@@ -36,21 +36,6 @@ public class MissionManager {
 		setDefaultAlt(100.0);
 	}
 
-	public class waypoint {
-		LatLng coord;
-		Double Height;
-
-		public waypoint(LatLng c, Double h) {
-			this.coord = c;
-			Height = h;
-		}
-
-		public waypoint(Double Lat, Double Lng, Double h) {
-			this.coord = new LatLng(Lat, Lng);
-			Height = h;
-		}
-	}
-
 	public MarkerOptions getHomeIcon() {
 		return (new MarkerOptions()
 				.position(home.coord)
