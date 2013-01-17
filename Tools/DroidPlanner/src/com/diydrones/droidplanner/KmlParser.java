@@ -8,7 +8,6 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.util.Log;
 import android.util.Xml;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -113,12 +112,12 @@ public class KmlParser {
 		
 		
 		parser.require(XmlPullParser.START_TAG, ns, "coordinates");
-		String[] title = readText(parser).split(",");
+		String coordString = readText(parser);
 		parser.require(XmlPullParser.END_TAG, ns, "coordinates");
 		
-		Log.d("", "coord:" + title);
-		Lat = Double.valueOf(title[0]);
-		Lng = Double.valueOf(title[1]);
+		String title[] = coordString.split(",");
+		Lng = Double.valueOf(title[0]);
+		Lat = Double.valueOf(title[1]);
 		h = Double.valueOf(title[2]);
 		
 		return (new waypoint(Lat, Lng, h));

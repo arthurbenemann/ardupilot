@@ -22,6 +22,7 @@ import com.diydrones.droidplanner.KmlParser.waypoint;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class GCPActivity extends android.support.v4.app.FragmentActivity
 		implements OnNavigationListener {
@@ -129,12 +130,13 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 	}
 
 	private void openKMZ() {
+		List<waypoint> WPlist = new ArrayList<waypoint>();
 		try {
 			FileInputStream in = new FileInputStream(Environment
 					.getExternalStorageDirectory().toString()
 					+ "/waypoints/file.kml");
 			KmlParser reader = new  KmlParser();
-			List<waypoint> WPlist = new ArrayList<waypoint>();
+
 			WPlist = reader.parse(in);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -145,6 +147,9 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		for (waypoint point : WPlist) {
+			mMap.addMarker(new MarkerOptions().position(point.coord));
 		}
 	}
 }
