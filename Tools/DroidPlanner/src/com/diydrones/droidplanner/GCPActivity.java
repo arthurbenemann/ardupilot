@@ -22,12 +22,13 @@ import com.diydrones.droidplanner.KmlParser.waypoint;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class GCPActivity extends android.support.v4.app.FragmentActivity
 		implements OnNavigationListener {
 	private GoogleMap mMap;
-
+	private	List<waypoint> WPlist;
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -42,6 +43,8 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		setUpActionBar();
 
 		setContentView(R.layout.gcp);
+		
+		WPlist = new ArrayList<waypoint>();
 
 		setUpMapIfNeeded();
 	}
@@ -89,7 +92,18 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		mUiSettings.setTiltGesturesEnabled(false);
 
 		// mMap.setOnMapLongClickListener(this);
-		// updateMarkersAndPath();
+		updateMarkers();
+	}
+
+	private void updateMarkers() {
+		mMap.clear();
+		for (waypoint point : WPlist) {
+			mMap.addMarker(new MarkerOptions()
+					.position(point.coord)
+					.icon(BitmapDescriptorFactory
+					.fromResource(R.drawable.placemark_circle_highlight))
+					.anchor((float) 0.5, (float) 0.5));
+		}		
 	}
 
 	@Override
@@ -130,12 +144,11 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 	}
 
 	private void openKMZ() {
-		List<waypoint> WPlist = new ArrayList<waypoint>();
 		try {
 			FileInputStream in = new FileInputStream(Environment
 					.getExternalStorageDirectory().toString()
 					+ "/waypoints/file.kml");
-			KmlParser reader = new  KmlParser();
+			KmlParser reader = new KmlParser();
 
 			WPlist = reader.parse(in);
 		} catch (FileNotFoundException e) {
@@ -148,8 +161,6 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for (waypoint point : WPlist) {
-			mMap.addMarker(new MarkerOptions().position(point.coord));
-		}
+		updateMarkers();
 	}
 }
