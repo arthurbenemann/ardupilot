@@ -22,10 +22,11 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
-import com.diydrones.droidplanner.MissionManager.waypoint;
+import com.diydrones.droidplanner.GCPActivity.KmlParser.waypoint;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.LatLng;
 
 public class GCPActivity extends android.support.v4.app.FragmentActivity
 		implements OnNavigationListener {
@@ -124,30 +125,32 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 			// clearWaypointsAndUpdate();
 			return true;
 		case R.id.menu_open_kmz:
-				openKMZ();
-			
+			openKMZ();
+
 			return true;
 		default:
 			return super.onMenuItemSelected(featureId, item);
 		}
 	}
 
-	private void openKMZ()  {
+	private void openKMZ() {
 		try {
-		FileInputStream in = new FileInputStream(Environment
-				.getExternalStorageDirectory().toString()
-				+ "/waypoints/file.kml");
-		new KmlParser().parse(in);
-	} catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (XmlPullParserException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}	
+			FileInputStream in = new FileInputStream(Environment
+					.getExternalStorageDirectory().toString()
+					+ "/waypoints/file.kml");
+			KmlParser reader = new  KmlParser();
+			List<waypoint> WPlist = new ArrayList<waypoint>();
+			WPlist = reader.parse(in);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -157,6 +160,21 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 	 */
 	public class KmlParser {
 		private final String ns = null;
+		
+		public class waypoint {
+			LatLng coord;
+			Double Height;
+
+			public waypoint(LatLng c, Double h) {
+				this.coord = c;
+				Height = h;
+			}
+
+			public waypoint(Double Lat, Double Lng, Double h) {
+				this.coord = new LatLng(Lat, Lng);
+				Height = h;
+			}
+		}
 
 		public List<waypoint> parse(InputStream in)
 				throws XmlPullParserException, IOException {
@@ -214,11 +232,36 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		// Processes title tags in the feed.
 		private waypoint readPoint(XmlPullParser parser) throws IOException,
 				XmlPullParserException {
-			//parser.require(XmlPullParser.START_TAG, ns, "coordinates");
-			String title = readText(parser);
-			//parser.require(XmlPullParser.END_TAG, ns, "coordinates");
+			waypoint point = null;
+			while (parser.next() != XmlPullParser.END_TAG) {
+				if (parser.getEventType() != XmlPullParser.START_TAG) {
+					continue;
+				}
+				String name = parser.getName();
+				if (name.equals("coordinates")) {
+					point = readCoordinate(parser);
+				} else {
+					skip(parser);
+				}
+			}
+			return point;
+		}
+
+		private waypoint readCoordinate(XmlPullParser parser)
+				throws IOException, XmlPullParserException {
+			Double Lat, Lng, h;
+			
+			
+			parser.require(XmlPullParser.START_TAG, ns, "coordinates");
+			String[] title = readText(parser).split(",");
+			parser.require(XmlPullParser.END_TAG, ns, "coordinates");
+			
 			Log.d("", "coord:" + title);
-			return null;
+			Lat = Double.valueOf(title[0]);
+			Lng = Double.valueOf(title[1]);
+			h = Double.valueOf(title[2]);
+			
+			return (new waypoint(Lat, Lng, h));
 		}
 
 		// For the tags title and summary, extracts their text values.
