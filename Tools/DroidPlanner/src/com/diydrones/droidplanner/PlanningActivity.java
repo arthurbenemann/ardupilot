@@ -295,7 +295,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		if (mPath.exists()) {
 			FilenameFilter filter = new FilenameFilter() {
 				public boolean accept(File dir, String filename) {
-					return filename.contains(".txt") || dir.isDirectory();
+					return filename.contains(".txt");
 				}
 			};
 			return mPath.list(filter);

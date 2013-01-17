@@ -1,7 +1,9 @@
 package com.diydrones.droidplanner;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,14 +11,18 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.ActionBar.OnNavigationListener;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
 import com.diydrones.droidplanner.KmlParser.waypoint;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -87,8 +93,7 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 	private void setUpMap() {
 		mMap.setMyLocationEnabled(true);
 		mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-		// mMap.setOnMarkerDragListener(this);
-
+		
 		UiSettings mUiSettings = mMap.getUiSettings();
 		mUiSettings.setMyLocationButtonEnabled(true);
 		mUiSettings.setCompassEnabled(true);
@@ -138,7 +143,7 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 			clearWaypointsAndUpdate();
 			return true;
 		case R.id.menu_open_kmz:
-			openKMZ();
+			OpenKmzDialog();
 			return true;
 		case R.id.menu_zoom:
 			zoomToExtents();
@@ -163,25 +168,77 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		}
 	}
 
-	private void openKMZ() {
+	private boolean openKMZ(String filename) {
 		try {
 			FileInputStream in = new FileInputStream(Environment
 					.getExternalStorageDirectory().toString()
-					+ "/waypoints/file.kml");
+					+ "/waypoints/"+filename);
 			KmlParser reader = new KmlParser();
 
 			WPlist = reader.parse(in);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (XmlPullParserException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 		updateMarkers();
 		zoomToExtents();
+		return true;
+	}
+	
+
+	private void OpenKmzDialog() {
+		final String[] itemList = loadFileList();
+		if (itemList.length == 0) {
+			Toast.makeText(getApplicationContext(), R.string.no_waypoint_files,
+					Toast.LENGTH_SHORT).show();
+			return;
+		}
+		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+		dialog.setTitle(R.string.select_file_to_open);
+		dialog.setItems(itemList, new OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				if(openKMZ(itemList[which])) {
+					zoomToExtents();
+					Toast.makeText(getApplicationContext(), itemList[which],
+							Toast.LENGTH_LONG).show();
+				} else {
+					Toast.makeText(getApplicationContext(),
+							R.string.error_when_opening_file,
+							Toast.LENGTH_SHORT).show();
+				}
+				updateMarkers();
+			}
+		});
+		dialog.create().show();
+	}
+
+	private String[] loadFileList() {
+		File mPath = new File(Environment.getExternalStorageDirectory()
+				.toString() + "/waypoints/");
+		try {
+			mPath.mkdirs();
+		} catch (SecurityException e) {
+			return new String[0];
+		}
+		if (mPath.exists()) {
+			FilenameFilter filter = new FilenameFilter() {
+				public boolean accept(File dir, String filename) {
+					return filename.contains(".kml");
+				}
+			};
+			return mPath.list(filter);
+		} else {
+			return new String[0];
+		}
+
 	}
 }
