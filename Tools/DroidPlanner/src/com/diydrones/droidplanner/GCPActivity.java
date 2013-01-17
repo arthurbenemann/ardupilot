@@ -19,16 +19,19 @@ import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
 import com.diydrones.droidplanner.KmlParser.waypoint;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class GCPActivity extends android.support.v4.app.FragmentActivity
 		implements OnNavigationListener {
 	private GoogleMap mMap;
-	private	List<waypoint> WPlist;
+	private List<waypoint> WPlist;
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -43,7 +46,7 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		setUpActionBar();
 
 		setContentView(R.layout.gcp);
-		
+
 		WPlist = new ArrayList<waypoint>();
 
 		setUpMapIfNeeded();
@@ -101,9 +104,9 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 			mMap.addMarker(new MarkerOptions()
 					.position(point.coord)
 					.icon(BitmapDescriptorFactory
-					.fromResource(R.drawable.placemark_circle_highlight))
+							.fromResource(R.drawable.placemark_circle_highlight))
 					.anchor((float) 0.5, (float) 0.5));
-		}		
+		}
 	}
 
 	@Override
@@ -132,14 +135,31 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_clear:
-			// clearWaypointsAndUpdate();
+			clearWaypointsAndUpdate();
 			return true;
 		case R.id.menu_open_kmz:
 			openKMZ();
-
 			return true;
+		case R.id.menu_zoom:
+			zoomToExtents();
 		default:
 			return super.onMenuItemSelected(featureId, item);
+		}
+	}
+
+	private void clearWaypointsAndUpdate() {
+		WPlist.clear();
+		updateMarkers();		
+	}
+
+	public void zoomToExtents() {
+		if (!WPlist.isEmpty()) {
+			LatLngBounds.Builder builder = new LatLngBounds.Builder();
+			for (waypoint point : WPlist) {
+				builder.include(point.coord);
+			}
+			mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
+					builder.build(), 30));
 		}
 	}
 
@@ -162,5 +182,6 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 			e.printStackTrace();
 		}
 		updateMarkers();
+		zoomToExtents();
 	}
 }

@@ -6,11 +6,11 @@
         android:title="@string/menu_zoom"/>
     <item
         android:id="@+id/menu_open_kmz"
-        android:showAsAction="never"
+        android:showAsAction="ifRoom"
         android:title="@string/menu_open_kmz"/>
     <item
         android:id="@+id/menu_clear"
-        android:showAsAction="never"
+        android:showAsAction="ifRoom"
         android:title="@string/menu_clear"/>
 
 </menu>
