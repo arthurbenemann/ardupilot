@@ -23,15 +23,18 @@ public class KmlParser {
 	public class waypoint {
 		LatLng coord;
 		Double Height;
+		boolean set;
 
 		public waypoint(LatLng c, Double h) {
 			this.coord = c;
 			Height = h;
+			set = false;
 		}
 
 		public waypoint(Double Lat, Double Lng, Double h) {
 			this.coord = new LatLng(Lat, Lng);
 			Height = h;
+			set = false;
 		}
 	}
 

@@ -11,13 +11,14 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.ActionBar;
-import android.app.AlertDialog;
 import android.app.ActionBar.OnNavigationListener;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -27,15 +28,18 @@ import android.widget.Toast;
 import com.diydrones.droidplanner.KmlParser.waypoint;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class GCPActivity extends android.support.v4.app.FragmentActivity
-		implements OnNavigationListener {
+		implements OnNavigationListener, OnMarkerClickListener {
 	private GoogleMap mMap;
+
 	private List<waypoint> WPlist;
 
 	@Override
@@ -93,24 +97,36 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 	private void setUpMap() {
 		mMap.setMyLocationEnabled(true);
 		mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-		
+
 		UiSettings mUiSettings = mMap.getUiSettings();
 		mUiSettings.setMyLocationButtonEnabled(true);
 		mUiSettings.setCompassEnabled(true);
 		mUiSettings.setTiltGesturesEnabled(false);
 
-		// mMap.setOnMapLongClickListener(this);
+		mMap.setOnMarkerClickListener(this);
 		updateMarkers();
 	}
 
 	private void updateMarkers() {
+		int i = 1;
 		mMap.clear();
 		for (waypoint point : WPlist) {
-			mMap.addMarker(new MarkerOptions()
-					.position(point.coord)
-					.icon(BitmapDescriptorFactory
-							.fromResource(R.drawable.placemark_circle_highlight))
-					.anchor((float) 0.5, (float) 0.5));
+			if (point.set) {
+				mMap.addMarker(new MarkerOptions()
+						.position(point.coord)
+						.title(String.valueOf(i))
+						.icon(BitmapDescriptorFactory
+								.fromResource(R.drawable.placemark_circle_blue))
+						.anchor((float) 0.5, (float) 0.5));
+			} else {
+				mMap.addMarker(new MarkerOptions()
+						.position(point.coord)
+						.title(String.valueOf(i))
+						.icon(BitmapDescriptorFactory
+								.fromResource(R.drawable.placemark_circle_red))
+						.anchor((float) 0.5, (float) 0.5));
+			}
+			i++;
 		}
 	}
 
@@ -154,7 +170,7 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 
 	private void clearWaypointsAndUpdate() {
 		WPlist.clear();
-		updateMarkers();		
+		updateMarkers();
 	}
 
 	public void zoomToExtents() {
@@ -172,7 +188,8 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		try {
 			FileInputStream in = new FileInputStream(Environment
 					.getExternalStorageDirectory().toString()
-					+ "/waypoints/"+filename);
+					+ "/waypoints/"
+					+ filename);
 			KmlParser reader = new KmlParser();
 
 			WPlist = reader.parse(in);
@@ -193,7 +210,6 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		zoomToExtents();
 		return true;
 	}
-	
 
 	private void OpenKmzDialog() {
 		final String[] itemList = loadFileList();
@@ -206,7 +222,7 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		dialog.setTitle(R.string.select_file_to_open);
 		dialog.setItems(itemList, new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
-				if(openKMZ(itemList[which])) {
+				if (openKMZ(itemList[which])) {
 					zoomToExtents();
 					Toast.makeText(getApplicationContext(), itemList[which],
 							Toast.LENGTH_LONG).show();
@@ -240,5 +256,14 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 			return new String[0];
 		}
 
+	}
+
+	@Override
+	public boolean onMarkerClick(Marker marker) {
+		Log.d("marker", marker.getTitle());
+		int i = Integer.parseInt(marker.getTitle()) - 1;
+		WPlist.get(i).set = !WPlist.get(i).set;
+		updateMarkers();
+		return true;
 	}
 }
