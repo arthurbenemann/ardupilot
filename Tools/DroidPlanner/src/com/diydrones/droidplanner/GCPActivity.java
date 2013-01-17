@@ -187,6 +187,21 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 
 
 	
+	
+	private boolean openGCPFile(String filename) {
+		boolean returnValue = false; 
+		if(filename.contains(".kmz")){
+			returnValue = openKMZ(filename);
+		}else if(filename.contains(".kml")){
+			returnValue = openKML(filename);
+		}
+		if(returnValue == true){
+			updateMarkers();
+			zoomToExtents();
+		}
+		return returnValue;
+	}
+	
 	private boolean openKML(String filename) {
 		try {
 			FileInputStream in = new FileInputStream(Environment
@@ -210,22 +225,8 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 			e.printStackTrace();
 			return false;
 		}
-		updateMarkers();
-		zoomToExtents();
 		return true;
 	}
-
-	
-	private boolean openGCPFile(String filename) {
-		if(filename.contains(".kmz")){
-			return openKMZ(filename);
-		}else if(filename.contains(".kml")){
-			return openKML(filename);
-		}else{
-			return false;
-		}
-	}
-	
 	private boolean openKMZ(String filename) {
 		try {
 			ZipInputStream zin = new ZipInputStream( new FileInputStream(Environment
@@ -252,8 +253,6 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 			e.printStackTrace();
 			return false;
 		}
-		updateMarkers();
-		zoomToExtents();
 		return true;
 	}
 

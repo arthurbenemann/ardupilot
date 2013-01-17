@@ -34,17 +34,20 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCqZnhgWsao4ey91Z8hNBbOxxJ_EiC5mpM" />
 
-        <activity android:name="com.diydrones.droidplanner.PlanningActivity" >
-        </activity>
-        
-        <activity android:name=".FightDataActivity"></activity>
-        <activity android:name=".PIDActivity"></activity>
-        <activity android:name=".TerminalActivity"></activity>
-        <activity android:name=".GCPActivity">
-            <intent-filter>           
+        <activity android:name=".PlanningActivity" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".FightDataActivity" >
+        </activity>
+        <activity android:name=".PIDActivity" >
+        </activity>
+        <activity android:name=".TerminalActivity" >
+        </activity>
+        <activity android:name=".GCPActivity" >
         </activity>
     </application>
 
