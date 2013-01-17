@@ -19,7 +19,9 @@ import com.google.android.gms.maps.model.LatLng;
  */
 public class KmlParser {
 	private final String ns = null;
-	
+
+	private List<waypoint> WPlist;
+
 	public class waypoint {
 		LatLng coord;
 		Double Height;
@@ -38,45 +40,41 @@ public class KmlParser {
 		}
 	}
 
-	public List<waypoint> parse(InputStream in)
-			throws XmlPullParserException, IOException {
+	public List<waypoint> parse(InputStream in) throws XmlPullParserException,
+			IOException {
+		WPlist = new ArrayList<waypoint>();
 		try {
 			XmlPullParser parser = Xml.newPullParser();
-			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES,
-					false);
+			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 			parser.setInput(in, null);
 			parser.nextTag();
-			return readFeed(parser);
+			readFeed(parser);
 		} finally {
 			in.close();
 		}
+		return WPlist;
 	}
 
-	private List<waypoint> readFeed(XmlPullParser parser)
-			throws XmlPullParserException, IOException {
-		List<waypoint> entries = new ArrayList<waypoint>();
+	private void readFeed(XmlPullParser parser) throws XmlPullParserException,
+			IOException {
 
 		parser.require(XmlPullParser.START_TAG, ns, "kml");
-		while (parser.next() != XmlPullParser.END_TAG) {
+		while (parser.next() != XmlPullParser.END_DOCUMENT) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
 			String name = parser.getName();
 			// Starts by looking for the entry tag
 			if (name.equals("Placemark")) {
-				entries.add(readPlacemark(parser));
-			} else {
-				skip(parser);
+				readPlacemark(parser);
 			}
 		}
-		return entries;
 	}
 
-	private waypoint readPlacemark(XmlPullParser parser)
+	private void readPlacemark(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, ns, "Placemark");
 		waypoint point = null;
-
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
@@ -84,14 +82,16 @@ public class KmlParser {
 			String name = parser.getName();
 			if (name.equals("Point")) {
 				point = readPoint(parser);
+				if (point != null) {
+					WPlist.add(point);
+				}
 			} else {
 				skip(parser);
 			}
 		}
-		return point;
 	}
 
-	// Processes title tags in the feed.
+	// Processes Point tags in the feed.
 	private waypoint readPoint(XmlPullParser parser) throws IOException,
 			XmlPullParserException {
 		waypoint point = null;
@@ -109,20 +109,19 @@ public class KmlParser {
 		return point;
 	}
 
-	private waypoint readCoordinate(XmlPullParser parser)
-			throws IOException, XmlPullParserException {
+	private waypoint readCoordinate(XmlPullParser parser) throws IOException,
+			XmlPullParserException {
 		Double Lat, Lng, h;
-		
-		
+
 		parser.require(XmlPullParser.START_TAG, ns, "coordinates");
 		String coordString = readText(parser);
 		parser.require(XmlPullParser.END_TAG, ns, "coordinates");
-		
+
 		String title[] = coordString.split(",");
 		Lng = Double.valueOf(title[0]);
 		Lat = Double.valueOf(title[1]);
 		h = Double.valueOf(title[2]);
-		
+
 		return (new waypoint(Lat, Lng, h));
 	}
 

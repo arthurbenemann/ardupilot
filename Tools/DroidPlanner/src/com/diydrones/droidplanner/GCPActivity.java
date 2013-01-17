@@ -18,7 +18,6 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -193,8 +192,6 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 			KmlParser reader = new KmlParser();
 
 			WPlist = reader.parse(in);
-			
-			in.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -262,7 +259,6 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 
 	@Override
 	public boolean onMarkerClick(Marker marker) {
-		Log.d("marker", marker.getTitle());
 		int i = Integer.parseInt(marker.getTitle()) - 1;
 		WPlist.get(i).set = !WPlist.get(i).set;
 		updateMarkers();
