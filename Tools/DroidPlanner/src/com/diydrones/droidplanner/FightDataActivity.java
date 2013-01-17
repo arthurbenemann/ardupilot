@@ -50,7 +50,9 @@ public class FightDataActivity  extends android.support.v4.app.FragmentActivity
 			case 3: // Terminal
 				startActivity(new Intent(this, TerminalActivity.class));
 				return false;
-
+			case 4: // GCP
+				startActivity(new Intent(this, GCPActivity.class));
+				return false;
 			}
 		}
 		public boolean onCreateOptionsMenu(Menu menu) {
