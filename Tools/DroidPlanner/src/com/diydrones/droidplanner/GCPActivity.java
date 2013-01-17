@@ -193,6 +193,8 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 			KmlParser reader = new KmlParser();
 
 			WPlist = reader.parse(in);
+			
+			in.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
