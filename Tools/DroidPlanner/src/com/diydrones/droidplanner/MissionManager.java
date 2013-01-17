@@ -36,7 +36,7 @@ public class MissionManager {
 		setDefaultAlt(100.0);
 	}
 
-	private class waypoint {
+	public class waypoint {
 		LatLng coord;
 		Double Height;
 
