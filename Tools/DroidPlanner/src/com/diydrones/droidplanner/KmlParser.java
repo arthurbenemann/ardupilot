@@ -43,15 +43,11 @@ public class KmlParser {
 	public List<waypoint> parse(InputStream in) throws XmlPullParserException,
 			IOException {
 		WPlist = new ArrayList<waypoint>();
-		try {
 			XmlPullParser parser = Xml.newPullParser();
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 			parser.setInput(in, null);
 			parser.nextTag();
 			readFeed(parser);
-		} finally {
-			in.close();
-		}
 		return WPlist;
 	}
 
