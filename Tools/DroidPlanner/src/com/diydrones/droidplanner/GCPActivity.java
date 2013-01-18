@@ -42,6 +42,7 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 	private GoogleMap mMap;
 
 	private List<waypoint> WPlist;
+	private Intent intent;
 
 	@Override
 	protected void onResume() {
@@ -52,6 +53,8 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		intent = getIntent();
 
 		// Set up the action bar to show a dropdown list.
 		setUpActionBar();
@@ -105,7 +108,17 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		mUiSettings.setTiltGesturesEnabled(false);
 
 		mMap.setOnMarkerClickListener(this);
+
 		updateMarkers();
+
+		String action = intent.getAction();
+		String type = intent.getType();
+		if (Intent.ACTION_VIEW.equals(action) && type != null) {
+			Toast.makeText(this, intent.getData().getPath(), Toast.LENGTH_LONG)
+					.show();
+			openGCPFile(intent.getData().getPath());
+		}
+
 	}
 
 	private void updateMarkers() {
@@ -185,29 +198,37 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		}
 	}
 
-
-	
-	
-	private boolean openGCPFile(String filename) {
-		boolean returnValue = false; 
-		if(filename.contains(".kmz")){
-			returnValue = openKMZ(filename);
-		}else if(filename.contains(".kml")){
-			returnValue = openKML(filename);
+	/**
+	 * Zoom to the extent of the waypoints should be used when the maps has not
+	 * undergone the layout phase Assumes a map size of 480x360 px
+	 */
+	public void zoomToExtentsFixed() {
+		if (!WPlist.isEmpty()) {
+			LatLngBounds.Builder builder = new LatLngBounds.Builder();
+			for (waypoint point : WPlist) {
+				builder.include(point.coord);
+			}
+				mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
+						builder.build(), 480, 360, 30));
 		}
-		if(returnValue == true){
+	}
+
+	private boolean openGCPFile(String fileWithPath) {
+		boolean returnValue = false;
+		if (fileWithPath.endsWith(".kmz")) {
+			returnValue = openKMZ(fileWithPath);
+		} else if (fileWithPath.endsWith(".kml")) {
+			returnValue = openKML(fileWithPath);
+		}
+		if (returnValue == true) {
 			updateMarkers();
-			zoomToExtents();
 		}
 		return returnValue;
 	}
-	
-	private boolean openKML(String filename) {
+
+	private boolean openKML(String fileWithPath) {
 		try {
-			FileInputStream in = new FileInputStream(Environment
-					.getExternalStorageDirectory().toString()
-					+ "/waypoints/"
-					+ filename);
+			FileInputStream in = new FileInputStream(fileWithPath);
 			KmlParser reader = new KmlParser();
 
 			WPlist = reader.parse(in);
@@ -227,21 +248,18 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		}
 		return true;
 	}
-	private boolean openKMZ(String filename) {
+
+	private boolean openKMZ(String fileWithPath) {
 		try {
-			ZipInputStream zin = new ZipInputStream( new FileInputStream(Environment
-					.getExternalStorageDirectory().toString()
-					+ "/waypoints/"
-					+ filename));
-	         ZipEntry ze;
-	         while ((ze = zin.getNextEntry()) != null)
-	         {
-	        	 if(ze.getName().contains(".kml"))
-	        	 {
-	        		 KmlParser reader = new KmlParser();
-	        		 WPlist = reader.parse(zin);
-	        	 }
-	         }		
+			ZipInputStream zin = new ZipInputStream(new FileInputStream(
+					fileWithPath));
+			ZipEntry ze;
+			while ((ze = zin.getNextEntry()) != null) {
+				if (ze.getName().contains(".kml")) {
+					KmlParser reader = new KmlParser();
+					WPlist = reader.parse(zin);
+				}
+			}
 			zin.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -267,7 +285,8 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		dialog.setTitle(R.string.select_file_to_open);
 		dialog.setItems(itemList, new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
-				if (openGCPFile(itemList[which])) {
+				if (openGCPFile(Environment.getExternalStorageDirectory()
+						.toString() + "/waypoints/" + itemList[which])) {
 					zoomToExtents();
 					Toast.makeText(getApplicationContext(), itemList[which],
 							Toast.LENGTH_LONG).show();
@@ -294,7 +313,8 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		if (mPath.exists()) {
 			FilenameFilter filter = new FilenameFilter() {
 				public boolean accept(File dir, String filename) {
-					return filename.contains(".kml")||filename.contains(".kmz");
+					return filename.contains(".kml")
+							|| filename.contains(".kmz");
 				}
 			};
 			return mPath.list(filter);

@@ -47,7 +47,17 @@
         </activity>
         <activity android:name=".TerminalActivity" >
         </activity>
-        <activity android:name=".GCPActivity" >
+        <activity
+            android:name=".GCPActivity"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/vnd.google-earth.kml+xml" />
+                <data android:mimeType="application/vnd.google-earth.kmz" />
+            </intent-filter>
         </activity>
     </application>
 
