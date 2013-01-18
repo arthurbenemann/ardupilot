@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.diydrones.droidplanner"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0" xmlns:tools="http://schemas.android.com/tools">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -40,6 +40,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
         </activity>
         <activity android:name=".FightDataActivity" >
         </activity>
@@ -48,8 +55,7 @@
         <activity android:name=".TerminalActivity" >
         </activity>
         <activity
-            android:name=".GCPActivity"
-            android:exported="false" >
+            android:name=".GCPActivity" tools:ignore="ExportedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

@@ -42,7 +42,6 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 	private GoogleMap mMap;
 
 	private List<waypoint> WPlist;
-	private Intent intent;
 
 	@Override
 	protected void onResume() {
@@ -54,7 +53,7 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		intent = getIntent();
+
 
 		// Set up the action bar to show a dropdown list.
 		setUpActionBar();
@@ -111,6 +110,7 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 
 		updateMarkers();
 
+		Intent intent = getIntent();
 		String action = intent.getAction();
 		String type = intent.getType();
 		if (Intent.ACTION_VIEW.equals(action) && type != null) {

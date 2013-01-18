@@ -11,6 +11,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -104,6 +106,19 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 
 		mMap.setOnMapLongClickListener(this);
 		updateMarkersAndPath();
+		
+		Intent intent = getIntent();
+		String action = intent.getAction();
+		String type = intent.getType();
+		if (Intent.ACTION_VIEW.equals(action) && type != null) {
+			Toast.makeText(this, intent.getData().getPath(), Toast.LENGTH_LONG)
+					.show();
+			mission.openMission(intent.getData().getPath());
+			updateMarkersAndPath();
+			Log.d("Plan", "loaded mission");
+			zoomToExtentsFixed();
+		}
+		
 	}
 
 	@Override
@@ -255,7 +270,18 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 	public void zoomToExtents() {
 		mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
 				mission.getHomeAndWaypointsBounds(getMyLocation()), 30));
-
+	}
+	
+	/**
+	 * Zoom to the extent of the waypoints should be used when the maps has not
+	 * undergone the layout phase Assumes a map size of 480x360 px
+	 */
+	public void zoomToExtentsFixed() {
+		Log.d("Plan", "Zoom start");
+		LatLngBounds bound = mission.getWaypointsBounds();
+		Log.d("Plan", "Bound created");
+		mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bound, 480, 360, 30));
+		Log.d("Plan", "Zoom");
 	}
 
 	private void OpenWaypointDialog() {
@@ -269,7 +295,10 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		dialog.setTitle(R.string.select_file_to_open);
 		dialog.setItems(itemList, new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
-				if (mission.openMission(itemList[which])) {
+				if (mission.openMission(Environment
+						.getExternalStorageDirectory().toString()
+						+ "/waypoints/"
+						+ itemList[which])) {
 					zoomToExtents();
 					Toast.makeText(getApplicationContext(), itemList[which],
 							Toast.LENGTH_LONG).show();

@@ -91,15 +91,12 @@ public class MissionManager {
 		waypoints.clear();
 	}
 
-	public boolean openMission(String filename) {
+	public boolean openMission(String fileWithPath) {
 		if (!isExternalStorageWritable()) {
 			return false;
 		}
 		try {
-			FileInputStream in = new FileInputStream(Environment
-					.getExternalStorageDirectory().toString()
-					+ "/waypoints/"
-					+ filename);
+			FileInputStream in = new FileInputStream(fileWithPath);
 			BufferedReader reader = new BufferedReader(
 					new InputStreamReader(in));
 
@@ -211,6 +208,15 @@ public class MissionManager {
 			for (waypoint w : waypoints) {
 				builder.include(w.coord);
 			}
+		}
+		return builder.build();
+	}
+
+	public LatLngBounds getWaypointsBounds() {
+		LatLngBounds.Builder builder = new LatLngBounds.Builder();
+		builder.include(home.coord);
+		for (waypoint w : waypoints) {
+			builder.include(w.coord);
 		}
 		return builder.build();
 	}
