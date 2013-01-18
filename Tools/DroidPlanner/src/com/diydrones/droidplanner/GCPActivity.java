@@ -117,6 +117,7 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 			Toast.makeText(this, intent.getData().getPath(), Toast.LENGTH_LONG)
 					.show();
 			openGCPFile(intent.getData().getPath());
+			zoomToExtentsFixed();
 		}
 
 	}
