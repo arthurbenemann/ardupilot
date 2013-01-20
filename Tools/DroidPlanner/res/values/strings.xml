@@ -27,5 +27,9 @@
     <string name="waypoint_altitude">Altitude</string>
     <string name="default_alt">Change Alt.</string>
     <string name="menu_open_kmz">Open KMZ</string>
+    <string name="menu_add_polygon">Add Polygon</string>
+    <string name="menu_polygon">Polygon</string>
+    <string name="menu_clear_polygon">Clear Polygon</string>
+    <string name="menu_finish_polygon">Finish Polygon</string>
 
 </resources>

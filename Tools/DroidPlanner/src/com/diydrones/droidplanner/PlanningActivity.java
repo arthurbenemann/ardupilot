@@ -38,6 +38,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 	private GoogleMap mMap;
 
 	public MissionManager mission;
+	public Polygon polygon;
 
 	TextView WaypointListNumber;
 
@@ -59,6 +60,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		WaypointListNumber = (TextView) (findViewById(R.id.textViewWP));
 
 		mission = new MissionManager();
+		polygon = new Polygon();
 		setUpMapIfNeeded();
 	}
 
@@ -106,7 +108,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 
 		mMap.setOnMapLongClickListener(this);
 		updateMarkersAndPath();
-		
+
 		Intent intent = getIntent();
 		String action = intent.getAction();
 		String type = intent.getType();
@@ -118,14 +120,17 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 			Log.d("Plan", "loaded mission");
 			zoomToExtentsFixed();
 		}
-		
+
 	}
 
 	@Override
 	public void onMapLongClick(LatLng point) {
-		mission.addWaypoint(point);
+		if (polygon.isVisible()) {
+			polygon.addWaypoint(point);
+		} else {
+			mission.addWaypoint(point);
+		}
 		updateMarkersAndPath();
-
 	}
 
 	@Override
@@ -146,6 +151,10 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 			mission.setWaypointToMarker(marker);
 			updateMarkersAndPath();
 			return;
+		} else if (polygon.isPolygonMarker(marker)) {
+			polygon.setWaypointToMarker(marker);
+			updateMarkersAndPath();
+			return;
 		}
 	}
 
@@ -158,6 +167,11 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		mMap.addPolyline(mission.getFlightPath());
 
 		WaypointListNumber.setText(mission.getWaypointData());
+
+		for (MarkerOptions point : polygon.getWaypointMarkers()) {
+			mMap.addMarker(point);
+		}
+		mMap.addPolyline(polygon.getFlightPath());
 	}
 
 	private void clearWaypointsAndUpdate() {
@@ -222,6 +236,14 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		case R.id.menu_default_alt:
 			changeDefaultAlt();
 			return true;
+		case R.id.menu_finish_polygon:
+			polygon.clearPolygon();
+			polygon.setVisible(false);
+			updateMarkersAndPath();
+			return true;
+		case R.id.menu_add_polygon:
+			polygon.setVisible(true);
+			updateMarkersAndPath();
 		default:
 			return super.onMenuItemSelected(featureId, item);
 		}
@@ -251,7 +273,6 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		builder.create().show();
 	}
 
-
 	private void menuSaveFile() {
 		if (mission.saveWaypoints()) {
 			Toast.makeText(this, R.string.file_saved, Toast.LENGTH_SHORT)
@@ -271,7 +292,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
 				mission.getHomeAndWaypointsBounds(getMyLocation()), 30));
 	}
-	
+
 	/**
 	 * Zoom to the extent of the waypoints should be used when the maps has not
 	 * undergone the layout phase Assumes a map size of 480x360 px
@@ -280,7 +301,8 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		Log.d("Plan", "Zoom start");
 		LatLngBounds bound = mission.getWaypointsBounds();
 		Log.d("Plan", "Bound created");
-		mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bound, 480, 360, 30));
+		mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bound, 480, 360,
+				30));
 		Log.d("Plan", "Zoom");
 	}
 
@@ -297,8 +319,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 			public void onClick(DialogInterface dialog, int which) {
 				if (mission.openMission(Environment
 						.getExternalStorageDirectory().toString()
-						+ "/waypoints/"
-						+ itemList[which])) {
+						+ "/waypoints/" + itemList[which])) {
 					zoomToExtents();
 					Toast.makeText(getApplicationContext(), itemList[which],
 							Toast.LENGTH_LONG).show();
