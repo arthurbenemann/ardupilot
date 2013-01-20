@@ -237,8 +237,9 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 			changeDefaultAlt();
 			return true;
 		case R.id.menu_finish_polygon:
-			polygon.clearPolygon();
-			polygon.setVisible(false);
+//			polygon.clearPolygon();
+//			polygon.setVisible(false);
+			mission.addWaypoints(polygon.getCorners());
 			updateMarkersAndPath();
 			return true;
 		case R.id.menu_add_polygon:

@@ -75,6 +75,10 @@ public class MissionManager {
 		return MarkerList;
 	}
 
+	public void addWaypoints(List<waypoint> points) {
+		waypoints.addAll(points);
+	}
+
 	public void addWaypoint(Double Lat, Double Lng, Double h) {
 		waypoints.add(new waypoint(Lat, Lng, h));
 	}

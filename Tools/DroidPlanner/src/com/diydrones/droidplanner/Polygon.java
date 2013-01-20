@@ -7,6 +7,7 @@ import android.graphics.Color;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -74,6 +75,26 @@ public class Polygon {
 
 	public void setVisible(boolean isVisible) {
 		this.isVisible = isVisible;
+	}
+	
+	public List<waypoint> hatchfill(){
+		List<waypoint> grid = new ArrayList<waypoint>();
+		
+		return grid;
+	}
+	
+	public List<waypoint> getCorners(){
+		List<waypoint> grid = new ArrayList<waypoint>();
+		LatLngBounds.Builder builder = new LatLngBounds.Builder();
+		for (waypoint point : waypoints) {
+			builder.include(point.coord);
+		}
+		LatLngBounds bounds = builder.build();
+		grid.add(new waypoint(bounds.southwest, 0.0));
+		grid.add(new waypoint(bounds.southwest.latitude,bounds.northeast.longitude, 0.0));
+		grid.add(new waypoint(bounds.northeast, 0.0));
+		grid.add(new waypoint(bounds.northeast.latitude,bounds.southwest.longitude, 0.0));
+		return grid;
 	}
 
 }
