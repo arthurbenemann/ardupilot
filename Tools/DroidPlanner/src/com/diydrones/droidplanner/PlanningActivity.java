@@ -239,7 +239,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		case R.id.menu_finish_polygon:
 //			polygon.clearPolygon();
 //			polygon.setVisible(false);
-			mission.addWaypoints(polygon.getCorners());
+			mission.addWaypoints(polygon.hatchfill());
 			updateMarkersAndPath();
 			return true;
 		case R.id.menu_add_polygon:
