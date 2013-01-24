@@ -81,7 +81,6 @@ public class Polygon {
 		this.isVisible = isVisible;
 	}
 
-
 	public class LineLatLng {
 		public LatLng p1;
 		public LatLng p2;
@@ -94,22 +93,21 @@ public class Polygon {
 
 	public List<waypoint> hatchfill() {
 		List<waypoint> gridPoints = new ArrayList<waypoint>();
-		
+
 		Double angle = 0.0;
 		Double lineDist = 5000.0;
 		List<LineLatLng> gridLines = generateGrid(waypoints, angle, lineDist);
 
 		List<LineLatLng> hatchLines = findIntersections(waypoints, gridLines);
 
-
 		boolean dir = false;
 		for (LineLatLng line : hatchLines) {
 			if (dir) {
 				gridPoints.add(new waypoint(line.p1, 0.0));// debug
 				gridPoints.add(new waypoint(line.p2, 0.0));// debug
-			}else {
+			} else {
 				gridPoints.add(new waypoint(line.p2, 0.0));// debug
-				gridPoints.add(new waypoint(line.p1, 0.0));// debug				
+				gridPoints.add(new waypoint(line.p1, 0.0));// debug
 			}
 			dir = !dir;
 		}
@@ -118,18 +116,21 @@ public class Polygon {
 
 	/**
 	 * 
-	 * @param polygon Polygon points
-	 * @param grid array with Grid lines
+	 * @param polygon
+	 *            Polygon points
+	 * @param grid
+	 *            array with Grid lines
 	 * @return array with the hatch lines
 	 */
-	private List<LineLatLng> findIntersections(List<waypoint> polygon,List<LineLatLng> grid) {
+	private List<LineLatLng> findIntersections(List<waypoint> polygon,
+			List<LineLatLng> grid) {
 		List<LineLatLng> hatchLines = new ArrayList<LineLatLng>();
 		// find intersections
 		for (LineLatLng line : grid) {
 			double closestDistance = Double.MAX_VALUE;
 			double farestDistance = Double.MIN_VALUE;
 
-			LatLng closestPoint =null;
+			LatLng closestPoint = null;
 			LatLng farestPoint = null;
 
 			int crosses = 0;
@@ -172,22 +173,25 @@ public class Polygon {
 		return hatchLines;
 	}
 
-	/** Generates a grid over the specified boundary's
+	/**
+	 * Generates a grid over the specified boundary's
 	 * 
-	 * @param waypoints  Array with the polygon points
-	 * @param angle Angle of the grid in Degrees
-	 * @param lineDist Distance between lines in meters
+	 * @param waypoints
+	 *            Array with the polygon points
+	 * @param angle
+	 *            Angle of the grid in Degrees
+	 * @param lineDist
+	 *            Distance between lines in meters
 	 * @return Returns a array of lines of the generated grid
 	 */
-	private List<Polygon.LineLatLng> generateGrid(List<waypoint> waypoints, Double angle,
-			Double lineDist) {
+	private List<Polygon.LineLatLng> generateGrid(List<waypoint> waypoints,
+			Double angle, Double lineDist) {
 		List<Polygon.LineLatLng> gridLines = new ArrayList<Polygon.LineLatLng>();
 
 		Bounds bounds = new Bounds(waypoints);
 		LatLng point = new LatLng(bounds.getMiddle().latitude,
 				bounds.getMiddle().longitude);
-		
-		
+
 		point = newpos(point, angle - 135, bounds.getDiag());
 
 		// get x y step amount in lat lng from m
@@ -210,14 +214,14 @@ public class Polygon {
 			point = addLatLng(point, diff);
 			lines++;
 		}
-		
+
 		return gridLines;
 	}
-	
+
 	/**
 	 * 
-	 * Object for holding boundarys for a polygon
-	 *
+	 * Object for holding boundary for a polygon
+	 * 
 	 */
 	public class Bounds {
 		public LatLng sw;
@@ -258,11 +262,16 @@ public class Polygon {
 		}
 	}
 
-	/*
-	 * Finds the intersection of two lines returns the intersection point or
-	 * null if there is no intersection from:
+	/**
+	 * Finds the intersection of two lines
 	 * http://stackoverflow.com/questions/
 	 * 1119451/how-to-tell-if-a-line-intersects -a-polygon-in-c
+	 * 
+	 * @param start1 starting point of the first line
+	 * @param end1 ending point of the first line
+	 * @param start2 starting point of the second line
+	 * @param end2 ending point of the second line
+	 * @return point of intersection, or null if there is no intersection
 	 */
 	private LatLng FindLineIntersection(LatLng start1, LatLng end1,
 			LatLng start2, LatLng end2) {
@@ -287,9 +296,15 @@ public class Polygon {
 		return (new LatLng(latitude, longitude));
 	}
 
-	private LatLng addLatLng(LatLng point, LatLng diff) {
-		return (new LatLng(point.latitude + diff.latitude, point.longitude
-				+ diff.longitude));
+	/**
+	 * Finds the line that has the start or tip closest to a point.
+	 * 
+	 * @param point
+	 *            Point to the distance will be minimized
+	 * @param list
+	 *            A list of lines to search
+	 * @return The closest Line
+	 */
 	LineLatLng findClosestLine(LatLng point, List<LineLatLng> list) {
 		LineLatLng answer = list.get(0);
 		double shortest = Double.MAX_VALUE;
@@ -306,6 +321,16 @@ public class Polygon {
 		}
 		return answer;
 	}
+
+	/**
+	 * Finds the closest point in a list to another point
+	 * 
+	 * @param point
+	 *            point that will be used as reference
+	 * @param list
+	 *            List of points to be searched
+	 * @return The closest point
+	 */
 	LatLng findClosestPoint(LatLng point, List<LatLng> list) {
 		LatLng answer = null;
 		double currentbest = Double.MAX_VALUE;
@@ -320,8 +345,26 @@ public class Polygon {
 		}
 		return answer;
 	}
+
+	/**
+	 * Adds an offset to a point (in degrees)
+	 * 
+	 * @param point
+	 *            the point to be modified
+	 * @param offset
+	 *            offset to be added
+	 * @return point with offset
+	 */
+	private LatLng addLatLng(LatLng point, LatLng offset) {
+		return (new LatLng(point.latitude + offset.latitude, point.longitude
+				+ offset.longitude));
 	}
 
+	/**
+	 * Returns the distance between two points
+	 * 
+	 * @return distance between the points in degrees
+	 */
 	public Double getDistance(LatLng p1, LatLng p2) {
 		return (Math.hypot((p1.latitude - p2.latitude),
 				(p1.longitude - p2.longitude)));
@@ -337,15 +380,23 @@ public class Polygon {
 		return Math.toDegrees(meters / radius_of_earth);
 	}
 
-	public LatLng newpos(LatLng point, double bearing, double distance) {
-		// '''extrapolate latitude/longitude given a heading and distance
-		// thanks to http://www.movable-type.co.uk/scripts/latlong.html
-		// '''
-		// from math import sin, asin, cos, atan2, radians, degrees
+	/**
+	 * Extrapolate latitude/longitude given a heading and distance thanks to
+	 * http://www.movable-type.co.uk/scripts/latlong.html
+	 * 
+	 * @param origin
+	 *            Point of origin
+	 * @param bearing
+	 *            bearing to navigate
+	 * @param distance
+	 *            distance to be added
+	 * @return New point with the added distance
+	 */
+	public LatLng newpos(LatLng origin, double bearing, double distance) {
 		double radius_of_earth = 6378100.0;// # in meters
 
-		double lat = point.latitude;
-		double lon = point.longitude;
+		double lat = origin.latitude;
+		double lon = origin.longitude;
 		double lat1 = Math.toRadians(lat);
 		double lon1 = Math.toRadians(lon);
 		double brng = Math.toRadians(bearing);
