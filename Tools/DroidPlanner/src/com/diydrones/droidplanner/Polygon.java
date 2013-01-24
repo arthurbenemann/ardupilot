@@ -120,22 +120,20 @@ public class Polygon {
 		}
 	}
 
-	public class linelatlng {
+	public class LineLatLng {
 		public LatLng p1;
 		public LatLng p2;
-		// used as a base for grid along line
-		public LatLng basepnt;
 
-		public linelatlng(LatLng p1, LatLng p2, LatLng basepnt) {
+		public LineLatLng(LatLng p1, LatLng p2) {
 			this.p1 = p1;
 			this.p2 = p2;
-			this.basepnt = basepnt;
 		}
 	}
 
 	public List<waypoint> hatchfill() {
 		List<waypoint> gridPoints = new ArrayList<waypoint>();
-		List<linelatlng> gridLines = new ArrayList<linelatlng>();
+		List<LineLatLng> gridLines = new ArrayList<LineLatLng>();
+		List<LineLatLng> hatchLines = new ArrayList<LineLatLng>();
 		Bounds bounds = new Bounds(waypoints);
 
 		Log.d("Hacth", "diag:" + bounds.getDiag());
@@ -163,7 +161,7 @@ public class Polygon {
 			pointx = newpos(pointx, angle, bounds.getDiag() * 1.5);
 			// gridPoints.add(new waypoint(pointx, 0.0));// debug
 
-			linelatlng line = new linelatlng(point, pointx, point);
+			LineLatLng line = new LineLatLng(point, pointx);
 			gridLines.add(line);
 
 			point = addLatLng(point, diff);
@@ -171,62 +169,51 @@ public class Polygon {
 		}
 
 		// find intersections
-		for (linelatlng line : gridLines) {
-			// double noc = Double.MAX_VALUE;
-			// double nof = Double.MIN_VALUE;
+		for (LineLatLng line : gridLines) {
+			double closestDistance = Double.MAX_VALUE;
+			double farestDistance = Double.MIN_VALUE;
 
-			// LatLng closestlatlong = LatLng.Zero;
-			// LatLng farestlatlong = LatLng.Zero;
+			LatLng closestPoint =null;
+			LatLng farestPoint = null;
 
-			// List<LatLng> intersections = new ArrayList<LatLng>();
+			int crosses = 0;
 
-			// int crosses = 0;
 			for (int b = 0; b < waypoints.size(); b++) {
 				LatLng newlatlong;
 				if (b != waypoints.size() - 1) {
 					newlatlong = FindLineIntersection(waypoints.get(b).coord,
 							waypoints.get(b + 1).coord, line.p1, line.p2);
-				} else {	// Don't forget the last polygon line
+				} else { // Don't forget the last polygon line
 					newlatlong = FindLineIntersection(waypoints.get(b).coord,
 							waypoints.get(0).coord, line.p1, line.p2);
 				}
 
 				if (newlatlong != null) {
-					gridPoints.add(new waypoint(newlatlong, 0.0));// debug
+					crosses++;
+					if (closestDistance > getDistance(line.p1, newlatlong)) {
+						closestPoint = new LatLng(newlatlong.latitude,
+								newlatlong.longitude);
+						closestDistance = getDistance(line.p1, newlatlong);
+					}
+					if (farestDistance < getDistance(line.p1, newlatlong)) {
+						farestPoint = new LatLng(newlatlong.latitude,
+								newlatlong.longitude);
+						farestDistance = getDistance(line.p1, newlatlong);
+					}
 				}
-				/*
-				 * if (!newlatlong.IsZero) { crosses++; matchs.Add(newlatlong);
-				 * if (noc > MainMap.Manager.GetDistance(gridLines[a].p1,
-				 * newlatlong)) { closestlatlong.Lat = newlatlong.Lat;
-				 * closestlatlong.Lng = newlatlong.Lng; noc =
-				 * MainMap.Manager.GetDistance(gridLines[a].p1, newlatlong); }
-				 * if (nof < MainMap.Manager.GetDistance(gridLines[a].p1,
-				 * newlatlong)) { farestlatlong.Lat = newlatlong.Lat;
-				 * farestlatlong.Lng = newlatlong.Lng; nof =
-				 * MainMap.Manager.GetDistance(gridLines[a].p1, newlatlong); } }
-				 */
 			}
-			/*
-			 * if (crosses == 0) { if (!PointInPolygon(gridLines[a].p1,
-			 * area.Points) && !PointInPolygon(gridLines[a].p2, area.Points))
-			 * remove.Add(gridLines[a]); } else if (crosses == 1) {
-			 * 
-			 * } else if (crosses == 2) { linelatlng line = gridLines[a];
-			 * line.p1 = closestlatlong; line.p2 = farestlatlong; gridLines[a] =
-			 * line; } else { linelatlng line = gridLines[a]; remove.Add(line);
-			 * 
-			 * while (matchs.Count > 1) { linelatlng newline = new linelatlng();
-			 * 
-			 * closestlatlong = findClosestPoint(closestlatlong, matchs);
-			 * newline.p1 = closestlatlong; matchs.Remove(closestlatlong);
-			 * 
-			 * closestlatlong = findClosestPoint(closestlatlong, matchs);
-			 * newline.p2 = closestlatlong; matchs.Remove(closestlatlong);
-			 * 
-			 * newline.basepnt = line.basepnt;
-			 * 
-			 * gridLines.Add(newline); } if (a > 150) break; }
-			 */
+
+			switch (crosses) {
+			case 0:
+			case 1:
+				break;
+			default: // TODO handle multiple crossings in a better way
+			case 2:
+				hatchLines.add(new LineLatLng(closestPoint, farestPoint));
+				gridPoints.add(new waypoint(closestPoint, 0.0));// debug
+				gridPoints.add(new waypoint(farestPoint, 0.0));// debug
+				break;
+			}
 		}
 
 		return gridPoints;
