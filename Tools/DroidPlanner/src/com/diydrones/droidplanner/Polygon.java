@@ -170,7 +170,89 @@ public class Polygon {
 			lines++;
 		}
 
+		// find intersections
+		for (linelatlng line : gridLines) {
+			//double noc = Double.MAX_VALUE;
+			//double nof = Double.MIN_VALUE;
+
+			// LatLng closestlatlong = LatLng.Zero;
+			// LatLng farestlatlong = LatLng.Zero;
+
+			//List<LatLng> intersections = new ArrayList<LatLng>();
+
+			//int crosses = 0;
+			for (int b = 1; b < waypoints.size(); b++) {
+				LatLng newlatlong = FindLineIntersection(waypoints.get(b - 1).coord,
+						waypoints.get(b).coord, line.p1, line.p2);
+				
+				if (newlatlong!=null) {
+					gridPoints.add(new waypoint(newlatlong, 0.0));// debug	
+				}
+				/*
+				 * if (!newlatlong.IsZero) { crosses++; matchs.Add(newlatlong);
+				 * if (noc > MainMap.Manager.GetDistance(gridLines[a].p1,
+				 * newlatlong)) { closestlatlong.Lat = newlatlong.Lat;
+				 * closestlatlong.Lng = newlatlong.Lng; noc =
+				 * MainMap.Manager.GetDistance(gridLines[a].p1, newlatlong); }
+				 * if (nof < MainMap.Manager.GetDistance(gridLines[a].p1,
+				 * newlatlong)) { farestlatlong.Lat = newlatlong.Lat;
+				 * farestlatlong.Lng = newlatlong.Lng; nof =
+				 * MainMap.Manager.GetDistance(gridLines[a].p1, newlatlong); } }
+				 */
+			}
+			/*
+			 * if (crosses == 0) { if (!PointInPolygon(gridLines[a].p1,
+			 * area.Points) && !PointInPolygon(gridLines[a].p2, area.Points))
+			 * remove.Add(gridLines[a]); } else if (crosses == 1) {
+			 * 
+			 * } else if (crosses == 2) { linelatlng line = gridLines[a];
+			 * line.p1 = closestlatlong; line.p2 = farestlatlong; gridLines[a] =
+			 * line; } else { linelatlng line = gridLines[a]; remove.Add(line);
+			 * 
+			 * while (matchs.Count > 1) { linelatlng newline = new linelatlng();
+			 * 
+			 * closestlatlong = findClosestPoint(closestlatlong, matchs);
+			 * newline.p1 = closestlatlong; matchs.Remove(closestlatlong);
+			 * 
+			 * closestlatlong = findClosestPoint(closestlatlong, matchs);
+			 * newline.p2 = closestlatlong; matchs.Remove(closestlatlong);
+			 * 
+			 * newline.basepnt = line.basepnt;
+			 * 
+			 * gridLines.Add(newline); } if (a > 150) break; }
+			 */
+		}
+
+		return gridPoints;
 	}
+
+	/*
+	 * Finds the intersection of two lines returns the intersection point or
+	 * null if there is no intersection from:
+	 * http://stackoverflow.com/questions/
+	 * 1119451/how-to-tell-if-a-line-intersects -a-polygon-in-c
+	 */
+	private LatLng FindLineIntersection(LatLng start1, LatLng end1,
+			LatLng start2, LatLng end2) {
+		double denom = ((end1.longitude - start1.longitude) * (end2.latitude - start2.latitude))
+				- ((end1.latitude - start1.latitude) * (end2.longitude - start2.longitude));
+		// AB & CD are parallel
+		if (denom == 0)
+			return null;
+		double numer = ((start1.latitude - start2.latitude) * (end2.longitude - start2.longitude))
+				- ((start1.longitude - start2.longitude) * (end2.latitude - start2.latitude));
+		double r = numer / denom;
+		double numer2 = ((start1.latitude - start2.latitude) * (end1.longitude - start1.longitude))
+				- ((start1.longitude - start2.longitude) * (end1.latitude - start1.latitude));
+		double s = numer2 / denom;
+		if ((r < 0 || r > 1) || (s < 0 || s > 1))
+			return null;
+		// Find intersection point
+		double longitude = start1.longitude
+				+ (r * (end1.longitude - start1.longitude));
+		double latitude = start1.latitude
+				+ (r * (end1.latitude - start1.latitude));
+		return (new LatLng(latitude, longitude));
 	}
 
 	private LatLng addLatLng(LatLng point, LatLng diff) {
