@@ -158,10 +158,10 @@ public class Polygon {
 		// draw grid
 		int lines = 0;
 		while (lines * lineDist < bounds.getDiag() * 1.5) {
-			//gridPoints.add(new waypoint(point, 0.0)); // debug
+			// gridPoints.add(new waypoint(point, 0.0)); // debug
 			LatLng pointx = point;
 			pointx = newpos(pointx, angle, bounds.getDiag() * 1.5);
-			//gridPoints.add(new waypoint(pointx, 0.0));// debug
+			// gridPoints.add(new waypoint(pointx, 0.0));// debug
 
 			linelatlng line = new linelatlng(point, pointx, point);
 			gridLines.add(line);
@@ -172,13 +172,14 @@ public class Polygon {
 
 		// find intersections
 		for (linelatlng line : gridLines) {
-			//double noc = Double.MAX_VALUE;
-			//double nof = Double.MIN_VALUE;
+			// double noc = Double.MAX_VALUE;
+			// double nof = Double.MIN_VALUE;
 
 			// LatLng closestlatlong = LatLng.Zero;
 			// LatLng farestlatlong = LatLng.Zero;
 
-			//List<LatLng> intersections = new ArrayList<LatLng>();
+			// List<LatLng> intersections = new ArrayList<LatLng>();
+
 			// int crosses = 0;
 			for (int b = 0; b < waypoints.size(); b++) {
 				LatLng newlatlong;
@@ -190,8 +191,8 @@ public class Polygon {
 							waypoints.get(0).coord, line.p1, line.p2);
 				}
 
-				if (newlatlong!=null) {
-					gridPoints.add(new waypoint(newlatlong, 0.0));// debug	
+				if (newlatlong != null) {
+					gridPoints.add(new waypoint(newlatlong, 0.0));// debug
 				}
 				/*
 				 * if (!newlatlong.IsZero) { crosses++; matchs.Add(newlatlong);
