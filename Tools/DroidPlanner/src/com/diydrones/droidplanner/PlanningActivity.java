@@ -62,6 +62,14 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		mission = new MissionManager();
 		polygon = new Polygon();
 		setUpMapIfNeeded();
+		
+
+		polygon.addWaypoint(-1.0, 0.0);		// Just for debugging the grid code
+		polygon.addWaypoint(-1.0, -1.0);
+		polygon.addWaypoint(-2.0, -1.0);
+		polygon.addWaypoint(-2.0, 0.0);
+		mission.addWaypoints(polygon.hatchfill());
+		updateMarkersAndPath();
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
