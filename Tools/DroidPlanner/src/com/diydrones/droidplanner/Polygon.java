@@ -290,6 +290,36 @@ public class Polygon {
 	private LatLng addLatLng(LatLng point, LatLng diff) {
 		return (new LatLng(point.latitude + diff.latitude, point.longitude
 				+ diff.longitude));
+	LineLatLng findClosestLine(LatLng point, List<LineLatLng> list) {
+		LineLatLng answer = list.get(0);
+		double shortest = Double.MAX_VALUE;
+
+		for (LineLatLng line : list) {
+			double ans1 = getDistance(point, line.p1);
+			double ans2 = getDistance(point, line.p2);
+			LatLng shorterpnt = ans1 < ans2 ? line.p1 : line.p2;
+
+			if (shortest > getDistance(point, shorterpnt)) {
+				answer = line;
+				shortest = getDistance(point, shorterpnt);
+			}
+		}
+		return answer;
+	}
+	LatLng findClosestPoint(LatLng point, List<LatLng> list) {
+		LatLng answer = null;
+		double currentbest = Double.MAX_VALUE;
+
+		for (LatLng pnt : list) {
+			double dist1 = getDistance(point, pnt);
+
+			if (dist1 < currentbest) {
+				answer = pnt;
+				currentbest = dist1;
+			}
+		}
+		return answer;
+	}
 	}
 
 	public Double getDistance(LatLng p1, LatLng p2) {
