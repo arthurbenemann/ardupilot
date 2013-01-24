@@ -108,9 +108,15 @@ public class Polygon {
 		public double getHeight() {
 			return (nw.latitude - sw.latitude);
 		}
-		
-		public double getDiag(){
-		return getDistance(ne,sw);	
+
+		public double getDiag() {
+			return latToMeters(getDistance(ne, sw));
+		}
+
+		public LatLng getMiddle() {
+			return (new LatLng((ne.latitude + sw.latitude) / 2,
+					(ne.longitude + sw.longitude) / 2));
+
 		}
 	}
 
@@ -122,37 +128,78 @@ public class Polygon {
 		
 		Log.d("Hacth", "diag:" + bounds.getDiag());
 
-		Double angle = 30.0;
-		Double lineDist = 3.0;
-		Double dx = lineDist/Math.sin(Math.toRadians(angle));
-		Double dy = lineDist/Math.cos(Math.toRadians(angle));
+		Double angle = 0.0;
+		Double lineDist = 20000.0;
+		Double y1 = Math.cos(Math.toRadians(angle+90));
+		Double x1 = Math.sin(Math.toRadians(angle+90));
 		
-		Log.d("Hacth", "Ang:" + angle + " lineDist:" + lineDist + " dy:" + dy
-				+ " dx:" + dx);
+		LatLng point = new LatLng(bounds.getMiddle().latitude,bounds.getMiddle().longitude);
+		point = newpos(point, angle-135, bounds.getDiag());
+                
+        // get x y step amount in lat lng from m
+        LatLng diff = new LatLng(metersTolat(lineDist * y1),metersTolat(lineDist * x1));
+        Log.d("Diff", "Lat:"+metersTolat(lineDist * y1)+" Long:"+metersTolat(lineDist * x1));
 
-		if (angle >= 0) {
-			Double lat = bounds.se.latitude;
-			Double lng = bounds.se.longitude;
+        int lines = 0;
+        while (lines * lineDist < bounds.getDiag() * 1.5)
+        {
+        	grid.add(new waypoint(point, 0.0)); //debug
+            LatLng pointx = point;
+            pointx = newpos(pointx, angle, bounds.getDiag() * 1.5);
+            grid.add(new waypoint(pointx, 0.0));//debug
 
-			while (lng > bounds.sw.longitude ) {
-				lng -= dx;
-				grid.add(new waypoint(lat, lng, 0.0));
-				grid.add(new waypoint(lat+bounds.getDiag()*dy, lng+bounds.getDiag()*dx, 0.0));				
-			}
-			while (lat < bounds.nw.latitude) {
-				lat += dy;
-				grid.add(new waypoint(lat, lng, 0.0));
-				grid.add(new waypoint(lat+bounds.getDiag()*dy, lng+bounds.getDiag()*dx, 0.0));
-			}
-
-		}
-
+            /*linelatlng line = new linelatlng();
+            line.p1 = new PointLatLng(y, x);
+            line.p2 = new PointLatLng(ny, nx);
+            line.basepnt = new PointLatLng(y, x);
+            grid.Add(line);
+*/
+            point = addLatLng(point,diff);
+            lines++;
+        }
 		return grid;
+	}
+
+	private LatLng addLatLng(LatLng point, LatLng diff) {
+		return (new LatLng(point.latitude+diff.latitude,point.longitude+diff.longitude));
 	}
 
 	public Double getDistance(LatLng p1, LatLng p2) {
 		return (Math.hypot((p1.latitude - p2.latitude),
 				(p1.longitude - p2.longitude)));
 	}
+	
+	
+	public Double latToMeters(double lat){
+		double radius_of_earth = 6378100.0;// # in meters
+		return Math.toRadians(lat)*radius_of_earth;
+	}
+	
+	public Double metersTolat(double meters){
+		double radius_of_earth = 6378100.0;// # in meters
+		return Math.toDegrees(meters/radius_of_earth);
+	}
 
+	public LatLng newpos(LatLng point, double bearing, double distance) {
+		// '''extrapolate latitude/longitude given a heading and distance
+		// thanks to http://www.movable-type.co.uk/scripts/latlong.html
+		// '''
+		// from math import sin, asin, cos, atan2, radians, degrees
+		double radius_of_earth = 6378100.0;// # in meters
+
+		double lat = point.latitude;
+		double lon = point.longitude;
+		double lat1 = Math.toRadians(lat);
+		double lon1 = Math.toRadians(lon);
+		double brng = Math.toRadians(bearing);
+		double dr = distance / radius_of_earth;
+
+		double lat2 = Math.asin(Math.sin(lat1) * Math.cos(dr) + Math.cos(lat1)
+				* Math.sin(dr) * Math.cos(brng));
+		double lon2 = lon1
+				+ Math.atan2(Math.sin(brng) * Math.sin(dr) * Math.cos(lat1),
+						Math.cos(dr) - Math.sin(lat1) * Math.sin(lat2));
+
+		return (new LatLng(Math.toDegrees(lat2), Math.toDegrees(lon2)));
+	}
 }
