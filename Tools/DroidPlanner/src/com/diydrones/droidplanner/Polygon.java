@@ -81,44 +81,6 @@ public class Polygon {
 		this.isVisible = isVisible;
 	}
 
-	public class Bounds {
-		public LatLng sw;
-		public LatLng se;
-		public LatLng nw;
-		public LatLng ne;
-
-		public Bounds(List<waypoint> points) {
-			LatLngBounds.Builder builder = new LatLngBounds.Builder();
-			for (waypoint point : points) {
-				builder.include(point.coord);
-			}
-			LatLngBounds bounds = builder.build();
-			sw = bounds.southwest;
-			se = new LatLng(bounds.southwest.latitude,
-					bounds.northeast.longitude);
-			nw = new LatLng(bounds.northeast.latitude,
-					bounds.southwest.longitude);
-			ne = bounds.northeast;
-		}
-
-		public double getWidth() {
-			return (ne.longitude - nw.longitude);
-		}
-
-		public double getHeight() {
-			return (nw.latitude - sw.latitude);
-		}
-
-		public double getDiag() {
-			return latToMeters(getDistance(ne, sw));
-		}
-
-		public LatLng getMiddle() {
-			return (new LatLng((ne.latitude + sw.latitude) / 2,
-					(ne.longitude + sw.longitude) / 2));
-
-		}
-	}
 
 	public class LineLatLng {
 		public LatLng p1;
@@ -132,41 +94,11 @@ public class Polygon {
 
 	public List<waypoint> hatchfill() {
 		List<waypoint> gridPoints = new ArrayList<waypoint>();
-		List<LineLatLng> gridLines = new ArrayList<LineLatLng>();
 		List<LineLatLng> hatchLines = new ArrayList<LineLatLng>();
-		Bounds bounds = new Bounds(waypoints);
-
-		Log.d("Hacth", "diag:" + bounds.getDiag());
 
 		Double angle = 0.0;
 		Double lineDist = 5000.0;
-		Double y1 = Math.cos(Math.toRadians(angle + 90));
-		Double x1 = Math.sin(Math.toRadians(angle + 90));
-
-		LatLng point = new LatLng(bounds.getMiddle().latitude,
-				bounds.getMiddle().longitude);
-		point = newpos(point, angle - 135, bounds.getDiag());
-
-		// get x y step amount in lat lng from m
-		LatLng diff = new LatLng(metersTolat(lineDist * y1),
-				metersTolat(lineDist * x1));
-		Log.d("Diff", "Lat:" + metersTolat(lineDist * y1) + " Long:"
-				+ metersTolat(lineDist * x1));
-
-		// draw grid
-		int lines = 0;
-		while (lines * lineDist < bounds.getDiag() * 1.5) {
-			// gridPoints.add(new waypoint(point, 0.0)); // debug
-			LatLng pointx = point;
-			pointx = newpos(pointx, angle, bounds.getDiag() * 1.5);
-			// gridPoints.add(new waypoint(pointx, 0.0));// debug
-
-			LineLatLng line = new LineLatLng(point, pointx);
-			gridLines.add(line);
-
-			point = addLatLng(point, diff);
-			lines++;
-		}
+		List<LineLatLng> gridLines = generateGrid(waypoints, angle, lineDist);
 
 		// find intersections
 		for (LineLatLng line : gridLines) {
@@ -217,6 +149,92 @@ public class Polygon {
 		}
 
 		return gridPoints;
+	}
+
+	/** Generates a grid over the specified boundary's
+	 * 
+	 * @param waypoints  Array with the polygon points
+	 * @param angle Angle of the grid in Degrees
+	 * @param lineDist Distance between lines in meters
+	 * @return Returns a array of lines of the generated grid
+	 */
+	private List<Polygon.LineLatLng> generateGrid(List<waypoint> waypoints, Double angle,
+			Double lineDist) {
+		List<Polygon.LineLatLng> gridLines = new ArrayList<Polygon.LineLatLng>();
+
+		Bounds bounds = new Bounds(waypoints);
+		LatLng point = new LatLng(bounds.getMiddle().latitude,
+				bounds.getMiddle().longitude);
+		
+		
+		point = newpos(point, angle - 135, bounds.getDiag());
+
+		// get x y step amount in lat lng from m
+		Double y1 = Math.cos(Math.toRadians(angle + 90));
+		Double x1 = Math.sin(Math.toRadians(angle + 90));
+		LatLng diff = new LatLng(metersTolat(lineDist * y1),
+				metersTolat(lineDist * x1));
+		Log.d("Diff", "Lat:" + metersTolat(lineDist * y1) + " Long:"
+				+ metersTolat(lineDist * x1));
+
+		// draw grid
+		int lines = 0;
+		while (lines * lineDist < bounds.getDiag() * 1.5) {
+			LatLng pointx = point;
+			pointx = newpos(pointx, angle, bounds.getDiag() * 1.5);
+
+			Polygon.LineLatLng line = new Polygon.LineLatLng(point, pointx);
+			gridLines.add(line);
+
+			point = addLatLng(point, diff);
+			lines++;
+		}
+		
+		return gridLines;
+	}
+	
+	/**
+	 * 
+	 * Object for holding boundarys for a polygon
+	 *
+	 */
+	public class Bounds {
+		public LatLng sw;
+		public LatLng se;
+		public LatLng nw;
+		public LatLng ne;
+
+		public Bounds(List<waypoint> points) {
+			LatLngBounds.Builder builder = new LatLngBounds.Builder();
+			for (waypoint point : points) {
+				builder.include(point.coord);
+			}
+			LatLngBounds bounds = builder.build();
+			sw = bounds.southwest;
+			se = new LatLng(bounds.southwest.latitude,
+					bounds.northeast.longitude);
+			nw = new LatLng(bounds.northeast.latitude,
+					bounds.southwest.longitude);
+			ne = bounds.northeast;
+		}
+
+		public double getWidth() {
+			return (ne.longitude - nw.longitude);
+		}
+
+		public double getHeight() {
+			return (nw.latitude - sw.latitude);
+		}
+
+		public double getDiag() {
+			return latToMeters(getDistance(ne, sw));
+		}
+
+		public LatLng getMiddle() {
+			return (new LatLng((ne.latitude + sw.latitude) / 2,
+					(ne.longitude + sw.longitude) / 2));
+
+		}
 	}
 
 	/*
