@@ -97,8 +97,7 @@ public class Polygon {
 		Double angle = 0.0;
 		Double lineDist = 5000.0;
 		List<LineLatLng> gridLines = generateGrid(waypoints, angle, lineDist);
-
-		List<LineLatLng> hatchLines = findIntersections(waypoints, gridLines);
+		List<LineLatLng> hatchLines = trimGridLines(waypoints, gridLines);
 
 		boolean dir = false;
 		for (LineLatLng line : hatchLines) {
@@ -115,18 +114,19 @@ public class Polygon {
 	}
 
 	/**
+	 * Trims a grid of lines for points outside a polygon
 	 * 
 	 * @param polygon
-	 *            Polygon points
+	 *            Polygon vertices
 	 * @param grid
-	 *            array with Grid lines
-	 * @return array with the hatch lines
+	 *            Array with Grid lines
+	 * @return array with the trimmed grid lines
 	 */
-	private List<LineLatLng> findIntersections(List<waypoint> polygon,
+	private List<LineLatLng> trimGridLines(List<waypoint> polygon,
 			List<LineLatLng> grid) {
 		List<LineLatLng> hatchLines = new ArrayList<LineLatLng>();
 		// find intersections
-		for (LineLatLng line : grid) {
+		for (LineLatLng gridLine : grid) {
 			double closestDistance = Double.MAX_VALUE;
 			double farestDistance = Double.MIN_VALUE;
 
@@ -135,27 +135,27 @@ public class Polygon {
 
 			int crosses = 0;
 
-			for (int b = 0; b < waypoints.size(); b++) {
+			for (int b = 0; b < polygon.size(); b++) {
 				LatLng newlatlong;
-				if (b != waypoints.size() - 1) {
-					newlatlong = FindLineIntersection(waypoints.get(b).coord,
-							waypoints.get(b + 1).coord, line.p1, line.p2);
+				if (b != polygon.size() - 1) {
+					newlatlong = FindLineIntersection(polygon.get(b).coord,
+							polygon.get(b + 1).coord, gridLine.p1, gridLine.p2);
 				} else { // Don't forget the last polygon line
-					newlatlong = FindLineIntersection(waypoints.get(b).coord,
-							waypoints.get(0).coord, line.p1, line.p2);
+					newlatlong = FindLineIntersection(polygon.get(b).coord,
+							polygon.get(0).coord, gridLine.p1, gridLine.p2);
 				}
 
 				if (newlatlong != null) {
 					crosses++;
-					if (closestDistance > getDistance(line.p1, newlatlong)) {
+					if (closestDistance > getDistance(gridLine.p1, newlatlong)) {
 						closestPoint = new LatLng(newlatlong.latitude,
 								newlatlong.longitude);
-						closestDistance = getDistance(line.p1, newlatlong);
+						closestDistance = getDistance(gridLine.p1, newlatlong);
 					}
-					if (farestDistance < getDistance(line.p1, newlatlong)) {
+					if (farestDistance < getDistance(gridLine.p1, newlatlong)) {
 						farestPoint = new LatLng(newlatlong.latitude,
 								newlatlong.longitude);
-						farestDistance = getDistance(line.p1, newlatlong);
+						farestDistance = getDistance(gridLine.p1, newlatlong);
 					}
 				}
 			}
@@ -263,14 +263,17 @@ public class Polygon {
 	}
 
 	/**
-	 * Finds the intersection of two lines
-	 * http://stackoverflow.com/questions/
+	 * Finds the intersection of two lines http://stackoverflow.com/questions/
 	 * 1119451/how-to-tell-if-a-line-intersects -a-polygon-in-c
 	 * 
-	 * @param start1 starting point of the first line
-	 * @param end1 ending point of the first line
-	 * @param start2 starting point of the second line
-	 * @param end2 ending point of the second line
+	 * @param start1
+	 *            starting point of the first line
+	 * @param end1
+	 *            ending point of the first line
+	 * @param start2
+	 *            starting point of the second line
+	 * @param end2
+	 *            ending point of the second line
 	 * @return point of intersection, or null if there is no intersection
 	 */
 	private LatLng FindLineIntersection(LatLng start1, LatLng end1,
