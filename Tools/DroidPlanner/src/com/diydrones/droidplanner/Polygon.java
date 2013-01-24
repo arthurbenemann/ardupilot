@@ -179,12 +179,17 @@ public class Polygon {
 			// LatLng farestlatlong = LatLng.Zero;
 
 			//List<LatLng> intersections = new ArrayList<LatLng>();
+			// int crosses = 0;
+			for (int b = 0; b < waypoints.size(); b++) {
+				LatLng newlatlong;
+				if (b != waypoints.size() - 1) {
+					newlatlong = FindLineIntersection(waypoints.get(b).coord,
+							waypoints.get(b + 1).coord, line.p1, line.p2);
+				} else {	// Don't forget the last polygon line
+					newlatlong = FindLineIntersection(waypoints.get(b).coord,
+							waypoints.get(0).coord, line.p1, line.p2);
+				}
 
-			//int crosses = 0;
-			for (int b = 1; b < waypoints.size(); b++) {
-				LatLng newlatlong = FindLineIntersection(waypoints.get(b - 1).coord,
-						waypoints.get(b).coord, line.p1, line.p2);
-				
 				if (newlatlong!=null) {
 					gridPoints.add(new waypoint(newlatlong, 0.0));// debug	
 				}
