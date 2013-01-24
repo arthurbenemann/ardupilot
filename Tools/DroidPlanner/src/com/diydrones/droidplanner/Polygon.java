@@ -120,64 +120,77 @@ public class Polygon {
 		}
 	}
 
+	public class linelatlng {
+		public LatLng p1;
+		public LatLng p2;
+		// used as a base for grid along line
+		public LatLng basepnt;
+
+		public linelatlng(LatLng p1, LatLng p2, LatLng basepnt) {
+			this.p1 = p1;
+			this.p2 = p2;
+			this.basepnt = basepnt;
+		}
+	}
+
 	public List<waypoint> hatchfill() {
-		List<waypoint> grid = new ArrayList<waypoint>();
-		
-		Bounds bounds = new Bounds(waypoints); 
-		
-		
+		List<waypoint> gridPoints = new ArrayList<waypoint>();
+		List<linelatlng> gridLines = new ArrayList<linelatlng>();
+		Bounds bounds = new Bounds(waypoints);
+
 		Log.d("Hacth", "diag:" + bounds.getDiag());
 
 		Double angle = 0.0;
-		Double lineDist = 20000.0;
-		Double y1 = Math.cos(Math.toRadians(angle+90));
-		Double x1 = Math.sin(Math.toRadians(angle+90));
-		
-		LatLng point = new LatLng(bounds.getMiddle().latitude,bounds.getMiddle().longitude);
-		point = newpos(point, angle-135, bounds.getDiag());
-                
-        // get x y step amount in lat lng from m
-        LatLng diff = new LatLng(metersTolat(lineDist * y1),metersTolat(lineDist * x1));
-        Log.d("Diff", "Lat:"+metersTolat(lineDist * y1)+" Long:"+metersTolat(lineDist * x1));
+		Double lineDist = 5000.0;
+		Double y1 = Math.cos(Math.toRadians(angle + 90));
+		Double x1 = Math.sin(Math.toRadians(angle + 90));
 
-        int lines = 0;
-        while (lines * lineDist < bounds.getDiag() * 1.5)
-        {
-        	grid.add(new waypoint(point, 0.0)); //debug
-            LatLng pointx = point;
-            pointx = newpos(pointx, angle, bounds.getDiag() * 1.5);
-            grid.add(new waypoint(pointx, 0.0));//debug
+		LatLng point = new LatLng(bounds.getMiddle().latitude,
+				bounds.getMiddle().longitude);
+		point = newpos(point, angle - 135, bounds.getDiag());
 
-            /*linelatlng line = new linelatlng();
-            line.p1 = new PointLatLng(y, x);
-            line.p2 = new PointLatLng(ny, nx);
-            line.basepnt = new PointLatLng(y, x);
-            grid.Add(line);
-*/
-            point = addLatLng(point,diff);
-            lines++;
-        }
-		return grid;
+		// get x y step amount in lat lng from m
+		LatLng diff = new LatLng(metersTolat(lineDist * y1),
+				metersTolat(lineDist * x1));
+		Log.d("Diff", "Lat:" + metersTolat(lineDist * y1) + " Long:"
+				+ metersTolat(lineDist * x1));
+
+		// draw grid
+		int lines = 0;
+		while (lines * lineDist < bounds.getDiag() * 1.5) {
+			//gridPoints.add(new waypoint(point, 0.0)); // debug
+			LatLng pointx = point;
+			pointx = newpos(pointx, angle, bounds.getDiag() * 1.5);
+			//gridPoints.add(new waypoint(pointx, 0.0));// debug
+
+			linelatlng line = new linelatlng(point, pointx, point);
+			gridLines.add(line);
+
+			point = addLatLng(point, diff);
+			lines++;
+		}
+
+	}
 	}
 
 	private LatLng addLatLng(LatLng point, LatLng diff) {
-		return (new LatLng(point.latitude+diff.latitude,point.longitude+diff.longitude));
+		return (new LatLng(point.latitude + diff.latitude, point.longitude
+				+ diff.longitude));
 	}
 
 	public Double getDistance(LatLng p1, LatLng p2) {
 		return (Math.hypot((p1.latitude - p2.latitude),
 				(p1.longitude - p2.longitude)));
 	}
-	
-	
-	public Double latToMeters(double lat){
+
+	public Double latToMeters(double lat) {
 		double radius_of_earth = 6378100.0;// # in meters
-		return Math.toRadians(lat)*radius_of_earth;
+		return Math.toRadians(lat) * radius_of_earth;
 	}
-	
-	public Double metersTolat(double meters){
+
+	public Double metersTolat(double meters) {
 		double radius_of_earth = 6378100.0;// # in meters
-		return Math.toDegrees(meters/radius_of_earth);
+		return Math.toDegrees(meters / radius_of_earth);
 	}
 
 	public LatLng newpos(LatLng point, double bearing, double distance) {
