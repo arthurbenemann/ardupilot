@@ -206,7 +206,7 @@ public class MissionManager {
 	public LatLngBounds getHomeAndWaypointsBounds(LatLng myLocation) {
 		LatLngBounds.Builder builder = new LatLngBounds.Builder();
 		builder.include(home.coord);
-		if (waypoints.isEmpty()) {
+		if (waypoints.isEmpty() && (myLocation!= null)) {
 			builder.include(myLocation);
 		} else {
 			for (waypoint w : waypoints) {

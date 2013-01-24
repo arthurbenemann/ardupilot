@@ -285,8 +285,12 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 	}
 
 	public LatLng getMyLocation() {
+		if(mMap.getMyLocation() != null){
 		return new LatLng(mMap.getMyLocation().getLatitude(), mMap
 				.getMyLocation().getLongitude());
+		}else {
+			return null;
+		}
 	}
 
 	public void zoomToExtents() {
