@@ -94,14 +94,38 @@ public class Polygon {
 
 	public List<waypoint> hatchfill() {
 		List<waypoint> gridPoints = new ArrayList<waypoint>();
-		List<LineLatLng> hatchLines = new ArrayList<LineLatLng>();
-
+		
 		Double angle = 0.0;
 		Double lineDist = 5000.0;
 		List<LineLatLng> gridLines = generateGrid(waypoints, angle, lineDist);
 
+		List<LineLatLng> hatchLines = findIntersections(waypoints, gridLines);
+
+
+		boolean dir = false;
+		for (LineLatLng line : hatchLines) {
+			if (dir) {
+				gridPoints.add(new waypoint(line.p1, 0.0));// debug
+				gridPoints.add(new waypoint(line.p2, 0.0));// debug
+			}else {
+				gridPoints.add(new waypoint(line.p2, 0.0));// debug
+				gridPoints.add(new waypoint(line.p1, 0.0));// debug				
+			}
+			dir = !dir;
+		}
+		return gridPoints;
+	}
+
+	/**
+	 * 
+	 * @param polygon Polygon points
+	 * @param grid array with Grid lines
+	 * @return array with the hatch lines
+	 */
+	private List<LineLatLng> findIntersections(List<waypoint> polygon,List<LineLatLng> grid) {
+		List<LineLatLng> hatchLines = new ArrayList<LineLatLng>();
 		// find intersections
-		for (LineLatLng line : gridLines) {
+		for (LineLatLng line : grid) {
 			double closestDistance = Double.MAX_VALUE;
 			double farestDistance = Double.MIN_VALUE;
 
@@ -142,13 +166,10 @@ public class Polygon {
 			default: // TODO handle multiple crossings in a better way
 			case 2:
 				hatchLines.add(new LineLatLng(closestPoint, farestPoint));
-				gridPoints.add(new waypoint(closestPoint, 0.0));// debug
-				gridPoints.add(new waypoint(farestPoint, 0.0));// debug
 				break;
 			}
 		}
-
-		return gridPoints;
+		return hatchLines;
 	}
 
 	/** Generates a grid over the specified boundary's
