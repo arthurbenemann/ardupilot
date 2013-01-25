@@ -410,11 +410,10 @@ public class Polygon {
 
 		for (int i = 0; i < waypoints.size(); i++) {
 			if (i == waypoints.size()-1) {
-				dist = Math.hypot(getDistance(point, waypoints.get(i).coord),
-						getDistance(point, waypoints.get(0).coord));
+				dist = getDistance(point, waypoints.get(i).coord)+
+						getDistance(point, waypoints.get(0).coord);
 			} else {
-				dist = Math.hypot(getDistance(point, waypoints.get(i).coord),
-						getDistance(point, waypoints.get(i + 1).coord));
+				dist = getDistance(point, waypoints.get(i).coord)+getDistance(point, waypoints.get(i + 1).coord);
 			}
 
 			if (dist < currentbest) {
