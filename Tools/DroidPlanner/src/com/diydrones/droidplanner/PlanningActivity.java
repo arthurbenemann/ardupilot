@@ -68,7 +68,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		polygon.addWaypoint(-1.0, -1.0);
 		polygon.addWaypoint(-2.0, -1.0);
 		polygon.addWaypoint(-2.0, 0.0);
-		mission.addWaypoints(polygon.hatchfill());
+		mission.addWaypoints(polygon.hatchfill(30.0,5000.0,mission.getHome().coord, 0.0));
 		updateMarkersAndPath();
 	}
 
@@ -247,7 +247,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		case R.id.menu_finish_polygon:
 //			polygon.clearPolygon();
 //			polygon.setVisible(false);
-			mission.addWaypoints(polygon.hatchfill());
+			mission.addWaypoints(polygon.hatchfill(30.0, 5000.0,mission.getLastWaypoint().coord,mission.getDefaultAlt()));
 			updateMarkersAndPath();
 			return true;
 		case R.id.menu_add_polygon:

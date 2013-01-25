@@ -91,24 +91,66 @@ public class Polygon {
 		}
 	}
 
-	public List<waypoint> hatchfill() {
-		List<waypoint> gridPoints = new ArrayList<waypoint>();
-
-		Double angle = 0.0;
-		Double lineDist = 5000.0;
+	public List<waypoint> hatchfill(Double angle, Double lineDist,
+			LatLng lastLocation, Double altitude) {
 		List<LineLatLng> gridLines = generateGrid(waypoints, angle, lineDist);
 		List<LineLatLng> hatchLines = trimGridLines(waypoints, gridLines);
 
-		boolean dir = false;
-		for (LineLatLng line : hatchLines) {
-			if (dir) {
-				gridPoints.add(new waypoint(line.p1, 0.0));// debug
-				gridPoints.add(new waypoint(line.p2, 0.0));// debug
+		List<waypoint> gridPoints = waypointsFromHatch(lastLocation, altitude,
+				hatchLines);
+
+		return gridPoints;
+	}
+
+	/**
+	 * Generates a list of waypoints from a list of hatch lines, choosing the
+	 * best way to organize the mission. Uses the extreme points of the lines as
+	 * waypoints.
+	 * 
+	 * @param lastLocation
+	 *            The last location of the mission, used to chose where to start
+	 *            filling the polygon with the hatch
+	 * @param altitude
+	 *            Altitude of the waypoints
+	 * @param hatchLines
+	 *            List of lines to be ordered and added
+	 */
+	public List<waypoint> waypointsFromHatch(LatLng lastLocation,
+			Double altitude, List<LineLatLng> hatchLines) {
+		List<waypoint> gridPoints = new ArrayList<waypoint>();
+		LineLatLng closest = findClosestLine(lastLocation, hatchLines);
+		LatLng lastpnt;
+
+		if (getDistance(closest.p1, lastLocation) < getDistance(closest.p2,
+				lastLocation)) {
+			lastpnt = closest.p1;
+		} else {
+			lastpnt = closest.p2;
+		}
+
+		while (hatchLines.size() > 0) {
+			if (getDistance(closest.p1, lastpnt) < getDistance(closest.p2,
+					lastpnt)) {
+				gridPoints.add(new waypoint(closest.p1, altitude));
+				gridPoints.add(new waypoint(closest.p2, altitude));
+
+				lastpnt = closest.p2;
+
+				hatchLines.remove(closest);
+				if (hatchLines.size() == 0)
+					break;
+				closest = findClosestLine(closest.p2, hatchLines);
 			} else {
-				gridPoints.add(new waypoint(line.p2, 0.0));// debug
-				gridPoints.add(new waypoint(line.p1, 0.0));// debug
+				gridPoints.add(new waypoint(closest.p2, altitude));
+				gridPoints.add(new waypoint(closest.p1, altitude));
+
+				lastpnt = closest.p1;
+
+				hatchLines.remove(closest);
+				if (hatchLines.size() == 0)
+					break;
+				closest = findClosestLine(closest.p1, hatchLines);
 			}
-			dir = !dir;
 		}
 		return gridPoints;
 	}

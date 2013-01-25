@@ -267,4 +267,15 @@ public class MissionManager {
 		this.defaultAlt = defaultAlt;
 	}
 
+	public waypoint getHome() {
+		return home;
+	}
+	
+	public waypoint getLastWaypoint(){
+		if(waypoints.size()>0)
+			return waypoints.get(waypoints.size()-1);
+		else
+			return home;
+	}
+
 }
