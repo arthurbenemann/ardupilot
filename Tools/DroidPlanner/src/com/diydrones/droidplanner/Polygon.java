@@ -57,7 +57,8 @@ public class Polygon {
 	}
 
 	public void addWaypoint(LatLng coord) {
-		waypoints.add(new waypoint(coord, (Double) 0.0));
+		waypoints.add(findClosestPair(coord, waypoints), new waypoint(coord,
+				(Double) 0.0));
 	}
 
 	public void clearPolygon() {
@@ -392,6 +393,39 @@ public class Polygon {
 	}
 
 	/**
+	 * Finds the pair of adjacent points that minimize the distance to a
+	 * reference point
+	 * 
+	 * @param point
+	 *            point that will be used as reference
+	 * @param waypoints
+	 *            List of points to be searched
+	 * @return Position of the second point in the pair that minimizes the
+	 *         distance
+	 */
+	int findClosestPair(LatLng point, List<waypoint> waypoints) {
+		int answer = 0;
+		double currentbest = Double.MAX_VALUE;
+		double dist;
+
+		for (int i = 0; i < waypoints.size(); i++) {
+			if (i == waypoints.size()-1) {
+				dist = Math.hypot(getDistance(point, waypoints.get(i).coord),
+						getDistance(point, waypoints.get(0).coord));
+			} else {
+				dist = Math.hypot(getDistance(point, waypoints.get(i).coord),
+						getDistance(point, waypoints.get(i + 1).coord));
+			}
+
+			if (dist < currentbest) {
+				answer = i + 1;
+				currentbest = dist;
+			}
+		}
+		return answer;
+	}
+
+	/**
 	 * Adds an offset to a point (in degrees)
 	 * 
 	 * @param point
@@ -456,13 +490,12 @@ public class Polygon {
 		return (new LatLng(Math.toDegrees(lat2), Math.toDegrees(lon2)));
 	}
 
-	
 	/**
-	 * Experimental Function, needs testing!
-	 * Calculate the area of the polygon
+	 * Experimental Function, needs testing! Calculate the area of the polygon
+	 * 
 	 * @return area in m²
 	 */
-	//TODO test and fix this function
+	// TODO test and fix this function
 	public Double getArea() {
 		double sum = 0.0;
 		for (int i = 0; i < waypoints.size() - 1; i++) {
