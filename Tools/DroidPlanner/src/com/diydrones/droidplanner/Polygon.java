@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.graphics.Color;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -455,5 +454,24 @@ public class Polygon {
 						Math.cos(dr) - Math.sin(lat1) * Math.sin(lat2));
 
 		return (new LatLng(Math.toDegrees(lat2), Math.toDegrees(lon2)));
+	}
+
+	
+	/**
+	 * Experimental Function, needs testing!
+	 * Calculate the area of the polygon
+	 * @return area in m²
+	 */
+	//TODO test and fix this function
+	public Double getArea() {
+		double sum = 0.0;
+		for (int i = 0; i < waypoints.size() - 1; i++) {
+			sum = sum
+					+ (latToMeters(waypoints.get(i).coord.longitude) * latToMeters(waypoints
+							.get(i + 1).coord.latitude))
+					- (latToMeters(waypoints.get(i).coord.latitude) * latToMeters(waypoints
+							.get(i + 1).coord.longitude));
+		}
+		return Math.abs(0.5 * sum);
 	}
 }
