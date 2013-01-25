@@ -286,10 +286,9 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 
 	
 	Double hatchAngle;
-	Double hatchDistance;
+	Double hatchDistance = 100.0;
 	private void finishPolygon() {
-		hatchAngle = 0.0;
-		hatchDistance = 100.0;
+		hatchAngle = ((double) mMap.getCameraPosition().bearing + 90)%180;
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Polygon Angle");
 
@@ -317,7 +316,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 	    	    
 	    SeekBar angleSeekBar = (SeekBar) dialog.findViewById(R.id.SeekBarAngle);
 	    final TextView angleTextView = (TextView) dialog.findViewById(R.id.TextViewAngle);
-	    angleTextView.setText(getResources().getString(R.string.dialog_polygon_hatch_angle)+"\t"+hatchAngle+"º");
+	    angleTextView.setText(String.format(getResources().getString(R.string.dialog_polygon_hatch_angle)+"\t%3.0fº",hatchAngle));
 	    angleSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {		
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
