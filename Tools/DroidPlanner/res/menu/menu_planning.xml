@@ -40,6 +40,7 @@
     <item android:id="@+id/menu_polygon" android:title="@string/menu_polygon">
         <menu>
             <item android:id="@+id/menu_add_polygon" android:title="@string/menu_add_polygon"/>
+            <item android:id="@+id/menu_clear_polygon" android:title="@string/menu_clear_polygon"/>
             <item android:id="@+id/menu_finish_polygon" android:title="@string/menu_finish_polygon"/>
         </menu>
     </item>

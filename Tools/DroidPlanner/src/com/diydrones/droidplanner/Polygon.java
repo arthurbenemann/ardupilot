@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.graphics.Color;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -20,7 +21,7 @@ public class Polygon {
 
 	public Polygon() {
 		waypoints = new ArrayList<waypoint>();
-		setVisible(true); // for debugging
+		setVisible(false);
 	}
 
 	public PolylineOptions getFlightPath() {

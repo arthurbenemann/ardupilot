@@ -31,5 +31,7 @@
     <string name="menu_polygon">Polygon</string>
     <string name="menu_clear_polygon">Clear Polygon</string>
     <string name="menu_finish_polygon">Finish Polygon</string>
+    <string name="exiting_polygon_mode">Exiting Polygon Mode</string>
+    <string name="entering_polygon_mode">Entering Polygon Mode</string>
 
 </resources>
