@@ -12,10 +12,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.NumberPicker;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -239,8 +242,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 			changeDefaultAlt();
 			return true;
 		case R.id.menu_finish_polygon:
-			mission.addWaypoints(polygon.hatchfill(30.0, 5000.0,mission.getLastWaypoint().coord,mission.getDefaultAlt()));
-			updateMarkersAndPath();
+			finishPolygon();
 			return true;
 		case R.id.menu_add_polygon:
 			polygon.setVisible(true);
@@ -282,6 +284,72 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		builder.create().show();
 	}
 
+	
+	Double hatchAngle;
+	Double hatchDistance;
+	private void finishPolygon() {
+		hatchAngle = 0.0;
+		hatchDistance = 100.0;
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Polygon Angle");
+
+	    LayoutInflater inflater = getLayoutInflater();
+
+	    // Inflate and set the layout for the dialog
+	    // Pass null as the parent view because its going in the dialog layout
+	    builder.setView(inflater.inflate(R.layout.dialog_polygon, null));
+	    
+	    
+		builder.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+					}
+				})
+		.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				mission.addWaypoints(polygon.hatchfill(hatchAngle, hatchDistance,mission.getLastWaypoint().coord,mission.getDefaultAlt()));
+				updateMarkersAndPath();
+			}
+		});
+	    
+	    AlertDialog dialog = builder.create();
+	    dialog.show();
+	    	    
+	    SeekBar angleSeekBar = (SeekBar) dialog.findViewById(R.id.SeekBarAngle);
+	    final TextView angleTextView = (TextView) dialog.findViewById(R.id.TextViewAngle);
+	    angleTextView.setText(getResources().getString(R.string.dialog_polygon_hatch_angle)+"\t"+hatchAngle+"º");
+	    angleSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {		
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				hatchAngle = (double) progress;
+				angleTextView.setText(getResources().getString(R.string.dialog_polygon_hatch_angle)+"\t"+hatchAngle+"º");
+			}
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+		});
+
+	    SeekBar distanceSeekBar = (SeekBar) dialog.findViewById(R.id.seekBarDistance);
+	    final TextView distanceTextView = (TextView) dialog.findViewById(R.id.textViewDistance);
+	    distanceTextView.setText(getResources().getString(R.string.dialog_polygon_distance_between_lines)+"\t"+hatchDistance+"m");
+	    distanceSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {		
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				hatchDistance = (double) progress;
+				distanceTextView.setText(getResources().getString(R.string.dialog_polygon_distance_between_lines)+"\t"+hatchDistance+"m");
+			}
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+		});
+
+	}
 	private void menuSaveFile() {
 		if (mission.saveWaypoints()) {
 			Toast.makeText(this, R.string.file_saved, Toast.LENGTH_SHORT)
