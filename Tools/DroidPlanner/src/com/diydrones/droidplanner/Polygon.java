@@ -15,21 +15,21 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 public class Polygon {
 
-	private List<waypoint> waypoints;
+	private List<LatLng> waypoints;
 	
 	public Polygon() {
-		waypoints = new ArrayList<waypoint>();
+		waypoints = new ArrayList<LatLng>();
 	}
 
 	public PolylineOptions getFlightPath() {
 		PolylineOptions flightPath = new PolylineOptions();
 		flightPath.color(Color.BLACK).width(2);
 
-		for (waypoint point : waypoints) {
-			flightPath.add(point.coord);
+		for (LatLng point : waypoints) {
+			flightPath.add(point);
 		}
 		if (waypoints.size() > 2) {
-			flightPath.add(waypoints.get(0).coord);
+			flightPath.add(waypoints.get(0));
 		}
 
 		return flightPath;
@@ -38,9 +38,9 @@ public class Polygon {
 	public List<MarkerOptions> getWaypointMarkers() {
 		int i = 1;
 		List<MarkerOptions> MarkerList = new ArrayList<MarkerOptions>();
-		for (waypoint point : waypoints) {
+		for (LatLng point : waypoints) {
 			MarkerList.add(new MarkerOptions()
-					.position(point.coord)
+					.position(point)
 					.draggable(true)
 					.title("Poly" + Integer.toString(i))
 					.icon(BitmapDescriptorFactory
@@ -51,12 +51,11 @@ public class Polygon {
 	}
 
 	public void addWaypoint(Double Lat, Double Lng) {
-		waypoints.add(new waypoint(Lat, Lng, (Double) 0.0));
+		waypoints.add(new LatLng(Lat, Lng));
 	}
 
 	public void addWaypoint(LatLng coord) {
-		waypoints.add(findClosestPair(coord, waypoints), new waypoint(coord,
-				(Double) 0.0));
+		waypoints.add(findClosestPair(coord, waypoints), coord);
 	}
 
 	public void clearPolygon() {
@@ -69,10 +68,10 @@ public class Polygon {
 
 	public void setWaypointToMarker(Marker marker) {
 		int WPnumber = Integer.parseInt(marker.getTitle().replace("Poly", "")) - 1;
-		waypoints.get(WPnumber).coord = marker.getPosition();
+		waypoints.set(WPnumber, marker.getPosition());
 	}
 
-	public class LineLatLng {
+	private class LineLatLng {
 		public LatLng p1;
 		public LatLng p2;
 
@@ -106,7 +105,7 @@ public class Polygon {
 	 * @param hatchLines
 	 *            List of lines to be ordered and added
 	 */
-	public List<waypoint> waypointsFromHatch(LatLng lastLocation,
+	private List<waypoint> waypointsFromHatch(LatLng lastLocation,
 			Double altitude, List<LineLatLng> hatchLines) {
 		List<waypoint> gridPoints = new ArrayList<waypoint>();
 		LineLatLng closest = findClosestLine(lastLocation, hatchLines);
@@ -149,13 +148,13 @@ public class Polygon {
 	/**
 	 * Trims a grid of lines for points outside a polygon
 	 * 
-	 * @param polygon
+	 * @param waypoints2
 	 *            Polygon vertices
 	 * @param grid
 	 *            Array with Grid lines
 	 * @return array with the trimmed grid lines
 	 */
-	private List<LineLatLng> trimGridLines(List<waypoint> polygon,
+	private List<LineLatLng> trimGridLines(List<LatLng> waypoints2,
 			List<LineLatLng> grid) {
 		List<LineLatLng> hatchLines = new ArrayList<LineLatLng>();
 		// find intersections
@@ -168,14 +167,14 @@ public class Polygon {
 
 			int crosses = 0;
 
-			for (int b = 0; b < polygon.size(); b++) {
+			for (int b = 0; b < waypoints2.size(); b++) {
 				LatLng newlatlong;
-				if (b != polygon.size() - 1) {
-					newlatlong = FindLineIntersection(polygon.get(b).coord,
-							polygon.get(b + 1).coord, gridLine.p1, gridLine.p2);
+				if (b != waypoints2.size() - 1) {
+					newlatlong = FindLineIntersection(waypoints2.get(b),
+							waypoints2.get(b + 1), gridLine.p1, gridLine.p2);
 				} else { // Don't forget the last polygon line
-					newlatlong = FindLineIntersection(polygon.get(b).coord,
-							polygon.get(0).coord, gridLine.p1, gridLine.p2);
+					newlatlong = FindLineIntersection(waypoints2.get(b),
+							waypoints2.get(0), gridLine.p1, gridLine.p2);
 				}
 
 				if (newlatlong != null) {
@@ -209,7 +208,7 @@ public class Polygon {
 	/**
 	 * Generates a grid over the specified boundary's
 	 * 
-	 * @param waypoints
+	 * @param waypoints2
 	 *            Array with the polygon points
 	 * @param angle
 	 *            Angle of the grid in Degrees
@@ -217,11 +216,11 @@ public class Polygon {
 	 *            Distance between lines in meters
 	 * @return Returns a array of lines of the generated grid
 	 */
-	private List<Polygon.LineLatLng> generateGrid(List<waypoint> waypoints,
+	private List<Polygon.LineLatLng> generateGrid(List<LatLng> waypoints2,
 			Double angle, Double lineDist) {
 		List<Polygon.LineLatLng> gridLines = new ArrayList<Polygon.LineLatLng>();
 
-		Bounds bounds = new Bounds(waypoints);
+		Bounds bounds = new Bounds(waypoints2);
 		LatLng point = new LatLng(bounds.getMiddle().latitude,
 				bounds.getMiddle().longitude);
 
@@ -256,32 +255,18 @@ public class Polygon {
 	 * Object for holding boundary for a polygon
 	 * 
 	 */
-	public class Bounds {
+	private class Bounds {
 		public LatLng sw;
-		public LatLng se;
-		public LatLng nw;
 		public LatLng ne;
 
-		public Bounds(List<waypoint> points) {
+		public Bounds(List<LatLng> points) {
 			LatLngBounds.Builder builder = new LatLngBounds.Builder();
-			for (waypoint point : points) {
-				builder.include(point.coord);
+			for (LatLng point : points) {
+				builder.include(point);
 			}
 			LatLngBounds bounds = builder.build();
 			sw = bounds.southwest;
-			se = new LatLng(bounds.southwest.latitude,
-					bounds.northeast.longitude);
-			nw = new LatLng(bounds.northeast.latitude,
-					bounds.southwest.longitude);
 			ne = bounds.northeast;
-		}
-
-		public double getWidth() {
-			return (ne.longitude - nw.longitude);
-		}
-
-		public double getHeight() {
-			return (nw.latitude - sw.latitude);
 		}
 
 		public double getDiag() {
@@ -341,7 +326,7 @@ public class Polygon {
 	 *            A list of lines to search
 	 * @return The closest Line
 	 */
-	LineLatLng findClosestLine(LatLng point, List<LineLatLng> list) {
+	private LineLatLng findClosestLine(LatLng point, List<LineLatLng> list) {
 		LineLatLng answer = list.get(0);
 		double shortest = Double.MAX_VALUE;
 
@@ -367,7 +352,8 @@ public class Polygon {
 	 *            List of points to be searched
 	 * @return The closest point
 	 */
-	LatLng findClosestPoint(LatLng point, List<LatLng> list) {
+	@SuppressWarnings("unused")
+	private LatLng findClosestPoint(LatLng point, List<LatLng> list) {
 		LatLng answer = null;
 		double currentbest = Double.MAX_VALUE;
 
@@ -388,24 +374,24 @@ public class Polygon {
 	 * 
 	 * @param point
 	 *            point that will be used as reference
-	 * @param waypoints
+	 * @param waypoints2
 	 *            List of points to be searched
 	 * @return Position of the second point in the pair that minimizes the
 	 *         distance
 	 */
-	int findClosestPair(LatLng point, List<waypoint> waypoints) {
+	private int findClosestPair(LatLng point, List<LatLng> waypoints2) {
 		int answer = 0;
 		double currentbest = Double.MAX_VALUE;
 		double dist;
 		LatLng p1, p2;
 
-		for (int i = 0; i < waypoints.size(); i++) {
-			if (i == waypoints.size() - 1) {
-				p1 = waypoints.get(i).coord;
-				p2 = waypoints.get(0).coord;
+		for (int i = 0; i < waypoints2.size(); i++) {
+			if (i == waypoints2.size() - 1) {
+				p1 = waypoints2.get(i);
+				p2 = waypoints2.get(0);
 			} else {
-				p1 = waypoints.get(i).coord;
-				p2 = waypoints.get(i + 1).coord;
+				p1 = waypoints2.get(i);
+				p2 = waypoints2.get(i + 1);
 			}
 
 			dist = (getDistance(p1, point) + getDistance(p1, point))
@@ -437,17 +423,17 @@ public class Polygon {
 	 * 
 	 * @return distance between the points in degrees
 	 */
-	public Double getDistance(LatLng p1, LatLng p2) {
+	private Double getDistance(LatLng p1, LatLng p2) {
 		return (Math.hypot((p1.latitude - p2.latitude),
 				(p1.longitude - p2.longitude)));
 	}
 
-	public Double latToMeters(double lat) {
+	private Double latToMeters(double lat) {
 		double radius_of_earth = 6378100.0;// # in meters
 		return Math.toRadians(lat) * radius_of_earth;
 	}
 
-	public Double metersTolat(double meters) {
+	private Double metersTolat(double meters) {
 		double radius_of_earth = 6378100.0;// # in meters
 		return Math.toDegrees(meters / radius_of_earth);
 	}
@@ -464,7 +450,7 @@ public class Polygon {
 	 *            distance to be added
 	 * @return New point with the added distance
 	 */
-	public LatLng newpos(LatLng origin, double bearing, double distance) {
+	private LatLng newpos(LatLng origin, double bearing, double distance) {
 		double radius_of_earth = 6378100.0;// # in meters
 
 		double lat = origin.latitude;
@@ -493,10 +479,10 @@ public class Polygon {
 		double sum = 0.0;
 		for (int i = 0; i < waypoints.size() - 1; i++) {
 			sum = sum
-					+ (latToMeters(waypoints.get(i).coord.longitude) * latToMeters(waypoints
-							.get(i + 1).coord.latitude))
-					- (latToMeters(waypoints.get(i).coord.latitude) * latToMeters(waypoints
-							.get(i + 1).coord.longitude));
+					+ (latToMeters(waypoints.get(i).longitude) * latToMeters(waypoints
+							.get(i + 1).latitude))
+					- (latToMeters(waypoints.get(i).latitude) * latToMeters(waypoints
+							.get(i + 1).longitude));
 		}
 		return Math.abs(0.5 * sum);
 	}
