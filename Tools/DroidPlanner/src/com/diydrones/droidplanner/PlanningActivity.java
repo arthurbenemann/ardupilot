@@ -76,7 +76,16 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu_planning, menu);
+		switch (mode) {
+		default:
+		case MISSION:
+			getMenuInflater().inflate(R.menu.menu_planning, menu);	
+			break;
+		case POLYGON:
+			getMenuInflater().inflate(R.menu.menu_planning_polygon, menu);
+			break;
+		}
+		
 
 		return true;
 	}
@@ -251,16 +260,18 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		case R.id.menu_default_alt:
 			changeDefaultAlt();
 			return true;
-		case R.id.menu_finish_polygon:
-			finishPolygon();
+		case R.id.menu_polygon:
+			setModeToPolygon();
 			return true;
-		case R.id.menu_add_polygon:
-			setModeToPolygon();			
-			updateMarkersAndPath();
+		case R.id.menu_generate_polygon:
+			generatePolygon();
 			return true;
 		case R.id.menu_clear_polygon:
-			setModeToMission();			
 			polygon.clearPolygon();
+			updateMarkersAndPath();
+			return true;
+		case R.id.menu_finish_polygon:
+			setModeToMission();		
 			updateMarkersAndPath();
 			return true;
 		default:
@@ -271,11 +282,13 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 	private void setModeToPolygon() {
 		mode = modes.POLYGON;
 		Toast.makeText(this, R.string.entering_polygon_mode, Toast.LENGTH_SHORT).show();
+		invalidateOptionsMenu();
 	}
 
 	private void setModeToMission() {
 		mode = modes.MISSION;
 		Toast.makeText(this, R.string.exiting_polygon_mode, Toast.LENGTH_SHORT).show();
+		invalidateOptionsMenu();
 	}
 
 	private void changeDefaultAlt() {
@@ -305,7 +318,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 	
 	Double hatchAngle;
 	Double hatchDistance = 100.0;
-	private void finishPolygon() {
+	private void generatePolygon() {
 		hatchAngle = ((double) mMap.getCameraPosition().bearing + 90)%180;
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Polygon Angle");
