@@ -229,7 +229,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.menu_clear:
+		case R.id.menu_clear_wp:
 			clearWaypointsAndUpdate();
 			return true;
 		case R.id.menu_load_from_apm:
