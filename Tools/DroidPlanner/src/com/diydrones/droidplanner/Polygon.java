@@ -16,11 +16,9 @@ import com.google.android.gms.maps.model.PolylineOptions;
 public class Polygon {
 
 	private List<waypoint> waypoints;
-	private boolean isVisible;
-
+	
 	public Polygon() {
 		waypoints = new ArrayList<waypoint>();
-		setVisible(false);
 	}
 
 	public PolylineOptions getFlightPath() {
@@ -72,14 +70,6 @@ public class Polygon {
 	public void setWaypointToMarker(Marker marker) {
 		int WPnumber = Integer.parseInt(marker.getTitle().replace("Poly", "")) - 1;
 		waypoints.get(WPnumber).coord = marker.getPosition();
-	}
-
-	public boolean isVisible() {
-		return isVisible;
-	}
-
-	public void setVisible(boolean isVisible) {
-		this.isVisible = isVisible;
 	}
 
 	public class LineLatLng {

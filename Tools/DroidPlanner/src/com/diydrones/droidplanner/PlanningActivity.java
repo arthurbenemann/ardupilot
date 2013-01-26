@@ -42,7 +42,11 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 
 	public MissionManager mission;
 	public Polygon polygon;
-
+	public enum modes{
+		MISSION,POLYGON;
+	}
+	public modes mode;
+	
 	TextView WaypointListNumber;
 
 	@Override
@@ -64,6 +68,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 
 		mission = new MissionManager();
 		polygon = new Polygon();
+		mode = modes.MISSION;
 		setUpMapIfNeeded();
 		
 		updateMarkersAndPath();
@@ -130,10 +135,15 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 
 	@Override
 	public void onMapLongClick(LatLng point) {
-		if (polygon.isVisible()) {
-			polygon.addWaypoint(point);
-		} else {
+
+		switch (mode) {
+		default:
+		case MISSION:			
 			mission.addWaypoint(point);
+			break;
+		case POLYGON:
+			polygon.addWaypoint(point);
+			break;
 		}
 		updateMarkersAndPath();
 	}
@@ -245,19 +255,27 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 			finishPolygon();
 			return true;
 		case R.id.menu_add_polygon:
-			polygon.setVisible(true);
-			Toast.makeText(this, R.string.entering_polygon_mode, Toast.LENGTH_SHORT).show();			
+			setModeToPolygon();			
 			updateMarkersAndPath();
 			return true;
 		case R.id.menu_clear_polygon:
-			polygon.setVisible(false);
-			Toast.makeText(this, R.string.exiting_polygon_mode, Toast.LENGTH_SHORT).show();			
+			setModeToMission();			
 			polygon.clearPolygon();
 			updateMarkersAndPath();
 			return true;
 		default:
 			return super.onMenuItemSelected(featureId, item);
 		}
+	}
+
+	private void setModeToPolygon() {
+		mode = modes.POLYGON;
+		Toast.makeText(this, R.string.entering_polygon_mode, Toast.LENGTH_SHORT).show();
+	}
+
+	private void setModeToMission() {
+		mode = modes.MISSION;
+		Toast.makeText(this, R.string.exiting_polygon_mode, Toast.LENGTH_SHORT).show();
 	}
 
 	private void changeDefaultAlt() {
