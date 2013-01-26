@@ -397,15 +397,19 @@ public class Polygon {
 		int answer = 0;
 		double currentbest = Double.MAX_VALUE;
 		double dist;
+		LatLng p1, p2;
 
 		for (int i = 0; i < waypoints.size(); i++) {
-			if (i == waypoints.size()-1) {
-				dist = getDistance(point, waypoints.get(i).coord)+
-						getDistance(point, waypoints.get(0).coord);
+			if (i == waypoints.size() - 1) {
+				p1 = waypoints.get(i).coord;
+				p2 = waypoints.get(0).coord;
 			} else {
-				dist = getDistance(point, waypoints.get(i).coord)+getDistance(point, waypoints.get(i + 1).coord);
+				p1 = waypoints.get(i).coord;
+				p2 = waypoints.get(i + 1).coord;
 			}
 
+			dist = (getDistance(p1, point) + getDistance(p1, point))
+					/ getDistance(p1, p2);
 			if (dist < currentbest) {
 				answer = i + 1;
 				currentbest = dist;
