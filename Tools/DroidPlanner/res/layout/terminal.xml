@@ -18,15 +18,16 @@
             android:padding="15dp" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/buttonSend"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="93dp"
             android:layout_height="match_parent"
-            android:text="Send" />
+            android:text="Send"
+            android:onClick="sendData" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textViewTerminal"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
