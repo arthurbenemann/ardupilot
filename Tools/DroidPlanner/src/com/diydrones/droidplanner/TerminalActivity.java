@@ -3,11 +3,14 @@ package com.diydrones.droidplanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+
+import com.diydrones.droidplanner.MAVLink.MAV_states;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
@@ -102,7 +105,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 	
 	
 	
-	private BufferedReader in;
+	private InputStream in;
 	PrintWriter out;
 
 	public void sendMessage(String message) {
@@ -112,14 +115,16 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		}
 	}
 	
-	public class connectTask extends AsyncTask<String, String, TCPClient> {
-		public static final String SERVERIP = "192.168.7.140"; 
+	public class connectTask extends AsyncTask<String, String, String> {
+		public static final String SERVERIP = "10.0.0.100"; 
 		public static final int SERVERPORT = 5760;
+		
+		public MAVLink parser;
 
 		@Override
-		protected TCPClient doInBackground(String... message) {
+		protected String doInBackground(String... message) {
 			Socket socket = null;
-			
+			parser = new MAVLink();
 			try {
 				InetAddress serverAddr = InetAddress.getByName(SERVERIP);
 				socket = new Socket(serverAddr, SERVERPORT);
@@ -128,11 +133,14 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 						new OutputStreamWriter(socket.getOutputStream())), true);
 				Log.e("TCP Client", "C: Done.");
 				// receive the message which the server sends back
-				in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				in = socket.getInputStream();
 				while (true) {
 					int data;
 					if((data = in.read())>=0){
-						publishProgress(Character.toString((char) data));
+						
+						if (parser.mavlink_parse_char(data)) {
+							publishProgress("Received Hertbeat\n");
+						}
 					}
 				}
 			} catch (IOException e) {
@@ -153,11 +161,11 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		protected void onProgressUpdate(String... values) {
 			super.onProgressUpdate(values);
 			//Log.d("TCP IN", "Update:" + values[0]);
-			//terminal.append(values[0]);
+			terminal.append(values[0]);
 		}
 
 		@Override
-		protected void onPostExecute(TCPClient result) {
+		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
 			Log.d("TCP IN", "Executed");
 		}
