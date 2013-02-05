@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.R.array;
+import android.R.integer;
 import android.util.Log;
 
 public class MAVLink {
@@ -48,11 +49,10 @@ public class MAVLink {
 
 	enum MAV_states {
 		MAVLINK_PARSE_STATE_UNINIT, MAVLINK_PARSE_STATE_IDLE, MAVLINK_PARSE_STATE_GOT_STX, MAVLINK_PARSE_STATE_GOT_LENGTH, MAVLINK_PARSE_STATE_GOT_SEQ, MAVLINK_PARSE_STATE_GOT_SYSID, MAVLINK_PARSE_STATE_GOT_COMPID, MAVLINK_PARSE_STATE_GOT_MSGID, MAVLINK_PARSE_STATE_GOT_CRC1, MAVLINK_PARSE_STATE_GOT_PAYLOAD
-	};
+	}
+
 
 	MAV_states state = MAV_states.MAVLINK_PARSE_STATE_UNINIT;
-
-	private int ck_b;
 
 	static boolean msg_received;
 
@@ -72,8 +72,6 @@ public class MAVLink {
 
 	private static int MAVLINK_STX = 254;
 
-	private static int ck_a;
-
 	public boolean mavlink_parse_char(int c) {
 		msg_received = false;
 
@@ -82,7 +80,7 @@ public class MAVLink {
 		case MAVLINK_PARSE_STATE_IDLE:
 			if (c == MAVLINK_STX) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_STX;
-				mavlink_start_checksum();
+				CRC.mavlink_start_checksum();
 				Log.d("MAVLink", "GOT_STX");
 			}
 			break;
@@ -99,7 +97,7 @@ public class MAVLink {
 				len = c;
 				Log.d("MAVLink", "LENGHT - " + len);
 				payload = new ArrayList<Integer>();
-				mavlink_update_checksum(c);
+				CRC.mavlink_update_checksum(c);
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_LENGTH;
 			}
 			break;
@@ -107,28 +105,28 @@ public class MAVLink {
 		case MAVLINK_PARSE_STATE_GOT_LENGTH:
 			seq = c;
 			Log.d("MAVLink", "SEQ - " + seq);
-			mavlink_update_checksum(c);
+			CRC.mavlink_update_checksum(c);
 			state = MAV_states.MAVLINK_PARSE_STATE_GOT_SEQ;
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_SEQ:
 			sysid = c;
 			Log.d("MAVLink", "SYSID - " + sysid);
-			mavlink_update_checksum(c);
+			CRC.mavlink_update_checksum(c);
 			state = MAV_states.MAVLINK_PARSE_STATE_GOT_SYSID;
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_SYSID:
 			compid = c;
 			Log.d("MAVLink", "COMPID - " + compid);
-			mavlink_update_checksum(c);
+			CRC.mavlink_update_checksum(c);
 			state = MAV_states.MAVLINK_PARSE_STATE_GOT_COMPID;
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_COMPID:
 			msgid = c;
 			Log.d("MAVLink", "MSGID - " + msgid);
-			mavlink_update_checksum(c);
+			CRC.mavlink_update_checksum(c);
 			if (len == 0) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_PAYLOAD;
 			} else {
@@ -139,7 +137,7 @@ public class MAVLink {
 		case MAVLINK_PARSE_STATE_GOT_MSGID:
 			Log.d("MAVLink", "PAYLOAD - " + c);
 			payload.add(c);
-			mavlink_update_checksum(c);
+			CRC.mavlink_update_checksum(c);
 			if (payload.size() == len) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_PAYLOAD;
 				Log.d("MAVLink", "PAYLOAD RECEIVED");
@@ -147,15 +145,17 @@ public class MAVLink {
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_PAYLOAD:
-			Log.d("MAVLink", "CHECKSUM A - " + c);
-			if (c != ck_a) {
-				// Check first checksum byte
+			CRC.mavlink_update_checksum(50); // TODO fix this magic byte used for CRC calculation, currently only works for Heartbeat messages
+			Log.d("MAVLink", "CHECKSUM A - " + c + " - CK_A - " + CRC.getMSB()
+					+ " - CK_B - " + CRC.getLSB());
+			// Check first checksum byte
+			if (c != CRC.getLSB()) {
 				parse_error++;
 				msg_received = false;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
 				if (c == MAVLINK_STX) {
 					state = MAV_states.MAVLINK_PARSE_STATE_GOT_STX;
-					mavlink_start_checksum();
+					CRC.mavlink_start_checksum();
 				}
 			} else {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_CRC1;
@@ -163,16 +163,18 @@ public class MAVLink {
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_CRC1:
-			Log.d("MAVLink", "CHECKSUM B - " + c);
-			if (c != ck_b) {// Check second checksum byte
+			Log.d("MAVLink", "CHECKSUM B - " + c + " - CK_B - " + CRC.getMSB());
+			// Check second checksum byte
+			if (c != CRC.getMSB()) {
 				parse_error++;
-				msg_received = true;
+				msg_received = false;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
 				if (c == MAVLINK_STX) {
 					state = MAV_states.MAVLINK_PARSE_STATE_GOT_STX;
-					mavlink_start_checksum();
+					CRC.mavlink_start_checksum();
 				}
-			} else { // Successfully got
+			} else { // Successfully received the message
+				Log.d("MAVLink", "MESSAGE RECEIVED");
 				msg_received = true;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
 			}
@@ -185,13 +187,46 @@ public class MAVLink {
 		return msg_received;
 	}
 
-	private static void mavlink_update_checksum(int c) {
-		// TODO Auto-generated method stub
+	private static class CRC {
 
-	}
+		private static final int CRC_INIT_VALUE = 0xffff;
+		private static int CRCvalue;
 
-	private static void mavlink_start_checksum() {
-		// TODO Auto-generated method stub
+		/**
+		 * Accumulate the X.25 CRC by adding one char at a time.
+		 * 
+		 * The checksum function adds the hash of one char at a time to the 16
+		 * bit checksum (uint16_t).
+		 * 
+		 * @param data
+		 *            new char to hash
+		 * @param crcAccum
+		 *            the already accumulated checksum
+		 **/
+		private static void mavlink_update_checksum(int data) {
+			// TODO Check this function
+			int tmp;
+			tmp = data ^ (CRCvalue & 0xff);
+			tmp ^= (tmp << 4) & 0xff;
+			CRCvalue = ((CRCvalue >> 8) & 0xff) ^ (tmp << 8) ^ (tmp << 3) ^ ((tmp >> 4)&0xf);
+		}
+
+		/**
+		 * Initialize the buffer for the X.25 CRC
+		 * 
+		 */
+		private static void mavlink_start_checksum() {
+			// TODO Check this function
+			CRCvalue = CRC_INIT_VALUE;
+		}
+
+		public static int getMSB() {
+			return ((CRCvalue >> 8) & 0xff);
+		}
+
+		public static int getLSB() {
+			return (CRCvalue & 0xff);
+		}
 
 	}
 }
