@@ -36,11 +36,6 @@
 
         <activity android:name=".PlanningActivity" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -53,6 +48,11 @@
         <activity android:name=".PIDActivity" >
         </activity>
         <activity android:name=".TerminalActivity" >
+                        <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".GCPActivity" tools:ignore="ExportedActivity">
