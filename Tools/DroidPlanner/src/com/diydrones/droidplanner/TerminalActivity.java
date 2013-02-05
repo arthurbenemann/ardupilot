@@ -138,8 +138,8 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 					int data;
 					if((data = in.read())>=0){
 						
-						if (parser.mavlink_parse_char(data)) {
-							publishProgress("Received Hertbeat\n");
+						if (parser.mavlink_parse_char(data)!=null) {
+							publishProgress("-\n");
 						}
 					}
 				}

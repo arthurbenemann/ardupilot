@@ -80,8 +80,9 @@ public class MAVLink {
 
 	private static int MAVLINK_STX = 254;
 
-	public boolean mavlink_parse_char(int c) {
+	public MAVLinkMessage mavlink_parse_char(int c) {
 		msg_received = false;
+		MAVLinkMessage m = null;
 
 		switch (state) {
 		case MAVLINK_PARSE_STATE_UNINIT:
@@ -168,7 +169,7 @@ public class MAVLink {
 				}
 			} else { // Successfully received the message
 				try {
-					unpackMessage();
+					m = unpackMessage();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -181,7 +182,7 @@ public class MAVLink {
 
 		}
 
-		return msg_received;
+		return m;
 	}
 
 	private MAVLinkMessage unpackMessage() {
