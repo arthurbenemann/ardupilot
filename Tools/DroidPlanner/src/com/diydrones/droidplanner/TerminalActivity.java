@@ -116,7 +116,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 	}
 	
 	public class connectTask extends AsyncTask<String, String, String> {
-		public static final String SERVERIP = "10.0.0.100"; 
+		public static final String SERVERIP = "10.0.0.99"; 
 		public static final int SERVERPORT = 5760;
 		
 		public MAVLink parser;

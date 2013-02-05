@@ -3,6 +3,17 @@ package com.diydrones.droidplanner;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.common.msg_attitude;
+import com.MAVLink.Messages.common.msg_global_position;
+import com.MAVLink.Messages.common.msg_global_position_int;
+import com.MAVLink.Messages.common.msg_gps_raw;
+import com.MAVLink.Messages.common.msg_heartbeat;
+import com.MAVLink.Messages.common.msg_statustext;
+import com.MAVLink.Messages.common.msg_sys_status;
+import com.MAVLink.Messages.common.msg_vfr_hud;
+import com.MAVLink.Messages.common.msg_waypoint_current;
+
 import android.R.array;
 import android.R.integer;
 import android.util.Log;
@@ -51,7 +62,6 @@ public class MAVLink {
 		MAVLINK_PARSE_STATE_UNINIT, MAVLINK_PARSE_STATE_IDLE, MAVLINK_PARSE_STATE_GOT_STX, MAVLINK_PARSE_STATE_GOT_LENGTH, MAVLINK_PARSE_STATE_GOT_SEQ, MAVLINK_PARSE_STATE_GOT_SYSID, MAVLINK_PARSE_STATE_GOT_COMPID, MAVLINK_PARSE_STATE_GOT_MSGID, MAVLINK_PARSE_STATE_GOT_CRC1, MAVLINK_PARSE_STATE_GOT_PAYLOAD
 	}
 
-
 	MAV_states state = MAV_states.MAVLINK_PARSE_STATE_UNINIT;
 
 	static boolean msg_received;
@@ -67,7 +77,6 @@ public class MAVLink {
 	private static int msgid;
 
 	private static List<Integer> payload;
-
 
 	private static int MAVLINK_STX = 254;
 
@@ -130,12 +139,11 @@ public class MAVLink {
 			CRC.mavlink_update_checksum(c);
 			if (payload.size() == len) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_PAYLOAD;
-				Log.d("MAVLink", "PAYLOAD RECEIVED");
 			}
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_PAYLOAD:
-			CRC.mavlink_finish_checksum(msgid); 
+			CRC.mavlink_finish_checksum(msgid);
 			// Check first checksum byte
 			if (c != CRC.getLSB()) {
 				msg_received = false;
@@ -150,7 +158,6 @@ public class MAVLink {
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_CRC1:
-			Log.d("MAVLink", "CHECKSUM B - " + c + " - CK_B - " + CRC.getMSB());
 			// Check second checksum byte
 			if (c != CRC.getMSB()) {
 				msg_received = false;
@@ -160,7 +167,12 @@ public class MAVLink {
 					CRC.mavlink_start_checksum();
 				}
 			} else { // Successfully received the message
-				Log.d("MAVLink", "MESSAGE RECEIVED");
+				try {
+					unpackMessage();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				msg_received = true;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
 			}
@@ -172,16 +184,122 @@ public class MAVLink {
 		return msg_received;
 	}
 
+	private MAVLinkMessage unpackMessage() {
+		switch (msgid) {
+		case msg_heartbeat.MAVLINK_MSG_ID_HEARTBEAT:			
+			Log.d("MAVLink", "HEARTBEAT");
+			return unpackHeartBeat();
+		case msg_attitude.MAVLINK_MSG_ID_ATTITUDE:			
+			Log.d("MAVLink", "ATTITUDE");
+			return unpackAttitude();
+/*		case msg_gps_raw.MAVLINK_MSG_ID_GPS_RAW:			
+			Log.d("MAVLink", "GPS");
+			return unpackGPS_RAW();
+		case msg_sys_status.MAVLINK_MSG_ID_SYS_STATUS:			
+			Log.d("MAVLink", "SYS_STATUS");
+			break;
+		case msg_waypoint_current.MAVLINK_MSG_ID_WAYPOINT_CURRENT:			
+			Log.d("MAVLink", "WAYPOINT_CURRENT");
+			break;
+		case msg_global_position_int.MAVLINK_MSG_ID_GLOBAL_POSITION_INT:			
+			Log.d("MAVLink", "GLOBAL_POSITION_INT");
+			break;
+		case msg_statustext.MAVLINK_MSG_ID_STATUSTEXT:			
+			Log.d("MAVLink", "STATUSTEXT");
+			break;
+		case msg_vfr_hud.MAVLINK_MSG_ID_VFR_HUD:			
+			Log.d("MAVLink", "VRF_HUD");
+			break;
+			*/
+		default:
+			Log.d("MAVLink", "UNKNOW MESSAGE - "+msgid);
+			return null;
+		}		
+	}
+
+	/*
+	private MAVLinkMessage unpackGPS_RAW() {
+		msg_gps_raw m = new msg_gps_raw();
+		m.usec = getInt64(0);
+		m.fix_type = getInt8(8);
+		m.lat = getInt32(12);
+		m.lon = getInt32(16);
+		m.alt = getInt32(20);
+		m.eph = getInt16(24);
+		m.epv = getInt16(26);
+		m.v = getInt16(28);
+		m. = getInt16(28);
+		return m;
+	}*/
+
+	private MAVLinkMessage unpackAttitude() {
+		msg_attitude m = new msg_attitude();
+		m.time_boot_ms = getInt32(0);
+		Log.d("MAVLink", "time_boot - "+m.time_boot_ms);
+		m.roll = getFloat(4);
+		Log.d("ROLL", "roll - "+m.roll);
+		m.pitch = getFloat(8);
+		m.yaw = getFloat(12);
+		m.rollspeed = getFloat(16);
+		m.pitchspeed = getFloat(20);
+		m.yawspeed = getFloat(24);
+		return m;
+	}
+
+
+	private MAVLinkMessage unpackHeartBeat() {
+		msg_heartbeat m = new msg_heartbeat();
+		m.type = getInt8(0);
+		m.autopilot = getInt8(1);
+		m.base_mode = getInt8(2);
+		m.custom_mode = getInt32(4);
+		m.system_status = getInt8(8);
+		m.mavlink_version = getInt8(9);
+		return m;		
+	}
+	
+	
+	private Integer getInt64(int i){
+		return payload.get(i) << 32  | (payload.get(i+4) & 0xFFFFFFFF);
+	}
+	
+	private Integer getInt32(int i){
+		 return payload.get(i+3) << 24 | (payload.get(i+2) & 0xFF) << 16 | payload.get(i+1) & 0xFF << 8 | (payload.get(i) & 0xFF);
+	}
+	
+
+	private Integer getInt8(int i){
+		 return payload.get(i);
+	}
+
+	private float getFloat(int i) {
+		return Float.intBitsToFloat(getInt32(i));
+	}
+
 	/**
-	 * X.25 CRC calculation for MAVlink messages.
-	 * The checksum must be initialized, 
-	 * updated with witch field of the message,
-	 * and then finished with the message id.
-	 *
+	 * X.25 CRC calculation for MAVlink messages. The checksum must be
+	 * initialized, updated with witch field of the message, and then finished
+	 * with the message id.
+	 * 
 	 */
 	private static class CRC {
 
-		private static final int[] MAVLINK_MESSAGE_CRCS = {50, 124, 137, 0, 237, 217, 104, 119, 0, 0, 0, 89, 0, 0, 0, 0, 0, 0, 0, 0, 214, 159, 220, 168, 24, 23, 170, 144, 67, 115, 39, 246, 185, 104, 237, 244, 222, 212, 9, 254, 230, 28, 28, 132, 221, 232, 11, 153, 41, 39, 214, 223, 141, 33, 15, 3, 100, 24, 239, 238, 0, 0, 183, 0, 130, 0, 148, 21, 0, 52, 124, 0, 0, 0, 20, 0, 152, 143, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 183, 63, 54, 0, 0, 0, 0, 0, 0, 0, 19, 102, 158, 208, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 134, 219, 208, 188, 84, 22, 19, 21, 134, 0, 78, 68, 189, 127, 42, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 204, 49, 170, 44, 83, 46, 247};
+		private static final int[] MAVLINK_MESSAGE_CRCS = { 50, 124, 137, 0,
+				237, 217, 104, 119, 0, 0, 0, 89, 0, 0, 0, 0, 0, 0, 0, 0, 214,
+				159, 220, 168, 24, 23, 170, 144, 67, 115, 39, 246, 185, 104,
+				237, 244, 222, 212, 9, 254, 230, 28, 28, 132, 221, 232, 11,
+				153, 41, 39, 214, 223, 141, 33, 15, 3, 100, 24, 239, 238, 0, 0,
+				183, 0, 130, 0, 148, 21, 0, 52, 124, 0, 0, 0, 20, 0, 152, 143,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 183, 63, 54, 0, 0, 0, 0, 0,
+				0, 0, 19, 102, 158, 208, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 134, 219, 208, 188, 84,
+				22, 19, 21, 134, 0, 78, 68, 189, 127, 42, 21, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 204, 49, 170, 44, 83,
+				46, 247 };
 		private static final int CRC_INIT_VALUE = 0xffff;
 		private static int CRCvalue;
 
@@ -200,16 +318,19 @@ public class MAVLink {
 			int tmp;
 			tmp = data ^ (CRCvalue & 0xff);
 			tmp ^= (tmp << 4) & 0xff;
-			CRCvalue = ((CRCvalue >> 8) & 0xff) ^ (tmp << 8) ^ (tmp << 3) ^ ((tmp >> 4)&0xf);
+			CRCvalue = ((CRCvalue >> 8) & 0xff) ^ (tmp << 8) ^ (tmp << 3)
+					^ ((tmp >> 4) & 0xf);
 		}
 
 		/**
-		 * Finish the CRC calculation of a message, by running the CRC with the Magic Byte.
-		 * This Magic byte has been defined in MAVlink v1.0.
-		 * @param msgid The message id number
+		 * Finish the CRC calculation of a message, by running the CRC with the
+		 * Magic Byte. This Magic byte has been defined in MAVlink v1.0.
+		 * 
+		 * @param msgid
+		 *            The message id number
 		 */
 		public static void mavlink_finish_checksum(int msgid) {
-			mavlink_update_checksum(MAVLINK_MESSAGE_CRCS[msgid]);			
+			mavlink_update_checksum(MAVLINK_MESSAGE_CRCS[msgid]);
 		}
 
 		/**
