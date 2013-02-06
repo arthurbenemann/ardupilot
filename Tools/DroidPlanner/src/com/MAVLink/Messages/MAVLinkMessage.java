@@ -1,10 +1,8 @@
 package com.MAVLink.Messages;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class MAVLinkMessage implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class MAVLinkMessage {
 	/**
 	 *  Simply a common interface for all MAVLink Messages
 	 */
