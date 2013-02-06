@@ -1,16 +1,12 @@
 package com.diydrones.droidplanner;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-
-import com.diydrones.droidplanner.MAVLink.MAV_states;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
