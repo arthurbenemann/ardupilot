@@ -24,6 +24,8 @@ class CRC {
 			44, 83, 46, 247 };
 	private static final int CRC_INIT_VALUE = 0xffff;
 	private int CRCvalue;
+	
+	
 
 	/**
 	 * Accumulate the X.25 CRC by adding one char at a time.

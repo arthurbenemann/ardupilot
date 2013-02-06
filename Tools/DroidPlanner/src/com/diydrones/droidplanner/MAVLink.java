@@ -82,7 +82,6 @@ public class MAVLink {
 		case MAVLINK_PARSE_STATE_IDLE:
 			if (c == MAVLINK_STX) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_STX;
-				crc = new CRC();
 			}
 			break;
 
@@ -95,32 +94,27 @@ public class MAVLink {
 				// CRC2
 				len = c;
 				payload = new ArrayList<Integer>();
-				crc.update_checksum(c);
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_LENGTH;
 			}
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_LENGTH:
 			seq = c;
-			crc.update_checksum(c);
 			state = MAV_states.MAVLINK_PARSE_STATE_GOT_SEQ;
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_SEQ:
 			sysid = c;
-			crc.update_checksum(c);
 			state = MAV_states.MAVLINK_PARSE_STATE_GOT_SYSID;
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_SYSID:
 			compid = c;
-			crc.update_checksum(c);
 			state = MAV_states.MAVLINK_PARSE_STATE_GOT_COMPID;
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_COMPID:
 			msgid = c;
-			crc.update_checksum(c);
 			if (len == 0) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_PAYLOAD;
 			} else {
@@ -130,14 +124,13 @@ public class MAVLink {
 
 		case MAVLINK_PARSE_STATE_GOT_MSGID:
 			payload.add(c);
-			crc.update_checksum(c);
 			if (payload.size() == len) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_PAYLOAD;
 			}
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_PAYLOAD:
-			crc.finish_checksum(msgid);
+			generateCRC();
 			// Check first checksum byte
 			if (c != crc.getLSB()) {
 				msg_received = false;
@@ -205,6 +198,18 @@ public class MAVLink {
 		}
 	}
 
+	private void generateCRC(){
+		crc = new CRC();
+		crc.update_checksum(len);
+		crc.update_checksum(seq);
+		crc.update_checksum(sysid);
+		crc.update_checksum(compid);
+		crc.update_checksum(msgid);
+		for (Integer data : payload) {
+			crc.update_checksum(data);			
+		}
+		crc.finish_checksum(msgid);
+	}
 	/*
 	 * private MAVLinkMessage unpackGPS_RAW() { msg_gps_raw m = new
 	 * msg_gps_raw(); m.usec = getInt64(0); m.fix_type = getInt8(8); m.lat =
