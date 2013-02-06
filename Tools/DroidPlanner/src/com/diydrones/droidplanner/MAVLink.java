@@ -3,20 +3,11 @@ package com.diydrones.droidplanner;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
+
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.common.msg_attitude;
-import com.MAVLink.Messages.common.msg_global_position;
-import com.MAVLink.Messages.common.msg_global_position_int;
-import com.MAVLink.Messages.common.msg_gps_raw;
 import com.MAVLink.Messages.common.msg_heartbeat;
-import com.MAVLink.Messages.common.msg_statustext;
-import com.MAVLink.Messages.common.msg_sys_status;
-import com.MAVLink.Messages.common.msg_vfr_hud;
-import com.MAVLink.Messages.common.msg_waypoint_current;
-
-import android.R.array;
-import android.R.integer;
-import android.util.Log;
 
 public class MAVLink {
 
@@ -169,7 +160,7 @@ public class MAVLink {
 				}
 			} else { // Successfully received the message
 				try {
-					m = unpackMessage();
+					m = unpackMessage(payload);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -185,14 +176,14 @@ public class MAVLink {
 		return m;
 	}
 
-	private MAVLinkMessage unpackMessage() {
+	private MAVLinkMessage unpackMessage(List<Integer> payload) {
 		switch (msgid) {
 		case msg_heartbeat.MAVLINK_MSG_ID_HEARTBEAT:			
 			Log.d("MAVLink", "HEARTBEAT");
-			return unpackHeartBeat();
+			return msg_heartbeat.unpackHeartBeat(payload);
 		case msg_attitude.MAVLINK_MSG_ID_ATTITUDE:			
 			Log.d("MAVLink", "ATTITUDE");
-			return unpackAttitude();
+			return msg_attitude.unpackAttitude(payload);
 /*		case msg_gps_raw.MAVLINK_MSG_ID_GPS_RAW:			
 			Log.d("MAVLink", "GPS");
 			return unpackGPS_RAW();
@@ -233,49 +224,16 @@ public class MAVLink {
 		return m;
 	}*/
 
-	private MAVLinkMessage unpackAttitude() {
-		msg_attitude m = new msg_attitude();
-		m.time_boot_ms = getInt32(0);
-		Log.d("MAVLink", "time_boot - "+m.time_boot_ms);
-		m.roll = getFloat(4);
-		Log.d("ROLL", "roll - "+m.roll);
-		m.pitch = getFloat(8);
-		m.yaw = getFloat(12);
-		m.rollspeed = getFloat(16);
-		m.pitchspeed = getFloat(20);
-		m.yawspeed = getFloat(24);
-		return m;
-	}
 
 
-	private MAVLinkMessage unpackHeartBeat() {
-		msg_heartbeat m = new msg_heartbeat();
-		m.type = getInt8(0);
-		m.autopilot = getInt8(1);
-		m.base_mode = getInt8(2);
-		m.custom_mode = getInt32(4);
-		m.system_status = getInt8(8);
-		m.mavlink_version = getInt8(9);
-		return m;		
+	
+	
 	}
 	
-	
-	private Integer getInt64(int i){
-		return payload.get(i) << 32  | (payload.get(i+4) & 0xFFFFFFFF);
-	}
-	
-	private Integer getInt32(int i){
-		 return payload.get(i+3) << 24 | (payload.get(i+2) & 0xFF) << 16 | payload.get(i+1) & 0xFF << 8 | (payload.get(i) & 0xFF);
 	}
 	
 
-	private Integer getInt8(int i){
-		 return payload.get(i);
-	}
 
-	private float getFloat(int i) {
-		return Float.intBitsToFloat(getInt32(i));
-	}
 
 	/**
 	 * X.25 CRC calculation for MAVlink messages. The checksum must be

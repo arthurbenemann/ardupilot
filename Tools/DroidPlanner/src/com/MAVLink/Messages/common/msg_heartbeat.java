@@ -1,5 +1,7 @@
 package com.MAVLink.Messages.common;
 
+import java.util.List;
+
 import com.MAVLink.Messages.MAVLinkMessage;
 
 public class msg_heartbeat extends MAVLinkMessage{
@@ -17,4 +19,15 @@ public class msg_heartbeat extends MAVLinkMessage{
 	public int system_status; ///< System status flag, see MAV_STATUS ENUM
 	public int mavlink_version; ///< MAVLink version
 
+	public static MAVLinkMessage unpackHeartBeat(List<Integer> payload) {
+		msg_heartbeat m = new msg_heartbeat();
+		m.type = getInt8(0,payload);
+		m.autopilot = getInt8(1,payload);
+		m.base_mode = getInt8(2,payload);
+		m.custom_mode = getInt32(4,payload);
+		m.system_status = getInt8(8,payload);
+		m.mavlink_version = getInt8(9,payload);
+		return m;		
+	}
+	
 }

@@ -1,5 +1,9 @@
 package com.MAVLink.Messages.common;
 
+import java.util.List;
+
+import android.util.Log;
+
 import com.MAVLink.Messages.MAVLinkMessage;
 
 public class msg_attitude extends MAVLinkMessage{
@@ -18,4 +22,18 @@ public class msg_attitude extends MAVLinkMessage{
 	public float pitchspeed; ///< Pitch angular speed (rad/s)
 	public float yawspeed; ///< Yaw angular speed (rad/s)
 
+
+	public static MAVLinkMessage unpackAttitude(List<Integer> payload) {
+		msg_attitude m = new msg_attitude();
+		m.time_boot_ms = getInt32(0,payload);
+		Log.d("MAVLink", "time_boot - "+m.time_boot_ms);
+		m.roll = getFloat(4,payload);
+		Log.d("ROLL", "roll - "+m.roll);
+		m.pitch = getFloat(8,payload);
+		m.yaw = getFloat(12,payload);
+		m.rollspeed = getFloat(16,payload);
+		m.pitchspeed = getFloat(20,payload);
+		m.yawspeed = getFloat(24,payload);
+		return m;
+	}
 }
