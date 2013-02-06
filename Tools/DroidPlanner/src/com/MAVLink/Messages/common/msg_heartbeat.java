@@ -19,7 +19,7 @@ public class msg_heartbeat extends MAVLinkMessage{
 	public int system_status; ///< System status flag, see MAV_STATUS ENUM
 	public int mavlink_version; ///< MAVLink version
 
-	public static MAVLinkMessage unpackHeartBeat(List<Integer> payload) {
+	public static MAVLinkMessage unpack(List<Integer> payload) {
 		msg_heartbeat m = new msg_heartbeat();
 		m.type = getInt8(0,payload);
 		m.autopilot = getInt8(1,payload);

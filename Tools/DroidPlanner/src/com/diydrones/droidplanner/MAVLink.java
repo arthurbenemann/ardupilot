@@ -180,10 +180,10 @@ public class MAVLink {
 		switch (msgid) {
 		case msg_heartbeat.MAVLINK_MSG_ID_HEARTBEAT:			
 			Log.d("MAVLink", "HEARTBEAT");
-			return msg_heartbeat.unpackHeartBeat(payload);
+			return msg_heartbeat.unpack(payload);
 		case msg_attitude.MAVLINK_MSG_ID_ATTITUDE:			
 			Log.d("MAVLink", "ATTITUDE");
-			return msg_attitude.unpackAttitude(payload);
+			return msg_attitude.unpack(payload);
 /*		case msg_gps_raw.MAVLINK_MSG_ID_GPS_RAW:			
 			Log.d("MAVLink", "GPS");
 			return unpackGPS_RAW();

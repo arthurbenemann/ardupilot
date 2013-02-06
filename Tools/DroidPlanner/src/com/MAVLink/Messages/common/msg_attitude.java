@@ -23,7 +23,7 @@ public class msg_attitude extends MAVLinkMessage{
 	public float yawspeed; ///< Yaw angular speed (rad/s)
 
 
-	public static MAVLinkMessage unpackAttitude(List<Integer> payload) {
+	public static MAVLinkMessage unpack(List<Integer> payload) {
 		msg_attitude m = new msg_attitude();
 		m.time_boot_ms = getInt32(0,payload);
 		Log.d("MAVLink", "time_boot - "+m.time_boot_ms);
