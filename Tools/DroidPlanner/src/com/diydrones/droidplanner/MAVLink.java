@@ -6,8 +6,8 @@ import java.util.List;
 import android.util.Log;
 
 import com.MAVLink.Messages.MAVLinkMessage;
-import com.MAVLink.Messages.common.msg_attitude;
-import com.MAVLink.Messages.common.msg_heartbeat;
+import com.MAVLink.Messages.ardupilotmega.msg_attitude;
+import com.MAVLink.Messages.ardupilotmega.msg_heartbeat;
 
 public class MAVLink {
 

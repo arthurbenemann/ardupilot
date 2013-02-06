@@ -1,16 +1,38 @@
+// MESSAGE MEMINFO PACKING
 package com.MAVLink.Messages.ardupilotmega;
+
+import java.util.List;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 
+/**
+* state of APM memory
+*/
 public class msg_meminfo extends MAVLinkMessage{
 
-	public msg_meminfo(){ messageType = MAVLINK_MSG_ID_MEMINFO; }
-
 	public static final int MAVLINK_MSG_ID_MEMINFO = 152;
+	public static final int MAVLINK_MSG_LENGTH = 4;
 
-	private static final long serialVersionUID = MAVLINK_MSG_ID_MEMINFO;
+ 	/**
+	*heap top
+	*/
+	public short brkval; 
+ 	/**
+	*free memory
+	*/
+	public short freemem; 
 
-	public int brkval; ///< heap top
-	public int freemem; ///< free memory
 
+/**
+ * Decode a meminfo message into this class fields
+ *
+ * @param payload The message to decode
+ */
+public static MAVLinkMessage unpack(List<Integer> payload) {
+    msg_meminfo m = new msg_meminfo();
+	//m.brkval = _get_brkval(msg);
+	//m.freemem = _get_freemem(msg);
+    return m;	
+
+    }
 }
