@@ -46,7 +46,6 @@ public class msg_attitude_quaternion extends MAVLinkMessage{
 	*/
 	public float yawspeed; 
 
-
 /**
  * Decode a attitude_quaternion message into this class fields
  *

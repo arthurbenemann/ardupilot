@@ -26,7 +26,6 @@ public class msg_fence_fetch_point extends MAVLinkMessage{
 	*/
 	public byte idx; 
 
-
 /**
  * Decode a fence_fetch_point message into this class fields
  *

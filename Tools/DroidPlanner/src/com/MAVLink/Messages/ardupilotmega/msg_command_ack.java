@@ -22,7 +22,6 @@ public class msg_command_ack extends MAVLinkMessage{
 	*/
 	public byte result; 
 
-
 /**
  * Decode a command_ack message into this class fields
  *

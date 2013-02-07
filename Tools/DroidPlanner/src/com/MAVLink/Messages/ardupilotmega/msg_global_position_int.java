@@ -51,7 +51,6 @@ public class msg_global_position_int extends MAVLinkMessage{
 	*/
 	public short hdg; 
 
-
 /**
  * Decode a global_position_int message into this class fields
  *

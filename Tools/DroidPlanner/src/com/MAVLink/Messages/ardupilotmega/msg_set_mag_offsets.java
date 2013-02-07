@@ -34,7 +34,6 @@ public class msg_set_mag_offsets extends MAVLinkMessage{
 	*/
 	public byte target_component; 
 
-
 /**
  * Decode a set_mag_offsets message into this class fields
  *

@@ -38,7 +38,6 @@ public class msg_heartbeat extends MAVLinkMessage{
 	*/
 	public byte mavlink_version; 
 
-
 /**
  * Decode a heartbeat message into this class fields
  *

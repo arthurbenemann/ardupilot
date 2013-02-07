@@ -38,7 +38,6 @@ public class msg_mount_configure extends MAVLinkMessage{
 	*/
 	public byte stab_yaw; 
 
-
 /**
  * Decode a mount_configure message into this class fields
  *

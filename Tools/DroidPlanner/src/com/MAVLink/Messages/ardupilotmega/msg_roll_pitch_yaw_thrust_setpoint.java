@@ -34,7 +34,6 @@ public class msg_roll_pitch_yaw_thrust_setpoint extends MAVLinkMessage{
 	*/
 	public float thrust; 
 
-
 /**
  * Decode a roll_pitch_yaw_thrust_setpoint message into this class fields
  *

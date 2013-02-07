@@ -31,7 +31,6 @@ public class msg_fence_status extends MAVLinkMessage{
 	*/
 	public byte breach_type; 
 
-
 /**
  * Decode a fence_status message into this class fields
  *

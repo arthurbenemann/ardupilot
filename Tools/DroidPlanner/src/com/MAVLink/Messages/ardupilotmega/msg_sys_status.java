@@ -66,7 +66,6 @@ public class msg_sys_status extends MAVLinkMessage{
 	*/
 	public byte battery_remaining; 
 
-
 /**
  * Decode a sys_status message into this class fields
  *

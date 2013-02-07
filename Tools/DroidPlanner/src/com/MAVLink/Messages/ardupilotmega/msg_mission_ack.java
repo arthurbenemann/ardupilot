@@ -26,7 +26,6 @@ public class msg_mission_ack extends MAVLinkMessage{
 	*/
 	public byte type; 
 
-
 /**
  * Decode a mission_ack message into this class fields
  *

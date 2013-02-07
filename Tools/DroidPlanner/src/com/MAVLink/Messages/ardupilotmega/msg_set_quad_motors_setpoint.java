@@ -34,7 +34,6 @@ public class msg_set_quad_motors_setpoint extends MAVLinkMessage{
 	*/
 	public byte target_system; 
 
-
 /**
  * Decode a set_quad_motors_setpoint message into this class fields
  *

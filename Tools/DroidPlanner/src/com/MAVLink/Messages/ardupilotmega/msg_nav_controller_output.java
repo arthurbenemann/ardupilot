@@ -46,7 +46,6 @@ public class msg_nav_controller_output extends MAVLinkMessage{
 	*/
 	public short wp_dist; 
 
-
 /**
  * Decode a nav_controller_output message into this class fields
  *

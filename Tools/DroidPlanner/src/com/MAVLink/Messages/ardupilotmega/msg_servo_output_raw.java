@@ -54,7 +54,6 @@ public class msg_servo_output_raw extends MAVLinkMessage{
 	*/
 	public byte port; 
 
-
 /**
  * Decode a servo_output_raw message into this class fields
  *

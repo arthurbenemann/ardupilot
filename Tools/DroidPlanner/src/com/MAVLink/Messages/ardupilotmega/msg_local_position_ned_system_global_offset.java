@@ -42,7 +42,6 @@ public class msg_local_position_ned_system_global_offset extends MAVLinkMessage{
 	*/
 	public float yaw; 
 
-
 /**
  * Decode a local_position_ned_system_global_offset message into this class fields
  *

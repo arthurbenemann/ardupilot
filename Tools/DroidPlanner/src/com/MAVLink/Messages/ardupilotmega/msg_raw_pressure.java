@@ -34,7 +34,6 @@ public class msg_raw_pressure extends MAVLinkMessage{
 	*/
 	public short temperature; 
 
-
 /**
  * Decode a raw_pressure message into this class fields
  *

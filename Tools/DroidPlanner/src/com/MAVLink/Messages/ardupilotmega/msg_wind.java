@@ -26,7 +26,6 @@ public class msg_wind extends MAVLinkMessage{
 	*/
 	public float speed_z; 
 
-
 /**
  * Decode a wind message into this class fields
  *

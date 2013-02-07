@@ -26,7 +26,6 @@ public class msg_mission_count extends MAVLinkMessage{
 	*/
 	public byte target_component; 
 
-
 /**
  * Decode a mission_count message into this class fields
  *

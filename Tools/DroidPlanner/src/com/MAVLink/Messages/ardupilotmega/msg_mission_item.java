@@ -71,7 +71,6 @@ public class msg_mission_item extends MAVLinkMessage{
 	*/
 	public byte autocontinue; 
 
-
 /**
  * Decode a mission_item message into this class fields
  *

@@ -30,7 +30,6 @@ public class msg_set_gps_global_origin extends MAVLinkMessage{
 	*/
 	public byte target_system; 
 
-
 /**
  * Decode a set_gps_global_origin message into this class fields
  *

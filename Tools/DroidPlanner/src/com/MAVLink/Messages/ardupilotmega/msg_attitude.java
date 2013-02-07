@@ -42,7 +42,6 @@ public class msg_attitude extends MAVLinkMessage{
 	*/
 	public float yawspeed; 
 
-
 /**
  * Decode a attitude message into this class fields
  *

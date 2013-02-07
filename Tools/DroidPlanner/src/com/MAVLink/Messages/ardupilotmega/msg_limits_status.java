@@ -51,7 +51,6 @@ public class msg_limits_status extends MAVLinkMessage{
 	*/
 	public byte mods_triggered; 
 
-
 /**
  * Decode a limits_status message into this class fields
  *

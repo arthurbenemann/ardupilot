@@ -30,7 +30,6 @@ public class msg_vision_speed_estimate extends MAVLinkMessage{
 	*/
 	public float z; 
 
-
 /**
  * Decode a vision_speed_estimate message into this class fields
  *

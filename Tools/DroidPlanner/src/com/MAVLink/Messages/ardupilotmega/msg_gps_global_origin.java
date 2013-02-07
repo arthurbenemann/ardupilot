@@ -26,7 +26,6 @@ public class msg_gps_global_origin extends MAVLinkMessage{
 	*/
 	public int altitude; 
 
-
 /**
  * Decode a gps_global_origin message into this class fields
  *

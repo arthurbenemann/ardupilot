@@ -22,7 +22,6 @@ public class msg_system_time extends MAVLinkMessage{
 	*/
 	public int time_boot_ms; 
 
-
 /**
  * Decode a system_time message into this class fields
  *

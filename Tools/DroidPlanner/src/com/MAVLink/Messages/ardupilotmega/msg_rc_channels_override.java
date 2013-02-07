@@ -54,7 +54,6 @@ public class msg_rc_channels_override extends MAVLinkMessage{
 	*/
 	public byte target_component; 
 
-
 /**
  * Decode a rc_channels_override message into this class fields
  *

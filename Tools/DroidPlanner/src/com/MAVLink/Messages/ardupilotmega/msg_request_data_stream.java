@@ -34,7 +34,6 @@ public class msg_request_data_stream extends MAVLinkMessage{
 	*/
 	public byte start_stop; 
 
-
 /**
  * Decode a request_data_stream message into this class fields
  *

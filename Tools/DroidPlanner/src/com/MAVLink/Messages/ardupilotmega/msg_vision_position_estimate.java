@@ -42,7 +42,6 @@ public class msg_vision_position_estimate extends MAVLinkMessage{
 	*/
 	public float yaw; 
 
-
 /**
  * Decode a vision_position_estimate message into this class fields
  *

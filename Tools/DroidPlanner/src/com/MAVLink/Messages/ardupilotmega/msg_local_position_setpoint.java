@@ -34,7 +34,6 @@ public class msg_local_position_setpoint extends MAVLinkMessage{
 	*/
 	public byte coordinate_frame; 
 
-
 /**
  * Decode a local_position_setpoint message into this class fields
  *

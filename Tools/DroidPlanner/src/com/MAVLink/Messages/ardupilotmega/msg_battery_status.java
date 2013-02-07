@@ -50,7 +50,6 @@ public class msg_battery_status extends MAVLinkMessage{
 	*/
 	public byte battery_remaining; 
 
-
 /**
  * Decode a battery_status message into this class fields
  *

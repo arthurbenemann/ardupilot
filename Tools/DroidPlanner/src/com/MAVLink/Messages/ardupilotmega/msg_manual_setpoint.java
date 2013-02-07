@@ -42,7 +42,6 @@ public class msg_manual_setpoint extends MAVLinkMessage{
 	*/
 	public byte manual_override_switch; 
 
-
 /**
  * Decode a manual_setpoint message into this class fields
  *

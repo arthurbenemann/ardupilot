@@ -34,7 +34,6 @@ public class msg_mount_status extends MAVLinkMessage{
 	*/
 	public byte target_component; 
 
-
 /**
  * Decode a mount_status message into this class fields
  *

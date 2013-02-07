@@ -38,7 +38,6 @@ public class msg_vfr_hud extends MAVLinkMessage{
 	*/
 	public short throttle; 
 
-
 /**
  * Decode a vfr_hud message into this class fields
  *

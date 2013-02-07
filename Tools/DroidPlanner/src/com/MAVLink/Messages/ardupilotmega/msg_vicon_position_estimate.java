@@ -42,7 +42,6 @@ public class msg_vicon_position_estimate extends MAVLinkMessage{
 	*/
 	public float yaw; 
 
-
 /**
  * Decode a vicon_position_estimate message into this class fields
  *

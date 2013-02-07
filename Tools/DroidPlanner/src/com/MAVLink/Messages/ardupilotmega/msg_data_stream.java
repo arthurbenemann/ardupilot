@@ -26,7 +26,6 @@ public class msg_data_stream extends MAVLinkMessage{
 	*/
 	public byte on_off; 
 
-
 /**
  * Decode a data_stream message into this class fields
  *

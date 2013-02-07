@@ -26,7 +26,6 @@ public class msg_mission_set_current extends MAVLinkMessage{
 	*/
 	public byte target_component; 
 
-
 /**
  * Decode a mission_set_current message into this class fields
  *

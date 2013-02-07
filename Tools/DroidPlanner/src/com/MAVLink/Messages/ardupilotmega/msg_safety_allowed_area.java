@@ -42,7 +42,6 @@ public class msg_safety_allowed_area extends MAVLinkMessage{
 	*/
 	public byte frame; 
 
-
 /**
  * Decode a safety_allowed_area message into this class fields
  *

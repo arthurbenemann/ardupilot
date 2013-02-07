@@ -38,7 +38,6 @@ public class msg_ap_adc extends MAVLinkMessage{
 	*/
 	public short adc6; 
 
-
 /**
  * Decode a ap_adc message into this class fields
  *

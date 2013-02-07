@@ -42,7 +42,6 @@ public class msg_radio extends MAVLinkMessage{
 	*/
 	public byte remnoise; 
 
-
 /**
  * Decode a radio message into this class fields
  *

@@ -58,7 +58,6 @@ public class msg_simstate extends MAVLinkMessage{
 	*/
 	public float lng; 
 
-
 /**
  * Decode a simstate message into this class fields
  *

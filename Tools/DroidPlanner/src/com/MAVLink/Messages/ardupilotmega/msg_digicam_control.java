@@ -54,7 +54,6 @@ public class msg_digicam_control extends MAVLinkMessage{
 	*/
 	public byte extra_param; 
 
-
 /**
  * Decode a digicam_control message into this class fields
  *

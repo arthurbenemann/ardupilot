@@ -58,7 +58,6 @@ public class msg_command_long extends MAVLinkMessage{
 	*/
 	public byte confirmation; 
 
-
 /**
  * Decode a command_long message into this class fields
  *

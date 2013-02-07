@@ -58,7 +58,6 @@ public class msg_rc_channels_scaled extends MAVLinkMessage{
 	*/
 	public byte rssi; 
 
-
 /**
  * Decode a rc_channels_scaled message into this class fields
  *

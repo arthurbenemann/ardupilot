@@ -18,7 +18,6 @@ public class msg_mission_item_reached extends MAVLinkMessage{
 	*/
 	public short seq; 
 
-
 /**
  * Decode a mission_item_reached message into this class fields
  *

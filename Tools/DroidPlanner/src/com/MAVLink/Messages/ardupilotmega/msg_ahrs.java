@@ -42,7 +42,6 @@ public class msg_ahrs extends MAVLinkMessage{
 	*/
 	public float error_yaw; 
 
-
 /**
  * Decode a ahrs message into this class fields
  *

@@ -54,7 +54,6 @@ public class msg_raw_imu extends MAVLinkMessage{
 	*/
 	public short zmag; 
 
-
 /**
  * Decode a raw_imu message into this class fields
  *

@@ -39,7 +39,6 @@ public class msg_fence_point extends MAVLinkMessage{
 	*/
 	public byte count; 
 
-
 /**
  * Decode a fence_point message into this class fields
  *

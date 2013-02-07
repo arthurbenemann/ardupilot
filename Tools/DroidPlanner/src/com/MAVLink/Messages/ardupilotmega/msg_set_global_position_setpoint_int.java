@@ -34,7 +34,6 @@ public class msg_set_global_position_setpoint_int extends MAVLinkMessage{
 	*/
 	public byte coordinate_frame; 
 
-
 /**
  * Decode a set_global_position_setpoint_int message into this class fields
  *

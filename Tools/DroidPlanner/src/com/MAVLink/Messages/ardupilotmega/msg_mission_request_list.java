@@ -22,7 +22,6 @@ public class msg_mission_request_list extends MAVLinkMessage{
 	*/
 	public byte target_component; 
 
-
 /**
  * Decode a mission_request_list message into this class fields
  *

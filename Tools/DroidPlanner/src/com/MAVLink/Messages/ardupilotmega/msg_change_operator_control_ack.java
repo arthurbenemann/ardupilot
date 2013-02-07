@@ -26,7 +26,6 @@ public class msg_change_operator_control_ack extends MAVLinkMessage{
 	*/
 	public byte ack; 
 
-
 /**
  * Decode a change_operator_control_ack message into this class fields
  *

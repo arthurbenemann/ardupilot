@@ -38,7 +38,6 @@ public class msg_manual_control extends MAVLinkMessage{
 	*/
 	public byte target; 
 
-
 /**
  * Decode a manual_control message into this class fields
  *

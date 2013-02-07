@@ -58,7 +58,6 @@ public class msg_hil_controls extends MAVLinkMessage{
 	*/
 	public byte nav_mode; 
 
-
 /**
  * Decode a hil_controls message into this class fields
  *

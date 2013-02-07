@@ -26,7 +26,6 @@ public class msg_set_mode extends MAVLinkMessage{
 	*/
 	public byte base_mode; 
 
-
 /**
  * Decode a set_mode message into this class fields
  *

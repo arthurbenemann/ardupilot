@@ -54,7 +54,6 @@ public class msg_scaled_imu extends MAVLinkMessage{
 	*/
 	public short zmag; 
 
-
 /**
  * Decode a scaled_imu message into this class fields
  *

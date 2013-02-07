@@ -50,7 +50,6 @@ public class msg_state_correction extends MAVLinkMessage{
 	*/
 	public float vzErr; 
 
-
 /**
  * Decode a state_correction message into this class fields
  *

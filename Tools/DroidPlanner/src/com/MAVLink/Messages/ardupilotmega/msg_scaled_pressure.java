@@ -30,7 +30,6 @@ public class msg_scaled_pressure extends MAVLinkMessage{
 	*/
 	public short temperature; 
 
-
 /**
  * Decode a scaled_pressure message into this class fields
  *

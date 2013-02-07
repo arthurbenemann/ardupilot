@@ -42,7 +42,6 @@ public class msg_setpoint_6dof extends MAVLinkMessage{
 	*/
 	public byte target_system; 
 
-
 /**
  * Decode a setpoint_6dof message into this class fields
  *

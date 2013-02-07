@@ -78,7 +78,6 @@ public class msg_hil_state extends MAVLinkMessage{
 	*/
 	public short zacc; 
 
-
 /**
  * Decode a hil_state message into this class fields
  *

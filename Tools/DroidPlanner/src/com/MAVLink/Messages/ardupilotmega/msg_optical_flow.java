@@ -46,7 +46,6 @@ public class msg_optical_flow extends MAVLinkMessage{
 	*/
 	public byte quality; 
 
-
 /**
  * Decode a optical_flow message into this class fields
  *

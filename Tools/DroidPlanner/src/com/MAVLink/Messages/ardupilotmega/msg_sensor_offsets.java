@@ -63,7 +63,6 @@ public class msg_sensor_offsets extends MAVLinkMessage{
 	*/
 	public short mag_ofs_z; 
 
-
 /**
  * Decode a sensor_offsets message into this class fields
  *

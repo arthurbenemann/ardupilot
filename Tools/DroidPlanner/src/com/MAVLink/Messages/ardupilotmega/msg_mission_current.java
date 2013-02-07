@@ -18,7 +18,6 @@ public class msg_mission_current extends MAVLinkMessage{
 	*/
 	public short seq; 
 
-
 /**
  * Decode a mission_current message into this class fields
  *

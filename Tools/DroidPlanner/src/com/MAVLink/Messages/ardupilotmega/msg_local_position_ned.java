@@ -42,7 +42,6 @@ public class msg_local_position_ned extends MAVLinkMessage{
 	*/
 	public float vz; 
 
-
 /**
  * Decode a local_position_ned message into this class fields
  *

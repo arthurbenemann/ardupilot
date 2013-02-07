@@ -70,7 +70,6 @@ public class msg_hil_rc_inputs_raw extends MAVLinkMessage{
 	*/
 	public byte rssi; 
 
-
 /**
  * Decode a hil_rc_inputs_raw message into this class fields
  *

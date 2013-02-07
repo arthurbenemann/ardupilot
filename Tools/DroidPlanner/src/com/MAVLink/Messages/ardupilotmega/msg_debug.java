@@ -26,7 +26,6 @@ public class msg_debug extends MAVLinkMessage{
 	*/
 	public byte ind; 
 
-
 /**
  * Decode a debug message into this class fields
  *

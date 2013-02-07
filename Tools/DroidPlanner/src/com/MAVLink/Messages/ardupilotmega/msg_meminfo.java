@@ -22,7 +22,6 @@ public class msg_meminfo extends MAVLinkMessage{
 	*/
 	public short freemem; 
 
-
 /**
  * Decode a meminfo message into this class fields
  *

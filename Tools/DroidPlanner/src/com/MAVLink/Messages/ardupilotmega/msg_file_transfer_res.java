@@ -22,7 +22,6 @@ public class msg_file_transfer_res extends MAVLinkMessage{
 	*/
 	public byte result; 
 
-
 /**
  * Decode a file_transfer_res message into this class fields
  *

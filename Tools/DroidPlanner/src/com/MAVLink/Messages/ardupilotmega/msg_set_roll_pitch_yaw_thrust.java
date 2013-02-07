@@ -38,7 +38,6 @@ public class msg_set_roll_pitch_yaw_thrust extends MAVLinkMessage{
 	*/
 	public byte target_component; 
 
-
 /**
  * Decode a set_roll_pitch_yaw_thrust message into this class fields
  *

@@ -55,7 +55,6 @@ public class msg_gps_raw_int extends MAVLinkMessage{
 	*/
 	public byte satellites_visible; 
 
-
 /**
  * Decode a gps_raw_int message into this class fields
  *

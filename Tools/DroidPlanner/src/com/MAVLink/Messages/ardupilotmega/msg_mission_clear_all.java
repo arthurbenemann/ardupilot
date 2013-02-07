@@ -22,7 +22,6 @@ public class msg_mission_clear_all extends MAVLinkMessage{
 	*/
 	public byte target_component; 
 
-
 /**
  * Decode a mission_clear_all message into this class fields
  *

@@ -42,7 +42,6 @@ public class msg_global_vision_position_estimate extends MAVLinkMessage{
 	*/
 	public float yaw; 
 
-
 /**
  * Decode a global_vision_position_estimate message into this class fields
  *

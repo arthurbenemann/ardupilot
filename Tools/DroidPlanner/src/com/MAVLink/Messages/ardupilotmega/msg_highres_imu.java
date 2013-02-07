@@ -74,7 +74,6 @@ public class msg_highres_imu extends MAVLinkMessage{
 	*/
 	public short fields_updated; 
 
-
 /**
  * Decode a highres_imu message into this class fields
  *

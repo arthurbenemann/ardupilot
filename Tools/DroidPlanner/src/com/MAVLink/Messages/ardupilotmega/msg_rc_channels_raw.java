@@ -58,7 +58,6 @@ public class msg_rc_channels_raw extends MAVLinkMessage{
 	*/
 	public byte rssi; 
 
-
 /**
  * Decode a rc_channels_raw message into this class fields
  *

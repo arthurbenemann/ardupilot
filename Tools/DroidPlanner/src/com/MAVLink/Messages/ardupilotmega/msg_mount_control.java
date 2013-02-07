@@ -38,7 +38,6 @@ public class msg_mount_control extends MAVLinkMessage{
 	*/
 	public byte save_position; 
 
-
 /**
  * Decode a mount_control message into this class fields
  *

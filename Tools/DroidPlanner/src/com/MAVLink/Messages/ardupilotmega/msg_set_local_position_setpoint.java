@@ -42,7 +42,6 @@ public class msg_set_local_position_setpoint extends MAVLinkMessage{
 	*/
 	public byte coordinate_frame; 
 
-
 /**
  * Decode a set_local_position_setpoint message into this class fields
  *

@@ -22,7 +22,6 @@ public class msg_hwstatus extends MAVLinkMessage{
 	*/
 	public byte I2Cerr; 
 
-
 /**
  * Decode a hwstatus message into this class fields
  *

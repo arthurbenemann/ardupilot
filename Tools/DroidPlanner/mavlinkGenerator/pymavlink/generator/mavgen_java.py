@@ -162,8 +162,6 @@ ${{ordered_fields: 	/**
 	*/
 	public ${type} ${name}${array_suffix}; 
 }}
-${{array_fields:#define MAVLINK_MSG_${msg_name}_FIELD_${name_upper}_LEN ${array_length}
-}}
 
 /**
  * Decode a ${name_lower} message into this class fields
@@ -336,10 +334,6 @@ def mavfmt(field):
         'uint64_t' : 'long',
         }
 
-    if field.array_length:
-        if field.type in ['char', 'int8_t', 'uint8_t']:
-            return str(field.array_length)+'s'
-        return str(field.array_length)+map[field.type]
     return map[field.type]
 	
 def generate_one(basename, xml):
@@ -408,7 +402,7 @@ def generate_one(basename, xml):
             else:
                 f.c_print_format = '"%s"' % f.print_format
             if f.array_length != 0:
-                f.array_suffix = '[%u]' % f.array_length
+                f.array_suffix = '[] = new %s[%u]' % (mavfmt(f),f.array_length)
                 f.array_prefix = '*'
                 f.array_tag = '_array'
                 f.array_arg = ', %u' % f.array_length

@@ -30,7 +30,6 @@ public class msg_ping extends MAVLinkMessage{
 	*/
 	public byte target_component; 
 
-
 /**
  * Decode a ping message into this class fields
  *
