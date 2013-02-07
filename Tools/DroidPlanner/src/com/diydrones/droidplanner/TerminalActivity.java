@@ -30,6 +30,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 
 	TextView terminal;
 	Button sendButton;
+	boolean running = false;
 	
 	
 	@Override
@@ -95,7 +96,15 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 			return true;
 		case R.id.menu_connect:
 			Log.d("TCP IN", "starting");
-			new connectTask().execute("");
+			if(!running){
+				item.setTitle(getResources().getString(R.string.menu_disconnect));
+				running = true;
+				new connectTask().execute("");
+			}else {
+				running = false;
+				item.setTitle(getResources().getString(R.string.menu_connect));
+			}
+				
 			return true;
 		default:
 			return super.onMenuItemSelected(featureId, item);
@@ -135,7 +144,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 				in = new BufferedInputStream(socket.getInputStream());
 				int cnt = 0;
 				MAVLinkMessage m;
-				while (true) {
+				while (running) {
 					int data;
 					if((data = in.read())>=0){
 						m = parser.mavlink_parse_char(data);

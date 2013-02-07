@@ -4,6 +4,7 @@
     <string name="app_title">DroidPlanner</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_connect">Connect</string>
+    <string name="menu_disconnect">Disconnect</string>
 
     <string-array name="menu_dropdown">
         <item>Planning</item>
