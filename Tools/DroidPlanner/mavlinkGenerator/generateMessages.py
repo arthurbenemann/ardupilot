@@ -33,6 +33,6 @@ class MavgenOptions:
 
 if __name__ == '__main__':
 # Generate headers
-    opts = MavgenOptions('Java', '1.0', './', '200');
+    opts = MavgenOptions('Java', '1.0', '../src/com/MAVLink/Messages', '200');
     args = ['./message_definitions/ardupilotmega.xml']
     mavgen(opts,args)
