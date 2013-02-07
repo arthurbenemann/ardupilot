@@ -1,9 +1,8 @@
 // MESSAGE ATTITUDE PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * The attitude in the aeronautical frame (right-handed, Z-down, X-front, Y-right).
@@ -47,7 +46,7 @@ public class msg_attitude extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_attitude m = new msg_attitude();
 	//m.time_boot_ms = _get_time_boot_ms(msg);
 	//m.roll = _get_roll(msg);

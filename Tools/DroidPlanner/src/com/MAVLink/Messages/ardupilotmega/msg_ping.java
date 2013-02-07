@@ -1,9 +1,8 @@
 // MESSAGE PING PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * A ping message either requesting or responding to a ping. This allows to measure the system latencies, including serial port, radio modem and UDP connections.
@@ -35,7 +34,7 @@ public class msg_ping extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_ping m = new msg_ping();
 	//m.time_usec = _get_time_usec(msg);
 	//m.seq = _get_seq(msg);

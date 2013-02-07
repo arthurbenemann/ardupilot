@@ -1,9 +1,8 @@
 // MESSAGE DATA96 PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Data packet, size 96
@@ -31,7 +30,7 @@ public class msg_data96 extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_data96 m = new msg_data96();
 	//m.type = _get_type(msg);
 	//m.len = _get_len(msg);

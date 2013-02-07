@@ -1,9 +1,8 @@
 // MESSAGE MISSION_ITEM PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Message encoding a mission item. This message is emitted to announce
@@ -76,7 +75,7 @@ public class msg_mission_item extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_mission_item m = new msg_mission_item();
 	//m.param1 = _get_param1(msg);
 	//m.param2 = _get_param2(msg);

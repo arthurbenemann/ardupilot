@@ -1,9 +1,8 @@
 // MESSAGE HIGHRES_IMU PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * The IMU readings in SI units in NED body frame
@@ -79,7 +78,7 @@ public class msg_highres_imu extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_highres_imu m = new msg_highres_imu();
 	//m.time_usec = _get_time_usec(msg);
 	//m.xacc = _get_xacc(msg);

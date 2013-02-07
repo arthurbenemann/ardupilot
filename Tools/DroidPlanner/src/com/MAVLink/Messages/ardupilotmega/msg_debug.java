@@ -1,9 +1,8 @@
 // MESSAGE DEBUG PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Send a debug value. The index is used to discriminate between values. These values show up in the plot of QGroundControl as DEBUG N.
@@ -31,7 +30,7 @@ public class msg_debug extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_debug m = new msg_debug();
 	//m.time_boot_ms = _get_time_boot_ms(msg);
 	//m.value = _get_value(msg);

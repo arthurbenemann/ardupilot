@@ -1,9 +1,8 @@
 // MESSAGE FILE_TRANSFER_DIR_LIST PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Get directory listing
@@ -31,7 +30,7 @@ public class msg_file_transfer_dir_list extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_file_transfer_dir_list m = new msg_file_transfer_dir_list();
 	//m.transfer_uid = _get_transfer_uid(msg);
 	// = _get_dir_path(msgm.dir_path);

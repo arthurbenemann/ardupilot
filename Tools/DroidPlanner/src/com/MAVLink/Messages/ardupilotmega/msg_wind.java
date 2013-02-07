@@ -1,9 +1,8 @@
 // MESSAGE WIND PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Wind estimation
@@ -31,7 +30,7 @@ public class msg_wind extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_wind m = new msg_wind();
 	//m.direction = _get_direction(msg);
 	//m.speed = _get_speed(msg);

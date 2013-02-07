@@ -1,9 +1,8 @@
 // MESSAGE HWSTATUS PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Status of key hardware
@@ -27,7 +26,7 @@ public class msg_hwstatus extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_hwstatus m = new msg_hwstatus();
 	//m.Vcc = _get_Vcc(msg);
 	//m.I2Cerr = _get_I2Cerr(msg);

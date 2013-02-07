@@ -1,9 +1,8 @@
 // MESSAGE SET_GPS_GLOBAL_ORIGIN PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * As local waypoints exist, the global MISSION reference allows to transform between the local coordinate frame and the global (GPS) coordinate frame. This can be necessary when e.g. in- and outdoor settings are connected and the MAV should move from in- to outdoor.
@@ -35,7 +34,7 @@ public class msg_set_gps_global_origin extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_set_gps_global_origin m = new msg_set_gps_global_origin();
 	//m.latitude = _get_latitude(msg);
 	//m.longitude = _get_longitude(msg);

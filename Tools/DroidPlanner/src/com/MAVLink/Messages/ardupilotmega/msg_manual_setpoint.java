@@ -1,9 +1,8 @@
 // MESSAGE MANUAL_SETPOINT PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Setpoint in roll, pitch, yaw and thrust from the operator
@@ -47,7 +46,7 @@ public class msg_manual_setpoint extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_manual_setpoint m = new msg_manual_setpoint();
 	//m.time_boot_ms = _get_time_boot_ms(msg);
 	//m.roll = _get_roll(msg);

@@ -1,9 +1,8 @@
 // MESSAGE STATE_CORRECTION PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Corrects the systems state by adding an error correction term to the position and velocity, and by rotating the attitude by a correction angle.
@@ -55,7 +54,7 @@ public class msg_state_correction extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_state_correction m = new msg_state_correction();
 	//m.xErr = _get_xErr(msg);
 	//m.yErr = _get_yErr(msg);

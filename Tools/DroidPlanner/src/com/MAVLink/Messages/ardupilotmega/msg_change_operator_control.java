@@ -1,9 +1,8 @@
 // MESSAGE CHANGE_OPERATOR_CONTROL PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Request to control this MAV
@@ -35,7 +34,7 @@ public class msg_change_operator_control extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_change_operator_control m = new msg_change_operator_control();
 	//m.target_system = _get_target_system(msg);
 	//m.control_request = _get_control_request(msg);

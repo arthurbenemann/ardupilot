@@ -1,9 +1,8 @@
 // MESSAGE SCALED_IMU PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * The RAW IMU readings for the usual 9DOF sensor setup. This message should contain the scaled values to the described units
@@ -59,7 +58,7 @@ public class msg_scaled_imu extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_scaled_imu m = new msg_scaled_imu();
 	//m.time_boot_ms = _get_time_boot_ms(msg);
 	//m.xacc = _get_xacc(msg);

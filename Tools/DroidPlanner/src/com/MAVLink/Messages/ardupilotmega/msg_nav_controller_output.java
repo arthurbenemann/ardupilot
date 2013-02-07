@@ -1,9 +1,8 @@
 // MESSAGE NAV_CONTROLLER_OUTPUT PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Outputs of the APM navigation controller. The primary use of this message is to check the response and signs of the controller before actual flight and to assist with tuning controller parameters.
@@ -51,7 +50,7 @@ public class msg_nav_controller_output extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_nav_controller_output m = new msg_nav_controller_output();
 	//m.nav_roll = _get_nav_roll(msg);
 	//m.nav_pitch = _get_nav_pitch(msg);

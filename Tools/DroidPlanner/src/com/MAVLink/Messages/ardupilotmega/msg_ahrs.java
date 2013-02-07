@@ -1,9 +1,8 @@
 // MESSAGE AHRS PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Status of DCM attitude estimator
@@ -47,7 +46,7 @@ public class msg_ahrs extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_ahrs m = new msg_ahrs();
 	//m.omegaIx = _get_omegaIx(msg);
 	//m.omegaIy = _get_omegaIy(msg);

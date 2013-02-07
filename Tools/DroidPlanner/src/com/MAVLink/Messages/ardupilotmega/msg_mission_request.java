@@ -1,9 +1,8 @@
 // MESSAGE MISSION_REQUEST PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Request the information of the mission item with the sequence number seq. The response of the system to this message should be a MISSION_ITEM message. http://qgroundcontrol.org/mavlink/waypoint_protocol
@@ -31,7 +30,7 @@ public class msg_mission_request extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_mission_request m = new msg_mission_request();
 	//m.seq = _get_seq(msg);
 	//m.target_system = _get_target_system(msg);

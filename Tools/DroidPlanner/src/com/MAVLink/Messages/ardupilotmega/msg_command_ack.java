@@ -1,9 +1,8 @@
 // MESSAGE COMMAND_ACK PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Report status of a command. Includes feedback wether the command was executed.
@@ -27,7 +26,7 @@ public class msg_command_ack extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_command_ack m = new msg_command_ack();
 	//m.command = _get_command(msg);
 	//m.result = _get_result(msg);

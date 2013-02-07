@@ -1,9 +1,8 @@
 // MESSAGE COMMAND_LONG PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Send a command with up to four parameters to the MAV
@@ -63,7 +62,7 @@ public class msg_command_long extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_command_long m = new msg_command_long();
 	//m.param1 = _get_param1(msg);
 	//m.param2 = _get_param2(msg);

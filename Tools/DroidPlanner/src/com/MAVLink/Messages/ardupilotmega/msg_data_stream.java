@@ -1,9 +1,8 @@
 // MESSAGE DATA_STREAM PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * 
@@ -31,7 +30,7 @@ public class msg_data_stream extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_data_stream m = new msg_data_stream();
 	//m.message_rate = _get_message_rate(msg);
 	//m.stream_id = _get_stream_id(msg);

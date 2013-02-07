@@ -1,9 +1,8 @@
 // MESSAGE DEBUG_VECT PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * 
@@ -39,7 +38,7 @@ public class msg_debug_vect extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_debug_vect m = new msg_debug_vect();
 	//m.time_usec = _get_time_usec(msg);
 	//m.x = _get_x(msg);

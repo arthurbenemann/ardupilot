@@ -1,9 +1,8 @@
 // MESSAGE SETPOINT_8DOF PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Set the 8 DOF setpoint for a controller.
@@ -55,7 +54,7 @@ public class msg_setpoint_8dof extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_setpoint_8dof m = new msg_setpoint_8dof();
 	//m.val1 = _get_val1(msg);
 	//m.val2 = _get_val2(msg);

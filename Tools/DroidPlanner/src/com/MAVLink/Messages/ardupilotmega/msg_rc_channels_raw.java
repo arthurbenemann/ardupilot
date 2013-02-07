@@ -1,9 +1,8 @@
 // MESSAGE RC_CHANNELS_RAW PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * The RAW values of the RC channels received. The standard PPM modulation is as follows: 1000 microseconds: 0%, 2000 microseconds: 100%. Individual receivers/transmitters might violate this specification.
@@ -63,7 +62,7 @@ public class msg_rc_channels_raw extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_rc_channels_raw m = new msg_rc_channels_raw();
 	//m.time_boot_ms = _get_time_boot_ms(msg);
 	//m.chan1_raw = _get_chan1_raw(msg);

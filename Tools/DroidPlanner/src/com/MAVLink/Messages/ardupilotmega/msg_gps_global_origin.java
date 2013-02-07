@@ -1,9 +1,8 @@
 // MESSAGE GPS_GLOBAL_ORIGIN PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Once the MAV sets a new GPS-Local correspondence, this message announces the origin (0,0,0) position
@@ -31,7 +30,7 @@ public class msg_gps_global_origin extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_gps_global_origin m = new msg_gps_global_origin();
 	//m.latitude = _get_latitude(msg);
 	//m.longitude = _get_longitude(msg);

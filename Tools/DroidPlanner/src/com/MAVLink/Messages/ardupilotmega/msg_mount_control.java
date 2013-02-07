@@ -1,9 +1,8 @@
 // MESSAGE MOUNT_CONTROL PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Message to control a camera mount, directional antenna, etc.
@@ -43,7 +42,7 @@ public class msg_mount_control extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_mount_control m = new msg_mount_control();
 	//m.input_a = _get_input_a(msg);
 	//m.input_b = _get_input_b(msg);

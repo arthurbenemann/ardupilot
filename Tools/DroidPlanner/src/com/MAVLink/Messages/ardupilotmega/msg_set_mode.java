@@ -1,9 +1,8 @@
 // MESSAGE SET_MODE PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Set the system mode, as defined by enum MAV_MODE. There is no target component id as the mode is by definition for the overall aircraft, not only for one component.
@@ -31,7 +30,7 @@ public class msg_set_mode extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_set_mode m = new msg_set_mode();
 	//m.custom_mode = _get_custom_mode(msg);
 	//m.target_system = _get_target_system(msg);

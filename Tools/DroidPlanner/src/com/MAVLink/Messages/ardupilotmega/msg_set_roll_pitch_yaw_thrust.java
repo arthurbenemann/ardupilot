@@ -1,9 +1,8 @@
 // MESSAGE SET_ROLL_PITCH_YAW_THRUST PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Set roll, pitch and yaw.
@@ -43,7 +42,7 @@ public class msg_set_roll_pitch_yaw_thrust extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_set_roll_pitch_yaw_thrust m = new msg_set_roll_pitch_yaw_thrust();
 	//m.roll = _get_roll(msg);
 	//m.pitch = _get_pitch(msg);

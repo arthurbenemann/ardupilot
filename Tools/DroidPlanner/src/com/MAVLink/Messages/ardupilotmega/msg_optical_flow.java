@@ -1,9 +1,8 @@
 // MESSAGE OPTICAL_FLOW PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Optical flow from a flow sensor (e.g. optical mouse sensor)
@@ -51,7 +50,7 @@ public class msg_optical_flow extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_optical_flow m = new msg_optical_flow();
 	//m.time_usec = _get_time_usec(msg);
 	//m.flow_comp_m_x = _get_flow_comp_m_x(msg);

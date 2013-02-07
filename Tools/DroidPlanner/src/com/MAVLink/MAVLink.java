@@ -1,7 +1,5 @@
 package com.MAVLink;
 
-import java.util.ArrayList;
-
 import com.MAVLink.Messages.MAVLinkMessage;
 
 public class MAVLink {
@@ -48,7 +46,6 @@ public class MAVLink {
 				// NOT counting STX, LENGTH, SEQ, SYSID, COMPID, MSGID, CRC1 and
 				// CRC2
 				m.len = c;
-				m.payload = new ArrayList<Integer>();
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_LENGTH;
 			}
 			break;
@@ -78,7 +75,7 @@ public class MAVLink {
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_MSGID:
-			m.payload.add(c);
+			m.payload.add((byte) c);
 			if (m.payloadIsFilled()) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_PAYLOAD;
 			}

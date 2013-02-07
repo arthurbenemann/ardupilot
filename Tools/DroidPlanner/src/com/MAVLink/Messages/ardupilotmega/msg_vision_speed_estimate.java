@@ -1,9 +1,8 @@
 // MESSAGE VISION_SPEED_ESTIMATE PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * 
@@ -35,7 +34,7 @@ public class msg_vision_speed_estimate extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_vision_speed_estimate m = new msg_vision_speed_estimate();
 	//m.usec = _get_usec(msg);
 	//m.x = _get_x(msg);

@@ -1,9 +1,8 @@
 // MESSAGE AP_ADC PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * raw ADC output
@@ -43,7 +42,7 @@ public class msg_ap_adc extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_ap_adc m = new msg_ap_adc();
 	//m.adc1 = _get_adc1(msg);
 	//m.adc2 = _get_adc2(msg);

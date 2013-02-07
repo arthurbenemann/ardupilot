@@ -1,9 +1,8 @@
 // MESSAGE MISSION_REQUEST_PARTIAL_LIST PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Request a partial list of mission items from the system/component. http://qgroundcontrol.org/mavlink/waypoint_protocol. If start and end index are the same, just send one waypoint.
@@ -35,7 +34,7 @@ public class msg_mission_request_partial_list extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_mission_request_partial_list m = new msg_mission_request_partial_list();
 	//m.start_index = _get_start_index(msg);
 	//m.end_index = _get_end_index(msg);

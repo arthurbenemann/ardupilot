@@ -1,9 +1,8 @@
 // MESSAGE SIMSTATE PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Status of simulation environment, if used
@@ -63,7 +62,7 @@ public class msg_simstate extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_simstate m = new msg_simstate();
 	//m.roll = _get_roll(msg);
 	//m.pitch = _get_pitch(msg);

@@ -1,9 +1,8 @@
 // MESSAGE SET_QUAD_MOTORS_SETPOINT PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Setpoint in the four motor speeds
@@ -39,7 +38,7 @@ public class msg_set_quad_motors_setpoint extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_set_quad_motors_setpoint m = new msg_set_quad_motors_setpoint();
 	//m.motor_front_nw = _get_motor_front_nw(msg);
 	//m.motor_right_ne = _get_motor_right_ne(msg);

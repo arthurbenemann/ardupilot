@@ -1,9 +1,8 @@
 // MESSAGE SETPOINT_6DOF PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Set the 6 DOF setpoint for a attitude and position controller.
@@ -47,7 +46,7 @@ public class msg_setpoint_6dof extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_setpoint_6dof m = new msg_setpoint_6dof();
 	//m.trans_x = _get_trans_x(msg);
 	//m.trans_y = _get_trans_y(msg);

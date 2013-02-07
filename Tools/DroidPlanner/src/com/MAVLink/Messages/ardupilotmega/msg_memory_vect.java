@@ -1,9 +1,8 @@
 // MESSAGE MEMORY_VECT PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Send raw controller memory. The use of this message is discouraged for normal packets, but a quite efficient way for testing new messages and getting experimental debug output.
@@ -35,7 +34,7 @@ public class msg_memory_vect extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_memory_vect m = new msg_memory_vect();
 	//m.address = _get_address(msg);
 	//m.ver = _get_ver(msg);

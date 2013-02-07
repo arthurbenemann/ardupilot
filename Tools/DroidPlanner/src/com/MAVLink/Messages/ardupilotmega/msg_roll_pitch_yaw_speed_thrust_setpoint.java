@@ -1,9 +1,8 @@
 // MESSAGE ROLL_PITCH_YAW_SPEED_THRUST_SETPOINT PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Setpoint in rollspeed, pitchspeed, yawspeed currently active on the system.
@@ -39,7 +38,7 @@ public class msg_roll_pitch_yaw_speed_thrust_setpoint extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_roll_pitch_yaw_speed_thrust_setpoint m = new msg_roll_pitch_yaw_speed_thrust_setpoint();
 	//m.time_boot_ms = _get_time_boot_ms(msg);
 	//m.roll_speed = _get_roll_speed(msg);

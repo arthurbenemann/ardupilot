@@ -1,9 +1,8 @@
 // MESSAGE RAW_PRESSURE PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * The RAW pressure readings for the typical setup of one absolute pressure and one differential pressure sensor. The sensor values should be the raw, UNSCALED ADC values.
@@ -39,7 +38,7 @@ public class msg_raw_pressure extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_raw_pressure m = new msg_raw_pressure();
 	//m.time_usec = _get_time_usec(msg);
 	//m.press_abs = _get_press_abs(msg);

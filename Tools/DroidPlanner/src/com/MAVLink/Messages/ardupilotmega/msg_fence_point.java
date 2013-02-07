@@ -1,9 +1,8 @@
 // MESSAGE FENCE_POINT PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * A fence point. Used to set a point when from
@@ -44,7 +43,7 @@ public class msg_fence_point extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_fence_point m = new msg_fence_point();
 	//m.lat = _get_lat(msg);
 	//m.lng = _get_lng(msg);

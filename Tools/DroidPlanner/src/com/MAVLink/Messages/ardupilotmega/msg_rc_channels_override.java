@@ -1,9 +1,8 @@
 // MESSAGE RC_CHANNELS_OVERRIDE PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * The RAW values of the RC channels sent to the MAV to override info received from the RC radio. A value of -1 means no change to that channel. A value of 0 means control of that channel should be released back to the RC radio. The standard PPM modulation is as follows: 1000 microseconds: 0%, 2000 microseconds: 100%. Individual receivers/transmitters might violate this specification.
@@ -59,7 +58,7 @@ public class msg_rc_channels_override extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_rc_channels_override m = new msg_rc_channels_override();
 	//m.chan1_raw = _get_chan1_raw(msg);
 	//m.chan2_raw = _get_chan2_raw(msg);

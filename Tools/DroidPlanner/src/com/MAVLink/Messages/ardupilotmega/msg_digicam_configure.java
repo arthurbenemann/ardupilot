@@ -1,9 +1,8 @@
 // MESSAGE DIGICAM_CONFIGURE PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Configure on-board Camera Control System.
@@ -63,7 +62,7 @@ public class msg_digicam_configure extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_digicam_configure m = new msg_digicam_configure();
 	//m.extra_value = _get_extra_value(msg);
 	//m.shutter_speed = _get_shutter_speed(msg);

@@ -1,9 +1,8 @@
 // MESSAGE RAW_IMU PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * The RAW IMU readings for the usual 9DOF sensor setup. This message should always contain the true raw values without any scaling to allow data capture and system debugging.
@@ -59,7 +58,7 @@ public class msg_raw_imu extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_raw_imu m = new msg_raw_imu();
 	//m.time_usec = _get_time_usec(msg);
 	//m.xacc = _get_xacc(msg);

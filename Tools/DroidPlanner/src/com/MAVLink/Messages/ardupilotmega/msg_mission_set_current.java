@@ -1,9 +1,8 @@
 // MESSAGE MISSION_SET_CURRENT PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Set the mission item with sequence number seq as current item. This means that the MAV will continue to this mission item on the shortest path (not following the mission items in-between).
@@ -31,7 +30,7 @@ public class msg_mission_set_current extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_mission_set_current m = new msg_mission_set_current();
 	//m.seq = _get_seq(msg);
 	//m.target_system = _get_target_system(msg);

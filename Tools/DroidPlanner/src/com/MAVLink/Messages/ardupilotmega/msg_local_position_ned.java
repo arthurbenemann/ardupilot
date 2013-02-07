@@ -1,9 +1,8 @@
 // MESSAGE LOCAL_POSITION_NED PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * The filtered local position (e.g. fused computer vision and accelerometers). Coordinate frame is right-handed, Z-axis down (aeronautical frame, NED / north-east-down convention)
@@ -47,7 +46,7 @@ public class msg_local_position_ned extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_local_position_ned m = new msg_local_position_ned();
 	//m.time_boot_ms = _get_time_boot_ms(msg);
 	//m.x = _get_x(msg);

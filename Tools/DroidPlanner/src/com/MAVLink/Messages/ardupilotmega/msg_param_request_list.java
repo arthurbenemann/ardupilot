@@ -1,9 +1,8 @@
 // MESSAGE PARAM_REQUEST_LIST PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Request all parameters of this component. After his request, all parameters are emitted.
@@ -27,7 +26,7 @@ public class msg_param_request_list extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_param_request_list m = new msg_param_request_list();
 	//m.target_system = _get_target_system(msg);
 	//m.target_component = _get_target_component(msg);

@@ -1,9 +1,8 @@
 // MESSAGE SCALED_PRESSURE PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * The pressure readings for the typical setup of one absolute and differential pressure sensor. The units are as specified in each field.
@@ -35,7 +34,7 @@ public class msg_scaled_pressure extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_scaled_pressure m = new msg_scaled_pressure();
 	//m.time_boot_ms = _get_time_boot_ms(msg);
 	//m.press_abs = _get_press_abs(msg);

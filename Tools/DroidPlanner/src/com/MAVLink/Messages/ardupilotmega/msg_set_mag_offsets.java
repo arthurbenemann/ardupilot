@@ -1,9 +1,8 @@
 // MESSAGE SET_MAG_OFFSETS PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * set the magnetometer offsets
@@ -39,7 +38,7 @@ public class msg_set_mag_offsets extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_set_mag_offsets m = new msg_set_mag_offsets();
 	//m.mag_ofs_x = _get_mag_ofs_x(msg);
 	//m.mag_ofs_y = _get_mag_ofs_y(msg);

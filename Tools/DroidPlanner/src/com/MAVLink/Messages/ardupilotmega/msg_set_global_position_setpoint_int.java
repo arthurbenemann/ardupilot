@@ -1,9 +1,8 @@
 // MESSAGE SET_GLOBAL_POSITION_SETPOINT_INT PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Set the current global position setpoint.
@@ -39,7 +38,7 @@ public class msg_set_global_position_setpoint_int extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_set_global_position_setpoint_int m = new msg_set_global_position_setpoint_int();
 	//m.latitude = _get_latitude(msg);
 	//m.longitude = _get_longitude(msg);

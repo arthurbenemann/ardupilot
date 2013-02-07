@@ -2,112 +2,9 @@
 package com.MAVLink.Messages;
 
 import java.util.List;
-import android.util.Log;import com.MAVLink.Messages.ardupilotmega.msg_sensor_offsets;
-import com.MAVLink.Messages.ardupilotmega.msg_set_mag_offsets;
-import com.MAVLink.Messages.ardupilotmega.msg_meminfo;
-import com.MAVLink.Messages.ardupilotmega.msg_ap_adc;
-import com.MAVLink.Messages.ardupilotmega.msg_digicam_configure;
-import com.MAVLink.Messages.ardupilotmega.msg_digicam_control;
-import com.MAVLink.Messages.ardupilotmega.msg_mount_configure;
-import com.MAVLink.Messages.ardupilotmega.msg_mount_control;
-import com.MAVLink.Messages.ardupilotmega.msg_mount_status;
-import com.MAVLink.Messages.ardupilotmega.msg_fence_point;
-import com.MAVLink.Messages.ardupilotmega.msg_fence_fetch_point;
-import com.MAVLink.Messages.ardupilotmega.msg_fence_status;
-import com.MAVLink.Messages.ardupilotmega.msg_ahrs;
-import com.MAVLink.Messages.ardupilotmega.msg_simstate;
-import com.MAVLink.Messages.ardupilotmega.msg_hwstatus;
-import com.MAVLink.Messages.ardupilotmega.msg_radio;
-import com.MAVLink.Messages.ardupilotmega.msg_limits_status;
-import com.MAVLink.Messages.ardupilotmega.msg_wind;
-import com.MAVLink.Messages.ardupilotmega.msg_data16;
-import com.MAVLink.Messages.ardupilotmega.msg_data32;
-import com.MAVLink.Messages.ardupilotmega.msg_data64;
-import com.MAVLink.Messages.ardupilotmega.msg_data96;import com.MAVLink.Messages.ardupilotmega.msg_heartbeat;
-import com.MAVLink.Messages.ardupilotmega.msg_sys_status;
-import com.MAVLink.Messages.ardupilotmega.msg_system_time;
-import com.MAVLink.Messages.ardupilotmega.msg_ping;
-import com.MAVLink.Messages.ardupilotmega.msg_change_operator_control;
-import com.MAVLink.Messages.ardupilotmega.msg_change_operator_control_ack;
-import com.MAVLink.Messages.ardupilotmega.msg_auth_key;
-import com.MAVLink.Messages.ardupilotmega.msg_set_mode;
-import com.MAVLink.Messages.ardupilotmega.msg_param_request_read;
-import com.MAVLink.Messages.ardupilotmega.msg_param_request_list;
-import com.MAVLink.Messages.ardupilotmega.msg_param_value;
-import com.MAVLink.Messages.ardupilotmega.msg_param_set;
-import com.MAVLink.Messages.ardupilotmega.msg_gps_raw_int;
-import com.MAVLink.Messages.ardupilotmega.msg_gps_status;
-import com.MAVLink.Messages.ardupilotmega.msg_scaled_imu;
-import com.MAVLink.Messages.ardupilotmega.msg_raw_imu;
-import com.MAVLink.Messages.ardupilotmega.msg_raw_pressure;
-import com.MAVLink.Messages.ardupilotmega.msg_scaled_pressure;
-import com.MAVLink.Messages.ardupilotmega.msg_attitude;
-import com.MAVLink.Messages.ardupilotmega.msg_attitude_quaternion;
-import com.MAVLink.Messages.ardupilotmega.msg_local_position_ned;
-import com.MAVLink.Messages.ardupilotmega.msg_global_position_int;
-import com.MAVLink.Messages.ardupilotmega.msg_rc_channels_scaled;
-import com.MAVLink.Messages.ardupilotmega.msg_rc_channels_raw;
-import com.MAVLink.Messages.ardupilotmega.msg_servo_output_raw;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_request_partial_list;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_write_partial_list;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_item;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_request;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_set_current;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_current;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_request_list;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_count;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_clear_all;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_item_reached;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_ack;
-import com.MAVLink.Messages.ardupilotmega.msg_set_gps_global_origin;
-import com.MAVLink.Messages.ardupilotmega.msg_gps_global_origin;
-import com.MAVLink.Messages.ardupilotmega.msg_set_local_position_setpoint;
-import com.MAVLink.Messages.ardupilotmega.msg_local_position_setpoint;
-import com.MAVLink.Messages.ardupilotmega.msg_global_position_setpoint_int;
-import com.MAVLink.Messages.ardupilotmega.msg_set_global_position_setpoint_int;
-import com.MAVLink.Messages.ardupilotmega.msg_safety_set_allowed_area;
-import com.MAVLink.Messages.ardupilotmega.msg_safety_allowed_area;
-import com.MAVLink.Messages.ardupilotmega.msg_set_roll_pitch_yaw_thrust;
-import com.MAVLink.Messages.ardupilotmega.msg_set_roll_pitch_yaw_speed_thrust;
-import com.MAVLink.Messages.ardupilotmega.msg_roll_pitch_yaw_thrust_setpoint;
-import com.MAVLink.Messages.ardupilotmega.msg_roll_pitch_yaw_speed_thrust_setpoint;
-import com.MAVLink.Messages.ardupilotmega.msg_set_quad_motors_setpoint;
-import com.MAVLink.Messages.ardupilotmega.msg_set_quad_swarm_roll_pitch_yaw_thrust;
-import com.MAVLink.Messages.ardupilotmega.msg_nav_controller_output;
-import com.MAVLink.Messages.ardupilotmega.msg_set_quad_swarm_led_roll_pitch_yaw_thrust;
-import com.MAVLink.Messages.ardupilotmega.msg_state_correction;
-import com.MAVLink.Messages.ardupilotmega.msg_request_data_stream;
-import com.MAVLink.Messages.ardupilotmega.msg_data_stream;
-import com.MAVLink.Messages.ardupilotmega.msg_manual_control;
-import com.MAVLink.Messages.ardupilotmega.msg_rc_channels_override;
-import com.MAVLink.Messages.ardupilotmega.msg_vfr_hud;
-import com.MAVLink.Messages.ardupilotmega.msg_command_long;
-import com.MAVLink.Messages.ardupilotmega.msg_command_ack;
-import com.MAVLink.Messages.ardupilotmega.msg_roll_pitch_yaw_rates_thrust_setpoint;
-import com.MAVLink.Messages.ardupilotmega.msg_manual_setpoint;
-import com.MAVLink.Messages.ardupilotmega.msg_local_position_ned_system_global_offset;
-import com.MAVLink.Messages.ardupilotmega.msg_hil_state;
-import com.MAVLink.Messages.ardupilotmega.msg_hil_controls;
-import com.MAVLink.Messages.ardupilotmega.msg_hil_rc_inputs_raw;
-import com.MAVLink.Messages.ardupilotmega.msg_optical_flow;
-import com.MAVLink.Messages.ardupilotmega.msg_global_vision_position_estimate;
-import com.MAVLink.Messages.ardupilotmega.msg_vision_position_estimate;
-import com.MAVLink.Messages.ardupilotmega.msg_vision_speed_estimate;
-import com.MAVLink.Messages.ardupilotmega.msg_vicon_position_estimate;
-import com.MAVLink.Messages.ardupilotmega.msg_highres_imu;
-import com.MAVLink.Messages.ardupilotmega.msg_omnidirectional_flow;
-import com.MAVLink.Messages.ardupilotmega.msg_file_transfer_start;
-import com.MAVLink.Messages.ardupilotmega.msg_file_transfer_dir_list;
-import com.MAVLink.Messages.ardupilotmega.msg_file_transfer_res;
-import com.MAVLink.Messages.ardupilotmega.msg_battery_status;
-import com.MAVLink.Messages.ardupilotmega.msg_setpoint_8dof;
-import com.MAVLink.Messages.ardupilotmega.msg_setpoint_6dof;
-import com.MAVLink.Messages.ardupilotmega.msg_memory_vect;
-import com.MAVLink.Messages.ardupilotmega.msg_debug_vect;
-import com.MAVLink.Messages.ardupilotmega.msg_named_value_float;
-import com.MAVLink.Messages.ardupilotmega.msg_named_value_int;
-import com.MAVLink.Messages.ardupilotmega.msg_statustext;
-import com.MAVLink.Messages.ardupilotmega.msg_debug;
+import android.util.Log;
+import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.ardupilotmega.*;
 public class MAVLinkMessage {
 	/**
 	 *  Simply a common interface for all MAVLink Messages
@@ -119,9 +16,12 @@ public class MAVLinkMessage {
 	public  int sysid;
 	public int compid;
 	public int msgid;
-	public List<Integer> payload;	
-	public CRC crc;	
+	public MAVLinkPayload payload;	
+	public CRC crc;
 	
+	public MAVLinkMessage() {
+		payload = new MAVLinkPayload();
+	}
 	/*
 	private Integer getInt64(int i){
 		return payload.get(i) << 32  | (payload.get(i+4) & 0xFFFFFFFF);
@@ -146,14 +46,14 @@ public class MAVLinkMessage {
 		crc.update_checksum(sysid);
 		crc.update_checksum(compid);
 		crc.update_checksum(msgid);
-		for (Integer data : payload) {
+		for (Byte data : MAVLinkPayload.getData()) {
 			crc.update_checksum(data);			
 		}
 		crc.finish_checksum(msgid);
 	}
 	
 	public boolean payloadIsFilled() {
-		return (payload.size() == len);
+		return (MAVLinkPayload.size() == len);
 	}
 	
 	public MAVLinkMessage unpackMessage() {

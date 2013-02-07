@@ -1,9 +1,8 @@
 // MESSAGE SET_QUAD_SWARM_ROLL_PITCH_YAW_THRUST PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Setpoint for up to four quadrotors in a group / wing
@@ -43,7 +42,7 @@ public class msg_set_quad_swarm_roll_pitch_yaw_thrust extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_set_quad_swarm_roll_pitch_yaw_thrust m = new msg_set_quad_swarm_roll_pitch_yaw_thrust();
 	// = _get_roll(msgm.roll);
 	// = _get_pitch(msgm.pitch);

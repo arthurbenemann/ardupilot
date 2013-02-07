@@ -1,9 +1,8 @@
 // MESSAGE VFR_HUD PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Metrics typically displayed on a HUD for fixed wing aircraft
@@ -43,7 +42,7 @@ public class msg_vfr_hud extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_vfr_hud m = new msg_vfr_hud();
 	//m.airspeed = _get_airspeed(msg);
 	//m.groundspeed = _get_groundspeed(msg);

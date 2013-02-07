@@ -1,9 +1,8 @@
 // MESSAGE FILE_TRANSFER_START PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Begin file transfer
@@ -39,7 +38,7 @@ public class msg_file_transfer_start extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_file_transfer_start m = new msg_file_transfer_start();
 	//m.transfer_uid = _get_transfer_uid(msg);
 	//m.file_size = _get_file_size(msg);

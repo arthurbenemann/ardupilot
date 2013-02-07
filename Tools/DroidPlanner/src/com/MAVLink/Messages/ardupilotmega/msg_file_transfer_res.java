@@ -1,9 +1,8 @@
 // MESSAGE FILE_TRANSFER_RES PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * File transfer result
@@ -27,7 +26,7 @@ public class msg_file_transfer_res extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_file_transfer_res m = new msg_file_transfer_res();
 	//m.transfer_uid = _get_transfer_uid(msg);
 	//m.result = _get_result(msg);

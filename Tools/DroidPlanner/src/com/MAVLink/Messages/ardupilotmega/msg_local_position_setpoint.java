@@ -1,9 +1,8 @@
 // MESSAGE LOCAL_POSITION_SETPOINT PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Transmit the current local setpoint of the controller to other MAVs (collision avoidance) and to the GCS.
@@ -39,7 +38,7 @@ public class msg_local_position_setpoint extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_local_position_setpoint m = new msg_local_position_setpoint();
 	//m.x = _get_x(msg);
 	//m.y = _get_y(msg);

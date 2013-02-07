@@ -145,9 +145,8 @@ def generate_message_h(directory, m):
 // MESSAGE ${name} PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * ${description}
@@ -168,7 +167,7 @@ ${{ordered_fields: 	/**
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_${name_lower} m = new msg_${name_lower}();
 ${{ordered_fields:	//${decode_left} = _get_${name}(msg${decode_right});
 }}
@@ -186,11 +185,9 @@ def generate_MAVLinkMessage(directory, xml_list):
 package com.MAVLink.Messages;
 
 import java.util.List;
-import android.util.Log;''')
-    for xml in xml_list:
-        t.write(f, '''
-${{message:import com.MAVLink.Messages.ardupilotmega.msg_${name_lower};
-}}''',xml)
+import android.util.Log;
+import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.ardupilotmega.*;''')
     f.write('''
 public class MAVLinkMessage {
 	/**
@@ -203,7 +200,7 @@ public class MAVLinkMessage {
 	public  int sysid;
 	public int compid;
 	public int msgid;
-	public List<Integer> payload;	
+	public MAVLinkPayload payload;	
 	public CRC crc;	
 	
 	/*
@@ -230,14 +227,14 @@ public class MAVLinkMessage {
 		crc.update_checksum(sysid);
 		crc.update_checksum(compid);
 		crc.update_checksum(msgid);
-		for (Integer data : payload) {
+		for (Byte data : MAVLinkPayload.getData()) {
 			crc.update_checksum(data);			
 		}
 		crc.finish_checksum(msgid);
 	}
 	
 	public boolean payloadIsFilled() {
-		return (payload.size() == len);
+		return (MAVLinkPayload.size() == len);
 	}
 	
 	public MAVLinkMessage unpackMessage() {

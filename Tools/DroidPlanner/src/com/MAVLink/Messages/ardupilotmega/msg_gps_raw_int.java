@@ -1,9 +1,8 @@
 // MESSAGE GPS_RAW_INT PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * The global position, as returned by the Global Positioning System (GPS). This is
@@ -60,7 +59,7 @@ public class msg_gps_raw_int extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_gps_raw_int m = new msg_gps_raw_int();
 	//m.time_usec = _get_time_usec(msg);
 	//m.lat = _get_lat(msg);

@@ -1,9 +1,8 @@
 // MESSAGE LIMITS_STATUS PACKING
 package com.MAVLink.Messages.ardupilotmega;
 
-import java.util.List;
-
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Status of AP_Limits. Sent in extended
@@ -56,7 +55,7 @@ public class msg_limits_status extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(List<Integer> payload) {
+public static MAVLinkMessage unpack(MAVLinkPayload payload) {
     msg_limits_status m = new msg_limits_status();
 	//m.last_trigger = _get_last_trigger(msg);
 	//m.last_action = _get_last_action(msg);
