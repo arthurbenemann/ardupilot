@@ -1,15 +1,12 @@
 package com.diydrones.droidplanner;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-
-import com.MAVLink.MAVLink;
-import com.MAVLink.Messages.MAVLinkMessage;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
@@ -24,6 +21,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+
+import com.MAVLink.MAVLink;
+import com.MAVLink.Messages.MAVLinkMessage;
 
 public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		implements OnNavigationListener {
@@ -104,7 +104,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 	
 	
 	
-	private InputStream in;
+	private BufferedInputStream in;
 	PrintWriter out;
 
 	public void sendMessage(String message) {
@@ -132,7 +132,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 						new OutputStreamWriter(socket.getOutputStream())), true);
 				Log.e("TCP Client", "C: Done.");
 				// receive the message which the server sends back
-				in = socket.getInputStream();
+				in = new BufferedInputStream(socket.getInputStream());
 				int cnt = 0;
 				MAVLinkMessage m;
 				while (true) {
