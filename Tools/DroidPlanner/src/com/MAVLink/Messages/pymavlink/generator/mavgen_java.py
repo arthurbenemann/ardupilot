@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''
-parse a MAVLink protocol XML file and generate a C implementation
+parse a MAVLink protocol XML file and generate a Java implementation
 
 Copyright Andrew Tridgell 2011
 Released under GNU GPL version 3 or later
@@ -347,7 +347,7 @@ def generate_one(basename, xml):
 
     directory = os.path.join(basename, '''ardupilotmega''')
 
-    print("Generating C implementation in directory %s" % directory)
+    print("Generating Java implementation in directory %s" % directory)
     mavparse.mkdir_p(directory)
 
     if xml.little_endian:
@@ -476,9 +476,9 @@ def generate_one(basename, xml):
 
 
 def generate(basename, xml_list):
-    '''generate complete MAVLink C implemenation'''
+    '''generate complete MAVLink Java implemenation'''
 
     for xml in xml_list:
         generate_one(basename, xml)
-    copy_fixed_headers(basename, xml_list[0])
-    copy_fixed_sources(basename, xml_list[0])
+    #copy_fixed_headers(basename, xml_list[0])
+    #copy_fixed_sources(basename, xml_list[0])
