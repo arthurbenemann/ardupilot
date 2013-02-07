@@ -120,7 +120,11 @@ public class MAVLink {
 
 		}
 
-		return m;
+		if (msg_received) {
+			return m;			
+		}else {
+			return null;
+		}
 	}
 
 }

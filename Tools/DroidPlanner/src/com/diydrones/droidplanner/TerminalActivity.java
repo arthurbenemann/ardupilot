@@ -9,6 +9,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 import com.MAVLink.MAVLink;
+import com.MAVLink.Messages.MAVLinkMessage;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
@@ -132,12 +133,15 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 				Log.e("TCP Client", "C: Done.");
 				// receive the message which the server sends back
 				in = socket.getInputStream();
+				int cnt = 0;
+				MAVLinkMessage m;
 				while (true) {
 					int data;
 					if((data = in.read())>=0){
-						
-						if (parser.mavlink_parse_char(data)!=null) {
-							publishProgress("-\n");
+						m = parser.mavlink_parse_char(data);
+						if (m!=null) {
+							cnt++;
+							publishProgress("Received "+cnt+" packets\nLast packet was: "+m.msgid);
 						}
 					}
 				}
@@ -159,7 +163,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		protected void onProgressUpdate(String... values) {
 			super.onProgressUpdate(values);
 			//Log.d("TCP IN", "Update:" + values[0]);
-			terminal.append(values[0]);
+			terminal.setText(values[0]);
 		}
 
 		@Override
