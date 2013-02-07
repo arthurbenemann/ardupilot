@@ -180,94 +180,86 @@ ${{ordered_fields:	//${decode_left} = _get_${name}(msg${decode_right});
     f.close()
 
 
-def generate_testsuite_h(directory, xml):
-    '''generate testsuite.h per XML file'''
-    f = open(os.path.join(directory, "testsuite.h"), mode='w')
+def generate_MAVLinkMessage(directory, xml):
+    f = open(os.path.join(directory, "MAVLinkMessage.Java"), mode='w')
     t.write(f, '''
-/** @file
- *	@brief MAVLink comm protocol testsuite generated from ${basename}.xml
- *	@see http://qgroundcontrol.org/mavlink/
- */
-#ifndef ${basename_upper}_TESTSUITE_H
-#define ${basename_upper}_TESTSUITE_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+package com.MAVLink.Messages;
 
-#ifndef MAVLINK_TEST_ALL
-#define MAVLINK_TEST_ALL
-${{include_list:static void mavlink_test_${base}(uint8_t, uint8_t, mavlink_message_t *last_msg);
+import java.util.List;
+import android.util.Log;
+${{message:import com.MAVLink.Messages.ardupilotmega.msg_${name_lower};
 }}
-static void mavlink_test_${basename}(uint8_t, uint8_t, mavlink_message_t *last_msg);
 
-static void mavlink_test_all(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
-{
-${{include_list:	mavlink_test_${base}(system_id, component_id, last_msg);
+public class MAVLinkMessage {
+	/**
+	 *  Simply a common interface for all MAVLink Messages
+	 */
+	
+	public int messageType = -1;	
+	public int seq;
+	public int len;
+	public  int sysid;
+	public int compid;
+	public int msgid;
+	public List<Integer> payload;	
+	public CRC crc;	
+	
+	/*
+	private Integer getInt64(int i){
+		return payload.get(i) << 32  | (payload.get(i+4) & 0xFFFFFFFF);
+	}*/
+	
+	public static Integer getInt32(int i,List<Integer> payload){
+		 return payload.get(i+3) << 24 | (payload.get(i+2) & 0xFF) << 16 | payload.get(i+1) & 0xFF << 8 | (payload.get(i) & 0xFF);
+	}	
+
+	public static Integer getInt8(int i,List<Integer> payload){
+		 return payload.get(i);
+	}
+
+	public static float getFloat(int i,List<Integer> payload) {
+		return Float.intBitsToFloat(getInt32(i,payload));
+	}
+	
+	public void generateCRC(){
+		crc = new CRC();
+		crc.update_checksum(len);
+		crc.update_checksum(seq);
+		crc.update_checksum(sysid);
+		crc.update_checksum(compid);
+		crc.update_checksum(msgid);
+		for (Integer data : payload) {
+			crc.update_checksum(data);			
+		}
+		crc.finish_checksum(msgid);
+	}
+	
+	public boolean payloadIsFilled() {
+		return (payload.size() == len);
+	}
+	
+	public MAVLinkMessage unpackMessage() {
+		switch (msgid) {
+${{message:		case msg_${name_lower}.MAVLINK_MSG_ID_${name}:
+			Log.d("MAVLink", "${name}");
+			return msg_${name_lower}.unpack(payload);
 }}
-	mavlink_test_${basename}(system_id, component_id, last_msg);
+		default:
+			Log.d("MAVLink", "UNKNOW MESSAGE - " + msgid);
+			return null;
+		}
+	}
+
+	/*
+	 * private MAVLinkMessage unpackGPS_RAW() { msg_gps_raw m = new
+	 * msg_gps_raw(); m.usec = getInt64(0); m.fix_type = getInt8(8); m.lat =
+	 * getInt32(12); m.lon = getInt32(16); m.alt = getInt32(20); m.eph =
+	 * getInt16(24); m.epv = getInt16(26); m.v = getInt16(28); m. =
+	 * getInt16(28); return m; }
+	 */
 }
-#endif
-
-${{include_list:#include "../${base}/testsuite.h"
-}}
-
-${{message:
-static void mavlink_test_${name_lower}(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
-{
-	mavlink_message_t msg;
-        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
-        uint16_t i;
-	mavlink_${name_lower}_t packet_in = {
-		${{ordered_fields:${c_test_value},
-	}}};
-	mavlink_${name_lower}_t packet1, packet2;
-        memset(&packet1, 0, sizeof(packet1));
-        ${{scalar_fields:	packet1.${name} = packet_in.${name};
-        }}
-        ${{array_fields:	mav_array_memcpy(packet1.${name}, packet_in.${name}, sizeof(${type})*${array_length});
-        }}
-
-        memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_${name_lower}_encode(system_id, component_id, &msg, &packet1);
-	mavlink_msg_${name_lower}_decode(&msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-
-        memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_${name_lower}_pack(system_id, component_id, &msg ${{arg_fields:, packet1.${name} }});
-	mavlink_msg_${name_lower}_decode(&msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-
-        memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_${name_lower}_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg ${{arg_fields:, packet1.${name} }});
-	mavlink_msg_${name_lower}_decode(&msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-
-        memset(&packet2, 0, sizeof(packet2));
-        mavlink_msg_to_send_buffer(buffer, &msg);
-        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
-        	comm_send_ch(MAVLINK_COMM_0, buffer[i]);
-        }
-	mavlink_msg_${name_lower}_decode(last_msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-        
-        memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_${name_lower}_send(MAVLINK_COMM_1 ${{arg_fields:, packet1.${name} }});
-	mavlink_msg_${name_lower}_decode(last_msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-}
-}}
-
-static void mavlink_test_${basename}(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
-{
-${{message:	mavlink_test_${name_lower}(system_id, component_id, last_msg);
-}}
-}
-
-#ifdef __cplusplus
-}
-#endif // __cplusplus
-#endif // ${basename_upper}_TESTSUITE_H
+	
 ''', xml)
 
     f.close()
@@ -466,7 +458,7 @@ def generate_one(basename, xml):
     #generate_main_h(directory, xml)
     for m in xml.message:
         generate_message_h(directory, m)
-    #generate_testsuite_h(directory, xml)
+    generate_MAVLinkMessage(basename, xml)
 
 
 def generate(basename, xml_list):
