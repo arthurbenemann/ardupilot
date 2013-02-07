@@ -1,4 +1,4 @@
-package com.diydrones.droidplanner;
+package com.MAVLink.Messages;
 
 /**
  * X.25 CRC calculation for MAVlink messages. The checksum must be initialized,
@@ -6,7 +6,7 @@ package com.diydrones.droidplanner;
  * id.
  * 
  */
-class CRC {
+public class CRC {
 	private final int[] MAVLINK_MESSAGE_CRCS = { 50, 124, 137, 0, 237,
 			217, 104, 119, 0, 0, 0, 89, 0, 0, 0, 0, 0, 0, 0, 0, 214, 159, 220,
 			168, 24, 23, 170, 144, 67, 115, 39, 246, 185, 104, 237, 244, 222,

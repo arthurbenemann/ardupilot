@@ -17,36 +17,8 @@ public class MAVLink {
 	 * complete packet once it could be successfully decoded. Checksum and other
 	 * failures will be silently ignored.
 	 * 
-	 * @param chan
-	 *            ID of the current channel. This allows to parse different
-	 *            channels with this function. a channel is not a physical
-	 *            message channel like a serial port, but a logic partition of
-	 *            the communication streams in this case. COMM_NB is the limit
-	 *            for the number of channels on MCU (e.g. ARM7), while
-	 *            COMM_NB_HIGH is the limit for the number of channels in
-	 *            Linux/Windows
 	 * @param c
-	 *            The char to barse
-	 * 
-	 * @param returnMsg
-	 *            NULL if no message could be decoded, the message data else
-	 * @return 0 if no message could be decoded, 1 else
-	 * 
-	 *         A typical use scenario of this function call is:
-	 * 
-	 * @code #include <inttypes.h> // For fixed-width uint8_t type
-	 * 
-	 *       mavlink_message_t msg; int chan = 0;
-	 * 
-	 * 
-	 *       while(serial.bytesAvailable > 0) { uint8_t byte =
-	 *       serial.getNextByte(); if (mavlink_parse_char(chan, byte, &msg)) {
-	 *       printf(
-	 *       "Received message with ID %d, sequence: %d from component %d of system %d"
-	 *       , msg.msgid, msg.seq, msg.compid, msg.sysid); } }
-	 * 
-	 * 
-	 * @endcode
+	 *            The char to parse	
 	 */
 
 	enum MAV_states {
@@ -57,31 +29,19 @@ public class MAVLink {
 
 	static boolean msg_received;
 
-	private static int seq;
-
-	private static int len;
-
-	private static int sysid;
-
-	private static int compid;
-
-	private static int msgid;
-
-	private static List<Integer> payload;
-
 	private static int MAVLINK_STX = 254;
-	
-	private CRC crc;
+
+	private MAVLinkMessage m;
 
 	public MAVLinkMessage mavlink_parse_char(int c) {
 		msg_received = false;
-		MAVLinkMessage m = null;
 
 		switch (state) {
 		case MAVLINK_PARSE_STATE_UNINIT:
 		case MAVLINK_PARSE_STATE_IDLE:
 			if (c == MAVLINK_STX) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_STX;
+				m = new MAVLinkMessage();
 			}
 			break;
 
@@ -92,30 +52,30 @@ public class MAVLink {
 			} else {
 				// NOT counting STX, LENGTH, SEQ, SYSID, COMPID, MSGID, CRC1 and
 				// CRC2
-				len = c;
-				payload = new ArrayList<Integer>();
+				m.len = c;
+				m.payload = new ArrayList<Integer>();
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_LENGTH;
 			}
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_LENGTH:
-			seq = c;
+			m.seq = c;
 			state = MAV_states.MAVLINK_PARSE_STATE_GOT_SEQ;
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_SEQ:
-			sysid = c;
+			m.sysid = c;
 			state = MAV_states.MAVLINK_PARSE_STATE_GOT_SYSID;
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_SYSID:
-			compid = c;
+			m.compid = c;
 			state = MAV_states.MAVLINK_PARSE_STATE_GOT_COMPID;
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_COMPID:
-			msgid = c;
-			if (len == 0) {
+			m.msgid = c;
+			if (m.len == 0) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_PAYLOAD;
 			} else {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_MSGID;
@@ -123,21 +83,21 @@ public class MAVLink {
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_MSGID:
-			payload.add(c);
-			if (payload.size() == len) {
+			m.payload.add(c);
+			if (m.payload.size() == m.len) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_PAYLOAD;
 			}
 			break;
 
 		case MAVLINK_PARSE_STATE_GOT_PAYLOAD:
-			generateCRC();
+			m.generateCRC();
 			// Check first checksum byte
-			if (c != crc.getLSB()) {
+			if (c != m.crc.getLSB()) {
 				msg_received = false;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
 				if (c == MAVLINK_STX) {
 					state = MAV_states.MAVLINK_PARSE_STATE_GOT_STX;
-					crc.start_checksum();
+					m.crc.start_checksum();
 				}
 			} else {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_CRC1;
@@ -146,16 +106,16 @@ public class MAVLink {
 
 		case MAVLINK_PARSE_STATE_GOT_CRC1:
 			// Check second checksum byte
-			if (c != crc.getMSB()) {
+			if (c != m.crc.getMSB()) {
 				msg_received = false;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
 				if (c == MAVLINK_STX) {
 					state = MAV_states.MAVLINK_PARSE_STATE_GOT_STX;
-					crc.start_checksum();
+					m.crc.start_checksum();
 				}
 			} else { // Successfully received the message
 				try {
-					m = unpackMessage(payload);
+					m = unpackMessage(m.payload);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -172,7 +132,7 @@ public class MAVLink {
 	}
 
 	private MAVLinkMessage unpackMessage(List<Integer> payload) {
-		switch (msgid) {
+		switch (m.msgid) {
 		case msg_heartbeat.MAVLINK_MSG_ID_HEARTBEAT:
 			Log.d("MAVLink", "HEARTBEAT");
 			return msg_heartbeat.unpack(payload);
@@ -193,23 +153,11 @@ public class MAVLink {
 			 * Log.d("MAVLink", "VRF_HUD"); break;
 			 */
 		default:
-			Log.d("MAVLink", "UNKNOW MESSAGE - " + msgid);
+			Log.d("MAVLink", "UNKNOW MESSAGE - " + m.msgid);
 			return null;
 		}
 	}
 
-	private void generateCRC(){
-		crc = new CRC();
-		crc.update_checksum(len);
-		crc.update_checksum(seq);
-		crc.update_checksum(sysid);
-		crc.update_checksum(compid);
-		crc.update_checksum(msgid);
-		for (Integer data : payload) {
-			crc.update_checksum(data);			
-		}
-		crc.finish_checksum(msgid);
-	}
 	/*
 	 * private MAVLinkMessage unpackGPS_RAW() { msg_gps_raw m = new
 	 * msg_gps_raw(); m.usec = getInt64(0); m.fix_type = getInt8(8); m.lat =
@@ -218,4 +166,3 @@ public class MAVLink {
 	 * getInt16(28); return m; }
 	 */
 }
-
