@@ -2,8 +2,28 @@
 package com.MAVLink.Messages;
 
 import java.util.List;
-import android.util.Log;
-import com.MAVLink.Messages.ardupilotmega.msg_heartbeat;
+import android.util.Log;import com.MAVLink.Messages.ardupilotmega.msg_sensor_offsets;
+import com.MAVLink.Messages.ardupilotmega.msg_set_mag_offsets;
+import com.MAVLink.Messages.ardupilotmega.msg_meminfo;
+import com.MAVLink.Messages.ardupilotmega.msg_ap_adc;
+import com.MAVLink.Messages.ardupilotmega.msg_digicam_configure;
+import com.MAVLink.Messages.ardupilotmega.msg_digicam_control;
+import com.MAVLink.Messages.ardupilotmega.msg_mount_configure;
+import com.MAVLink.Messages.ardupilotmega.msg_mount_control;
+import com.MAVLink.Messages.ardupilotmega.msg_mount_status;
+import com.MAVLink.Messages.ardupilotmega.msg_fence_point;
+import com.MAVLink.Messages.ardupilotmega.msg_fence_fetch_point;
+import com.MAVLink.Messages.ardupilotmega.msg_fence_status;
+import com.MAVLink.Messages.ardupilotmega.msg_ahrs;
+import com.MAVLink.Messages.ardupilotmega.msg_simstate;
+import com.MAVLink.Messages.ardupilotmega.msg_hwstatus;
+import com.MAVLink.Messages.ardupilotmega.msg_radio;
+import com.MAVLink.Messages.ardupilotmega.msg_limits_status;
+import com.MAVLink.Messages.ardupilotmega.msg_wind;
+import com.MAVLink.Messages.ardupilotmega.msg_data16;
+import com.MAVLink.Messages.ardupilotmega.msg_data32;
+import com.MAVLink.Messages.ardupilotmega.msg_data64;
+import com.MAVLink.Messages.ardupilotmega.msg_data96;import com.MAVLink.Messages.ardupilotmega.msg_heartbeat;
 import com.MAVLink.Messages.ardupilotmega.msg_sys_status;
 import com.MAVLink.Messages.ardupilotmega.msg_system_time;
 import com.MAVLink.Messages.ardupilotmega.msg_ping;
@@ -88,7 +108,6 @@ import com.MAVLink.Messages.ardupilotmega.msg_named_value_float;
 import com.MAVLink.Messages.ardupilotmega.msg_named_value_int;
 import com.MAVLink.Messages.ardupilotmega.msg_statustext;
 import com.MAVLink.Messages.ardupilotmega.msg_debug;
-
 public class MAVLinkMessage {
 	/**
 	 *  Simply a common interface for all MAVLink Messages
@@ -138,8 +157,72 @@ public class MAVLinkMessage {
 	}
 	
 	public MAVLinkMessage unpackMessage() {
-		switch (msgid) {
-		case msg_heartbeat.MAVLINK_MSG_ID_HEARTBEAT:
+		switch (msgid) {		case msg_sensor_offsets.MAVLINK_MSG_ID_SENSOR_OFFSETS:
+			Log.d("MAVLink", "SENSOR_OFFSETS");
+			return msg_sensor_offsets.unpack(payload);
+		case msg_set_mag_offsets.MAVLINK_MSG_ID_SET_MAG_OFFSETS:
+			Log.d("MAVLink", "SET_MAG_OFFSETS");
+			return msg_set_mag_offsets.unpack(payload);
+		case msg_meminfo.MAVLINK_MSG_ID_MEMINFO:
+			Log.d("MAVLink", "MEMINFO");
+			return msg_meminfo.unpack(payload);
+		case msg_ap_adc.MAVLINK_MSG_ID_AP_ADC:
+			Log.d("MAVLink", "AP_ADC");
+			return msg_ap_adc.unpack(payload);
+		case msg_digicam_configure.MAVLINK_MSG_ID_DIGICAM_CONFIGURE:
+			Log.d("MAVLink", "DIGICAM_CONFIGURE");
+			return msg_digicam_configure.unpack(payload);
+		case msg_digicam_control.MAVLINK_MSG_ID_DIGICAM_CONTROL:
+			Log.d("MAVLink", "DIGICAM_CONTROL");
+			return msg_digicam_control.unpack(payload);
+		case msg_mount_configure.MAVLINK_MSG_ID_MOUNT_CONFIGURE:
+			Log.d("MAVLink", "MOUNT_CONFIGURE");
+			return msg_mount_configure.unpack(payload);
+		case msg_mount_control.MAVLINK_MSG_ID_MOUNT_CONTROL:
+			Log.d("MAVLink", "MOUNT_CONTROL");
+			return msg_mount_control.unpack(payload);
+		case msg_mount_status.MAVLINK_MSG_ID_MOUNT_STATUS:
+			Log.d("MAVLink", "MOUNT_STATUS");
+			return msg_mount_status.unpack(payload);
+		case msg_fence_point.MAVLINK_MSG_ID_FENCE_POINT:
+			Log.d("MAVLink", "FENCE_POINT");
+			return msg_fence_point.unpack(payload);
+		case msg_fence_fetch_point.MAVLINK_MSG_ID_FENCE_FETCH_POINT:
+			Log.d("MAVLink", "FENCE_FETCH_POINT");
+			return msg_fence_fetch_point.unpack(payload);
+		case msg_fence_status.MAVLINK_MSG_ID_FENCE_STATUS:
+			Log.d("MAVLink", "FENCE_STATUS");
+			return msg_fence_status.unpack(payload);
+		case msg_ahrs.MAVLINK_MSG_ID_AHRS:
+			Log.d("MAVLink", "AHRS");
+			return msg_ahrs.unpack(payload);
+		case msg_simstate.MAVLINK_MSG_ID_SIMSTATE:
+			Log.d("MAVLink", "SIMSTATE");
+			return msg_simstate.unpack(payload);
+		case msg_hwstatus.MAVLINK_MSG_ID_HWSTATUS:
+			Log.d("MAVLink", "HWSTATUS");
+			return msg_hwstatus.unpack(payload);
+		case msg_radio.MAVLINK_MSG_ID_RADIO:
+			Log.d("MAVLink", "RADIO");
+			return msg_radio.unpack(payload);
+		case msg_limits_status.MAVLINK_MSG_ID_LIMITS_STATUS:
+			Log.d("MAVLink", "LIMITS_STATUS");
+			return msg_limits_status.unpack(payload);
+		case msg_wind.MAVLINK_MSG_ID_WIND:
+			Log.d("MAVLink", "WIND");
+			return msg_wind.unpack(payload);
+		case msg_data16.MAVLINK_MSG_ID_DATA16:
+			Log.d("MAVLink", "DATA16");
+			return msg_data16.unpack(payload);
+		case msg_data32.MAVLINK_MSG_ID_DATA32:
+			Log.d("MAVLink", "DATA32");
+			return msg_data32.unpack(payload);
+		case msg_data64.MAVLINK_MSG_ID_DATA64:
+			Log.d("MAVLink", "DATA64");
+			return msg_data64.unpack(payload);
+		case msg_data96.MAVLINK_MSG_ID_DATA96:
+			Log.d("MAVLink", "DATA96");
+			return msg_data96.unpack(payload);		case msg_heartbeat.MAVLINK_MSG_ID_HEARTBEAT:
 			Log.d("MAVLink", "HEARTBEAT");
 			return msg_heartbeat.unpack(payload);
 		case msg_sys_status.MAVLINK_MSG_ID_SYS_STATUS:

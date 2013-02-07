@@ -180,17 +180,18 @@ ${{ordered_fields:	//${decode_left} = _get_${name}(msg${decode_right});
     f.close()
 
 
-def generate_MAVLinkMessage(directory, xml):
+def generate_MAVLinkMessage(directory, xml_list):
     f = open(os.path.join(directory, "MAVLinkMessage.Java"), mode='w')
-    t.write(f, '''
-
+    f.write('''
 package com.MAVLink.Messages;
 
 import java.util.List;
-import android.util.Log;
+import android.util.Log;''')
+    for xml in xml_list:
+        t.write(f, '''
 ${{message:import com.MAVLink.Messages.ardupilotmega.msg_${name_lower};
-}}
-
+}}''',xml)
+    f.write('''
 public class MAVLinkMessage {
 	/**
 	 *  Simply a common interface for all MAVLink Messages
@@ -240,11 +241,14 @@ public class MAVLinkMessage {
 	}
 	
 	public MAVLinkMessage unpackMessage() {
-		switch (msgid) {
+		switch (msgid) {''')
+    for xml in xml_list:
+        t.write(f, '''
 ${{message:		case msg_${name_lower}.MAVLINK_MSG_ID_${name}:
 			Log.d("MAVLink", "${name}");
 			return msg_${name_lower}.unpack(payload);
-}}
+}}''',xml)
+    f.write('''
 		default:
 			Log.d("MAVLink", "UNKNOW MESSAGE - " + msgid);
 			return null;
@@ -260,7 +264,7 @@ ${{message:		case msg_${name_lower}.MAVLINK_MSG_ID_${name}:
 	 */
 }
 	
-''', xml)
+''')
 
     f.close()
 
@@ -458,7 +462,6 @@ def generate_one(basename, xml):
     #generate_main_h(directory, xml)
     for m in xml.message:
         generate_message_h(directory, m)
-    generate_MAVLinkMessage(basename, xml)
 
 
 def generate(basename, xml_list):
@@ -466,5 +469,6 @@ def generate(basename, xml_list):
 
     for xml in xml_list:
         generate_one(basename, xml)
+    generate_MAVLinkMessage(basename, xml_list)
     #copy_fixed_headers(basename, xml_list[0])
     #copy_fixed_sources(basename, xml_list[0])
