@@ -1,4 +1,4 @@
-package com.diydrones.droidplanner;
+package com.MAVLink;
 
 import java.util.ArrayList;
 import java.util.List;
