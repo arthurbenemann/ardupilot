@@ -201,7 +201,10 @@ public class MAVLinkMessage {
 	public int msgid;
 	public MAVLinkPayload payload;	
 	public CRC crc;	
-	
+
+	public MAVLinkMessage(){
+		payload = new MAVLinkPayload();
+	}
 	public void generateCRC(){
 		crc = new CRC();
 		crc.update_checksum(len);
