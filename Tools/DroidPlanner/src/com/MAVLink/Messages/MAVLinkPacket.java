@@ -223,8 +223,6 @@ public class MAVLinkPacket{
 			return  new msg_vicon_position_estimate(payload);
 		case msg_highres_imu.MAVLINK_MSG_ID_HIGHRES_IMU:
 			return  new msg_highres_imu(payload);
-		case msg_omnidirectional_flow.MAVLINK_MSG_ID_OMNIDIRECTIONAL_FLOW:
-			return  new msg_omnidirectional_flow(payload);
 		case msg_file_transfer_start.MAVLINK_MSG_ID_FILE_TRANSFER_START:
 			return  new msg_file_transfer_start(payload);
 		case msg_file_transfer_dir_list.MAVLINK_MSG_ID_FILE_TRANSFER_DIR_LIST:

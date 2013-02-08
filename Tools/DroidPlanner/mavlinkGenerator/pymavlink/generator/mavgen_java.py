@@ -64,76 +64,80 @@ def generate_mavlink_h(directory, xml):
 ''', xml)
     f.close()
 
-def generate_main_h(directory, xml):
-    '''generate main header per XML file'''
-    f = open(os.path.join(directory, xml.basename + ".h"), mode='w')
-    t.write(f, '''
-/** @file
- *	@brief MAVLink comm protocol generated from ${basename}.xml
- *	@see http://qgroundcontrol.org/mavlink/
+def generate_CRC(directory, xml):
+    # and message CRCs array
+    xml.message_crcs_array = ''
+    for crc in xml.message_crcs:
+        xml.message_crcs_array += '%u, ' % crc
+    xml.message_crcs_array = xml.message_crcs_array[:-2]
+    
+    f = open(os.path.join(directory, "CRC.java"), mode='w')
+    t.write(f,'''
+ package com.MAVLink.Messages;
+
+/**
+ * X.25 CRC calculation for MAVlink messages. The checksum must be initialized,
+ * updated with witch field of the message, and then finished with the message
+ * id.
+ * 
  */
-#ifndef ${basename_upper}_H
-#define ${basename_upper}_H
+public class CRC {
+	private final int[] MAVLINK_MESSAGE_CRCS = {${message_crcs_array}};
+	private static final int CRC_INIT_VALUE = 0xffff;
+	private int CRCvalue;	
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+	/**
+	 * Accumulate the X.25 CRC by adding one char at a time.
+	 * 
+	 * The checksum function adds the hash of one char at a time to the 16 bit
+	 * checksum (uint16_t).
+	 * 
+	 * @param data
+	 *            new char to hash
+	 * @param crcAccum
+	 *            the already accumulated checksum
+	 **/
+	public  void update_checksum(int data) {
+		int tmp;
+		tmp = data ^ (CRCvalue & 0xff);
+		tmp ^= (tmp << 4) & 0xff;
+		CRCvalue = ((CRCvalue >> 8) & 0xff) ^ (tmp << 8) ^ (tmp << 3)
+				^ ((tmp >> 4) & 0xf);
+	}
 
-// MESSAGE LENGTHS AND CRCS
+	/**
+	 * Finish the CRC calculation of a message, by running the CRC with the
+	 * Magic Byte. This Magic byte has been defined in MAVlink v1.0.
+	 * 
+	 * @param msgid
+	 *            The message id number
+	 */
+	public  void finish_checksum(int msgid) {
+		update_checksum(MAVLINK_MESSAGE_CRCS[msgid]);
+	}
 
-#ifndef MAVLINK_MESSAGE_LENGTHS
-#define MAVLINK_MESSAGE_LENGTHS {${message_lengths_array}}
-#endif
+	/**
+	 * Initialize the buffer for the X.25 CRC
+	 * 
+	 */
+	public void start_checksum() {
+		CRCvalue = CRC_INIT_VALUE;
+	}
 
-#ifndef MAVLINK_MESSAGE_CRCS
-#define MAVLINK_MESSAGE_CRCS {${message_crcs_array}}
-#endif
+	public int getMSB() {
+		return ((CRCvalue >> 8) & 0xff);
+	}
 
-#ifndef MAVLINK_MESSAGE_INFO
-#define MAVLINK_MESSAGE_INFO {${message_info_array}}
-#endif
+	public int getLSB() {
+		return (CRCvalue & 0xff);
+	}
 
-#include "../protocol.h"
+	public CRC() {
+		start_checksum();
+	}
 
-#define MAVLINK_ENABLED_${basename_upper}
-
-// ENUM DEFINITIONS
-
-${{enum:
-/** @brief ${description} */
-#ifndef HAVE_ENUM_${name}
-#define HAVE_ENUM_${name}
-enum ${name}
-{
-${{entry:	${name}=${value}, /* ${description} |${{param:${description}| }} */
-}}
-};
-#endif
-}}
-
-${{include_list:#include "../${base}/${base}.h"
-}}
-
-// MAVLINK VERSION
-
-#ifndef MAVLINK_VERSION
-#define MAVLINK_VERSION ${version}
-#endif
-
-#if (MAVLINK_VERSION == 0)
-#undef MAVLINK_VERSION
-#define MAVLINK_VERSION ${version}
-#endif
-
-// MESSAGE DEFINITIONS
-${{message:#include "./mavlink_msg_${name_lower}.h"
-}}
-
-#ifdef __cplusplus
 }
-#endif // __cplusplus
-#endif // ${basename_upper}_H
-''', xml)
+''',xml)
 
     f.close()
              
@@ -205,7 +209,7 @@ public class MAVLinkPacket{
 	}
 	
 	public boolean payloadIsFilled() {
-		return (MAVLinkPayload.size() == len);
+		return (payload.size() == len);
 	}
 	
 	public void generateCRC(){
@@ -341,11 +345,7 @@ def generate_one(basename, xml):
         xml.message_lengths_array += '%u, ' % mlen
     xml.message_lengths_array = xml.message_lengths_array[:-2]
 
-    # and message CRCs array
-    xml.message_crcs_array = ''
-    for crc in xml.message_crcs:
-        xml.message_crcs_array += '%u, ' % crc
-    xml.message_crcs_array = xml.message_crcs_array[:-2]
+
 
     # form message info array
     xml.message_info_array = ''
@@ -438,7 +438,7 @@ def generate_one(basename, xml):
             
     #generate_mavlink_h(directory, xml)
     #generate_version_h(directory, xml)
-    #generate_main_h(directory, xml)
+    
     for m in xml.message:
         generate_message_h(directory, m)
 
@@ -448,6 +448,8 @@ def generate(basename, xml_list):
 
     for xml in xml_list:
         generate_one(basename, xml)
+        
     generate_MAVLinkMessage(basename, xml_list)
+    generate_CRC(basename, xml_list[0])
     #copy_fixed_headers(basename, xml_list[0])
     #copy_fixed_sources(basename, xml_list[0])
