@@ -64,6 +64,7 @@ public class msg_command_long extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    param1 = payload.getFloat();
 	    param2 = payload.getFloat();
 	    param3 = payload.getFloat();

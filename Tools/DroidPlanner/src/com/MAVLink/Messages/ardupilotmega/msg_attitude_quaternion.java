@@ -52,6 +52,7 @@ public class msg_attitude_quaternion extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_boot_ms = payload.getInt();
 	    q1 = payload.getFloat();
 	    q2 = payload.getFloat();

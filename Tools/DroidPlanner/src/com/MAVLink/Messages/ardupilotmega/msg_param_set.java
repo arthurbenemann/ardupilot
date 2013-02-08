@@ -40,6 +40,7 @@ public class msg_param_set extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    param_value = payload.getFloat();
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();

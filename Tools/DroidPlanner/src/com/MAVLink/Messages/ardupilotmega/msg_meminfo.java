@@ -28,6 +28,7 @@ public class msg_meminfo extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    brkval = payload.getShort();
 	    freemem = payload.getShort();    
     }

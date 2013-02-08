@@ -32,6 +32,7 @@ public class msg_data32 extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    type = payload.getByte();
 	    len = payload.getByte();
 	     for (int i = 0; i < data.length; i++) {

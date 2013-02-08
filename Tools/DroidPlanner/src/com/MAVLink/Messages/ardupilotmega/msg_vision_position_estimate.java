@@ -48,6 +48,7 @@ public class msg_vision_position_estimate extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    usec = payload.getLong();
 	    x = payload.getFloat();
 	    y = payload.getFloat();

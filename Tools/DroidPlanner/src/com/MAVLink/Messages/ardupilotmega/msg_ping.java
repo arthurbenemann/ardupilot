@@ -36,6 +36,7 @@ public class msg_ping extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_usec = payload.getLong();
 	    seq = payload.getInt();
 	    target_system = payload.getByte();

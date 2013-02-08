@@ -44,6 +44,7 @@ public class msg_vfr_hud extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    airspeed = payload.getFloat();
 	    groundspeed = payload.getFloat();
 	    alt = payload.getFloat();

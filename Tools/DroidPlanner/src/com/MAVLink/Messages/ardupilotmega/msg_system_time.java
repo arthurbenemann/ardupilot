@@ -28,6 +28,7 @@ public class msg_system_time extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_unix_usec = payload.getLong();
 	    time_boot_ms = payload.getInt();    
     }

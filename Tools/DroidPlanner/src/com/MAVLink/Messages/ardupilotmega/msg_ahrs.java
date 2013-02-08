@@ -48,6 +48,7 @@ public class msg_ahrs extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    omegaIx = payload.getFloat();
 	    omegaIy = payload.getFloat();
 	    omegaIz = payload.getFloat();

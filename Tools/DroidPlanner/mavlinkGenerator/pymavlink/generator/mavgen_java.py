@@ -173,6 +173,7 @@ ${{ordered_fields: 	/**
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 ${{ordered_fields:	    ${unpackField}
 }}    
     }
@@ -219,8 +220,9 @@ public class MAVLinkPacket{
 		crc.update_checksum(sysid);
 		crc.update_checksum(compid);
 		crc.update_checksum(msgid);
-		for (Byte data : MAVLinkPayload.getData()) {
-			crc.update_checksum(data);			
+		payload.resetIndex();
+		for (int i = 0; i < payload.size(); i++) {
+			crc.update_checksum(payload.getByte());
 		}
 		crc.finish_checksum(msgid);
     }

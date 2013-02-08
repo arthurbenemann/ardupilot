@@ -60,6 +60,7 @@ public class msg_raw_imu extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_usec = payload.getLong();
 	    xacc = payload.getShort();
 	    yacc = payload.getShort();

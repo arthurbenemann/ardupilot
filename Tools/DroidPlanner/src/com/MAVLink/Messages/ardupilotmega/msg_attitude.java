@@ -48,6 +48,7 @@ public class msg_attitude extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_boot_ms = payload.getInt();
 	    roll = payload.getFloat();
 	    pitch = payload.getFloat();

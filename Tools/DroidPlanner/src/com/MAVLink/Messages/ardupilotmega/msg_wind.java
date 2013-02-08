@@ -32,6 +32,7 @@ public class msg_wind extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    direction = payload.getFloat();
 	    speed = payload.getFloat();
 	    speed_z = payload.getFloat();    

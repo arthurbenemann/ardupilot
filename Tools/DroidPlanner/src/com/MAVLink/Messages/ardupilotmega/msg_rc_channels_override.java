@@ -60,6 +60,7 @@ public class msg_rc_channels_override extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    chan1_raw = payload.getShort();
 	    chan2_raw = payload.getShort();
 	    chan3_raw = payload.getShort();

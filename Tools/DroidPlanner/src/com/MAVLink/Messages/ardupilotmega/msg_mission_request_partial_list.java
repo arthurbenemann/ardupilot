@@ -36,6 +36,7 @@ public class msg_mission_request_partial_list extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    start_index = payload.getShort();
 	    end_index = payload.getShort();
 	    target_system = payload.getByte();

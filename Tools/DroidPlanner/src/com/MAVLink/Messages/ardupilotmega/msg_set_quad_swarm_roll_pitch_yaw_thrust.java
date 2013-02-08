@@ -44,6 +44,7 @@ public class msg_set_quad_swarm_roll_pitch_yaw_thrust extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	     for (int i = 0; i < roll.length; i++) {
 			roll[i] = payload.getShort();
 		}

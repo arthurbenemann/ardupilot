@@ -48,6 +48,7 @@ public class msg_radio extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    rxerrors = payload.getShort();
 	    fixed = payload.getShort();
 	    rssi = payload.getByte();

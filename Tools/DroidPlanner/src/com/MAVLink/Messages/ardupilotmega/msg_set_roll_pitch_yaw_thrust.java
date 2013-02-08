@@ -44,6 +44,7 @@ public class msg_set_roll_pitch_yaw_thrust extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    roll = payload.getFloat();
 	    pitch = payload.getFloat();
 	    yaw = payload.getFloat();

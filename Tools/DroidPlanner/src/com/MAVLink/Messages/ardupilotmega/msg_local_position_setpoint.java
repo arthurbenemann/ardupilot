@@ -40,6 +40,7 @@ public class msg_local_position_setpoint extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    x = payload.getFloat();
 	    y = payload.getFloat();
 	    z = payload.getFloat();

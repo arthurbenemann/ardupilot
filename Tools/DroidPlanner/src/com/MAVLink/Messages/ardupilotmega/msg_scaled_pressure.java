@@ -36,6 +36,7 @@ public class msg_scaled_pressure extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_boot_ms = payload.getInt();
 	    press_abs = payload.getFloat();
 	    press_diff = payload.getFloat();

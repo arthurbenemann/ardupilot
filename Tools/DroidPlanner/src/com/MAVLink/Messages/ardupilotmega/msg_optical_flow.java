@@ -52,6 +52,7 @@ public class msg_optical_flow extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_usec = payload.getLong();
 	    flow_comp_m_x = payload.getFloat();
 	    flow_comp_m_y = payload.getFloat();

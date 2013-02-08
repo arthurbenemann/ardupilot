@@ -52,6 +52,7 @@ public class msg_nav_controller_output extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    nav_roll = payload.getFloat();
 	    nav_pitch = payload.getFloat();
 	    alt_error = payload.getFloat();

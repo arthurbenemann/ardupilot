@@ -40,6 +40,7 @@ public class msg_debug_vect extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_usec = payload.getLong();
 	    x = payload.getFloat();
 	    y = payload.getFloat();

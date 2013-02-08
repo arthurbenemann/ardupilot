@@ -40,6 +40,7 @@ public class msg_raw_pressure extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_usec = payload.getLong();
 	    press_abs = payload.getShort();
 	    press_diff1 = payload.getShort();

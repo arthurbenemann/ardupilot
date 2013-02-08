@@ -30,7 +30,7 @@ public class MAVLinkPacket{
 		crc.update_checksum(msgid);
 		payload.resetIndex();
 		for (int i = 0; i < payload.size(); i++) {
-			crc.update_checksum(payload.getByte());			
+			crc.update_checksum(payload.getByte());
 		}
 		crc.finish_checksum(msgid);
     }

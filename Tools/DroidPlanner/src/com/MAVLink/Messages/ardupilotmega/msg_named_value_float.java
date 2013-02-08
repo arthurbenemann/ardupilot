@@ -32,6 +32,7 @@ public class msg_named_value_float extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_boot_ms = payload.getInt();
 	    value = payload.getFloat();
 	     for (int i = 0; i < name.length; i++) {

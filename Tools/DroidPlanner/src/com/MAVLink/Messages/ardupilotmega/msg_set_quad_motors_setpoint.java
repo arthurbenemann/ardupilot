@@ -40,6 +40,7 @@ public class msg_set_quad_motors_setpoint extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    motor_front_nw = payload.getShort();
 	    motor_right_ne = payload.getShort();
 	    motor_back_se = payload.getShort();

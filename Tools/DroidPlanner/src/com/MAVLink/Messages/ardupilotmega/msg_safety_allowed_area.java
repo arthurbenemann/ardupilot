@@ -48,6 +48,7 @@ public class msg_safety_allowed_area extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    p1x = payload.getFloat();
 	    p1y = payload.getFloat();
 	    p1z = payload.getFloat();

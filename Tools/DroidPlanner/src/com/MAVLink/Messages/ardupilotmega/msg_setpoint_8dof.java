@@ -56,6 +56,7 @@ public class msg_setpoint_8dof extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    val1 = payload.getFloat();
 	    val2 = payload.getFloat();
 	    val3 = payload.getFloat();

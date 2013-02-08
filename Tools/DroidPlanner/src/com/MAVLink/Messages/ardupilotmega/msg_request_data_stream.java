@@ -40,6 +40,7 @@ public class msg_request_data_stream extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    req_message_rate = payload.getShort();
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();

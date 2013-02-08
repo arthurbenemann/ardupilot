@@ -60,6 +60,7 @@ public class msg_servo_output_raw extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_usec = payload.getInt();
 	    servo1_raw = payload.getShort();
 	    servo2_raw = payload.getShort();

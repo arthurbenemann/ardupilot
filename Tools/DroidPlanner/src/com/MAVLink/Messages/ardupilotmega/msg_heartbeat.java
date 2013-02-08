@@ -44,6 +44,7 @@ public class msg_heartbeat extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    custom_mode = payload.getInt();
 	    type = payload.getByte();
 	    autopilot = payload.getByte();

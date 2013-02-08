@@ -64,6 +64,7 @@ public class msg_hil_controls extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_usec = payload.getLong();
 	    roll_ailerons = payload.getFloat();
 	    pitch_elevator = payload.getFloat();

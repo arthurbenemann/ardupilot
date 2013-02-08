@@ -56,6 +56,7 @@ public class msg_battery_status extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    voltage_cell_1 = payload.getShort();
 	    voltage_cell_2 = payload.getShort();
 	    voltage_cell_3 = payload.getShort();

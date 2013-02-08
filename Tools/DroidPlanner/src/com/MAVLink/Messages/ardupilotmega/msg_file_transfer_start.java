@@ -40,6 +40,7 @@ public class msg_file_transfer_start extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    transfer_uid = payload.getLong();
 	    file_size = payload.getInt();
 	     for (int i = 0; i < dest_path.length; i++) {

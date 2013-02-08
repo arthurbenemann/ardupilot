@@ -45,6 +45,7 @@ public class msg_fence_point extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    lat = payload.getFloat();
 	    lng = payload.getFloat();
 	    target_system = payload.getByte();

@@ -40,6 +40,7 @@ public class msg_set_global_position_setpoint_int extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    latitude = payload.getInt();
 	    longitude = payload.getInt();
 	    altitude = payload.getInt();

@@ -24,6 +24,7 @@ public class msg_mission_current extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    seq = payload.getShort();    
     }
 

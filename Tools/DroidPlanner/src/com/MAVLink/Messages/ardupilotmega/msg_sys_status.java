@@ -72,6 +72,7 @@ public class msg_sys_status extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    onboard_control_sensors_present = payload.getInt();
 	    onboard_control_sensors_enabled = payload.getInt();
 	    onboard_control_sensors_health = payload.getInt();

@@ -64,6 +64,7 @@ public class msg_digicam_configure extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    extra_value = payload.getFloat();
 	    shutter_speed = payload.getShort();
 	    target_system = payload.getByte();

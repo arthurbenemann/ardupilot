@@ -57,6 +57,7 @@ public class msg_global_position_int extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_boot_ms = payload.getInt();
 	    lat = payload.getInt();
 	    lon = payload.getInt();

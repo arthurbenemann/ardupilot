@@ -24,6 +24,7 @@ public class msg_auth_key extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	     for (int i = 0; i < key.length; i++) {
 			key[i] = payload.getByte();
 		}    

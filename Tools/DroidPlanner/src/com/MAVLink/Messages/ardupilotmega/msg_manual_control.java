@@ -44,6 +44,7 @@ public class msg_manual_control extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    x = payload.getShort();
 	    y = payload.getShort();
 	    z = payload.getShort();

@@ -57,6 +57,7 @@ public class msg_limits_status extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    last_trigger = payload.getInt();
 	    last_action = payload.getInt();
 	    last_recovery = payload.getInt();

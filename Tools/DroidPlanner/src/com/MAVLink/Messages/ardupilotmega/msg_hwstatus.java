@@ -28,6 +28,7 @@ public class msg_hwstatus extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    Vcc = payload.getShort();
 	    I2Cerr = payload.getByte();    
     }

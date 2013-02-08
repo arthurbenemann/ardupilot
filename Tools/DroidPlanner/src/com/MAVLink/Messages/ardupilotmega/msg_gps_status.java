@@ -44,6 +44,7 @@ public class msg_gps_status extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    satellites_visible = payload.getByte();
 	     for (int i = 0; i < satellite_prn.length; i++) {
 			satellite_prn[i] = payload.getByte();

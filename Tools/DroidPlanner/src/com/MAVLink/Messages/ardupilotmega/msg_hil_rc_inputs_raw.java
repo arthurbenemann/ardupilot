@@ -76,6 +76,7 @@ public class msg_hil_rc_inputs_raw extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_usec = payload.getLong();
 	    chan1_raw = payload.getShort();
 	    chan2_raw = payload.getShort();

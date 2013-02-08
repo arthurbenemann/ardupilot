@@ -40,6 +40,7 @@ public class msg_roll_pitch_yaw_rates_thrust_setpoint extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_boot_ms = payload.getInt();
 	    roll_rate = payload.getFloat();
 	    pitch_rate = payload.getFloat();

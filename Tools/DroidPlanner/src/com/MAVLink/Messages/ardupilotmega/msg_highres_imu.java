@@ -80,6 +80,7 @@ public class msg_highres_imu extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_usec = payload.getLong();
 	    xacc = payload.getFloat();
 	    yacc = payload.getFloat();

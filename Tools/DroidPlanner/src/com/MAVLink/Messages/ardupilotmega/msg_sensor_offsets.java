@@ -69,6 +69,7 @@ public class msg_sensor_offsets extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    mag_declination = payload.getFloat();
 	    raw_press = payload.getInt();
 	    raw_temp = payload.getInt();

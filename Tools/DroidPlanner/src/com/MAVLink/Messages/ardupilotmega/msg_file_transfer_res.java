@@ -28,6 +28,7 @@ public class msg_file_transfer_res extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    transfer_uid = payload.getLong();
 	    result = payload.getByte();    
     }

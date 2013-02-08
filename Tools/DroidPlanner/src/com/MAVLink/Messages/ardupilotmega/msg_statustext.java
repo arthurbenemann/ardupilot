@@ -28,6 +28,7 @@ public class msg_statustext extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    severity = payload.getByte();
 	     for (int i = 0; i < text.length; i++) {
 			text[i] = payload.getByte();

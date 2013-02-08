@@ -32,6 +32,7 @@ public class msg_mission_count extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    count = payload.getShort();
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();    

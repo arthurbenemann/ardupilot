@@ -61,6 +61,7 @@ public class msg_gps_raw_int extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    time_usec = payload.getLong();
 	    lat = payload.getInt();
 	    lon = payload.getInt();

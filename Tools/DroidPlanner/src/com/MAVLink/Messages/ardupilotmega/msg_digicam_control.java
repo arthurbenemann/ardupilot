@@ -60,6 +60,7 @@ public class msg_digicam_control extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    extra_value = payload.getFloat();
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();

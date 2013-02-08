@@ -44,6 +44,7 @@ public class msg_mount_configure extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();
 	    mount_mode = payload.getByte();

@@ -56,6 +56,7 @@ public class msg_state_correction extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    xErr = payload.getFloat();
 	    yErr = payload.getFloat();
 	    zErr = payload.getFloat();

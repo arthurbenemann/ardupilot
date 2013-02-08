@@ -36,6 +36,7 @@ public class msg_change_operator_control extends MAVLinkMessage{
  * @param payload The message to decode
  */
     public void unpack(MAVLinkPayload payload) {
+        payload.resetIndex();
 	    target_system = payload.getByte();
 	    control_request = payload.getByte();
 	    version = payload.getByte();
