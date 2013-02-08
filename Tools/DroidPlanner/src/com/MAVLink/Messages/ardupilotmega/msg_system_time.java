@@ -26,11 +26,9 @@ public class msg_system_time extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_system_time m = new msg_system_time();
-	//m.time_unix_usec = _get_time_unix_usec(msg);
-	//m.time_boot_ms = _get_time_boot_ms(msg);
-    return m;	
-
+public void unpack() {
+	//m.time_unix_usec = payload.getlong();
+	//m.time_boot_ms = payload.getint();
+    
     }
 }

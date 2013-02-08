@@ -30,12 +30,10 @@ public class msg_wind extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_wind m = new msg_wind();
-	//m.direction = _get_direction(msg);
-	//m.speed = _get_speed(msg);
-	//m.speed_z = _get_speed_z(msg);
-    return m;	
-
+public void unpack() {
+	//m.direction = payload.getfloat();
+	//m.speed = payload.getfloat();
+	//m.speed_z = payload.getfloat();
+    
     }
 }

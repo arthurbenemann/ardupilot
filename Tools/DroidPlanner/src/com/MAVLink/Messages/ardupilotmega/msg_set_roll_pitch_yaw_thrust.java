@@ -42,15 +42,13 @@ public class msg_set_roll_pitch_yaw_thrust extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_set_roll_pitch_yaw_thrust m = new msg_set_roll_pitch_yaw_thrust();
-	//m.roll = _get_roll(msg);
-	//m.pitch = _get_pitch(msg);
-	//m.yaw = _get_yaw(msg);
-	//m.thrust = _get_thrust(msg);
-	//m.target_system = _get_target_system(msg);
-	//m.target_component = _get_target_component(msg);
-    return m;	
-
+public void unpack() {
+	//m.roll = payload.getfloat();
+	//m.pitch = payload.getfloat();
+	//m.yaw = payload.getfloat();
+	//m.thrust = payload.getfloat();
+	//m.target_system = payload.getbyte();
+	//m.target_component = payload.getbyte();
+    
     }
 }

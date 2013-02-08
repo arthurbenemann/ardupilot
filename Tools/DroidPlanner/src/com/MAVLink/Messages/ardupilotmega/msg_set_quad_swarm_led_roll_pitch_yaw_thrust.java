@@ -54,18 +54,16 @@ public class msg_set_quad_swarm_led_roll_pitch_yaw_thrust extends MAVLinkMessage
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_set_quad_swarm_led_roll_pitch_yaw_thrust m = new msg_set_quad_swarm_led_roll_pitch_yaw_thrust();
-	// = _get_roll(msgm.roll);
-	// = _get_pitch(msgm.pitch);
-	// = _get_yaw(msgm.yaw);
-	// = _get_thrust(msgm.thrust);
-	//m.group = _get_group(msg);
-	//m.mode = _get_mode(msg);
-	// = _get_led_red(msgm.led_red);
-	// = _get_led_blue(msgm.led_blue);
-	// = _get_led_green(msgm.led_green);
-    return m;	
-
+public void unpack() {
+	// = payload.getshort();
+	// = payload.getshort();
+	// = payload.getshort();
+	// = payload.getshort();
+	//m.group = payload.getbyte();
+	//m.mode = payload.getbyte();
+	// = payload.getbyte();
+	// = payload.getbyte();
+	// = payload.getbyte();
+    
     }
 }

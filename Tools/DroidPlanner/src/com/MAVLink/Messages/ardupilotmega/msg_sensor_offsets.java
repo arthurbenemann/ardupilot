@@ -2,7 +2,6 @@
 package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
-import com.MAVLink.Messages.MAVLinkPayload;
 
 /**
 * Offsets and calibrations values for hardware
@@ -67,21 +66,19 @@ public class msg_sensor_offsets extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_sensor_offsets m = new msg_sensor_offsets();
-	//m.mag_declination = _get_mag_declination(msg);
-	//m.raw_press = _get_raw_press(msg);
-	//m.raw_temp = _get_raw_temp(msg);
-	//m.gyro_cal_x = _get_gyro_cal_x(msg);
-	//m.gyro_cal_y = _get_gyro_cal_y(msg);
-	//m.gyro_cal_z = _get_gyro_cal_z(msg);
-	//m.accel_cal_x = _get_accel_cal_x(msg);
-	//m.accel_cal_y = _get_accel_cal_y(msg);
-	//m.accel_cal_z = _get_accel_cal_z(msg);
-	//m.mag_ofs_x = _get_mag_ofs_x(msg);
-	//m.mag_ofs_y = _get_mag_ofs_y(msg);
-	//m.mag_ofs_z = _get_mag_ofs_z(msg);
-    return m;	
-
+public void unpack() {
+	//m.mag_declination = payload.getfloat();
+	//m.raw_press = payload.getint();
+	//m.raw_temp = payload.getint();
+	//m.gyro_cal_x = payload.getfloat();
+	//m.gyro_cal_y = payload.getfloat();
+	//m.gyro_cal_z = payload.getfloat();
+	//m.accel_cal_x = payload.getfloat();
+	//m.accel_cal_y = payload.getfloat();
+	//m.accel_cal_z = payload.getfloat();
+	//m.mag_ofs_x = payload.getshort();
+	//m.mag_ofs_y = payload.getshort();
+	//m.mag_ofs_z = payload.getshort();
+    
     }
 }

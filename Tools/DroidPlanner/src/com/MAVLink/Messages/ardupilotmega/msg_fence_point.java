@@ -43,15 +43,13 @@ public class msg_fence_point extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_fence_point m = new msg_fence_point();
-	//m.lat = _get_lat(msg);
-	//m.lng = _get_lng(msg);
-	//m.target_system = _get_target_system(msg);
-	//m.target_component = _get_target_component(msg);
-	//m.idx = _get_idx(msg);
-	//m.count = _get_count(msg);
-    return m;	
-
+public void unpack() {
+	//m.lat = payload.getfloat();
+	//m.lng = payload.getfloat();
+	//m.target_system = payload.getbyte();
+	//m.target_component = payload.getbyte();
+	//m.idx = payload.getbyte();
+	//m.count = payload.getbyte();
+    
     }
 }

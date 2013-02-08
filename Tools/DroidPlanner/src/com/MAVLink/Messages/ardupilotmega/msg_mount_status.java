@@ -38,14 +38,12 @@ public class msg_mount_status extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_mount_status m = new msg_mount_status();
-	//m.pointing_a = _get_pointing_a(msg);
-	//m.pointing_b = _get_pointing_b(msg);
-	//m.pointing_c = _get_pointing_c(msg);
-	//m.target_system = _get_target_system(msg);
-	//m.target_component = _get_target_component(msg);
-    return m;	
-
+public void unpack() {
+	//m.pointing_a = payload.getint();
+	//m.pointing_b = payload.getint();
+	//m.pointing_c = payload.getint();
+	//m.target_system = payload.getbyte();
+	//m.target_component = payload.getbyte();
+    
     }
 }

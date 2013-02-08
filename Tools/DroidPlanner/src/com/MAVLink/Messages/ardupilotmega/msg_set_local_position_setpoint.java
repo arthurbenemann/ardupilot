@@ -46,16 +46,14 @@ public class msg_set_local_position_setpoint extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_set_local_position_setpoint m = new msg_set_local_position_setpoint();
-	//m.x = _get_x(msg);
-	//m.y = _get_y(msg);
-	//m.z = _get_z(msg);
-	//m.yaw = _get_yaw(msg);
-	//m.target_system = _get_target_system(msg);
-	//m.target_component = _get_target_component(msg);
-	//m.coordinate_frame = _get_coordinate_frame(msg);
-    return m;	
-
+public void unpack() {
+	//m.x = payload.getfloat();
+	//m.y = payload.getfloat();
+	//m.z = payload.getfloat();
+	//m.yaw = payload.getfloat();
+	//m.target_system = payload.getbyte();
+	//m.target_component = payload.getbyte();
+	//m.coordinate_frame = payload.getbyte();
+    
     }
 }

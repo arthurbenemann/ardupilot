@@ -30,12 +30,10 @@ public class msg_mission_ack extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_mission_ack m = new msg_mission_ack();
-	//m.target_system = _get_target_system(msg);
-	//m.target_component = _get_target_component(msg);
-	//m.type = _get_type(msg);
-    return m;	
-
+public void unpack() {
+	//m.target_system = payload.getbyte();
+	//m.target_component = payload.getbyte();
+	//m.type = payload.getbyte();
+    
     }
 }

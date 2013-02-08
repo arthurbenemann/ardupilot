@@ -38,14 +38,12 @@ public class msg_debug_vect extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_debug_vect m = new msg_debug_vect();
-	//m.time_usec = _get_time_usec(msg);
-	//m.x = _get_x(msg);
-	//m.y = _get_y(msg);
-	//m.z = _get_z(msg);
-	// = _get_name(msgm.name);
-    return m;	
-
+public void unpack() {
+	//m.time_usec = payload.getlong();
+	//m.x = payload.getfloat();
+	//m.y = payload.getfloat();
+	//m.z = payload.getfloat();
+	// = payload.getbyte();
+    
     }
 }

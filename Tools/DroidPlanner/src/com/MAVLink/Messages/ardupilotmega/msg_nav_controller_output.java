@@ -50,17 +50,15 @@ public class msg_nav_controller_output extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_nav_controller_output m = new msg_nav_controller_output();
-	//m.nav_roll = _get_nav_roll(msg);
-	//m.nav_pitch = _get_nav_pitch(msg);
-	//m.alt_error = _get_alt_error(msg);
-	//m.aspd_error = _get_aspd_error(msg);
-	//m.xtrack_error = _get_xtrack_error(msg);
-	//m.nav_bearing = _get_nav_bearing(msg);
-	//m.target_bearing = _get_target_bearing(msg);
-	//m.wp_dist = _get_wp_dist(msg);
-    return m;	
-
+public void unpack() {
+	//m.nav_roll = payload.getfloat();
+	//m.nav_pitch = payload.getfloat();
+	//m.alt_error = payload.getfloat();
+	//m.aspd_error = payload.getfloat();
+	//m.xtrack_error = payload.getfloat();
+	//m.nav_bearing = payload.getshort();
+	//m.target_bearing = payload.getshort();
+	//m.wp_dist = payload.getshort();
+    
     }
 }

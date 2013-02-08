@@ -62,20 +62,18 @@ public class msg_simstate extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_simstate m = new msg_simstate();
-	//m.roll = _get_roll(msg);
-	//m.pitch = _get_pitch(msg);
-	//m.yaw = _get_yaw(msg);
-	//m.xacc = _get_xacc(msg);
-	//m.yacc = _get_yacc(msg);
-	//m.zacc = _get_zacc(msg);
-	//m.xgyro = _get_xgyro(msg);
-	//m.ygyro = _get_ygyro(msg);
-	//m.zgyro = _get_zgyro(msg);
-	//m.lat = _get_lat(msg);
-	//m.lng = _get_lng(msg);
-    return m;	
-
+public void unpack() {
+	//m.roll = payload.getfloat();
+	//m.pitch = payload.getfloat();
+	//m.yaw = payload.getfloat();
+	//m.xacc = payload.getfloat();
+	//m.yacc = payload.getfloat();
+	//m.zacc = payload.getfloat();
+	//m.xgyro = payload.getfloat();
+	//m.ygyro = payload.getfloat();
+	//m.zgyro = payload.getfloat();
+	//m.lat = payload.getfloat();
+	//m.lng = payload.getfloat();
+    
     }
 }

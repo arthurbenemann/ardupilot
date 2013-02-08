@@ -67,7 +67,7 @@ public class MAVLinkPayload {
 		return (long) result;
 	}
 
-	public float getFloat(int i, List<Integer> payload) {
+	public float getFloat() {
 		return Float.intBitsToFloat(getInt());
 	}
 

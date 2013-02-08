@@ -62,20 +62,18 @@ public class msg_command_long extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_command_long m = new msg_command_long();
-	//m.param1 = _get_param1(msg);
-	//m.param2 = _get_param2(msg);
-	//m.param3 = _get_param3(msg);
-	//m.param4 = _get_param4(msg);
-	//m.param5 = _get_param5(msg);
-	//m.param6 = _get_param6(msg);
-	//m.param7 = _get_param7(msg);
-	//m.command = _get_command(msg);
-	//m.target_system = _get_target_system(msg);
-	//m.target_component = _get_target_component(msg);
-	//m.confirmation = _get_confirmation(msg);
-    return m;	
-
+public void unpack() {
+	//m.param1 = payload.getfloat();
+	//m.param2 = payload.getfloat();
+	//m.param3 = payload.getfloat();
+	//m.param4 = payload.getfloat();
+	//m.param5 = payload.getfloat();
+	//m.param6 = payload.getfloat();
+	//m.param7 = payload.getfloat();
+	//m.command = payload.getshort();
+	//m.target_system = payload.getbyte();
+	//m.target_component = payload.getbyte();
+	//m.confirmation = payload.getbyte();
+    
     }
 }

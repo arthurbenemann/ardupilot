@@ -30,12 +30,10 @@ public class msg_data_stream extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_data_stream m = new msg_data_stream();
-	//m.message_rate = _get_message_rate(msg);
-	//m.stream_id = _get_stream_id(msg);
-	//m.on_off = _get_on_off(msg);
-    return m;	
-
+public void unpack() {
+	//m.message_rate = payload.getshort();
+	//m.stream_id = payload.getbyte();
+	//m.on_off = payload.getbyte();
+    
     }
 }

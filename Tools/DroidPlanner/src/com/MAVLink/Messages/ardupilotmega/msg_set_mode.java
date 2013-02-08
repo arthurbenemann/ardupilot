@@ -30,12 +30,10 @@ public class msg_set_mode extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_set_mode m = new msg_set_mode();
-	//m.custom_mode = _get_custom_mode(msg);
-	//m.target_system = _get_target_system(msg);
-	//m.base_mode = _get_base_mode(msg);
-    return m;	
-
+public void unpack() {
+	//m.custom_mode = payload.getint();
+	//m.target_system = payload.getbyte();
+	//m.base_mode = payload.getbyte();
+    
     }
 }

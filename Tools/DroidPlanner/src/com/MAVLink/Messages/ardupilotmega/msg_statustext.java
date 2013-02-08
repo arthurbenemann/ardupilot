@@ -26,11 +26,9 @@ public class msg_statustext extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_statustext m = new msg_statustext();
-	//m.severity = _get_severity(msg);
-	// = _get_text(msgm.text);
-    return m;	
-
+public void unpack() {
+	//m.severity = payload.getbyte();
+	// = payload.getbyte();
+    
     }
 }

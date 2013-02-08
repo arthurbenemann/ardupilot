@@ -34,13 +34,11 @@ public class msg_set_gps_global_origin extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_set_gps_global_origin m = new msg_set_gps_global_origin();
-	//m.latitude = _get_latitude(msg);
-	//m.longitude = _get_longitude(msg);
-	//m.altitude = _get_altitude(msg);
-	//m.target_system = _get_target_system(msg);
-    return m;	
-
+public void unpack() {
+	//m.latitude = payload.getint();
+	//m.longitude = payload.getint();
+	//m.altitude = payload.getint();
+	//m.target_system = payload.getbyte();
+    
     }
 }

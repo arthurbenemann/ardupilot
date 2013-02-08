@@ -22,10 +22,8 @@ public class msg_mission_item_reached extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_mission_item_reached m = new msg_mission_item_reached();
-	//m.seq = _get_seq(msg);
-    return m;	
-
+public void unpack() {
+	//m.seq = payload.getshort();
+    
     }
 }

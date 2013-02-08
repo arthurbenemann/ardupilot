@@ -30,12 +30,10 @@ public class msg_named_value_int extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_named_value_int m = new msg_named_value_int();
-	//m.time_boot_ms = _get_time_boot_ms(msg);
-	//m.value = _get_value(msg);
-	// = _get_name(msgm.name);
-    return m;	
-
+public void unpack() {
+	//m.time_boot_ms = payload.getint();
+	//m.value = payload.getint();
+	// = payload.getbyte();
+    
     }
 }

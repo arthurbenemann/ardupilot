@@ -50,17 +50,15 @@ public class msg_optical_flow extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_optical_flow m = new msg_optical_flow();
-	//m.time_usec = _get_time_usec(msg);
-	//m.flow_comp_m_x = _get_flow_comp_m_x(msg);
-	//m.flow_comp_m_y = _get_flow_comp_m_y(msg);
-	//m.ground_distance = _get_ground_distance(msg);
-	//m.flow_x = _get_flow_x(msg);
-	//m.flow_y = _get_flow_y(msg);
-	//m.sensor_id = _get_sensor_id(msg);
-	//m.quality = _get_quality(msg);
-    return m;	
-
+public void unpack() {
+	//m.time_usec = payload.getlong();
+	//m.flow_comp_m_x = payload.getfloat();
+	//m.flow_comp_m_y = payload.getfloat();
+	//m.ground_distance = payload.getfloat();
+	//m.flow_x = payload.getshort();
+	//m.flow_y = payload.getshort();
+	//m.sensor_id = payload.getbyte();
+	//m.quality = payload.getbyte();
+    
     }
 }

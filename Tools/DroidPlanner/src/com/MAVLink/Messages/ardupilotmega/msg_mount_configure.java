@@ -42,15 +42,13 @@ public class msg_mount_configure extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_mount_configure m = new msg_mount_configure();
-	//m.target_system = _get_target_system(msg);
-	//m.target_component = _get_target_component(msg);
-	//m.mount_mode = _get_mount_mode(msg);
-	//m.stab_roll = _get_stab_roll(msg);
-	//m.stab_pitch = _get_stab_pitch(msg);
-	//m.stab_yaw = _get_stab_yaw(msg);
-    return m;	
-
+public void unpack() {
+	//m.target_system = payload.getbyte();
+	//m.target_component = payload.getbyte();
+	//m.mount_mode = payload.getbyte();
+	//m.stab_roll = payload.getbyte();
+	//m.stab_pitch = payload.getbyte();
+	//m.stab_yaw = payload.getbyte();
+    
     }
 }

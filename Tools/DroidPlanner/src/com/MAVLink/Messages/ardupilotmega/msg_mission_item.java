@@ -75,23 +75,21 @@ public class msg_mission_item extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_mission_item m = new msg_mission_item();
-	//m.param1 = _get_param1(msg);
-	//m.param2 = _get_param2(msg);
-	//m.param3 = _get_param3(msg);
-	//m.param4 = _get_param4(msg);
-	//m.x = _get_x(msg);
-	//m.y = _get_y(msg);
-	//m.z = _get_z(msg);
-	//m.seq = _get_seq(msg);
-	//m.command = _get_command(msg);
-	//m.target_system = _get_target_system(msg);
-	//m.target_component = _get_target_component(msg);
-	//m.frame = _get_frame(msg);
-	//m.current = _get_current(msg);
-	//m.autocontinue = _get_autocontinue(msg);
-    return m;	
-
+public void unpack() {
+	//m.param1 = payload.getfloat();
+	//m.param2 = payload.getfloat();
+	//m.param3 = payload.getfloat();
+	//m.param4 = payload.getfloat();
+	//m.x = payload.getfloat();
+	//m.y = payload.getfloat();
+	//m.z = payload.getfloat();
+	//m.seq = payload.getshort();
+	//m.command = payload.getshort();
+	//m.target_system = payload.getbyte();
+	//m.target_component = payload.getbyte();
+	//m.frame = payload.getbyte();
+	//m.current = payload.getbyte();
+	//m.autocontinue = payload.getbyte();
+    
     }
 }

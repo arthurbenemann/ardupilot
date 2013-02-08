@@ -78,24 +78,22 @@ public class msg_highres_imu extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_highres_imu m = new msg_highres_imu();
-	//m.time_usec = _get_time_usec(msg);
-	//m.xacc = _get_xacc(msg);
-	//m.yacc = _get_yacc(msg);
-	//m.zacc = _get_zacc(msg);
-	//m.xgyro = _get_xgyro(msg);
-	//m.ygyro = _get_ygyro(msg);
-	//m.zgyro = _get_zgyro(msg);
-	//m.xmag = _get_xmag(msg);
-	//m.ymag = _get_ymag(msg);
-	//m.zmag = _get_zmag(msg);
-	//m.abs_pressure = _get_abs_pressure(msg);
-	//m.diff_pressure = _get_diff_pressure(msg);
-	//m.pressure_alt = _get_pressure_alt(msg);
-	//m.temperature = _get_temperature(msg);
-	//m.fields_updated = _get_fields_updated(msg);
-    return m;	
-
+public void unpack() {
+	//m.time_usec = payload.getlong();
+	//m.xacc = payload.getfloat();
+	//m.yacc = payload.getfloat();
+	//m.zacc = payload.getfloat();
+	//m.xgyro = payload.getfloat();
+	//m.ygyro = payload.getfloat();
+	//m.zgyro = payload.getfloat();
+	//m.xmag = payload.getfloat();
+	//m.ymag = payload.getfloat();
+	//m.zmag = payload.getfloat();
+	//m.abs_pressure = payload.getfloat();
+	//m.diff_pressure = payload.getfloat();
+	//m.pressure_alt = payload.getfloat();
+	//m.temperature = payload.getfloat();
+	//m.fields_updated = payload.getshort();
+    
     }
 }

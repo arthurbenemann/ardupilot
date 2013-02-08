@@ -34,13 +34,11 @@ public class msg_param_request_read extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_param_request_read m = new msg_param_request_read();
-	//m.param_index = _get_param_index(msg);
-	//m.target_system = _get_target_system(msg);
-	//m.target_component = _get_target_component(msg);
-	// = _get_param_id(msgm.param_id);
-    return m;	
-
+public void unpack() {
+	//m.param_index = payload.getshort();
+	//m.target_system = payload.getbyte();
+	//m.target_component = payload.getbyte();
+	// = payload.getbyte();
+    
     }
 }

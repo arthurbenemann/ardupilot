@@ -46,16 +46,14 @@ public class msg_radio extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_radio m = new msg_radio();
-	//m.rxerrors = _get_rxerrors(msg);
-	//m.fixed = _get_fixed(msg);
-	//m.rssi = _get_rssi(msg);
-	//m.remrssi = _get_remrssi(msg);
-	//m.txbuf = _get_txbuf(msg);
-	//m.noise = _get_noise(msg);
-	//m.remnoise = _get_remnoise(msg);
-    return m;	
-
+public void unpack() {
+	//m.rxerrors = payload.getshort();
+	//m.fixed = payload.getshort();
+	//m.rssi = payload.getbyte();
+	//m.remrssi = payload.getbyte();
+	//m.txbuf = payload.getbyte();
+	//m.noise = payload.getbyte();
+	//m.remnoise = payload.getbyte();
+    
     }
 }

@@ -38,14 +38,12 @@ public class msg_request_data_stream extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_request_data_stream m = new msg_request_data_stream();
-	//m.req_message_rate = _get_req_message_rate(msg);
-	//m.target_system = _get_target_system(msg);
-	//m.target_component = _get_target_component(msg);
-	//m.req_stream_id = _get_req_stream_id(msg);
-	//m.start_stop = _get_start_stop(msg);
-    return m;	
-
+public void unpack() {
+	//m.req_message_rate = payload.getshort();
+	//m.target_system = payload.getbyte();
+	//m.target_component = payload.getbyte();
+	//m.req_stream_id = payload.getbyte();
+	//m.start_stop = payload.getbyte();
+    
     }
 }

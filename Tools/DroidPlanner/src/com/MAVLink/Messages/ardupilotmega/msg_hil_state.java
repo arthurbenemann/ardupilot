@@ -82,25 +82,23 @@ public class msg_hil_state extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_hil_state m = new msg_hil_state();
-	//m.time_usec = _get_time_usec(msg);
-	//m.roll = _get_roll(msg);
-	//m.pitch = _get_pitch(msg);
-	//m.yaw = _get_yaw(msg);
-	//m.rollspeed = _get_rollspeed(msg);
-	//m.pitchspeed = _get_pitchspeed(msg);
-	//m.yawspeed = _get_yawspeed(msg);
-	//m.lat = _get_lat(msg);
-	//m.lon = _get_lon(msg);
-	//m.alt = _get_alt(msg);
-	//m.vx = _get_vx(msg);
-	//m.vy = _get_vy(msg);
-	//m.vz = _get_vz(msg);
-	//m.xacc = _get_xacc(msg);
-	//m.yacc = _get_yacc(msg);
-	//m.zacc = _get_zacc(msg);
-    return m;	
-
+public void unpack() {
+	//m.time_usec = payload.getlong();
+	//m.roll = payload.getfloat();
+	//m.pitch = payload.getfloat();
+	//m.yaw = payload.getfloat();
+	//m.rollspeed = payload.getfloat();
+	//m.pitchspeed = payload.getfloat();
+	//m.yawspeed = payload.getfloat();
+	//m.lat = payload.getint();
+	//m.lon = payload.getint();
+	//m.alt = payload.getint();
+	//m.vx = payload.getshort();
+	//m.vy = payload.getshort();
+	//m.vz = payload.getshort();
+	//m.xacc = payload.getshort();
+	//m.yacc = payload.getshort();
+	//m.zacc = payload.getshort();
+    
     }
 }

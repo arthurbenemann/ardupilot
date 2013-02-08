@@ -34,13 +34,11 @@ public class msg_memory_vect extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_memory_vect m = new msg_memory_vect();
-	//m.address = _get_address(msg);
-	//m.ver = _get_ver(msg);
-	//m.type = _get_type(msg);
-	// = _get_value(msgm.value);
-    return m;	
-
+public void unpack() {
+	//m.address = payload.getshort();
+	//m.ver = payload.getbyte();
+	//m.type = payload.getbyte();
+	// = payload.getbyte();
+    
     }
 }

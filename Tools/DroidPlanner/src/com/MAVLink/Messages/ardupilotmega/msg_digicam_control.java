@@ -58,19 +58,17 @@ public class msg_digicam_control extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_digicam_control m = new msg_digicam_control();
-	//m.extra_value = _get_extra_value(msg);
-	//m.target_system = _get_target_system(msg);
-	//m.target_component = _get_target_component(msg);
-	//m.session = _get_session(msg);
-	//m.zoom_pos = _get_zoom_pos(msg);
-	//m.zoom_step = _get_zoom_step(msg);
-	//m.focus_lock = _get_focus_lock(msg);
-	//m.shot = _get_shot(msg);
-	//m.command_id = _get_command_id(msg);
-	//m.extra_param = _get_extra_param(msg);
-    return m;	
-
+public void unpack() {
+	//m.extra_value = payload.getfloat();
+	//m.target_system = payload.getbyte();
+	//m.target_component = payload.getbyte();
+	//m.session = payload.getbyte();
+	//m.zoom_pos = payload.getbyte();
+	//m.zoom_step = payload.getbyte();
+	//m.focus_lock = payload.getbyte();
+	//m.shot = payload.getbyte();
+	//m.command_id = payload.getbyte();
+	//m.extra_param = payload.getbyte();
+    
     }
 }

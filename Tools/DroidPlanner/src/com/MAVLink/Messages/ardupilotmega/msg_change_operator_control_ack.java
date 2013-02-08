@@ -30,12 +30,10 @@ public class msg_change_operator_control_ack extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_change_operator_control_ack m = new msg_change_operator_control_ack();
-	//m.gcs_system_id = _get_gcs_system_id(msg);
-	//m.control_request = _get_control_request(msg);
-	//m.ack = _get_ack(msg);
-    return m;	
-
+public void unpack() {
+	//m.gcs_system_id = payload.getbyte();
+	//m.control_request = payload.getbyte();
+	//m.ack = payload.getbyte();
+    
     }
 }

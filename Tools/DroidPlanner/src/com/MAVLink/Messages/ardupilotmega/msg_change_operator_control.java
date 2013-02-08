@@ -34,13 +34,11 @@ public class msg_change_operator_control extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_change_operator_control m = new msg_change_operator_control();
-	//m.target_system = _get_target_system(msg);
-	//m.control_request = _get_control_request(msg);
-	//m.version = _get_version(msg);
-	// = _get_passkey(msgm.passkey);
-    return m;	
-
+public void unpack() {
+	//m.target_system = payload.getbyte();
+	//m.control_request = payload.getbyte();
+	//m.version = payload.getbyte();
+	// = payload.getbyte();
+    
     }
 }

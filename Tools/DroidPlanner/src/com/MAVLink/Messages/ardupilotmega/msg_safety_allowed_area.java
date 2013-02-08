@@ -46,16 +46,14 @@ public class msg_safety_allowed_area extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_safety_allowed_area m = new msg_safety_allowed_area();
-	//m.p1x = _get_p1x(msg);
-	//m.p1y = _get_p1y(msg);
-	//m.p1z = _get_p1z(msg);
-	//m.p2x = _get_p2x(msg);
-	//m.p2y = _get_p2y(msg);
-	//m.p2z = _get_p2z(msg);
-	//m.frame = _get_frame(msg);
-    return m;	
-
+public void unpack() {
+	//m.p1x = payload.getfloat();
+	//m.p1y = payload.getfloat();
+	//m.p1z = payload.getfloat();
+	//m.p2x = payload.getfloat();
+	//m.p2y = payload.getfloat();
+	//m.p2z = payload.getfloat();
+	//m.frame = payload.getbyte();
+    
     }
 }

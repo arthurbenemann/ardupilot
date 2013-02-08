@@ -34,13 +34,11 @@ public class msg_vision_speed_estimate extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_vision_speed_estimate m = new msg_vision_speed_estimate();
-	//m.usec = _get_usec(msg);
-	//m.x = _get_x(msg);
-	//m.y = _get_y(msg);
-	//m.z = _get_z(msg);
-    return m;	
-
+public void unpack() {
+	//m.usec = payload.getlong();
+	//m.x = payload.getfloat();
+	//m.y = payload.getfloat();
+	//m.z = payload.getfloat();
+    
     }
 }

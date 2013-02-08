@@ -46,16 +46,14 @@ public class msg_vicon_position_estimate extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_vicon_position_estimate m = new msg_vicon_position_estimate();
-	//m.usec = _get_usec(msg);
-	//m.x = _get_x(msg);
-	//m.y = _get_y(msg);
-	//m.z = _get_z(msg);
-	//m.roll = _get_roll(msg);
-	//m.pitch = _get_pitch(msg);
-	//m.yaw = _get_yaw(msg);
-    return m;	
-
+public void unpack() {
+	//m.usec = payload.getlong();
+	//m.x = payload.getfloat();
+	//m.y = payload.getfloat();
+	//m.z = payload.getfloat();
+	//m.roll = payload.getfloat();
+	//m.pitch = payload.getfloat();
+	//m.yaw = payload.getfloat();
+    
     }
 }

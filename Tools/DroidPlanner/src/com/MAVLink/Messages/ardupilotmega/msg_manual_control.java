@@ -42,15 +42,13 @@ public class msg_manual_control extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_manual_control m = new msg_manual_control();
-	//m.x = _get_x(msg);
-	//m.y = _get_y(msg);
-	//m.z = _get_z(msg);
-	//m.r = _get_r(msg);
-	//m.buttons = _get_buttons(msg);
-	//m.target = _get_target(msg);
-    return m;	
-
+public void unpack() {
+	//m.x = payload.getshort();
+	//m.y = payload.getshort();
+	//m.z = payload.getshort();
+	//m.r = payload.getshort();
+	//m.buttons = payload.getshort();
+	//m.target = payload.getbyte();
+    
     }
 }

@@ -46,16 +46,14 @@ public class msg_ahrs extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_ahrs m = new msg_ahrs();
-	//m.omegaIx = _get_omegaIx(msg);
-	//m.omegaIy = _get_omegaIy(msg);
-	//m.omegaIz = _get_omegaIz(msg);
-	//m.accel_weight = _get_accel_weight(msg);
-	//m.renorm_val = _get_renorm_val(msg);
-	//m.error_rp = _get_error_rp(msg);
-	//m.error_yaw = _get_error_yaw(msg);
-    return m;	
-
+public void unpack() {
+	//m.omegaIx = payload.getfloat();
+	//m.omegaIy = payload.getfloat();
+	//m.omegaIz = payload.getfloat();
+	//m.accel_weight = payload.getfloat();
+	//m.renorm_val = payload.getfloat();
+	//m.error_rp = payload.getfloat();
+	//m.error_yaw = payload.getfloat();
+    
     }
 }

@@ -26,11 +26,9 @@ public class msg_command_ack extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_command_ack m = new msg_command_ack();
-	//m.command = _get_command(msg);
-	//m.result = _get_result(msg);
-    return m;	
-
+public void unpack() {
+	//m.command = payload.getshort();
+	//m.result = payload.getbyte();
+    
     }
 }

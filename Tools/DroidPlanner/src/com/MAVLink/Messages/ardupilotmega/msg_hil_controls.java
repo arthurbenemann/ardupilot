@@ -62,20 +62,18 @@ public class msg_hil_controls extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_hil_controls m = new msg_hil_controls();
-	//m.time_usec = _get_time_usec(msg);
-	//m.roll_ailerons = _get_roll_ailerons(msg);
-	//m.pitch_elevator = _get_pitch_elevator(msg);
-	//m.yaw_rudder = _get_yaw_rudder(msg);
-	//m.throttle = _get_throttle(msg);
-	//m.aux1 = _get_aux1(msg);
-	//m.aux2 = _get_aux2(msg);
-	//m.aux3 = _get_aux3(msg);
-	//m.aux4 = _get_aux4(msg);
-	//m.mode = _get_mode(msg);
-	//m.nav_mode = _get_nav_mode(msg);
-    return m;	
-
+public void unpack() {
+	//m.time_usec = payload.getlong();
+	//m.roll_ailerons = payload.getfloat();
+	//m.pitch_elevator = payload.getfloat();
+	//m.yaw_rudder = payload.getfloat();
+	//m.throttle = payload.getfloat();
+	//m.aux1 = payload.getfloat();
+	//m.aux2 = payload.getfloat();
+	//m.aux3 = payload.getfloat();
+	//m.aux4 = payload.getfloat();
+	//m.mode = payload.getbyte();
+	//m.nav_mode = payload.getbyte();
+    
     }
 }

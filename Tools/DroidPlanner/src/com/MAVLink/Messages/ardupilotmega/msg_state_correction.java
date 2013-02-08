@@ -54,18 +54,16 @@ public class msg_state_correction extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_state_correction m = new msg_state_correction();
-	//m.xErr = _get_xErr(msg);
-	//m.yErr = _get_yErr(msg);
-	//m.zErr = _get_zErr(msg);
-	//m.rollErr = _get_rollErr(msg);
-	//m.pitchErr = _get_pitchErr(msg);
-	//m.yawErr = _get_yawErr(msg);
-	//m.vxErr = _get_vxErr(msg);
-	//m.vyErr = _get_vyErr(msg);
-	//m.vzErr = _get_vzErr(msg);
-    return m;	
-
+public void unpack() {
+	//m.xErr = payload.getfloat();
+	//m.yErr = payload.getfloat();
+	//m.zErr = payload.getfloat();
+	//m.rollErr = payload.getfloat();
+	//m.pitchErr = payload.getfloat();
+	//m.yawErr = payload.getfloat();
+	//m.vxErr = payload.getfloat();
+	//m.vyErr = payload.getfloat();
+	//m.vzErr = payload.getfloat();
+    
     }
 }

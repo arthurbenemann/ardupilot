@@ -167,12 +167,10 @@ ${{ordered_fields: 	/**
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_${name_lower} m = new msg_${name_lower}();
-${{ordered_fields:	//${decode_left} = _get_${name}(msg${decode_right});
+public void unpack() {
+${{ordered_fields:	//${decode_left} = payload.get${type}();
 }}
-    return m;	
-
+    
     }
 }
 ''', m)
@@ -222,18 +220,20 @@ public class MAVLinkMessage {
 		return (MAVLinkPayload.size() == len);
 	}
 	
-	public MAVLinkMessage unpackMessage() {
-		switch (msgid) {''')
+	public void unpackMessage() {
+		switch (msgid) {
+		''')
     for xml in xml_list:
         t.write(f, '''
 ${{message:		case msg_${name_lower}.MAVLINK_MSG_ID_${name}:
 			Log.d("MAVLink", "${name}");
-			return msg_${name_lower}.unpack(payload);
+			((msg_${name_lower}) this).unpack();
+			return;
 }}''',xml)
     f.write('''
 		default:
 			Log.d("MAVLink", "UNKNOW MESSAGE - " + msgid);
-			return null;
+			return;
 		}
 	}
 

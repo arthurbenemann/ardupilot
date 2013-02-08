@@ -70,22 +70,20 @@ public class msg_sys_status extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_sys_status m = new msg_sys_status();
-	//m.onboard_control_sensors_present = _get_onboard_control_sensors_present(msg);
-	//m.onboard_control_sensors_enabled = _get_onboard_control_sensors_enabled(msg);
-	//m.onboard_control_sensors_health = _get_onboard_control_sensors_health(msg);
-	//m.load = _get_load(msg);
-	//m.voltage_battery = _get_voltage_battery(msg);
-	//m.current_battery = _get_current_battery(msg);
-	//m.drop_rate_comm = _get_drop_rate_comm(msg);
-	//m.errors_comm = _get_errors_comm(msg);
-	//m.errors_count1 = _get_errors_count1(msg);
-	//m.errors_count2 = _get_errors_count2(msg);
-	//m.errors_count3 = _get_errors_count3(msg);
-	//m.errors_count4 = _get_errors_count4(msg);
-	//m.battery_remaining = _get_battery_remaining(msg);
-    return m;	
-
+public void unpack() {
+	//m.onboard_control_sensors_present = payload.getint();
+	//m.onboard_control_sensors_enabled = payload.getint();
+	//m.onboard_control_sensors_health = payload.getint();
+	//m.load = payload.getshort();
+	//m.voltage_battery = payload.getshort();
+	//m.current_battery = payload.getshort();
+	//m.drop_rate_comm = payload.getshort();
+	//m.errors_comm = payload.getshort();
+	//m.errors_count1 = payload.getshort();
+	//m.errors_count2 = payload.getshort();
+	//m.errors_count3 = payload.getshort();
+	//m.errors_count4 = payload.getshort();
+	//m.battery_remaining = payload.getbyte();
+    
     }
 }

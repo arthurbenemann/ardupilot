@@ -42,15 +42,13 @@ public class msg_omnidirectional_flow extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_omnidirectional_flow m = new msg_omnidirectional_flow();
-	//m.time_usec = _get_time_usec(msg);
-	//m.front_distance_m = _get_front_distance_m(msg);
-	// = _get_left(msgm.left);
-	// = _get_right(msgm.right);
-	//m.sensor_id = _get_sensor_id(msg);
-	//m.quality = _get_quality(msg);
-    return m;	
-
+public void unpack() {
+	//m.time_usec = payload.getlong();
+	//m.front_distance_m = payload.getfloat();
+	// = payload.getshort();
+	// = payload.getshort();
+	//m.sensor_id = payload.getbyte();
+	//m.quality = payload.getbyte();
+    
     }
 }

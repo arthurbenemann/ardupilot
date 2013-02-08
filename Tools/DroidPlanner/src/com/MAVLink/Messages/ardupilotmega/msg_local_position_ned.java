@@ -46,16 +46,14 @@ public class msg_local_position_ned extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_local_position_ned m = new msg_local_position_ned();
-	//m.time_boot_ms = _get_time_boot_ms(msg);
-	//m.x = _get_x(msg);
-	//m.y = _get_y(msg);
-	//m.z = _get_z(msg);
-	//m.vx = _get_vx(msg);
-	//m.vy = _get_vy(msg);
-	//m.vz = _get_vz(msg);
-    return m;	
-
+public void unpack() {
+	//m.time_boot_ms = payload.getint();
+	//m.x = payload.getfloat();
+	//m.y = payload.getfloat();
+	//m.z = payload.getfloat();
+	//m.vx = payload.getfloat();
+	//m.vy = payload.getfloat();
+	//m.vz = payload.getfloat();
+    
     }
 }

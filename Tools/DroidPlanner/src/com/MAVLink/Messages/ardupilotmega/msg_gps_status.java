@@ -42,15 +42,13 @@ public class msg_gps_status extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_gps_status m = new msg_gps_status();
-	//m.satellites_visible = _get_satellites_visible(msg);
-	// = _get_satellite_prn(msgm.satellite_prn);
-	// = _get_satellite_used(msgm.satellite_used);
-	// = _get_satellite_elevation(msgm.satellite_elevation);
-	// = _get_satellite_azimuth(msgm.satellite_azimuth);
-	// = _get_satellite_snr(msgm.satellite_snr);
-    return m;	
-
+public void unpack() {
+	//m.satellites_visible = payload.getbyte();
+	// = payload.getbyte();
+	// = payload.getbyte();
+	// = payload.getbyte();
+	// = payload.getbyte();
+	// = payload.getbyte();
+    
     }
 }

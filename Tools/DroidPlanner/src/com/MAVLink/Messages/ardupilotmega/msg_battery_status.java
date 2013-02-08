@@ -54,18 +54,16 @@ public class msg_battery_status extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_battery_status m = new msg_battery_status();
-	//m.voltage_cell_1 = _get_voltage_cell_1(msg);
-	//m.voltage_cell_2 = _get_voltage_cell_2(msg);
-	//m.voltage_cell_3 = _get_voltage_cell_3(msg);
-	//m.voltage_cell_4 = _get_voltage_cell_4(msg);
-	//m.voltage_cell_5 = _get_voltage_cell_5(msg);
-	//m.voltage_cell_6 = _get_voltage_cell_6(msg);
-	//m.current_battery = _get_current_battery(msg);
-	//m.accu_id = _get_accu_id(msg);
-	//m.battery_remaining = _get_battery_remaining(msg);
-    return m;	
-
+public void unpack() {
+	//m.voltage_cell_1 = payload.getshort();
+	//m.voltage_cell_2 = payload.getshort();
+	//m.voltage_cell_3 = payload.getshort();
+	//m.voltage_cell_4 = payload.getshort();
+	//m.voltage_cell_5 = payload.getshort();
+	//m.voltage_cell_6 = payload.getshort();
+	//m.current_battery = payload.getshort();
+	//m.accu_id = payload.getbyte();
+	//m.battery_remaining = payload.getbyte();
+    
     }
 }

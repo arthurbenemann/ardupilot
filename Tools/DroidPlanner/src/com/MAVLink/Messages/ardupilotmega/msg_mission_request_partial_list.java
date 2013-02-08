@@ -34,13 +34,11 @@ public class msg_mission_request_partial_list extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_mission_request_partial_list m = new msg_mission_request_partial_list();
-	//m.start_index = _get_start_index(msg);
-	//m.end_index = _get_end_index(msg);
-	//m.target_system = _get_target_system(msg);
-	//m.target_component = _get_target_component(msg);
-    return m;	
-
+public void unpack() {
+	//m.start_index = payload.getshort();
+	//m.end_index = payload.getshort();
+	//m.target_system = payload.getbyte();
+	//m.target_component = payload.getbyte();
+    
     }
 }

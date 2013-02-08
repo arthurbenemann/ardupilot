@@ -58,19 +58,17 @@ public class msg_rc_channels_override extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_rc_channels_override m = new msg_rc_channels_override();
-	//m.chan1_raw = _get_chan1_raw(msg);
-	//m.chan2_raw = _get_chan2_raw(msg);
-	//m.chan3_raw = _get_chan3_raw(msg);
-	//m.chan4_raw = _get_chan4_raw(msg);
-	//m.chan5_raw = _get_chan5_raw(msg);
-	//m.chan6_raw = _get_chan6_raw(msg);
-	//m.chan7_raw = _get_chan7_raw(msg);
-	//m.chan8_raw = _get_chan8_raw(msg);
-	//m.target_system = _get_target_system(msg);
-	//m.target_component = _get_target_component(msg);
-    return m;	
-
+public void unpack() {
+	//m.chan1_raw = payload.getshort();
+	//m.chan2_raw = payload.getshort();
+	//m.chan3_raw = payload.getshort();
+	//m.chan4_raw = payload.getshort();
+	//m.chan5_raw = payload.getshort();
+	//m.chan6_raw = payload.getshort();
+	//m.chan7_raw = payload.getshort();
+	//m.chan8_raw = payload.getshort();
+	//m.target_system = payload.getbyte();
+	//m.target_component = payload.getbyte();
+    
     }
 }

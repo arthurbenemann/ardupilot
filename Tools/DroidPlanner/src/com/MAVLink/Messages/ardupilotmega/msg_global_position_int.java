@@ -55,18 +55,16 @@ public class msg_global_position_int extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public static MAVLinkMessage unpack(MAVLinkPayload payload) {
-    msg_global_position_int m = new msg_global_position_int();
-	//m.time_boot_ms = _get_time_boot_ms(msg);
-	//m.lat = _get_lat(msg);
-	//m.lon = _get_lon(msg);
-	//m.alt = _get_alt(msg);
-	//m.relative_alt = _get_relative_alt(msg);
-	//m.vx = _get_vx(msg);
-	//m.vy = _get_vy(msg);
-	//m.vz = _get_vz(msg);
-	//m.hdg = _get_hdg(msg);
-    return m;	
-
+public void unpack() {
+	//m.time_boot_ms = payload.getint();
+	//m.lat = payload.getint();
+	//m.lon = payload.getint();
+	//m.alt = payload.getint();
+	//m.relative_alt = payload.getint();
+	//m.vx = payload.getshort();
+	//m.vy = payload.getshort();
+	//m.vz = payload.getshort();
+	//m.hdg = payload.getshort();
+    
     }
 }
