@@ -38,6 +38,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		
 		// Set up the action bar to show a dropdown list.
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
@@ -86,7 +87,8 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_terminal, menu);
-
+		this.menu = menu;
+		connectButton = menu.findItem(R.id.menu_connect);
 		return true;
 	}
 
@@ -96,21 +98,34 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		case R.id.menu_settings:
 			return true;
 		case R.id.menu_connect:
-			Log.d("TCP IN", "starting");
-			if(!running){
-				item.setTitle(getResources().getString(R.string.menu_disconnect));
-				running = true;
-				new connectTask().execute("");
-			}else {
-				running = false;
-				item.setTitle(getResources().getString(R.string.menu_connect));
-			}
-				
+			toggleConnectionState();				
 			return true;
 		default:
 			return super.onMenuItemSelected(featureId, item);
 		}
 	}
+
+	private void toggleConnectionState() {
+		if(!running){
+			openConnection();
+		}else {
+			closeConnection();
+		}
+	}
+
+	private void closeConnection() {
+		Log.d("TCP IN", "closing TCP");
+		connectButton.setTitle(getResources().getString(R.string.menu_connect));
+		running = false;
+	}
+
+	private void openConnection() {
+		Log.d("TCP IN", "starting TCP");
+		connectButton.setTitle(getResources().getString(R.string.menu_disconnect));
+		running = true;
+		new connectTask().execute("");
+	}
+
 	
 	
 	
@@ -158,14 +173,9 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 						}
 					}
 				}
+				socket.close();
 			} catch (IOException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					socket.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
 			return null;
 		}
@@ -182,7 +192,8 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
-			Log.d("TCP IN", "Executed");
+			Log.d("TCP IN", "Finished");
+			closeConnection();
 		}
 
 	}
