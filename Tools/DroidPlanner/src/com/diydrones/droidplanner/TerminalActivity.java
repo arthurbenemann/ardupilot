@@ -2,17 +2,24 @@ package com.diydrones.droidplanner;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +38,8 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 
 	TextView terminal;
 	Button sendButton;
+	Menu menu;
+	MenuItem connectButton;
 	boolean running = false;
 	
 	
@@ -126,10 +135,20 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		new connectTask().execute("");
 	}
 
+	/**
+	 * Timestamp for logs in the Mission Planner Format
+	 */
+	private String getTimeStamp() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss",Locale.US);
+		String timeStamp = sdf.format(new Date());
+		return timeStamp;
+	}
 	
 	
 	
 	private BufferedInputStream in;
+	public FileOutputStream logWriter;
+	
 	PrintWriter out;
 
 	public void sendMessage(String message) {
@@ -138,21 +157,25 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 			out.flush();
 		}
 	}
-	
+
 	public class connectTask extends AsyncTask<String, String, String> {
-		public static final String SERVERIP = "10.0.0.99"; 
+		public static final String SERVERIP = "10.0.0.99";
 		public static final int SERVERPORT = 5760;
-		
+
 		public Parser parser;
+		
 
 		@Override
 		protected String doInBackground(String... message) {
 			Socket socket = null;
 			parser = new Parser();
 			try {
+
+				logWriter = getFileStream();	
+				
 				InetAddress serverAddr = InetAddress.getByName(SERVERIP);
 				socket = new Socket(serverAddr, SERVERPORT);
-				
+
 				out = new PrintWriter(new BufferedWriter(
 						new OutputStreamWriter(socket.getOutputStream())), true);
 				Log.e("TCP Client", "C: Done.");
@@ -162,14 +185,19 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 				MAVLinkMessage m;
 				while (running) {
 					int data;
-					if((data = in.read())>=0){
+					if ((data = in.read()) >= 0) {
+						logWriter.write(data);
 						m = parser.mavlink_parse_char(data);
-						if (m!=null) {
-							if(m.msgid == msg_attitude.MAVLINK_MSG_ID_ATTITUDE){
-								Log.d("ROLL", String.format("Roll:%5.5f \t time:%d",((msg_attitude) m).roll,((msg_attitude) m).time_boot_ms));
+						if (m != null) {
+							if (m.msgid == msg_attitude.MAVLINK_MSG_ID_ATTITUDE) {
+								Log.d("ROLL", String.format(
+										"Roll:%5.5f \t time:%d",
+										((msg_attitude) m).roll,
+										((msg_attitude) m).time_boot_ms));
 							}
 							cnt++;
-							publishProgress("Received "+cnt+" packets\nLast packet was: "+m.msgid);
+							publishProgress("Received " + cnt
+									+ " packets\nLast packet was: " + m.msgid);
 						}
 					}
 				}
@@ -179,7 +207,6 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 			}
 			return null;
 		}
-
 
 		
 		@Override
@@ -196,6 +223,18 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 			closeConnection();
 		}
 
+
+
 	}
 
+	private FileOutputStream getFileStream() throws FileNotFoundException {
+		String root = Environment.getExternalStorageDirectory().toString();
+		File myDir = new File(root+"/DroidPlanner/logs");
+		myDir.mkdirs();
+		File file = new File(myDir, getTimeStamp()+".tlog");
+		if (file.exists())
+			file.delete();
+		FileOutputStream out = new FileOutputStream(file);
+		return out;
+	}
 }
