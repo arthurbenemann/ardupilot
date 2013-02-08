@@ -22,7 +22,7 @@ import android.widget.Button;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.MAVLink.MAVLink;
+import com.MAVLink.Parser;
 import com.MAVLink.Messages.MAVLinkMessage;
 
 public class TerminalActivity extends android.support.v4.app.FragmentActivity
@@ -127,12 +127,12 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		public static final String SERVERIP = "10.0.0.99"; 
 		public static final int SERVERPORT = 5760;
 		
-		public MAVLink parser;
+		public Parser parser;
 
 		@Override
 		protected String doInBackground(String... message) {
 			Socket socket = null;
-			parser = new MAVLink();
+			parser = new Parser();
 			try {
 				InetAddress serverAddr = InetAddress.getByName(SERVERIP);
 				socket = new Socket(serverAddr, SERVERPORT);

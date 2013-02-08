@@ -2,7 +2,7 @@ package com.MAVLink;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 
-public class MAVLink {
+public class Parser {
 
 	/**
 	 * This is a convenience function which handles the complete MAVLink
