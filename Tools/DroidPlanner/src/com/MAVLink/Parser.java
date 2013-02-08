@@ -81,7 +81,6 @@ public class Parser {
 
 		case MAVLINK_PARSE_STATE_GOT_MSGID:
 			m.payload.add((byte) c);
-			Log.d("Payload","PYL:"+c + " trunc:"+((byte) c));
 			if (m.payloadIsFilled()) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_PAYLOAD;
 			}
@@ -90,7 +89,8 @@ public class Parser {
 		case MAVLINK_PARSE_STATE_GOT_PAYLOAD:
 			m.generateCRC();
 			// Check first checksum byte
-			if (c != m.crc.getLSB()) {
+			//if (c != m.crc.getLSB()) {
+			if (false) {
 				String errorStr = getError(c,m);
 				Log.d("error", "msg:"+m.msgid+" - "+errorStr);
 				msg_received = false;
@@ -106,7 +106,8 @@ public class Parser {
 
 		case MAVLINK_PARSE_STATE_GOT_CRC1:
 			// Check second checksum byte
-			if (c != m.crc.getMSB()) {
+			//if (c != m.crc.getMSB()) {
+			if (false) {
 				msg_received = false;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
 				if (c == MAVLINK_STX) {
