@@ -44,17 +44,18 @@ public class msg_mount_control extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.input_a = payload.getint();
-	//m.input_b = payload.getint();
-	//m.input_c = payload.getint();
-	//m.target_system = payload.getbyte();
-	//m.target_component = payload.getbyte();
-	//m.save_position = payload.getbyte();
+	//input_a = payload.getInt();
+	//input_b = payload.getInt();
+	//input_c = payload.getInt();
+	//target_system = payload.getByte();
+	//target_component = payload.getByte();
+	//save_position = payload.getByte();
     
     }
 
     public msg_mount_control(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "MOUNT_CONTROL");
-	}
+    msgid = MAVLINK_MSG_ID_MOUNT_CONTROL;
+    unpack(payload);
+    Log.d("MAVLink", "MOUNT_CONTROL");
+    }
 }

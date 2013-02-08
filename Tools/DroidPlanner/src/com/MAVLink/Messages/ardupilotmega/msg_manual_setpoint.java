@@ -48,18 +48,19 @@ public class msg_manual_setpoint extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.time_boot_ms = payload.getint();
-	//m.roll = payload.getfloat();
-	//m.pitch = payload.getfloat();
-	//m.yaw = payload.getfloat();
-	//m.thrust = payload.getfloat();
-	//m.mode_switch = payload.getbyte();
-	//m.manual_override_switch = payload.getbyte();
+	//time_boot_ms = payload.getInt();
+	//roll = payload.getFloat();
+	//pitch = payload.getFloat();
+	//yaw = payload.getFloat();
+	//thrust = payload.getFloat();
+	//mode_switch = payload.getByte();
+	//manual_override_switch = payload.getByte();
     
     }
 
     public msg_manual_setpoint(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "MANUAL_SETPOINT");
-	}
+    msgid = MAVLINK_MSG_ID_MANUAL_SETPOINT;
+    unpack(payload);
+    Log.d("MAVLink", "MANUAL_SETPOINT");
+    }
 }

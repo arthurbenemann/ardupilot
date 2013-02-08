@@ -37,15 +37,16 @@ public class msg_fence_status extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.breach_time = payload.getint();
-	//m.breach_count = payload.getshort();
-	//m.breach_status = payload.getbyte();
-	//m.breach_type = payload.getbyte();
+	//breach_time = payload.getInt();
+	//breach_count = payload.getShort();
+	//breach_status = payload.getByte();
+	//breach_type = payload.getByte();
     
     }
 
     public msg_fence_status(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "FENCE_STATUS");
-	}
+    msgid = MAVLINK_MSG_ID_FENCE_STATUS;
+    unpack(payload);
+    Log.d("MAVLink", "FENCE_STATUS");
+    }
 }

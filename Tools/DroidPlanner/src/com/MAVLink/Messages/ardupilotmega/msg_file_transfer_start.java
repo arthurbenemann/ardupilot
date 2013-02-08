@@ -40,16 +40,17 @@ public class msg_file_transfer_start extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.transfer_uid = payload.getlong();
-	//m.file_size = payload.getint();
-	// = payload.getbyte();
-	//m.direction = payload.getbyte();
-	//m.flags = payload.getbyte();
+	//transfer_uid = payload.getLong();
+	//file_size = payload.getInt();
+	// = payload.getByte();
+	//direction = payload.getByte();
+	//flags = payload.getByte();
     
     }
 
     public msg_file_transfer_start(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "FILE_TRANSFER_START");
-	}
+    msgid = MAVLINK_MSG_ID_FILE_TRANSFER_START;
+    unpack(payload);
+    Log.d("MAVLink", "FILE_TRANSFER_START");
+    }
 }

@@ -45,17 +45,18 @@ public class msg_fence_point extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.lat = payload.getfloat();
-	//m.lng = payload.getfloat();
-	//m.target_system = payload.getbyte();
-	//m.target_component = payload.getbyte();
-	//m.idx = payload.getbyte();
-	//m.count = payload.getbyte();
+	//lat = payload.getFloat();
+	//lng = payload.getFloat();
+	//target_system = payload.getByte();
+	//target_component = payload.getByte();
+	//idx = payload.getByte();
+	//count = payload.getByte();
     
     }
 
     public msg_fence_point(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "FENCE_POINT");
-	}
+    msgid = MAVLINK_MSG_ID_FENCE_POINT;
+    unpack(payload);
+    Log.d("MAVLink", "FENCE_POINT");
+    }
 }

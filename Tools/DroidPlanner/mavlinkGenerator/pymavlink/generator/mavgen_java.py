@@ -169,44 +169,62 @@ ${{ordered_fields: 	/**
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-${{ordered_fields:	//${decode_left} = payload.get${type}();
+${{ordered_fields:	//${decode_left} = payload.get${getType}();
 }}
     
     }
 
     public msg_${name_lower}(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "${name}");
-	}
+    msgid = MAVLINK_MSG_ID_${name};
+    unpack(payload);
+    Log.d("MAVLink", "${name}");
+    }
 }
 ''', m)
     f.close()
 
 
 def generate_MAVLinkMessage(directory, xml_list):
-    f = open(os.path.join(directory, "MAVLinkMessage.Java"), mode='w')
-    f.write('''
-package com.MAVLink.Messages;
+    f = open(os.path.join(directory, "MAVLinkPacket.Java"), mode='w')
+    f.write('''package com.MAVLink.Messages;
 
 import android.util.Log;
-import com.MAVLink.Messages.MAVLinkPayload;
-import com.MAVLink.Messages.ardupilotmega.*;''')
-    f.write('''
-public class MAVLinkMessage {
-	/**
-	 *  Simply a common interface for all MAVLink Messages
-	 */
-	
-	public int messageType = -1;	
+
+import com.MAVLink.Messages.ardupilotmega.*;
+
+public class MAVLinkPacket{
 	public int seq;
 	public int len;
 	public  int sysid;
 	public int compid;
-	public int msgid;
+	public int msgid;		
+	public MAVLinkPayload payload;
+	public CRC crc;		
 	
-	public MAVLinkMessage unpackMessage(MAVLinkPayload payload) {
+	public MAVLinkPacket(){
+		payload = new MAVLinkPayload();
+	}
+	
+	public boolean payloadIsFilled() {
+		return (MAVLinkPayload.size() == len);
+	}
+	
+	public void generateCRC(){
+		crc = new CRC();
+		crc.update_checksum(len);
+		crc.update_checksum(seq);
+		crc.update_checksum(sysid);
+		crc.update_checksum(compid);
+		crc.update_checksum(msgid);
+		for (Byte data : MAVLinkPayload.getData()) {
+			crc.update_checksum(data);			
+		}
+		crc.finish_checksum(msgid);
+    }
+	
+	public MAVLinkMessage unpack() {
 		switch (msgid) {
-		''')
+''')
     for xml in xml_list:
         t.write(f, '''
 ${{message:		case msg_${name_lower}.MAVLINK_MSG_ID_${name}:
@@ -219,13 +237,6 @@ ${{message:		case msg_${name_lower}.MAVLINK_MSG_ID_${name}:
 		}
 	}
 
-	/*
-	 * private MAVLinkMessage unpackGPS_RAW() { msg_gps_raw m = new
-	 * msg_gps_raw(); m.usec = getInt64(0); m.fix_type = getInt8(8); m.lat =
-	 * getInt32(12); m.lon = getInt32(16); m.alt = getInt32(20); m.eph =
-	 * getInt16(24); m.epv = getInt16(26); m.v = getInt16(28); m. =
-	 * getInt16(28); return m; }
-	 */
 }
 	
 ''')
@@ -386,7 +397,7 @@ def generate_one(basename, xml):
                 f.array_arg = ''
                 f.array_return_arg = ''
                 f.array_const = ''
-                f.decode_left =  'm.%s' % (f.name)
+                f.decode_left =  '%s' % (f.name)
                 f.decode_right = ''
                 f.get_arg = ''
                 f.return_type = f.type
@@ -420,6 +431,7 @@ def generate_one(basename, xml):
     for m in xml.message:
         for f in m.ordered_fields:
                 f.type = mavfmt(f)
+                f.getType = f.type.title();
             
     #generate_mavlink_h(directory, xml)
     #generate_version_h(directory, xml)

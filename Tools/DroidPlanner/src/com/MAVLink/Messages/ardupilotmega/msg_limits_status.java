@@ -57,20 +57,21 @@ public class msg_limits_status extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.last_trigger = payload.getint();
-	//m.last_action = payload.getint();
-	//m.last_recovery = payload.getint();
-	//m.last_clear = payload.getint();
-	//m.breach_count = payload.getshort();
-	//m.limits_state = payload.getbyte();
-	//m.mods_enabled = payload.getbyte();
-	//m.mods_required = payload.getbyte();
-	//m.mods_triggered = payload.getbyte();
+	//last_trigger = payload.getInt();
+	//last_action = payload.getInt();
+	//last_recovery = payload.getInt();
+	//last_clear = payload.getInt();
+	//breach_count = payload.getShort();
+	//limits_state = payload.getByte();
+	//mods_enabled = payload.getByte();
+	//mods_required = payload.getByte();
+	//mods_triggered = payload.getByte();
     
     }
 
     public msg_limits_status(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "LIMITS_STATUS");
-	}
+    msgid = MAVLINK_MSG_ID_LIMITS_STATUS;
+    unpack(payload);
+    Log.d("MAVLink", "LIMITS_STATUS");
+    }
 }

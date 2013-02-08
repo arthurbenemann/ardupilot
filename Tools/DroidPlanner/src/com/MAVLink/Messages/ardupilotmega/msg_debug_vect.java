@@ -40,16 +40,17 @@ public class msg_debug_vect extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.time_usec = payload.getlong();
-	//m.x = payload.getfloat();
-	//m.y = payload.getfloat();
-	//m.z = payload.getfloat();
-	// = payload.getbyte();
+	//time_usec = payload.getLong();
+	//x = payload.getFloat();
+	//y = payload.getFloat();
+	//z = payload.getFloat();
+	// = payload.getByte();
     
     }
 
     public msg_debug_vect(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "DEBUG_VECT");
-	}
+    msgid = MAVLINK_MSG_ID_DEBUG_VECT;
+    unpack(payload);
+    Log.d("MAVLink", "DEBUG_VECT");
+    }
 }

@@ -60,21 +60,22 @@ public class msg_scaled_imu extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.time_boot_ms = payload.getint();
-	//m.xacc = payload.getshort();
-	//m.yacc = payload.getshort();
-	//m.zacc = payload.getshort();
-	//m.xgyro = payload.getshort();
-	//m.ygyro = payload.getshort();
-	//m.zgyro = payload.getshort();
-	//m.xmag = payload.getshort();
-	//m.ymag = payload.getshort();
-	//m.zmag = payload.getshort();
+	//time_boot_ms = payload.getInt();
+	//xacc = payload.getShort();
+	//yacc = payload.getShort();
+	//zacc = payload.getShort();
+	//xgyro = payload.getShort();
+	//ygyro = payload.getShort();
+	//zgyro = payload.getShort();
+	//xmag = payload.getShort();
+	//ymag = payload.getShort();
+	//zmag = payload.getShort();
     
     }
 
     public msg_scaled_imu(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "SCALED_IMU");
-	}
+    msgid = MAVLINK_MSG_ID_SCALED_IMU;
+    unpack(payload);
+    Log.d("MAVLink", "SCALED_IMU");
+    }
 }

@@ -32,14 +32,15 @@ public class msg_mission_count extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.count = payload.getshort();
-	//m.target_system = payload.getbyte();
-	//m.target_component = payload.getbyte();
+	//count = payload.getShort();
+	//target_system = payload.getByte();
+	//target_component = payload.getByte();
     
     }
 
     public msg_mission_count(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "MISSION_COUNT");
-	}
+    msgid = MAVLINK_MSG_ID_MISSION_COUNT;
+    unpack(payload);
+    Log.d("MAVLink", "MISSION_COUNT");
+    }
 }

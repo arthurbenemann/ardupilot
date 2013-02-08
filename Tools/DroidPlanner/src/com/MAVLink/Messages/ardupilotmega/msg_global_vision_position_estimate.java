@@ -48,18 +48,19 @@ public class msg_global_vision_position_estimate extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.usec = payload.getlong();
-	//m.x = payload.getfloat();
-	//m.y = payload.getfloat();
-	//m.z = payload.getfloat();
-	//m.roll = payload.getfloat();
-	//m.pitch = payload.getfloat();
-	//m.yaw = payload.getfloat();
+	//usec = payload.getLong();
+	//x = payload.getFloat();
+	//y = payload.getFloat();
+	//z = payload.getFloat();
+	//roll = payload.getFloat();
+	//pitch = payload.getFloat();
+	//yaw = payload.getFloat();
     
     }
 
     public msg_global_vision_position_estimate(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "GLOBAL_VISION_POSITION_ESTIMATE");
-	}
+    msgid = MAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE;
+    unpack(payload);
+    Log.d("MAVLink", "GLOBAL_VISION_POSITION_ESTIMATE");
+    }
 }

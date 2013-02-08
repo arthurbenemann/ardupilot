@@ -60,21 +60,22 @@ public class msg_servo_output_raw extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.time_usec = payload.getint();
-	//m.servo1_raw = payload.getshort();
-	//m.servo2_raw = payload.getshort();
-	//m.servo3_raw = payload.getshort();
-	//m.servo4_raw = payload.getshort();
-	//m.servo5_raw = payload.getshort();
-	//m.servo6_raw = payload.getshort();
-	//m.servo7_raw = payload.getshort();
-	//m.servo8_raw = payload.getshort();
-	//m.port = payload.getbyte();
+	//time_usec = payload.getInt();
+	//servo1_raw = payload.getShort();
+	//servo2_raw = payload.getShort();
+	//servo3_raw = payload.getShort();
+	//servo4_raw = payload.getShort();
+	//servo5_raw = payload.getShort();
+	//servo6_raw = payload.getShort();
+	//servo7_raw = payload.getShort();
+	//servo8_raw = payload.getShort();
+	//port = payload.getByte();
     
     }
 
     public msg_servo_output_raw(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "SERVO_OUTPUT_RAW");
-	}
+    msgid = MAVLINK_MSG_ID_SERVO_OUTPUT_RAW;
+    unpack(payload);
+    Log.d("MAVLink", "SERVO_OUTPUT_RAW");
+    }
 }

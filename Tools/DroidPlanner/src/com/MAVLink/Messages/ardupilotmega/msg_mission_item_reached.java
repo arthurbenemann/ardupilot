@@ -24,12 +24,13 @@ public class msg_mission_item_reached extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.seq = payload.getshort();
+	//seq = payload.getShort();
     
     }
 
     public msg_mission_item_reached(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "MISSION_ITEM_REACHED");
-	}
+    msgid = MAVLINK_MSG_ID_MISSION_ITEM_REACHED;
+    unpack(payload);
+    Log.d("MAVLink", "MISSION_ITEM_REACHED");
+    }
 }

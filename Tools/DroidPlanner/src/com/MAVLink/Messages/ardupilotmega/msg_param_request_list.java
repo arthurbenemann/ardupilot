@@ -28,13 +28,14 @@ public class msg_param_request_list extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.target_system = payload.getbyte();
-	//m.target_component = payload.getbyte();
+	//target_system = payload.getByte();
+	//target_component = payload.getByte();
     
     }
 
     public msg_param_request_list(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "PARAM_REQUEST_LIST");
-	}
+    msgid = MAVLINK_MSG_ID_PARAM_REQUEST_LIST;
+    unpack(payload);
+    Log.d("MAVLink", "PARAM_REQUEST_LIST");
+    }
 }

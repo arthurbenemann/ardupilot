@@ -36,15 +36,16 @@ public class msg_mission_write_partial_list extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.start_index = payload.getshort();
-	//m.end_index = payload.getshort();
-	//m.target_system = payload.getbyte();
-	//m.target_component = payload.getbyte();
+	//start_index = payload.getShort();
+	//end_index = payload.getShort();
+	//target_system = payload.getByte();
+	//target_component = payload.getByte();
     
     }
 
     public msg_mission_write_partial_list(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "MISSION_WRITE_PARTIAL_LIST");
-	}
+    msgid = MAVLINK_MSG_ID_MISSION_WRITE_PARTIAL_LIST;
+    unpack(payload);
+    Log.d("MAVLink", "MISSION_WRITE_PARTIAL_LIST");
+    }
 }

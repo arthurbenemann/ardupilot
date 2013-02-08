@@ -40,16 +40,17 @@ public class msg_set_mag_offsets extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.mag_ofs_x = payload.getshort();
-	//m.mag_ofs_y = payload.getshort();
-	//m.mag_ofs_z = payload.getshort();
-	//m.target_system = payload.getbyte();
-	//m.target_component = payload.getbyte();
+	//mag_ofs_x = payload.getShort();
+	//mag_ofs_y = payload.getShort();
+	//mag_ofs_z = payload.getShort();
+	//target_system = payload.getByte();
+	//target_component = payload.getByte();
     
     }
 
     public msg_set_mag_offsets(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "SET_MAG_OFFSETS");
-	}
+    msgid = MAVLINK_MSG_ID_SET_MAG_OFFSETS;
+    unpack(payload);
+    Log.d("MAVLink", "SET_MAG_OFFSETS");
+    }
 }

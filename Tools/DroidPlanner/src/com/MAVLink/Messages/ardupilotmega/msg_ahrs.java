@@ -48,18 +48,19 @@ public class msg_ahrs extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.omegaIx = payload.getfloat();
-	//m.omegaIy = payload.getfloat();
-	//m.omegaIz = payload.getfloat();
-	//m.accel_weight = payload.getfloat();
-	//m.renorm_val = payload.getfloat();
-	//m.error_rp = payload.getfloat();
-	//m.error_yaw = payload.getfloat();
+	//omegaIx = payload.getFloat();
+	//omegaIy = payload.getFloat();
+	//omegaIz = payload.getFloat();
+	//accel_weight = payload.getFloat();
+	//renorm_val = payload.getFloat();
+	//error_rp = payload.getFloat();
+	//error_yaw = payload.getFloat();
     
     }
 
     public msg_ahrs(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "AHRS");
-	}
+    msgid = MAVLINK_MSG_ID_AHRS;
+    unpack(payload);
+    Log.d("MAVLink", "AHRS");
+    }
 }

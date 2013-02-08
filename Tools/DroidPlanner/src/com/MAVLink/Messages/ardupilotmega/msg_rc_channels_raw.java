@@ -64,22 +64,23 @@ public class msg_rc_channels_raw extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.time_boot_ms = payload.getint();
-	//m.chan1_raw = payload.getshort();
-	//m.chan2_raw = payload.getshort();
-	//m.chan3_raw = payload.getshort();
-	//m.chan4_raw = payload.getshort();
-	//m.chan5_raw = payload.getshort();
-	//m.chan6_raw = payload.getshort();
-	//m.chan7_raw = payload.getshort();
-	//m.chan8_raw = payload.getshort();
-	//m.port = payload.getbyte();
-	//m.rssi = payload.getbyte();
+	//time_boot_ms = payload.getInt();
+	//chan1_raw = payload.getShort();
+	//chan2_raw = payload.getShort();
+	//chan3_raw = payload.getShort();
+	//chan4_raw = payload.getShort();
+	//chan5_raw = payload.getShort();
+	//chan6_raw = payload.getShort();
+	//chan7_raw = payload.getShort();
+	//chan8_raw = payload.getShort();
+	//port = payload.getByte();
+	//rssi = payload.getByte();
     
     }
 
     public msg_rc_channels_raw(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "RC_CHANNELS_RAW");
-	}
+    msgid = MAVLINK_MSG_ID_RC_CHANNELS_RAW;
+    unpack(payload);
+    Log.d("MAVLink", "RC_CHANNELS_RAW");
+    }
 }

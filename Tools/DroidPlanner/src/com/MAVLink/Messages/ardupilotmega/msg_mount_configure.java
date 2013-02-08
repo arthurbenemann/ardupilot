@@ -44,17 +44,18 @@ public class msg_mount_configure extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.target_system = payload.getbyte();
-	//m.target_component = payload.getbyte();
-	//m.mount_mode = payload.getbyte();
-	//m.stab_roll = payload.getbyte();
-	//m.stab_pitch = payload.getbyte();
-	//m.stab_yaw = payload.getbyte();
+	//target_system = payload.getByte();
+	//target_component = payload.getByte();
+	//mount_mode = payload.getByte();
+	//stab_roll = payload.getByte();
+	//stab_pitch = payload.getByte();
+	//stab_yaw = payload.getByte();
     
     }
 
     public msg_mount_configure(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "MOUNT_CONFIGURE");
-	}
+    msgid = MAVLINK_MSG_ID_MOUNT_CONFIGURE;
+    unpack(payload);
+    Log.d("MAVLink", "MOUNT_CONFIGURE");
+    }
 }

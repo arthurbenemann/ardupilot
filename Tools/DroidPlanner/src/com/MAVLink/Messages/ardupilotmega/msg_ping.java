@@ -36,15 +36,16 @@ public class msg_ping extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.time_usec = payload.getlong();
-	//m.seq = payload.getint();
-	//m.target_system = payload.getbyte();
-	//m.target_component = payload.getbyte();
+	//time_usec = payload.getLong();
+	//seq = payload.getInt();
+	//target_system = payload.getByte();
+	//target_component = payload.getByte();
     
     }
 
     public msg_ping(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "PING");
-	}
+    msgid = MAVLINK_MSG_ID_PING;
+    unpack(payload);
+    Log.d("MAVLink", "PING");
+    }
 }

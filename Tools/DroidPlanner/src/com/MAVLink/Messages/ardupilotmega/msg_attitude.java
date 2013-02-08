@@ -48,18 +48,19 @@ public class msg_attitude extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	time_boot_ms = payload.getInt();
-	roll = payload.getFloat();
-	pitch = payload.getFloat();
-	yaw = payload.getFloat();
-	rollspeed = payload.getFloat();
-	pitchspeed = payload.getFloat();
-	yawspeed = payload.getFloat();
+	//time_boot_ms = payload.getInt();
+	//roll = payload.getFloat();
+	//pitch = payload.getFloat();
+	//yaw = payload.getFloat();
+	//rollspeed = payload.getFloat();
+	//pitchspeed = payload.getFloat();
+	//yawspeed = payload.getFloat();
+    
     }
 
     public msg_attitude(MAVLinkPayload payload){
     msgid = MAVLINK_MSG_ID_ATTITUDE;
-	unpack(payload);
-	Log.d("MAVLink", "ATTITUDE");
-	}
+    unpack(payload);
+    Log.d("MAVLink", "ATTITUDE");
+    }
 }

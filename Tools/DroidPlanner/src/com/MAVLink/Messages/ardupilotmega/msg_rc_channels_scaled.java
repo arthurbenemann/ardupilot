@@ -64,22 +64,23 @@ public class msg_rc_channels_scaled extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.time_boot_ms = payload.getint();
-	//m.chan1_scaled = payload.getshort();
-	//m.chan2_scaled = payload.getshort();
-	//m.chan3_scaled = payload.getshort();
-	//m.chan4_scaled = payload.getshort();
-	//m.chan5_scaled = payload.getshort();
-	//m.chan6_scaled = payload.getshort();
-	//m.chan7_scaled = payload.getshort();
-	//m.chan8_scaled = payload.getshort();
-	//m.port = payload.getbyte();
-	//m.rssi = payload.getbyte();
+	//time_boot_ms = payload.getInt();
+	//chan1_scaled = payload.getShort();
+	//chan2_scaled = payload.getShort();
+	//chan3_scaled = payload.getShort();
+	//chan4_scaled = payload.getShort();
+	//chan5_scaled = payload.getShort();
+	//chan6_scaled = payload.getShort();
+	//chan7_scaled = payload.getShort();
+	//chan8_scaled = payload.getShort();
+	//port = payload.getByte();
+	//rssi = payload.getByte();
     
     }
 
     public msg_rc_channels_scaled(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "RC_CHANNELS_SCALED");
-	}
+    msgid = MAVLINK_MSG_ID_RC_CHANNELS_SCALED;
+    unpack(payload);
+    Log.d("MAVLink", "RC_CHANNELS_SCALED");
+    }
 }

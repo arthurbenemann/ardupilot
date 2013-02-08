@@ -40,16 +40,17 @@ public class msg_param_set extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.param_value = payload.getfloat();
-	//m.target_system = payload.getbyte();
-	//m.target_component = payload.getbyte();
-	// = payload.getbyte();
-	//m.param_type = payload.getbyte();
+	//param_value = payload.getFloat();
+	//target_system = payload.getByte();
+	//target_component = payload.getByte();
+	// = payload.getByte();
+	//param_type = payload.getByte();
     
     }
 
     public msg_param_set(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "PARAM_SET");
-	}
+    msgid = MAVLINK_MSG_ID_PARAM_SET;
+    unpack(payload);
+    Log.d("MAVLink", "PARAM_SET");
+    }
 }

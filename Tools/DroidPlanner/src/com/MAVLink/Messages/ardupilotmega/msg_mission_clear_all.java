@@ -28,13 +28,14 @@ public class msg_mission_clear_all extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.target_system = payload.getbyte();
-	//m.target_component = payload.getbyte();
+	//target_system = payload.getByte();
+	//target_component = payload.getByte();
     
     }
 
     public msg_mission_clear_all(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "MISSION_CLEAR_ALL");
-	}
+    msgid = MAVLINK_MSG_ID_MISSION_CLEAR_ALL;
+    unpack(payload);
+    Log.d("MAVLink", "MISSION_CLEAR_ALL");
+    }
 }

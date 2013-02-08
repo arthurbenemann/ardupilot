@@ -32,11 +32,11 @@ public class MAVLinkPacket{
 			crc.update_checksum(data);			
 		}
 		crc.finish_checksum(msgid);
-	}
+    }
 	
 	public MAVLinkMessage unpack() {
 		switch (msgid) {
-			case msg_sensor_offsets.MAVLINK_MSG_ID_SENSOR_OFFSETS:
+		case msg_sensor_offsets.MAVLINK_MSG_ID_SENSOR_OFFSETS:
 			return  new msg_sensor_offsets(payload);
 		case msg_set_mag_offsets.MAVLINK_MSG_ID_SET_MAG_OFFSETS:
 			return  new msg_set_mag_offsets(payload);
@@ -256,3 +256,4 @@ public class MAVLinkPacket{
 	}
 
 }
+	

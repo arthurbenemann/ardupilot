@@ -32,14 +32,15 @@ public class msg_debug extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.time_boot_ms = payload.getint();
-	//m.value = payload.getfloat();
-	//m.ind = payload.getbyte();
+	//time_boot_ms = payload.getInt();
+	//value = payload.getFloat();
+	//ind = payload.getByte();
     
     }
 
     public msg_debug(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "DEBUG");
-	}
+    msgid = MAVLINK_MSG_ID_DEBUG;
+    unpack(payload);
+    Log.d("MAVLink", "DEBUG");
+    }
 }

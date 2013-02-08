@@ -32,14 +32,15 @@ public class msg_named_value_int extends MAVLinkMessage{
  * @param payload The message to decode
  */
 public void unpack(MAVLinkPayload payload) {
-	//m.time_boot_ms = payload.getint();
-	//m.value = payload.getint();
-	// = payload.getbyte();
+	//time_boot_ms = payload.getInt();
+	//value = payload.getInt();
+	// = payload.getByte();
     
     }
 
     public msg_named_value_int(MAVLinkPayload payload){
-	unpack(payload);
-	Log.d("MAVLink", "NAMED_VALUE_INT");
-	}
+    msgid = MAVLINK_MSG_ID_NAMED_VALUE_INT;
+    unpack(payload);
+    Log.d("MAVLink", "NAMED_VALUE_INT");
+    }
 }
