@@ -16,7 +16,7 @@ public class MAVLinkPayload {
 		return payload;
 	}
 
-	public static int size() {
+	public int size() {
 		return payload.size();
 	}
 

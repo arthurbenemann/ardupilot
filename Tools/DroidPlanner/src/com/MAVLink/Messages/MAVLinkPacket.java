@@ -18,7 +18,7 @@ public class MAVLinkPacket{
 	}
 	
 	public boolean payloadIsFilled() {
-		return (MAVLinkPayload.size() == len);
+		return (payload.size() == len);
 	}
 	
 	public void generateCRC(){
