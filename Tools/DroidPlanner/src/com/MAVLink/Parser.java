@@ -81,6 +81,7 @@ public class Parser {
 
 		case MAVLINK_PARSE_STATE_GOT_MSGID:
 			m.payload.add((byte) c);
+			Log.d("Payload","PYL:"+c + " trunc:"+((byte) c));
 			if (m.payloadIsFilled()) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_PAYLOAD;
 			}
@@ -90,7 +91,8 @@ public class Parser {
 			m.generateCRC();
 			// Check first checksum byte
 			if (c != m.crc.getLSB()) {
-				Log.d("error", "CRC1 error for msg:"+m.msgid);
+				String errorStr = getError(c,m);
+				Log.d("error", "msg:"+m.msgid+" - "+errorStr);
 				msg_received = false;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
 				if (c == MAVLINK_STX) {
@@ -105,7 +107,6 @@ public class Parser {
 		case MAVLINK_PARSE_STATE_GOT_CRC1:
 			// Check second checksum byte
 			if (c != m.crc.getMSB()) {
-				Log.d("error", "CRC2 error for msg:"+m.msgid);
 				msg_received = false;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
 				if (c == MAVLINK_STX) {
@@ -128,6 +129,22 @@ public class Parser {
 		}
 
 			return message;	
+	}
+
+	private String getError(int c, MAVLinkPacket m) {
+		String str = new String();
+		str = (m.len)+":"; 
+		str += (m.seq)+":"; 
+		str += (m.sysid)+":"; 
+		str += (m.compid)+":"; 
+		str += (m.msgid)+".";
+		m.payload.resetIndex();
+		for (int i = 0; i < m.payload.size(); i++) {
+			str += (m.payload.getByte())+":";
+		}
+		str += (c)+":"; 
+		
+		return str;
 	}
 
 }

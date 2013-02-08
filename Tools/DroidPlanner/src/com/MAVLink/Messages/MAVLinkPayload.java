@@ -5,14 +5,14 @@ import java.util.List;
 
 public class MAVLinkPayload {
 
-	public static List<Byte> payload;
+	public List<Byte> payload;
 	public int index;
 
 	public MAVLinkPayload() {
 		payload = new ArrayList<Byte>();
 	}
 
-	public static List<Byte> getData() {
+	public List<Byte> getData() {
 		return payload;
 	}
 
