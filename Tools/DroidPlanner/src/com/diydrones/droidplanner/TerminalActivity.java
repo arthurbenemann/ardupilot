@@ -183,6 +183,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 				in = new BufferedInputStream(socket.getInputStream());
 				int cnt = 0;
 				MAVLinkMessage m;
+				String attitudeString = "";
 				while (running) {
 					int data;
 					if ((data = in.read()) >= 0) {
@@ -190,14 +191,18 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 						m = parser.mavlink_parse_char(data);
 						if (m != null) {
 							if (m.msgid == msg_attitude.MAVLINK_MSG_ID_ATTITUDE) {
-								Log.d("ROLL", String.format(
-										"Roll:%5.5f \t time:%d",
-										((msg_attitude) m).roll,
-										((msg_attitude) m).time_boot_ms));
+								attitudeString = String.format(
+										"Roll:%3.1f \t Yaw:%3.1f \t Pitch:%3.1f \t time:%d",
+										((msg_attitude) m).roll*57.3,
+										((msg_attitude) m).yaw*57.3,
+										((msg_attitude) m).pitch*57.3,
+										((msg_attitude) m).time_boot_ms);
+								Log.d("ROLL", attitudeString);
 							}
 							cnt++;
-							publishProgress("Received " + cnt
-									+ " packets\nLast packet was: " + m.msgid);
+							
+							String terminalMsg = "Received " + cnt + " packets\nLast packet was: " + m.msgid+"\n";
+							publishProgress(terminalMsg+attitudeString);
 						}
 					}
 				}
