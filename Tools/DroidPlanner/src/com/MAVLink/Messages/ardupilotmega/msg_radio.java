@@ -47,20 +47,19 @@ public class msg_radio extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//rxerrors = payload.getShort();
-	//fixed = payload.getShort();
-	//rssi = payload.getByte();
-	//remrssi = payload.getByte();
-	//txbuf = payload.getByte();
-	//noise = payload.getByte();
-	//remnoise = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    rxerrors = payload.getShort();
+	    fixed = payload.getShort();
+	    rssi = payload.getByte();
+	    remrssi = payload.getByte();
+	    txbuf = payload.getByte();
+	    noise = payload.getByte();
+	    remnoise = payload.getByte();    
     }
 
     public msg_radio(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_RADIO;
-    unpack(payload);
-    Log.d("MAVLink", "RADIO");
+        msgid = MAVLINK_MSG_ID_RADIO;
+        unpack(payload);
+        Log.d("MAVLink", "RADIO");
     }
 }

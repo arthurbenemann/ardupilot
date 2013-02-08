@@ -31,16 +31,15 @@ public class msg_fence_fetch_point extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//target_system = payload.getByte();
-	//target_component = payload.getByte();
-	//idx = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    target_system = payload.getByte();
+	    target_component = payload.getByte();
+	    idx = payload.getByte();    
     }
 
     public msg_fence_fetch_point(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_FENCE_FETCH_POINT;
-    unpack(payload);
-    Log.d("MAVLink", "FENCE_FETCH_POINT");
+        msgid = MAVLINK_MSG_ID_FENCE_FETCH_POINT;
+        unpack(payload);
+        Log.d("MAVLink", "FENCE_FETCH_POINT");
     }
 }

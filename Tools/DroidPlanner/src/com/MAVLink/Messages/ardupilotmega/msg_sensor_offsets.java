@@ -68,25 +68,24 @@ public class msg_sensor_offsets extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//mag_declination = payload.getFloat();
-	//raw_press = payload.getInt();
-	//raw_temp = payload.getInt();
-	//gyro_cal_x = payload.getFloat();
-	//gyro_cal_y = payload.getFloat();
-	//gyro_cal_z = payload.getFloat();
-	//accel_cal_x = payload.getFloat();
-	//accel_cal_y = payload.getFloat();
-	//accel_cal_z = payload.getFloat();
-	//mag_ofs_x = payload.getShort();
-	//mag_ofs_y = payload.getShort();
-	//mag_ofs_z = payload.getShort();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    mag_declination = payload.getFloat();
+	    raw_press = payload.getInt();
+	    raw_temp = payload.getInt();
+	    gyro_cal_x = payload.getFloat();
+	    gyro_cal_y = payload.getFloat();
+	    gyro_cal_z = payload.getFloat();
+	    accel_cal_x = payload.getFloat();
+	    accel_cal_y = payload.getFloat();
+	    accel_cal_z = payload.getFloat();
+	    mag_ofs_x = payload.getShort();
+	    mag_ofs_y = payload.getShort();
+	    mag_ofs_z = payload.getShort();    
     }
 
     public msg_sensor_offsets(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_SENSOR_OFFSETS;
-    unpack(payload);
-    Log.d("MAVLink", "SENSOR_OFFSETS");
+        msgid = MAVLINK_MSG_ID_SENSOR_OFFSETS;
+        unpack(payload);
+        Log.d("MAVLink", "SENSOR_OFFSETS");
     }
 }

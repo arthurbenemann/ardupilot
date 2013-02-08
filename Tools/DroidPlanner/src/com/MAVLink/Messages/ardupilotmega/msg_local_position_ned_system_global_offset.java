@@ -47,20 +47,19 @@ public class msg_local_position_ned_system_global_offset extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//time_boot_ms = payload.getInt();
-	//x = payload.getFloat();
-	//y = payload.getFloat();
-	//z = payload.getFloat();
-	//roll = payload.getFloat();
-	//pitch = payload.getFloat();
-	//yaw = payload.getFloat();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    time_boot_ms = payload.getInt();
+	    x = payload.getFloat();
+	    y = payload.getFloat();
+	    z = payload.getFloat();
+	    roll = payload.getFloat();
+	    pitch = payload.getFloat();
+	    yaw = payload.getFloat();    
     }
 
     public msg_local_position_ned_system_global_offset(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET;
-    unpack(payload);
-    Log.d("MAVLink", "LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET");
+        msgid = MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET;
+        unpack(payload);
+        Log.d("MAVLink", "LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET");
     }
 }

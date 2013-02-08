@@ -168,16 +168,15 @@ ${{ordered_fields: 	/**
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-${{ordered_fields:	//${decode_left} = payload.get${getType}();
-}}
-    
+    public void unpack(MAVLinkPayload payload) {
+${{ordered_fields:	    ${unpackField}
+}}    
     }
 
     public msg_${name_lower}(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_${name};
-    unpack(payload);
-    Log.d("MAVLink", "${name}");
+        msgid = MAVLINK_MSG_ID_${name};
+        unpack(payload);
+        Log.d("MAVLink", "${name}");
     }
 }
 ''', m)
@@ -381,6 +380,10 @@ def generate_one(basename, xml):
                 f.array_const = 'const '
                 f.decode_left = ''
                 f.decode_right = 'm.%s' % (f.name)
+                
+                f.unpackField = ''' for (int i = 0; i < %s.length; i++) {
+			%s[i] = payload.get%s();
+		}''' % (f.name, f.name, mavfmt(f).title() )
                 f.return_type = 'uint16_t'
                 f.get_arg = ', %s *%s' % (f.type, f.name)
                 if f.type == 'char':
@@ -399,6 +402,7 @@ def generate_one(basename, xml):
                 f.array_const = ''
                 f.decode_left =  '%s' % (f.name)
                 f.decode_right = ''
+                f.unpackField = '%s = payload.get%s();' % (f.name, mavfmt(f).title())
                 f.get_arg = ''
                 f.return_type = f.type
                 if f.type == 'char':
@@ -431,7 +435,6 @@ def generate_one(basename, xml):
     for m in xml.message:
         for f in m.ordered_fields:
                 f.type = mavfmt(f)
-                f.getType = f.type.title();
             
     #generate_mavlink_h(directory, xml)
     #generate_version_h(directory, xml)

@@ -59,23 +59,22 @@ public class msg_raw_imu extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//time_usec = payload.getLong();
-	//xacc = payload.getShort();
-	//yacc = payload.getShort();
-	//zacc = payload.getShort();
-	//xgyro = payload.getShort();
-	//ygyro = payload.getShort();
-	//zgyro = payload.getShort();
-	//xmag = payload.getShort();
-	//ymag = payload.getShort();
-	//zmag = payload.getShort();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    time_usec = payload.getLong();
+	    xacc = payload.getShort();
+	    yacc = payload.getShort();
+	    zacc = payload.getShort();
+	    xgyro = payload.getShort();
+	    ygyro = payload.getShort();
+	    zgyro = payload.getShort();
+	    xmag = payload.getShort();
+	    ymag = payload.getShort();
+	    zmag = payload.getShort();    
     }
 
     public msg_raw_imu(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_RAW_IMU;
-    unpack(payload);
-    Log.d("MAVLink", "RAW_IMU");
+        msgid = MAVLINK_MSG_ID_RAW_IMU;
+        unpack(payload);
+        Log.d("MAVLink", "RAW_IMU");
     }
 }

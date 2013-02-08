@@ -27,15 +27,16 @@ public class msg_statustext extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//severity = payload.getByte();
-	// = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    severity = payload.getByte();
+	     for (int i = 0; i < text.length; i++) {
+			text[i] = payload.getByte();
+		}    
     }
 
     public msg_statustext(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_STATUSTEXT;
-    unpack(payload);
-    Log.d("MAVLink", "STATUSTEXT");
+        msgid = MAVLINK_MSG_ID_STATUSTEXT;
+        unpack(payload);
+        Log.d("MAVLink", "STATUSTEXT");
     }
 }

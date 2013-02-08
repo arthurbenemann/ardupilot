@@ -63,24 +63,23 @@ public class msg_simstate extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//roll = payload.getFloat();
-	//pitch = payload.getFloat();
-	//yaw = payload.getFloat();
-	//xacc = payload.getFloat();
-	//yacc = payload.getFloat();
-	//zacc = payload.getFloat();
-	//xgyro = payload.getFloat();
-	//ygyro = payload.getFloat();
-	//zgyro = payload.getFloat();
-	//lat = payload.getFloat();
-	//lng = payload.getFloat();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    roll = payload.getFloat();
+	    pitch = payload.getFloat();
+	    yaw = payload.getFloat();
+	    xacc = payload.getFloat();
+	    yacc = payload.getFloat();
+	    zacc = payload.getFloat();
+	    xgyro = payload.getFloat();
+	    ygyro = payload.getFloat();
+	    zgyro = payload.getFloat();
+	    lat = payload.getFloat();
+	    lng = payload.getFloat();    
     }
 
     public msg_simstate(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_SIMSTATE;
-    unpack(payload);
-    Log.d("MAVLink", "SIMSTATE");
+        msgid = MAVLINK_MSG_ID_SIMSTATE;
+        unpack(payload);
+        Log.d("MAVLink", "SIMSTATE");
     }
 }

@@ -59,23 +59,22 @@ public class msg_rc_channels_override extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//chan1_raw = payload.getShort();
-	//chan2_raw = payload.getShort();
-	//chan3_raw = payload.getShort();
-	//chan4_raw = payload.getShort();
-	//chan5_raw = payload.getShort();
-	//chan6_raw = payload.getShort();
-	//chan7_raw = payload.getShort();
-	//chan8_raw = payload.getShort();
-	//target_system = payload.getByte();
-	//target_component = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    chan1_raw = payload.getShort();
+	    chan2_raw = payload.getShort();
+	    chan3_raw = payload.getShort();
+	    chan4_raw = payload.getShort();
+	    chan5_raw = payload.getShort();
+	    chan6_raw = payload.getShort();
+	    chan7_raw = payload.getShort();
+	    chan8_raw = payload.getShort();
+	    target_system = payload.getByte();
+	    target_component = payload.getByte();    
     }
 
     public msg_rc_channels_override(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE;
-    unpack(payload);
-    Log.d("MAVLink", "RC_CHANNELS_OVERRIDE");
+        msgid = MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE;
+        unpack(payload);
+        Log.d("MAVLink", "RC_CHANNELS_OVERRIDE");
     }
 }

@@ -39,18 +39,17 @@ public class msg_set_quad_motors_setpoint extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//motor_front_nw = payload.getShort();
-	//motor_right_ne = payload.getShort();
-	//motor_back_se = payload.getShort();
-	//motor_left_sw = payload.getShort();
-	//target_system = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    motor_front_nw = payload.getShort();
+	    motor_right_ne = payload.getShort();
+	    motor_back_se = payload.getShort();
+	    motor_left_sw = payload.getShort();
+	    target_system = payload.getByte();    
     }
 
     public msg_set_quad_motors_setpoint(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT;
-    unpack(payload);
-    Log.d("MAVLink", "SET_QUAD_MOTORS_SETPOINT");
+        msgid = MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT;
+        unpack(payload);
+        Log.d("MAVLink", "SET_QUAD_MOTORS_SETPOINT");
     }
 }

@@ -23,14 +23,13 @@ public class msg_mission_current extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//seq = payload.getShort();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    seq = payload.getShort();    
     }
 
     public msg_mission_current(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_MISSION_CURRENT;
-    unpack(payload);
-    Log.d("MAVLink", "MISSION_CURRENT");
+        msgid = MAVLINK_MSG_ID_MISSION_CURRENT;
+        unpack(payload);
+        Log.d("MAVLink", "MISSION_CURRENT");
     }
 }

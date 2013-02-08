@@ -35,17 +35,18 @@ public class msg_change_operator_control extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//target_system = payload.getByte();
-	//control_request = payload.getByte();
-	//version = payload.getByte();
-	// = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    target_system = payload.getByte();
+	    control_request = payload.getByte();
+	    version = payload.getByte();
+	     for (int i = 0; i < passkey.length; i++) {
+			passkey[i] = payload.getByte();
+		}    
     }
 
     public msg_change_operator_control(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL;
-    unpack(payload);
-    Log.d("MAVLink", "CHANGE_OPERATOR_CONTROL");
+        msgid = MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL;
+        unpack(payload);
+        Log.d("MAVLink", "CHANGE_OPERATOR_CONTROL");
     }
 }

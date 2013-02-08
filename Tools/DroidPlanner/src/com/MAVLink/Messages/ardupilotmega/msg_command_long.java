@@ -63,24 +63,23 @@ public class msg_command_long extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//param1 = payload.getFloat();
-	//param2 = payload.getFloat();
-	//param3 = payload.getFloat();
-	//param4 = payload.getFloat();
-	//param5 = payload.getFloat();
-	//param6 = payload.getFloat();
-	//param7 = payload.getFloat();
-	//command = payload.getShort();
-	//target_system = payload.getByte();
-	//target_component = payload.getByte();
-	//confirmation = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    param1 = payload.getFloat();
+	    param2 = payload.getFloat();
+	    param3 = payload.getFloat();
+	    param4 = payload.getFloat();
+	    param5 = payload.getFloat();
+	    param6 = payload.getFloat();
+	    param7 = payload.getFloat();
+	    command = payload.getShort();
+	    target_system = payload.getByte();
+	    target_component = payload.getByte();
+	    confirmation = payload.getByte();    
     }
 
     public msg_command_long(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_COMMAND_LONG;
-    unpack(payload);
-    Log.d("MAVLink", "COMMAND_LONG");
+        msgid = MAVLINK_MSG_ID_COMMAND_LONG;
+        unpack(payload);
+        Log.d("MAVLink", "COMMAND_LONG");
     }
 }

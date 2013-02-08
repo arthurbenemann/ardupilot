@@ -47,20 +47,19 @@ public class msg_setpoint_6dof extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//trans_x = payload.getFloat();
-	//trans_y = payload.getFloat();
-	//trans_z = payload.getFloat();
-	//rot_x = payload.getFloat();
-	//rot_y = payload.getFloat();
-	//rot_z = payload.getFloat();
-	//target_system = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    trans_x = payload.getFloat();
+	    trans_y = payload.getFloat();
+	    trans_z = payload.getFloat();
+	    rot_x = payload.getFloat();
+	    rot_y = payload.getFloat();
+	    rot_z = payload.getFloat();
+	    target_system = payload.getByte();    
     }
 
     public msg_setpoint_6dof(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_SETPOINT_6DOF;
-    unpack(payload);
-    Log.d("MAVLink", "SETPOINT_6DOF");
+        msgid = MAVLINK_MSG_ID_SETPOINT_6DOF;
+        unpack(payload);
+        Log.d("MAVLink", "SETPOINT_6DOF");
     }
 }

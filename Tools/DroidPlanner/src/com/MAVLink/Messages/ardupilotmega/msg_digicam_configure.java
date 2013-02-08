@@ -63,24 +63,23 @@ public class msg_digicam_configure extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//extra_value = payload.getFloat();
-	//shutter_speed = payload.getShort();
-	//target_system = payload.getByte();
-	//target_component = payload.getByte();
-	//mode = payload.getByte();
-	//aperture = payload.getByte();
-	//iso = payload.getByte();
-	//exposure_type = payload.getByte();
-	//command_id = payload.getByte();
-	//engine_cut_off = payload.getByte();
-	//extra_param = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    extra_value = payload.getFloat();
+	    shutter_speed = payload.getShort();
+	    target_system = payload.getByte();
+	    target_component = payload.getByte();
+	    mode = payload.getByte();
+	    aperture = payload.getByte();
+	    iso = payload.getByte();
+	    exposure_type = payload.getByte();
+	    command_id = payload.getByte();
+	    engine_cut_off = payload.getByte();
+	    extra_param = payload.getByte();    
     }
 
     public msg_digicam_configure(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_DIGICAM_CONFIGURE;
-    unpack(payload);
-    Log.d("MAVLink", "DIGICAM_CONFIGURE");
+        msgid = MAVLINK_MSG_ID_DIGICAM_CONFIGURE;
+        unpack(payload);
+        Log.d("MAVLink", "DIGICAM_CONFIGURE");
     }
 }

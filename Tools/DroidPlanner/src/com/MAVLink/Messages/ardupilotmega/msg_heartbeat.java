@@ -43,19 +43,18 @@ public class msg_heartbeat extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//custom_mode = payload.getInt();
-	//type = payload.getByte();
-	//autopilot = payload.getByte();
-	//base_mode = payload.getByte();
-	//system_status = payload.getByte();
-	//mavlink_version = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    custom_mode = payload.getInt();
+	    type = payload.getByte();
+	    autopilot = payload.getByte();
+	    base_mode = payload.getByte();
+	    system_status = payload.getByte();
+	    mavlink_version = payload.getByte();    
     }
 
     public msg_heartbeat(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_HEARTBEAT;
-    unpack(payload);
-    Log.d("MAVLink", "HEARTBEAT");
+        msgid = MAVLINK_MSG_ID_HEARTBEAT;
+        unpack(payload);
+        Log.d("MAVLink", "HEARTBEAT");
     }
 }

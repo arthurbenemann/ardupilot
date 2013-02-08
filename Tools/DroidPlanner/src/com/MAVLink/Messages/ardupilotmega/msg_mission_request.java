@@ -31,16 +31,15 @@ public class msg_mission_request extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//seq = payload.getShort();
-	//target_system = payload.getByte();
-	//target_component = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    seq = payload.getShort();
+	    target_system = payload.getByte();
+	    target_component = payload.getByte();    
     }
 
     public msg_mission_request(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_MISSION_REQUEST;
-    unpack(payload);
-    Log.d("MAVLink", "MISSION_REQUEST");
+        msgid = MAVLINK_MSG_ID_MISSION_REQUEST;
+        unpack(payload);
+        Log.d("MAVLink", "MISSION_REQUEST");
     }
 }

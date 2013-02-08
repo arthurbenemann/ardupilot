@@ -51,21 +51,20 @@ public class msg_attitude_quaternion extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//time_boot_ms = payload.getInt();
-	//q1 = payload.getFloat();
-	//q2 = payload.getFloat();
-	//q3 = payload.getFloat();
-	//q4 = payload.getFloat();
-	//rollspeed = payload.getFloat();
-	//pitchspeed = payload.getFloat();
-	//yawspeed = payload.getFloat();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    time_boot_ms = payload.getInt();
+	    q1 = payload.getFloat();
+	    q2 = payload.getFloat();
+	    q3 = payload.getFloat();
+	    q4 = payload.getFloat();
+	    rollspeed = payload.getFloat();
+	    pitchspeed = payload.getFloat();
+	    yawspeed = payload.getFloat();    
     }
 
     public msg_attitude_quaternion(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_ATTITUDE_QUATERNION;
-    unpack(payload);
-    Log.d("MAVLink", "ATTITUDE_QUATERNION");
+        msgid = MAVLINK_MSG_ID_ATTITUDE_QUATERNION;
+        unpack(payload);
+        Log.d("MAVLink", "ATTITUDE_QUATERNION");
     }
 }

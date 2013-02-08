@@ -83,29 +83,28 @@ public class msg_hil_state extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//time_usec = payload.getLong();
-	//roll = payload.getFloat();
-	//pitch = payload.getFloat();
-	//yaw = payload.getFloat();
-	//rollspeed = payload.getFloat();
-	//pitchspeed = payload.getFloat();
-	//yawspeed = payload.getFloat();
-	//lat = payload.getInt();
-	//lon = payload.getInt();
-	//alt = payload.getInt();
-	//vx = payload.getShort();
-	//vy = payload.getShort();
-	//vz = payload.getShort();
-	//xacc = payload.getShort();
-	//yacc = payload.getShort();
-	//zacc = payload.getShort();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    time_usec = payload.getLong();
+	    roll = payload.getFloat();
+	    pitch = payload.getFloat();
+	    yaw = payload.getFloat();
+	    rollspeed = payload.getFloat();
+	    pitchspeed = payload.getFloat();
+	    yawspeed = payload.getFloat();
+	    lat = payload.getInt();
+	    lon = payload.getInt();
+	    alt = payload.getInt();
+	    vx = payload.getShort();
+	    vy = payload.getShort();
+	    vz = payload.getShort();
+	    xacc = payload.getShort();
+	    yacc = payload.getShort();
+	    zacc = payload.getShort();    
     }
 
     public msg_hil_state(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_HIL_STATE;
-    unpack(payload);
-    Log.d("MAVLink", "HIL_STATE");
+        msgid = MAVLINK_MSG_ID_HIL_STATE;
+        unpack(payload);
+        Log.d("MAVLink", "HIL_STATE");
     }
 }

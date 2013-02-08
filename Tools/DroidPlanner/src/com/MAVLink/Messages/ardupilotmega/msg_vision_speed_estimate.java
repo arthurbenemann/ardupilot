@@ -35,17 +35,16 @@ public class msg_vision_speed_estimate extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//usec = payload.getLong();
-	//x = payload.getFloat();
-	//y = payload.getFloat();
-	//z = payload.getFloat();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    usec = payload.getLong();
+	    x = payload.getFloat();
+	    y = payload.getFloat();
+	    z = payload.getFloat();    
     }
 
     public msg_vision_speed_estimate(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE;
-    unpack(payload);
-    Log.d("MAVLink", "VISION_SPEED_ESTIMATE");
+        msgid = MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE;
+        unpack(payload);
+        Log.d("MAVLink", "VISION_SPEED_ESTIMATE");
     }
 }

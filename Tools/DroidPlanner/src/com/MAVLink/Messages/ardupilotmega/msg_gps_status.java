@@ -43,19 +43,28 @@ public class msg_gps_status extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//satellites_visible = payload.getByte();
-	// = payload.getByte();
-	// = payload.getByte();
-	// = payload.getByte();
-	// = payload.getByte();
-	// = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    satellites_visible = payload.getByte();
+	     for (int i = 0; i < satellite_prn.length; i++) {
+			satellite_prn[i] = payload.getByte();
+		}
+	     for (int i = 0; i < satellite_used.length; i++) {
+			satellite_used[i] = payload.getByte();
+		}
+	     for (int i = 0; i < satellite_elevation.length; i++) {
+			satellite_elevation[i] = payload.getByte();
+		}
+	     for (int i = 0; i < satellite_azimuth.length; i++) {
+			satellite_azimuth[i] = payload.getByte();
+		}
+	     for (int i = 0; i < satellite_snr.length; i++) {
+			satellite_snr[i] = payload.getByte();
+		}    
     }
 
     public msg_gps_status(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_GPS_STATUS;
-    unpack(payload);
-    Log.d("MAVLink", "GPS_STATUS");
+        msgid = MAVLINK_MSG_ID_GPS_STATUS;
+        unpack(payload);
+        Log.d("MAVLink", "GPS_STATUS");
     }
 }

@@ -35,17 +35,16 @@ public class msg_scaled_pressure extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//time_boot_ms = payload.getInt();
-	//press_abs = payload.getFloat();
-	//press_diff = payload.getFloat();
-	//temperature = payload.getShort();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    time_boot_ms = payload.getInt();
+	    press_abs = payload.getFloat();
+	    press_diff = payload.getFloat();
+	    temperature = payload.getShort();    
     }
 
     public msg_scaled_pressure(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_SCALED_PRESSURE;
-    unpack(payload);
-    Log.d("MAVLink", "SCALED_PRESSURE");
+        msgid = MAVLINK_MSG_ID_SCALED_PRESSURE;
+        unpack(payload);
+        Log.d("MAVLink", "SCALED_PRESSURE");
     }
 }

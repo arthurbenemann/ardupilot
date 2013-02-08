@@ -43,19 +43,18 @@ public class msg_vfr_hud extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//airspeed = payload.getFloat();
-	//groundspeed = payload.getFloat();
-	//alt = payload.getFloat();
-	//climb = payload.getFloat();
-	//heading = payload.getShort();
-	//throttle = payload.getShort();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    airspeed = payload.getFloat();
+	    groundspeed = payload.getFloat();
+	    alt = payload.getFloat();
+	    climb = payload.getFloat();
+	    heading = payload.getShort();
+	    throttle = payload.getShort();    
     }
 
     public msg_vfr_hud(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_VFR_HUD;
-    unpack(payload);
-    Log.d("MAVLink", "VFR_HUD");
+        msgid = MAVLINK_MSG_ID_VFR_HUD;
+        unpack(payload);
+        Log.d("MAVLink", "VFR_HUD");
     }
 }

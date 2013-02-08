@@ -79,28 +79,27 @@ public class msg_highres_imu extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//time_usec = payload.getLong();
-	//xacc = payload.getFloat();
-	//yacc = payload.getFloat();
-	//zacc = payload.getFloat();
-	//xgyro = payload.getFloat();
-	//ygyro = payload.getFloat();
-	//zgyro = payload.getFloat();
-	//xmag = payload.getFloat();
-	//ymag = payload.getFloat();
-	//zmag = payload.getFloat();
-	//abs_pressure = payload.getFloat();
-	//diff_pressure = payload.getFloat();
-	//pressure_alt = payload.getFloat();
-	//temperature = payload.getFloat();
-	//fields_updated = payload.getShort();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    time_usec = payload.getLong();
+	    xacc = payload.getFloat();
+	    yacc = payload.getFloat();
+	    zacc = payload.getFloat();
+	    xgyro = payload.getFloat();
+	    ygyro = payload.getFloat();
+	    zgyro = payload.getFloat();
+	    xmag = payload.getFloat();
+	    ymag = payload.getFloat();
+	    zmag = payload.getFloat();
+	    abs_pressure = payload.getFloat();
+	    diff_pressure = payload.getFloat();
+	    pressure_alt = payload.getFloat();
+	    temperature = payload.getFloat();
+	    fields_updated = payload.getShort();    
     }
 
     public msg_highres_imu(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_HIGHRES_IMU;
-    unpack(payload);
-    Log.d("MAVLink", "HIGHRES_IMU");
+        msgid = MAVLINK_MSG_ID_HIGHRES_IMU;
+        unpack(payload);
+        Log.d("MAVLink", "HIGHRES_IMU");
     }
 }

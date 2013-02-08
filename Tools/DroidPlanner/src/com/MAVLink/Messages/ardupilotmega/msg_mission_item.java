@@ -76,27 +76,26 @@ public class msg_mission_item extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//param1 = payload.getFloat();
-	//param2 = payload.getFloat();
-	//param3 = payload.getFloat();
-	//param4 = payload.getFloat();
-	//x = payload.getFloat();
-	//y = payload.getFloat();
-	//z = payload.getFloat();
-	//seq = payload.getShort();
-	//command = payload.getShort();
-	//target_system = payload.getByte();
-	//target_component = payload.getByte();
-	//frame = payload.getByte();
-	//current = payload.getByte();
-	//autocontinue = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    param1 = payload.getFloat();
+	    param2 = payload.getFloat();
+	    param3 = payload.getFloat();
+	    param4 = payload.getFloat();
+	    x = payload.getFloat();
+	    y = payload.getFloat();
+	    z = payload.getFloat();
+	    seq = payload.getShort();
+	    command = payload.getShort();
+	    target_system = payload.getByte();
+	    target_component = payload.getByte();
+	    frame = payload.getByte();
+	    current = payload.getByte();
+	    autocontinue = payload.getByte();    
     }
 
     public msg_mission_item(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_MISSION_ITEM;
-    unpack(payload);
-    Log.d("MAVLink", "MISSION_ITEM");
+        msgid = MAVLINK_MSG_ID_MISSION_ITEM;
+        unpack(payload);
+        Log.d("MAVLink", "MISSION_ITEM");
     }
 }

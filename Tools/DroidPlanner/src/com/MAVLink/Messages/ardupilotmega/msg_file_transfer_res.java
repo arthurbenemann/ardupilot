@@ -27,15 +27,14 @@ public class msg_file_transfer_res extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//transfer_uid = payload.getLong();
-	//result = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    transfer_uid = payload.getLong();
+	    result = payload.getByte();    
     }
 
     public msg_file_transfer_res(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_FILE_TRANSFER_RES;
-    unpack(payload);
-    Log.d("MAVLink", "FILE_TRANSFER_RES");
+        msgid = MAVLINK_MSG_ID_FILE_TRANSFER_RES;
+        unpack(payload);
+        Log.d("MAVLink", "FILE_TRANSFER_RES");
     }
 }

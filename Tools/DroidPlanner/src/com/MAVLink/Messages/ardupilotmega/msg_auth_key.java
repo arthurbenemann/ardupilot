@@ -23,14 +23,15 @@ public class msg_auth_key extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	// = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	     for (int i = 0; i < key.length; i++) {
+			key[i] = payload.getByte();
+		}    
     }
 
     public msg_auth_key(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_AUTH_KEY;
-    unpack(payload);
-    Log.d("MAVLink", "AUTH_KEY");
+        msgid = MAVLINK_MSG_ID_AUTH_KEY;
+        unpack(payload);
+        Log.d("MAVLink", "AUTH_KEY");
     }
 }

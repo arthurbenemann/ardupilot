@@ -47,20 +47,19 @@ public class msg_set_local_position_setpoint extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//x = payload.getFloat();
-	//y = payload.getFloat();
-	//z = payload.getFloat();
-	//yaw = payload.getFloat();
-	//target_system = payload.getByte();
-	//target_component = payload.getByte();
-	//coordinate_frame = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    x = payload.getFloat();
+	    y = payload.getFloat();
+	    z = payload.getFloat();
+	    yaw = payload.getFloat();
+	    target_system = payload.getByte();
+	    target_component = payload.getByte();
+	    coordinate_frame = payload.getByte();    
     }
 
     public msg_set_local_position_setpoint(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_SET_LOCAL_POSITION_SETPOINT;
-    unpack(payload);
-    Log.d("MAVLink", "SET_LOCAL_POSITION_SETPOINT");
+        msgid = MAVLINK_MSG_ID_SET_LOCAL_POSITION_SETPOINT;
+        unpack(payload);
+        Log.d("MAVLink", "SET_LOCAL_POSITION_SETPOINT");
     }
 }

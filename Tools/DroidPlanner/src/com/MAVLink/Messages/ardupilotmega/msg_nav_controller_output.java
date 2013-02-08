@@ -51,21 +51,20 @@ public class msg_nav_controller_output extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//nav_roll = payload.getFloat();
-	//nav_pitch = payload.getFloat();
-	//alt_error = payload.getFloat();
-	//aspd_error = payload.getFloat();
-	//xtrack_error = payload.getFloat();
-	//nav_bearing = payload.getShort();
-	//target_bearing = payload.getShort();
-	//wp_dist = payload.getShort();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    nav_roll = payload.getFloat();
+	    nav_pitch = payload.getFloat();
+	    alt_error = payload.getFloat();
+	    aspd_error = payload.getFloat();
+	    xtrack_error = payload.getFloat();
+	    nav_bearing = payload.getShort();
+	    target_bearing = payload.getShort();
+	    wp_dist = payload.getShort();    
     }
 
     public msg_nav_controller_output(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT;
-    unpack(payload);
-    Log.d("MAVLink", "NAV_CONTROLLER_OUTPUT");
+        msgid = MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT;
+        unpack(payload);
+        Log.d("MAVLink", "NAV_CONTROLLER_OUTPUT");
     }
 }

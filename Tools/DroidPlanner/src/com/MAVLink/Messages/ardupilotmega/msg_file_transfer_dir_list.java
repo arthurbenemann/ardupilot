@@ -31,16 +31,17 @@ public class msg_file_transfer_dir_list extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//transfer_uid = payload.getLong();
-	// = payload.getByte();
-	//flags = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    transfer_uid = payload.getLong();
+	     for (int i = 0; i < dir_path.length; i++) {
+			dir_path[i] = payload.getByte();
+		}
+	    flags = payload.getByte();    
     }
 
     public msg_file_transfer_dir_list(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_FILE_TRANSFER_DIR_LIST;
-    unpack(payload);
-    Log.d("MAVLink", "FILE_TRANSFER_DIR_LIST");
+        msgid = MAVLINK_MSG_ID_FILE_TRANSFER_DIR_LIST;
+        unpack(payload);
+        Log.d("MAVLink", "FILE_TRANSFER_DIR_LIST");
     }
 }

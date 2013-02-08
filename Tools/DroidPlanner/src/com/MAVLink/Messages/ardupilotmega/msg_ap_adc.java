@@ -43,19 +43,18 @@ public class msg_ap_adc extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//adc1 = payload.getShort();
-	//adc2 = payload.getShort();
-	//adc3 = payload.getShort();
-	//adc4 = payload.getShort();
-	//adc5 = payload.getShort();
-	//adc6 = payload.getShort();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    adc1 = payload.getShort();
+	    adc2 = payload.getShort();
+	    adc3 = payload.getShort();
+	    adc4 = payload.getShort();
+	    adc5 = payload.getShort();
+	    adc6 = payload.getShort();    
     }
 
     public msg_ap_adc(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_AP_ADC;
-    unpack(payload);
-    Log.d("MAVLink", "AP_ADC");
+        msgid = MAVLINK_MSG_ID_AP_ADC;
+        unpack(payload);
+        Log.d("MAVLink", "AP_ADC");
     }
 }

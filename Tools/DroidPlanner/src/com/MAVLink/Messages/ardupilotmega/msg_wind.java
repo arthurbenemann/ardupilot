@@ -31,16 +31,15 @@ public class msg_wind extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//direction = payload.getFloat();
-	//speed = payload.getFloat();
-	//speed_z = payload.getFloat();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    direction = payload.getFloat();
+	    speed = payload.getFloat();
+	    speed_z = payload.getFloat();    
     }
 
     public msg_wind(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_WIND;
-    unpack(payload);
-    Log.d("MAVLink", "WIND");
+        msgid = MAVLINK_MSG_ID_WIND;
+        unpack(payload);
+        Log.d("MAVLink", "WIND");
     }
 }

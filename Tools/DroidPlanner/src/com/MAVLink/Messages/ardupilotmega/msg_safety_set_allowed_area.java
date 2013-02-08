@@ -55,22 +55,21 @@ public class msg_safety_set_allowed_area extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//p1x = payload.getFloat();
-	//p1y = payload.getFloat();
-	//p1z = payload.getFloat();
-	//p2x = payload.getFloat();
-	//p2y = payload.getFloat();
-	//p2z = payload.getFloat();
-	//target_system = payload.getByte();
-	//target_component = payload.getByte();
-	//frame = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    p1x = payload.getFloat();
+	    p1y = payload.getFloat();
+	    p1z = payload.getFloat();
+	    p2x = payload.getFloat();
+	    p2y = payload.getFloat();
+	    p2z = payload.getFloat();
+	    target_system = payload.getByte();
+	    target_component = payload.getByte();
+	    frame = payload.getByte();    
     }
 
     public msg_safety_set_allowed_area(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA;
-    unpack(payload);
-    Log.d("MAVLink", "SAFETY_SET_ALLOWED_AREA");
+        msgid = MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA;
+        unpack(payload);
+        Log.d("MAVLink", "SAFETY_SET_ALLOWED_AREA");
     }
 }

@@ -71,26 +71,25 @@ public class msg_sys_status extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//onboard_control_sensors_present = payload.getInt();
-	//onboard_control_sensors_enabled = payload.getInt();
-	//onboard_control_sensors_health = payload.getInt();
-	//load = payload.getShort();
-	//voltage_battery = payload.getShort();
-	//current_battery = payload.getShort();
-	//drop_rate_comm = payload.getShort();
-	//errors_comm = payload.getShort();
-	//errors_count1 = payload.getShort();
-	//errors_count2 = payload.getShort();
-	//errors_count3 = payload.getShort();
-	//errors_count4 = payload.getShort();
-	//battery_remaining = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    onboard_control_sensors_present = payload.getInt();
+	    onboard_control_sensors_enabled = payload.getInt();
+	    onboard_control_sensors_health = payload.getInt();
+	    load = payload.getShort();
+	    voltage_battery = payload.getShort();
+	    current_battery = payload.getShort();
+	    drop_rate_comm = payload.getShort();
+	    errors_comm = payload.getShort();
+	    errors_count1 = payload.getShort();
+	    errors_count2 = payload.getShort();
+	    errors_count3 = payload.getShort();
+	    errors_count4 = payload.getShort();
+	    battery_remaining = payload.getByte();    
     }
 
     public msg_sys_status(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_SYS_STATUS;
-    unpack(payload);
-    Log.d("MAVLink", "SYS_STATUS");
+        msgid = MAVLINK_MSG_ID_SYS_STATUS;
+        unpack(payload);
+        Log.d("MAVLink", "SYS_STATUS");
     }
 }

@@ -55,22 +55,21 @@ public class msg_setpoint_8dof extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack(MAVLinkPayload payload) {
-	//val1 = payload.getFloat();
-	//val2 = payload.getFloat();
-	//val3 = payload.getFloat();
-	//val4 = payload.getFloat();
-	//val5 = payload.getFloat();
-	//val6 = payload.getFloat();
-	//val7 = payload.getFloat();
-	//val8 = payload.getFloat();
-	//target_system = payload.getByte();
-    
+    public void unpack(MAVLinkPayload payload) {
+	    val1 = payload.getFloat();
+	    val2 = payload.getFloat();
+	    val3 = payload.getFloat();
+	    val4 = payload.getFloat();
+	    val5 = payload.getFloat();
+	    val6 = payload.getFloat();
+	    val7 = payload.getFloat();
+	    val8 = payload.getFloat();
+	    target_system = payload.getByte();    
     }
 
     public msg_setpoint_8dof(MAVLinkPayload payload){
-    msgid = MAVLINK_MSG_ID_SETPOINT_8DOF;
-    unpack(payload);
-    Log.d("MAVLink", "SETPOINT_8DOF");
+        msgid = MAVLINK_MSG_ID_SETPOINT_8DOF;
+        unpack(payload);
+        Log.d("MAVLink", "SETPOINT_8DOF");
     }
 }
