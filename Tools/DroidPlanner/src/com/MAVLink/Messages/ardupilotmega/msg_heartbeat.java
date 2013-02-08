@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * The heartbeat message shows that a system is present and responding. The type of the MAV and Autopilot hardware allow the receiving system to treat further messages from this system appropriate (e.g. by laying out the user interface based on the autopilot).
@@ -42,7 +43,7 @@ public class msg_heartbeat extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.custom_mode = payload.getint();
 	//m.type = payload.getbyte();
 	//m.autopilot = payload.getbyte();
@@ -51,4 +52,9 @@ public void unpack() {
 	//m.mavlink_version = payload.getbyte();
     
     }
+
+    public msg_heartbeat(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "HEARTBEAT");
+	}
 }

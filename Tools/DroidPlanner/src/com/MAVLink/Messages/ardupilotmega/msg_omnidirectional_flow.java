@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Optical flow from an omnidirectional flow sensor (e.g. PX4FLOW with wide angle lens)
@@ -42,7 +43,7 @@ public class msg_omnidirectional_flow extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_usec = payload.getlong();
 	//m.front_distance_m = payload.getfloat();
 	// = payload.getshort();
@@ -51,4 +52,9 @@ public void unpack() {
 	//m.quality = payload.getbyte();
     
     }
+
+    public msg_omnidirectional_flow(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "OMNIDIRECTIONAL_FLOW");
+	}
 }

@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Ack message during MISSION handling. The type field states if this message is a positive ack (type=0) or if an error happened (type=non-zero).
@@ -30,10 +31,15 @@ public class msg_mission_ack extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.target_system = payload.getbyte();
 	//m.target_component = payload.getbyte();
 	//m.type = payload.getbyte();
     
     }
+
+    public msg_mission_ack(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "MISSION_ACK");
+	}
 }

@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * The scaled values of the RC channels received. (-100%) -10000, (0%) 0, (100%) 10000. Channels that are inactive should be set to 65535.
@@ -62,7 +63,7 @@ public class msg_rc_channels_scaled extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_boot_ms = payload.getint();
 	//m.chan1_scaled = payload.getshort();
 	//m.chan2_scaled = payload.getshort();
@@ -76,4 +77,9 @@ public void unpack() {
 	//m.rssi = payload.getbyte();
     
     }
+
+    public msg_rc_channels_scaled(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "RC_CHANNELS_SCALED");
+	}
 }

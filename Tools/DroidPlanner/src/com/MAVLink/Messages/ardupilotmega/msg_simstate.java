@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Status of simulation environment, if used
@@ -62,7 +63,7 @@ public class msg_simstate extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.roll = payload.getfloat();
 	//m.pitch = payload.getfloat();
 	//m.yaw = payload.getfloat();
@@ -76,4 +77,9 @@ public void unpack() {
 	//m.lng = payload.getfloat();
     
     }
+
+    public msg_simstate(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "SIMSTATE");
+	}
 }

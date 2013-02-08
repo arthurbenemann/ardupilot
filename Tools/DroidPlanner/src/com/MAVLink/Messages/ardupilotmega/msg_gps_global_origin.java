@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Once the MAV sets a new GPS-Local correspondence, this message announces the origin (0,0,0) position
@@ -30,10 +31,15 @@ public class msg_gps_global_origin extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.latitude = payload.getint();
 	//m.longitude = payload.getint();
 	//m.altitude = payload.getint();
     
     }
+
+    public msg_gps_global_origin(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "GPS_GLOBAL_ORIGIN");
+	}
 }

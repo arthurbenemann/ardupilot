@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * The system time is the time of the master clock, typically the computer clock of the main onboard computer.
@@ -26,9 +27,14 @@ public class msg_system_time extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_unix_usec = payload.getlong();
 	//m.time_boot_ms = payload.getint();
     
     }
+
+    public msg_system_time(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "SYSTEM_TIME");
+	}
 }

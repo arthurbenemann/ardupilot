@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * This message is emitted as response to MISSION_REQUEST_LIST by the MAV and to initiate a write transaction. The GCS can then request the individual mission item based on the knowledge of the total number of MISSIONs.
@@ -30,10 +31,15 @@ public class msg_mission_count extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.count = payload.getshort();
 	//m.target_system = payload.getbyte();
 	//m.target_component = payload.getbyte();
     
     }
+
+    public msg_mission_count(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "MISSION_COUNT");
+	}
 }

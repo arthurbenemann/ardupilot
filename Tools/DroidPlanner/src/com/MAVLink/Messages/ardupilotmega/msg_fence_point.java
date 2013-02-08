@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * A fence point. Used to set a point when from
@@ -43,7 +44,7 @@ public class msg_fence_point extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.lat = payload.getfloat();
 	//m.lng = payload.getfloat();
 	//m.target_system = payload.getbyte();
@@ -52,4 +53,9 @@ public void unpack() {
 	//m.count = payload.getbyte();
     
     }
+
+    public msg_fence_point(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "FENCE_POINT");
+	}
 }

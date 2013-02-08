@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * A certain mission item has been reached. The system will either hold this position (or circle on the orbit) or (if the autocontinue on the WP was set) continue to the next MISSION.
@@ -22,8 +23,13 @@ public class msg_mission_item_reached extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.seq = payload.getshort();
     
     }
+
+    public msg_mission_item_reached(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "MISSION_ITEM_REACHED");
+	}
 }

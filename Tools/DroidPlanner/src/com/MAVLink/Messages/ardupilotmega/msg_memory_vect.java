@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Send raw controller memory. The use of this message is discouraged for normal packets, but a quite efficient way for testing new messages and getting experimental debug output.
@@ -34,11 +35,16 @@ public class msg_memory_vect extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.address = payload.getshort();
 	//m.ver = payload.getbyte();
 	//m.type = payload.getbyte();
 	// = payload.getbyte();
     
     }
+
+    public msg_memory_vect(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "MEMORY_VECT");
+	}
 }

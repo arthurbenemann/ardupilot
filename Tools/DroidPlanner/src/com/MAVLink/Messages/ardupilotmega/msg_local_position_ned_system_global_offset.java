@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * The offset in X, Y, Z and yaw between the LOCAL_POSITION_NED messages of MAV X and the global coordinate frame in NED coordinates. Coordinate frame is right-handed, Z-axis down (aeronautical frame, NED / north-east-down convention)
@@ -46,7 +47,7 @@ public class msg_local_position_ned_system_global_offset extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_boot_ms = payload.getint();
 	//m.x = payload.getfloat();
 	//m.y = payload.getfloat();
@@ -56,4 +57,9 @@ public void unpack() {
 	//m.yaw = payload.getfloat();
     
     }
+
+    public msg_local_position_ned_system_global_offset(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET");
+	}
 }

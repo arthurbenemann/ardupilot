@@ -147,6 +147,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * ${description}
@@ -167,11 +168,16 @@ ${{ordered_fields: 	/**
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 ${{ordered_fields:	//${decode_left} = payload.get${type}();
 }}
     
     }
+
+    public msg_${name_lower}(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "${name}");
+	}
 }
 ''', m)
     f.close()
@@ -197,43 +203,19 @@ public class MAVLinkMessage {
 	public  int sysid;
 	public int compid;
 	public int msgid;
-	public MAVLinkPayload payload;	
-	public CRC crc;	
-
-	public MAVLinkMessage(){
-		payload = new MAVLinkPayload();
-	}
-	public void generateCRC(){
-		crc = new CRC();
-		crc.update_checksum(len);
-		crc.update_checksum(seq);
-		crc.update_checksum(sysid);
-		crc.update_checksum(compid);
-		crc.update_checksum(msgid);
-		for (Byte data : MAVLinkPayload.getData()) {
-			crc.update_checksum(data);			
-		}
-		crc.finish_checksum(msgid);
-	}
 	
-	public boolean payloadIsFilled() {
-		return (MAVLinkPayload.size() == len);
-	}
-	
-	public void unpackMessage() {
+	public MAVLinkMessage unpackMessage(MAVLinkPayload payload) {
 		switch (msgid) {
 		''')
     for xml in xml_list:
         t.write(f, '''
 ${{message:		case msg_${name_lower}.MAVLINK_MSG_ID_${name}:
-			Log.d("MAVLink", "${name}");
-			((msg_${name_lower}) this).unpack();
-			return;
+			return  new msg_${name_lower}(payload);
 }}''',xml)
     f.write('''
 		default:
 			Log.d("MAVLink", "UNKNOW MESSAGE - " + msgid);
-			return;
+			return null;
 		}
 	}
 

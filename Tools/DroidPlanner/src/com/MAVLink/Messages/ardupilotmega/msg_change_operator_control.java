@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Request to control this MAV
@@ -34,11 +35,16 @@ public class msg_change_operator_control extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.target_system = payload.getbyte();
 	//m.control_request = payload.getbyte();
 	//m.version = payload.getbyte();
 	// = payload.getbyte();
     
     }
+
+    public msg_change_operator_control(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "CHANGE_OPERATOR_CONTROL");
+	}
 }

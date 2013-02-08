@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Set the 8 DOF setpoint for a controller.
@@ -54,7 +55,7 @@ public class msg_setpoint_8dof extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.val1 = payload.getfloat();
 	//m.val2 = payload.getfloat();
 	//m.val3 = payload.getfloat();
@@ -66,4 +67,9 @@ public void unpack() {
 	//m.target_system = payload.getbyte();
     
     }
+
+    public msg_setpoint_8dof(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "SETPOINT_8DOF");
+	}
 }

@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Sent from simulation to autopilot. This packet is useful for high throughput applications such as hardware in the loop simulations.
@@ -82,7 +83,7 @@ public class msg_hil_state extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_usec = payload.getlong();
 	//m.roll = payload.getfloat();
 	//m.pitch = payload.getfloat();
@@ -101,4 +102,9 @@ public void unpack() {
 	//m.zacc = payload.getshort();
     
     }
+
+    public msg_hil_state(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "HIL_STATE");
+	}
 }

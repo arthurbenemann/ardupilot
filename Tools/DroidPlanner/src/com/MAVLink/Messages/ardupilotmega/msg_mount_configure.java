@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Message to configure a camera mount, directional antenna, etc.
@@ -42,7 +43,7 @@ public class msg_mount_configure extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.target_system = payload.getbyte();
 	//m.target_component = payload.getbyte();
 	//m.mount_mode = payload.getbyte();
@@ -51,4 +52,9 @@ public void unpack() {
 	//m.stab_yaw = payload.getbyte();
     
     }
+
+    public msg_mount_configure(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "MOUNT_CONFIGURE");
+	}
 }

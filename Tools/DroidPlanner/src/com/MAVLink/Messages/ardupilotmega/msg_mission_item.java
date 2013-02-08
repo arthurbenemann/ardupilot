@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Message encoding a mission item. This message is emitted to announce
@@ -75,7 +76,7 @@ public class msg_mission_item extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.param1 = payload.getfloat();
 	//m.param2 = payload.getfloat();
 	//m.param3 = payload.getfloat();
@@ -92,4 +93,9 @@ public void unpack() {
 	//m.autocontinue = payload.getbyte();
     
     }
+
+    public msg_mission_item(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "MISSION_ITEM");
+	}
 }

@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Sent from autopilot to simulation. Hardware in the loop control outputs
@@ -62,7 +63,7 @@ public class msg_hil_controls extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_usec = payload.getlong();
 	//m.roll_ailerons = payload.getfloat();
 	//m.pitch_elevator = payload.getfloat();
@@ -76,4 +77,9 @@ public void unpack() {
 	//m.nav_mode = payload.getbyte();
     
     }
+
+    public msg_hil_controls(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "HIL_CONTROLS");
+	}
 }

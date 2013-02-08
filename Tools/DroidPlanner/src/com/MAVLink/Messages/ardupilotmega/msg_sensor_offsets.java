@@ -2,6 +2,8 @@
 package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Offsets and calibrations values for hardware
@@ -66,7 +68,7 @@ public class msg_sensor_offsets extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.mag_declination = payload.getfloat();
 	//m.raw_press = payload.getint();
 	//m.raw_temp = payload.getint();
@@ -81,4 +83,9 @@ public void unpack() {
 	//m.mag_ofs_z = payload.getshort();
     
     }
+
+    public msg_sensor_offsets(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "SENSOR_OFFSETS");
+	}
 }

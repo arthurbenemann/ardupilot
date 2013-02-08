@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * state of APM memory
@@ -26,9 +27,14 @@ public class msg_meminfo extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.brkval = payload.getshort();
 	//m.freemem = payload.getshort();
     
     }
+
+    public msg_meminfo(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "MEMINFO");
+	}
 }

@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Data packet, size 64
@@ -30,10 +31,15 @@ public class msg_data64 extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.type = payload.getbyte();
 	//m.len = payload.getbyte();
 	// = payload.getbyte();
     
     }
+
+    public msg_data64(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "DATA64");
+	}
 }

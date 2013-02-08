@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Send a command with up to four parameters to the MAV
@@ -62,7 +63,7 @@ public class msg_command_long extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.param1 = payload.getfloat();
 	//m.param2 = payload.getfloat();
 	//m.param3 = payload.getfloat();
@@ -76,4 +77,9 @@ public void unpack() {
 	//m.confirmation = payload.getbyte();
     
     }
+
+    public msg_command_long(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "COMMAND_LONG");
+	}
 }

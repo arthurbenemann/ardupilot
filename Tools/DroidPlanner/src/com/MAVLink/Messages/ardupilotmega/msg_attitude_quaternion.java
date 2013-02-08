@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * The attitude in the aeronautical frame (right-handed, Z-down, X-front, Y-right), expressed as quaternion.
@@ -50,7 +51,7 @@ public class msg_attitude_quaternion extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_boot_ms = payload.getint();
 	//m.q1 = payload.getfloat();
 	//m.q2 = payload.getfloat();
@@ -61,4 +62,9 @@ public void unpack() {
 	//m.yawspeed = payload.getfloat();
     
     }
+
+    public msg_attitude_quaternion(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "ATTITUDE_QUATERNION");
+	}
 }

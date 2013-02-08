@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Wind estimation
@@ -30,10 +31,15 @@ public class msg_wind extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.direction = payload.getfloat();
 	//m.speed = payload.getfloat();
 	//m.speed_z = payload.getfloat();
     
     }
+
+    public msg_wind(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "WIND");
+	}
 }

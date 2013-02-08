@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * The general system state. If the system is following the MAVLink standard, the system state is mainly defined by three orthogonal states/modes: The system mode, which is either LOCKED (motors shut down and locked), MANUAL (system under RC control), GUIDED (system with autonomous position control, position setpoint controlled manually) or AUTO (system guided by path/waypoint planner). The NAV_MODE defined the current flight state: LIFTOFF (often an open-loop maneuver), LANDING, WAYPOINTS or VECTOR. This represents the internal navigation state machine. The system status shows wether the system is currently active or not and if an emergency occured. During the CRITICAL and EMERGENCY states the MAV is still considered to be active, but should start emergency procedures autonomously. After a failure occured it should first move from active to critical to allow manual intervention and then move to emergency after a certain timeout.
@@ -70,7 +71,7 @@ public class msg_sys_status extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.onboard_control_sensors_present = payload.getint();
 	//m.onboard_control_sensors_enabled = payload.getint();
 	//m.onboard_control_sensors_health = payload.getint();
@@ -86,4 +87,9 @@ public void unpack() {
 	//m.battery_remaining = payload.getbyte();
     
     }
+
+    public msg_sys_status(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "SYS_STATUS");
+	}
 }

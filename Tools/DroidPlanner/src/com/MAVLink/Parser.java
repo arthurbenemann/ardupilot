@@ -1,6 +1,7 @@
 package com.MAVLink;
 
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.MAVLinkPacket;
 
 public class Parser {
 
@@ -21,20 +22,22 @@ public class Parser {
 	MAV_states state = MAV_states.MAVLINK_PARSE_STATE_UNINIT;
 
 	static boolean msg_received;
-
 	private static int MAVLINK_STX = 254;
 
-	private MAVLinkMessage m;
-
+	private MAVLinkPacket m;
+	
+	MAVLinkMessage message;
+	
 	public MAVLinkMessage mavlink_parse_char(int c) {
 		msg_received = false;
-
+		message = null;
+		
 		switch (state) {
 		case MAVLINK_PARSE_STATE_UNINIT:
 		case MAVLINK_PARSE_STATE_IDLE:
 			if (c == MAVLINK_STX) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_STX;
-				m = new MAVLinkMessage();
+				m = new MAVLinkPacket();
 			}
 			break;
 
@@ -107,7 +110,7 @@ public class Parser {
 				}
 			} else { // Successfully received the message
 				try {
-					m.unpackMessage();
+					 message = m.unpack();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -120,11 +123,7 @@ public class Parser {
 
 		}
 
-		if (msg_received) {
-			return m;			
-		}else {
-			return null;
-		}
+			return message;	
 	}
 
 }

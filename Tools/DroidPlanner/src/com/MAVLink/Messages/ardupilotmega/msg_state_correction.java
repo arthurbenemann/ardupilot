@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Corrects the systems state by adding an error correction term to the position and velocity, and by rotating the attitude by a correction angle.
@@ -54,7 +55,7 @@ public class msg_state_correction extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.xErr = payload.getfloat();
 	//m.yErr = payload.getfloat();
 	//m.zErr = payload.getfloat();
@@ -66,4 +67,9 @@ public void unpack() {
 	//m.vzErr = payload.getfloat();
     
     }
+
+    public msg_state_correction(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "STATE_CORRECTION");
+	}
 }

@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * The RAW IMU readings for the usual 9DOF sensor setup. This message should contain the scaled values to the described units
@@ -58,7 +59,7 @@ public class msg_scaled_imu extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_boot_ms = payload.getint();
 	//m.xacc = payload.getshort();
 	//m.yacc = payload.getshort();
@@ -71,4 +72,9 @@ public void unpack() {
 	//m.zmag = payload.getshort();
     
     }
+
+    public msg_scaled_imu(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "SCALED_IMU");
+	}
 }

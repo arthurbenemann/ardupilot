@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Request the information of the mission item with the sequence number seq. The response of the system to this message should be a MISSION_ITEM message. http://qgroundcontrol.org/mavlink/waypoint_protocol
@@ -30,10 +31,15 @@ public class msg_mission_request extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.seq = payload.getshort();
 	//m.target_system = payload.getbyte();
 	//m.target_component = payload.getbyte();
     
     }
+
+    public msg_mission_request(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "MISSION_REQUEST");
+	}
 }

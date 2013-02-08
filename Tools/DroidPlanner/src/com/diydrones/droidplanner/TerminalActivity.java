@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.MAVLink.Parser;
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.ardupilotmega.msg_attitude;
 
 public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		implements OnNavigationListener {
@@ -149,6 +150,9 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 					if((data = in.read())>=0){
 						m = parser.mavlink_parse_char(data);
 						if (m!=null) {
+							if(m.msgid == msg_attitude.MAVLINK_MSG_ID_ATTITUDE){
+								Log.d("ROLL", String.format("Roll:%5.5f \t time:%d",((msg_attitude) m).roll,((msg_attitude) m).time_boot_ms));
+							}
 							cnt++;
 							publishProgress("Received "+cnt+" packets\nLast packet was: "+m.msgid);
 						}

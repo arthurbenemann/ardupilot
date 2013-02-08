@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * The global position, as returned by the Global Positioning System (GPS). This is
@@ -59,7 +60,7 @@ public class msg_gps_raw_int extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_usec = payload.getlong();
 	//m.lat = payload.getint();
 	//m.lon = payload.getint();
@@ -72,4 +73,9 @@ public void unpack() {
 	//m.satellites_visible = payload.getbyte();
     
     }
+
+    public msg_gps_raw_int(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "GPS_RAW_INT");
+	}
 }

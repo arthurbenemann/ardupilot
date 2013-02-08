@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Set roll, pitch and yaw.
@@ -42,7 +43,7 @@ public class msg_set_roll_pitch_yaw_speed_thrust extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.roll_speed = payload.getfloat();
 	//m.pitch_speed = payload.getfloat();
 	//m.yaw_speed = payload.getfloat();
@@ -51,4 +52,9 @@ public void unpack() {
 	//m.target_component = payload.getbyte();
     
     }
+
+    public msg_set_roll_pitch_yaw_speed_thrust(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "SET_ROLL_PITCH_YAW_SPEED_THRUST");
+	}
 }

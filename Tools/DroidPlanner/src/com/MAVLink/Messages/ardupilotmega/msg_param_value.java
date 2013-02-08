@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Emit the value of a onboard parameter. The inclusion of param_count and param_index in the message allows the recipient to keep track of received parameters and allows him to re-request missing parameters after a loss or timeout.
@@ -38,7 +39,7 @@ public class msg_param_value extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.param_value = payload.getfloat();
 	//m.param_count = payload.getshort();
 	//m.param_index = payload.getshort();
@@ -46,4 +47,9 @@ public void unpack() {
 	//m.param_type = payload.getbyte();
     
     }
+
+    public msg_param_value(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "PARAM_VALUE");
+	}
 }

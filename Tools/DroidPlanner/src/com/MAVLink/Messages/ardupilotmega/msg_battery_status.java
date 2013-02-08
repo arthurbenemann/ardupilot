@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Transmitte battery informations for a accu pack.
@@ -54,7 +55,7 @@ public class msg_battery_status extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.voltage_cell_1 = payload.getshort();
 	//m.voltage_cell_2 = payload.getshort();
 	//m.voltage_cell_3 = payload.getshort();
@@ -66,4 +67,9 @@ public void unpack() {
 	//m.battery_remaining = payload.getbyte();
     
     }
+
+    public msg_battery_status(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "BATTERY_STATUS");
+	}
 }

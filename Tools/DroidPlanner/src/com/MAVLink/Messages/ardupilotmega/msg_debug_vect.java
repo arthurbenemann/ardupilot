@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * 
@@ -38,7 +39,7 @@ public class msg_debug_vect extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_usec = payload.getlong();
 	//m.x = payload.getfloat();
 	//m.y = payload.getfloat();
@@ -46,4 +47,9 @@ public void unpack() {
 	// = payload.getbyte();
     
     }
+
+    public msg_debug_vect(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "DEBUG_VECT");
+	}
 }

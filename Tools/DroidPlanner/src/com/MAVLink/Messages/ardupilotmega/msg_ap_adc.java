@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * raw ADC output
@@ -42,7 +43,7 @@ public class msg_ap_adc extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.adc1 = payload.getshort();
 	//m.adc2 = payload.getshort();
 	//m.adc3 = payload.getshort();
@@ -51,4 +52,9 @@ public void unpack() {
 	//m.adc6 = payload.getshort();
     
     }
+
+    public msg_ap_adc(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "AP_ADC");
+	}
 }

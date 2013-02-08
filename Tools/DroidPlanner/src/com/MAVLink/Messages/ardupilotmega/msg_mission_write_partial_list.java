@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * This message is sent to the MAV to write a partial list. If start index == end index, only one item will be transmitted / updated. If the start index is NOT 0 and above the current list size, this request should be REJECTED!
@@ -34,11 +35,16 @@ public class msg_mission_write_partial_list extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.start_index = payload.getshort();
 	//m.end_index = payload.getshort();
 	//m.target_system = payload.getbyte();
 	//m.target_component = payload.getbyte();
     
     }
+
+    public msg_mission_write_partial_list(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "MISSION_WRITE_PARTIAL_LIST");
+	}
 }

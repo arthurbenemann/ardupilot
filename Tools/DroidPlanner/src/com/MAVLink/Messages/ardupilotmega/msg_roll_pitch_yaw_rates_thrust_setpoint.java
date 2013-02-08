@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Setpoint in roll, pitch, yaw rates and thrust currently active on the system.
@@ -38,7 +39,7 @@ public class msg_roll_pitch_yaw_rates_thrust_setpoint extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_boot_ms = payload.getint();
 	//m.roll_rate = payload.getfloat();
 	//m.pitch_rate = payload.getfloat();
@@ -46,4 +47,9 @@ public void unpack() {
 	//m.thrust = payload.getfloat();
     
     }
+
+    public msg_roll_pitch_yaw_rates_thrust_setpoint(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "ROLL_PITCH_YAW_RATES_THRUST_SETPOINT");
+	}
 }

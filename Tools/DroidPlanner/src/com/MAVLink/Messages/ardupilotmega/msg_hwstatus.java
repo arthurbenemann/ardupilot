@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Status of key hardware
@@ -26,9 +27,14 @@ public class msg_hwstatus extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.Vcc = payload.getshort();
 	//m.I2Cerr = payload.getbyte();
     
     }
+
+    public msg_hwstatus(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "HWSTATUS");
+	}
 }

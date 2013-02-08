@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * The IMU readings in SI units in NED body frame
@@ -78,7 +79,7 @@ public class msg_highres_imu extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_usec = payload.getlong();
 	//m.xacc = payload.getfloat();
 	//m.yacc = payload.getfloat();
@@ -96,4 +97,9 @@ public void unpack() {
 	//m.fields_updated = payload.getshort();
     
     }
+
+    public msg_highres_imu(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "HIGHRES_IMU");
+	}
 }

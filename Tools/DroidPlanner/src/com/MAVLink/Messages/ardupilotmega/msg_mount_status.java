@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Message with some status from APM to GCS about camera or antenna mount
@@ -38,7 +39,7 @@ public class msg_mount_status extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.pointing_a = payload.getint();
 	//m.pointing_b = payload.getint();
 	//m.pointing_c = payload.getint();
@@ -46,4 +47,9 @@ public void unpack() {
 	//m.target_component = payload.getbyte();
     
     }
+
+    public msg_mount_status(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "MOUNT_STATUS");
+	}
 }

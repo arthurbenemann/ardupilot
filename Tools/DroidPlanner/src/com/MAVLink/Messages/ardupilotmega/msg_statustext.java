@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Status text message. These messages are printed in yellow in the COMM console of QGroundControl. WARNING: They consume quite some bandwidth, so use only for important status and error messages. If implemented wisely, these messages are buffered on the MCU and sent only at a limited rate (e.g. 10 Hz).
@@ -26,9 +27,14 @@ public class msg_statustext extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.severity = payload.getbyte();
 	// = payload.getbyte();
     
     }
+
+    public msg_statustext(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "STATUSTEXT");
+	}
 }

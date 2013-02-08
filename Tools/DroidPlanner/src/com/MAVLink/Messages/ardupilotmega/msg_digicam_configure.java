@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Configure on-board Camera Control System.
@@ -62,7 +63,7 @@ public class msg_digicam_configure extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.extra_value = payload.getfloat();
 	//m.shutter_speed = payload.getshort();
 	//m.target_system = payload.getbyte();
@@ -76,4 +77,9 @@ public void unpack() {
 	//m.extra_param = payload.getbyte();
     
     }
+
+    public msg_digicam_configure(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "DIGICAM_CONFIGURE");
+	}
 }

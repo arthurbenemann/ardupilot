@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * The RAW values of the servo outputs (for RC input from the remote, use the RC_CHANNELS messages). The standard PPM modulation is as follows: 1000 microseconds: 0%, 2000 microseconds: 100%.
@@ -58,7 +59,7 @@ public class msg_servo_output_raw extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_usec = payload.getint();
 	//m.servo1_raw = payload.getshort();
 	//m.servo2_raw = payload.getshort();
@@ -71,4 +72,9 @@ public void unpack() {
 	//m.port = payload.getbyte();
     
     }
+
+    public msg_servo_output_raw(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "SERVO_OUTPUT_RAW");
+	}
 }

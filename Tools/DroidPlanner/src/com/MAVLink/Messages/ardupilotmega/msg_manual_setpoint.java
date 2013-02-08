@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Setpoint in roll, pitch, yaw and thrust from the operator
@@ -46,7 +47,7 @@ public class msg_manual_setpoint extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_boot_ms = payload.getint();
 	//m.roll = payload.getfloat();
 	//m.pitch = payload.getfloat();
@@ -56,4 +57,9 @@ public void unpack() {
 	//m.manual_override_switch = payload.getbyte();
     
     }
+
+    public msg_manual_setpoint(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "MANUAL_SETPOINT");
+	}
 }

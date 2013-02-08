@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Status of DCM attitude estimator
@@ -46,7 +47,7 @@ public class msg_ahrs extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.omegaIx = payload.getfloat();
 	//m.omegaIy = payload.getfloat();
 	//m.omegaIz = payload.getfloat();
@@ -56,4 +57,9 @@ public void unpack() {
 	//m.error_yaw = payload.getfloat();
     
     }
+
+    public msg_ahrs(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "AHRS");
+	}
 }

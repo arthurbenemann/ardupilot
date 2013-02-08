@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Report status of a command. Includes feedback wether the command was executed.
@@ -26,9 +27,14 @@ public class msg_command_ack extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.command = payload.getshort();
 	//m.result = payload.getbyte();
     
     }
+
+    public msg_command_ack(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "COMMAND_ACK");
+	}
 }

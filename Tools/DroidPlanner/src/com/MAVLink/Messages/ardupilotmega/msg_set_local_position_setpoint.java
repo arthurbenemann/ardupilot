@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Set the setpoint for a local position controller. This is the position in local coordinates the MAV should fly to. This message is sent by the path/MISSION planner to the onboard position controller. As some MAVs have a degree of freedom in yaw (e.g. all helicopters/quadrotors), the desired yaw angle is part of the message.
@@ -46,7 +47,7 @@ public class msg_set_local_position_setpoint extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.x = payload.getfloat();
 	//m.y = payload.getfloat();
 	//m.z = payload.getfloat();
@@ -56,4 +57,9 @@ public void unpack() {
 	//m.coordinate_frame = payload.getbyte();
     
     }
+
+    public msg_set_local_position_setpoint(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "SET_LOCAL_POSITION_SETPOINT");
+	}
 }

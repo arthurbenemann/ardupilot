@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * The filtered global position (e.g. fused GPS and accelerometers). The position is in GPS-frame (right-handed, Z-up). It
@@ -55,7 +56,7 @@ public class msg_global_position_int extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_boot_ms = payload.getint();
 	//m.lat = payload.getint();
 	//m.lon = payload.getint();
@@ -67,4 +68,9 @@ public void unpack() {
 	//m.hdg = payload.getshort();
     
     }
+
+    public msg_global_position_int(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "GLOBAL_POSITION_INT");
+	}
 }

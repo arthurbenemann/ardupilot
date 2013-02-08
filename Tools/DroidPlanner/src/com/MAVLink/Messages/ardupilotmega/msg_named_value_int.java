@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Send a key-value pair as integer. The use of this message is discouraged for normal packets, but a quite efficient way for testing new messages and getting experimental debug output.
@@ -30,10 +31,15 @@ public class msg_named_value_int extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.time_boot_ms = payload.getint();
 	//m.value = payload.getint();
 	// = payload.getbyte();
     
     }
+
+    public msg_named_value_int(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "NAMED_VALUE_INT");
+	}
 }

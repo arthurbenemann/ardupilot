@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * This message provides an API for manually controlling the vehicle using standard joystick axes nomenclature, along with a joystick-like input device. Unused axes can be disabled an buttons are also transmit as boolean values of their 
@@ -42,7 +43,7 @@ public class msg_manual_control extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.x = payload.getshort();
 	//m.y = payload.getshort();
 	//m.z = payload.getshort();
@@ -51,4 +52,9 @@ public void unpack() {
 	//m.target = payload.getbyte();
     
     }
+
+    public msg_manual_control(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "MANUAL_CONTROL");
+	}
 }

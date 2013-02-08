@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Set the current global position setpoint.
@@ -38,7 +39,7 @@ public class msg_set_global_position_setpoint_int extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.latitude = payload.getint();
 	//m.longitude = payload.getint();
 	//m.altitude = payload.getint();
@@ -46,4 +47,9 @@ public void unpack() {
 	//m.coordinate_frame = payload.getbyte();
     
     }
+
+    public msg_set_global_position_setpoint_int(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "SET_GLOBAL_POSITION_SETPOINT_INT");
+	}
 }

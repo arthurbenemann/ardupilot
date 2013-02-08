@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Emit an encrypted signature / key identifying this system. PLEASE NOTE: This protocol has been kept simple, so transmitting the key requires an encrypted channel for true safety.
@@ -22,8 +23,13 @@ public class msg_auth_key extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	// = payload.getbyte();
     
     }
+
+    public msg_auth_key(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "AUTH_KEY");
+	}
 }

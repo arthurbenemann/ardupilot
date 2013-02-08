@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * 
@@ -30,10 +31,15 @@ public class msg_data_stream extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.message_rate = payload.getshort();
 	//m.stream_id = payload.getbyte();
 	//m.on_off = payload.getbyte();
     
     }
+
+    public msg_data_stream(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "DATA_STREAM");
+	}
 }

@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * 
@@ -46,7 +47,7 @@ public class msg_vision_position_estimate extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.usec = payload.getlong();
 	//m.x = payload.getfloat();
 	//m.y = payload.getfloat();
@@ -56,4 +57,9 @@ public void unpack() {
 	//m.yaw = payload.getfloat();
     
     }
+
+    public msg_vision_position_estimate(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "VISION_POSITION_ESTIMATE");
+	}
 }

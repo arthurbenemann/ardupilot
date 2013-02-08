@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * The positioning status, as reported by GPS. This message is intended to display status information about each satellite visible to the receiver. See message GLOBAL_POSITION for the global position estimate. This message can contain information for up to 20 satellites.
@@ -42,7 +43,7 @@ public class msg_gps_status extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.satellites_visible = payload.getbyte();
 	// = payload.getbyte();
 	// = payload.getbyte();
@@ -51,4 +52,9 @@ public void unpack() {
 	// = payload.getbyte();
     
     }
+
+    public msg_gps_status(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "GPS_STATUS");
+	}
 }

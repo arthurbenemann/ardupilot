@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Status of geo-fencing. Sent in extended
@@ -35,11 +36,16 @@ public class msg_fence_status extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.breach_time = payload.getint();
 	//m.breach_count = payload.getshort();
 	//m.breach_status = payload.getbyte();
 	//m.breach_type = payload.getbyte();
     
     }
+
+    public msg_fence_status(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "FENCE_STATUS");
+	}
 }

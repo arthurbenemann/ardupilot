@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Read out the safety zone the MAV currently assumes.
@@ -46,7 +47,7 @@ public class msg_safety_allowed_area extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.p1x = payload.getfloat();
 	//m.p1y = payload.getfloat();
 	//m.p1z = payload.getfloat();
@@ -56,4 +57,9 @@ public void unpack() {
 	//m.frame = payload.getbyte();
     
     }
+
+    public msg_safety_allowed_area(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "SAFETY_ALLOWED_AREA");
+	}
 }

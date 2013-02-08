@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Request a current fence point from MAV
@@ -30,10 +31,15 @@ public class msg_fence_fetch_point extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.target_system = payload.getbyte();
 	//m.target_component = payload.getbyte();
 	//m.idx = payload.getbyte();
     
     }
+
+    public msg_fence_fetch_point(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "FENCE_FETCH_POINT");
+	}
 }

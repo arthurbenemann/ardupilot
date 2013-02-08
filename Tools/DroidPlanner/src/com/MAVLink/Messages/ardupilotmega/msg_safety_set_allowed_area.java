@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Set a safety zone (volume), which is defined by two corners of a cube. This message can be used to tell the MAV which setpoints/MISSIONs to accept and which to reject. Safety areas are often enforced by national or competition regulations.
@@ -54,7 +55,7 @@ public class msg_safety_set_allowed_area extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.p1x = payload.getfloat();
 	//m.p1y = payload.getfloat();
 	//m.p1z = payload.getfloat();
@@ -66,4 +67,9 @@ public void unpack() {
 	//m.frame = payload.getbyte();
     
     }
+
+    public msg_safety_set_allowed_area(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "SAFETY_SET_ALLOWED_AREA");
+	}
 }

@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import android.util.Log;
 
 /**
 * Metrics typically displayed on a HUD for fixed wing aircraft
@@ -42,7 +43,7 @@ public class msg_vfr_hud extends MAVLinkMessage{
  *
  * @param payload The message to decode
  */
-public void unpack() {
+public void unpack(MAVLinkPayload payload) {
 	//m.airspeed = payload.getfloat();
 	//m.groundspeed = payload.getfloat();
 	//m.alt = payload.getfloat();
@@ -51,4 +52,9 @@ public void unpack() {
 	//m.throttle = payload.getshort();
     
     }
+
+    public msg_vfr_hud(MAVLinkPayload payload){
+	unpack(payload);
+	Log.d("MAVLink", "VFR_HUD");
+	}
 }
