@@ -1,6 +1,5 @@
  package com.MAVLink.Messages;
 
-
 /**
  * X.25 CRC calculation for MAVlink messages. The checksum must be initialized,
  * updated with witch field of the message, and then finished with the message

@@ -99,6 +99,7 @@ public class CRC {
 	 **/
 	public  void update_checksum(int data) {
 		int tmp;
+		data= data & 0xff;	//cast because we want an unsigned type
 		tmp = data ^ (CRCvalue & 0xff);
 		tmp ^= (tmp << 4) & 0xff;
 		CRCvalue = ((CRCvalue >> 8) & 0xff) ^ (tmp << 8) ^ (tmp << 3)
