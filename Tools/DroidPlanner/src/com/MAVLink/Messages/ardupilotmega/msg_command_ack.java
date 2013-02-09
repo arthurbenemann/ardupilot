@@ -37,5 +37,10 @@ public class msg_command_ack extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_COMMAND_ACK;
         unpack(payload);
         Log.d("MAVLink", "COMMAND_ACK");
+        //Log.d("MAVLINK_MSG_ID_COMMAND_ACK", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_COMMAND_ACK -"+" command:"+command+" result:"+result+"";
     }
 }

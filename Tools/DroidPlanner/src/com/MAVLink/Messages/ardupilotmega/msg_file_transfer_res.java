@@ -37,5 +37,10 @@ public class msg_file_transfer_res extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_FILE_TRANSFER_RES;
         unpack(payload);
         Log.d("MAVLink", "FILE_TRANSFER_RES");
+        //Log.d("MAVLINK_MSG_ID_FILE_TRANSFER_RES", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_FILE_TRANSFER_RES -"+" transfer_uid:"+transfer_uid+" result:"+result+"";
     }
 }

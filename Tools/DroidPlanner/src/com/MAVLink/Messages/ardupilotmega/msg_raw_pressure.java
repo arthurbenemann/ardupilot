@@ -52,5 +52,10 @@ public class msg_raw_pressure extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_RAW_PRESSURE;
         unpack(payload);
         Log.d("MAVLink", "RAW_PRESSURE");
+        //Log.d("MAVLINK_MSG_ID_RAW_PRESSURE", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_RAW_PRESSURE -"+" time_usec:"+time_usec+" press_abs:"+press_abs+" press_diff1:"+press_diff1+" press_diff2:"+press_diff2+" temperature:"+temperature+"";
     }
 }

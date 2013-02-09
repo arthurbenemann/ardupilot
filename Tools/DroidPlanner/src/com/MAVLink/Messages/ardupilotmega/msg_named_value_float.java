@@ -44,5 +44,10 @@ public class msg_named_value_float extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_NAMED_VALUE_FLOAT;
         unpack(payload);
         Log.d("MAVLink", "NAMED_VALUE_FLOAT");
+        //Log.d("MAVLINK_MSG_ID_NAMED_VALUE_FLOAT", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_NAMED_VALUE_FLOAT -"+" time_boot_ms:"+time_boot_ms+" value:"+value+" name:"+name+"";
     }
 }

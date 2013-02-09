@@ -37,5 +37,10 @@ public class msg_mission_clear_all extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MISSION_CLEAR_ALL;
         unpack(payload);
         Log.d("MAVLink", "MISSION_CLEAR_ALL");
+        //Log.d("MAVLINK_MSG_ID_MISSION_CLEAR_ALL", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_MISSION_CLEAR_ALL -"+" target_system:"+target_system+" target_component:"+target_component+"";
     }
 }

@@ -78,5 +78,10 @@ public class msg_gps_raw_int extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_GPS_RAW_INT;
         unpack(payload);
         Log.d("MAVLink", "GPS_RAW_INT");
+        //Log.d("MAVLINK_MSG_ID_GPS_RAW_INT", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_GPS_RAW_INT -"+" time_usec:"+time_usec+" lat:"+lat+" lon:"+lon+" alt:"+alt+" eph:"+eph+" epv:"+epv+" vel:"+vel+" cog:"+cog+" fix_type:"+fix_type+" satellites_visible:"+satellites_visible+"";
     }
 }

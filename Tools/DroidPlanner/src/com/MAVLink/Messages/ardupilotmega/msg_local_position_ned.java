@@ -62,5 +62,10 @@ public class msg_local_position_ned extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_LOCAL_POSITION_NED;
         unpack(payload);
         Log.d("MAVLink", "LOCAL_POSITION_NED");
+        //Log.d("MAVLINK_MSG_ID_LOCAL_POSITION_NED", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_LOCAL_POSITION_NED -"+" time_boot_ms:"+time_boot_ms+" x:"+x+" y:"+y+" z:"+z+" vx:"+vx+" vy:"+vy+" vz:"+vz+"";
     }
 }

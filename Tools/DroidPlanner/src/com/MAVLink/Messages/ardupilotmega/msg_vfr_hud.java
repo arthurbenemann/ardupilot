@@ -57,5 +57,10 @@ public class msg_vfr_hud extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_VFR_HUD;
         unpack(payload);
         Log.d("MAVLink", "VFR_HUD");
+        //Log.d("MAVLINK_MSG_ID_VFR_HUD", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_VFR_HUD -"+" airspeed:"+airspeed+" groundspeed:"+groundspeed+" alt:"+alt+" climb:"+climb+" heading:"+heading+" throttle:"+throttle+"";
     }
 }

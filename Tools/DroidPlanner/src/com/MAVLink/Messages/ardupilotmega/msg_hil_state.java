@@ -107,5 +107,10 @@ public class msg_hil_state extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_HIL_STATE;
         unpack(payload);
         Log.d("MAVLink", "HIL_STATE");
+        //Log.d("MAVLINK_MSG_ID_HIL_STATE", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_HIL_STATE -"+" time_usec:"+time_usec+" roll:"+roll+" pitch:"+pitch+" yaw:"+yaw+" rollspeed:"+rollspeed+" pitchspeed:"+pitchspeed+" yawspeed:"+yawspeed+" lat:"+lat+" lon:"+lon+" alt:"+alt+" vx:"+vx+" vy:"+vy+" vz:"+vz+" xacc:"+xacc+" yacc:"+yacc+" zacc:"+zacc+"";
     }
 }

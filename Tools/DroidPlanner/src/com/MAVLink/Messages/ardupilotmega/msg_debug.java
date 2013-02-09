@@ -42,5 +42,10 @@ public class msg_debug extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_DEBUG;
         unpack(payload);
         Log.d("MAVLink", "DEBUG");
+        //Log.d("MAVLINK_MSG_ID_DEBUG", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_DEBUG -"+" time_boot_ms:"+time_boot_ms+" value:"+value+" ind:"+ind+"";
     }
 }

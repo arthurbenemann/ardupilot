@@ -52,5 +52,10 @@ public class msg_set_quad_motors_setpoint extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT;
         unpack(payload);
         Log.d("MAVLink", "SET_QUAD_MOTORS_SETPOINT");
+        //Log.d("MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT -"+" motor_front_nw:"+motor_front_nw+" motor_right_ne:"+motor_right_ne+" motor_back_se:"+motor_back_se+" motor_left_sw:"+motor_left_sw+" target_system:"+target_system+"";
     }
 }

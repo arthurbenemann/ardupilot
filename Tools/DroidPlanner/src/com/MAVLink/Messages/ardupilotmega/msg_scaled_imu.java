@@ -77,5 +77,10 @@ public class msg_scaled_imu extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_SCALED_IMU;
         unpack(payload);
         Log.d("MAVLink", "SCALED_IMU");
+        //Log.d("MAVLINK_MSG_ID_SCALED_IMU", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_SCALED_IMU -"+" time_boot_ms:"+time_boot_ms+" xacc:"+xacc+" yacc:"+yacc+" zacc:"+zacc+" xgyro:"+xgyro+" ygyro:"+ygyro+" zgyro:"+zgyro+" xmag:"+xmag+" ymag:"+ymag+" zmag:"+zmag+"";
     }
 }

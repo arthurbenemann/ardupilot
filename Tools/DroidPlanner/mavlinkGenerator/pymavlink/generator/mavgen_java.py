@@ -182,6 +182,11 @@ ${{ordered_fields:	    ${unpackField}
         msgid = MAVLINK_MSG_ID_${name};
         unpack(payload);
         Log.d("MAVLink", "${name}");
+        //Log.d("MAVLINK_MSG_ID_${name}", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_${name} -"+${{ordered_fields:" ${name}:"+${name}+}}"";
     }
 }
 ''', m)

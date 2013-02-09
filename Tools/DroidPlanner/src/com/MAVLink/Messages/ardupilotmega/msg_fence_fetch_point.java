@@ -42,5 +42,10 @@ public class msg_fence_fetch_point extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_FENCE_FETCH_POINT;
         unpack(payload);
         Log.d("MAVLink", "FENCE_FETCH_POINT");
+        //Log.d("MAVLINK_MSG_ID_FENCE_FETCH_POINT", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_FENCE_FETCH_POINT -"+" target_system:"+target_system+" target_component:"+target_component+" idx:"+idx+"";
     }
 }

@@ -77,5 +77,10 @@ public class msg_digicam_control extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_DIGICAM_CONTROL;
         unpack(payload);
         Log.d("MAVLink", "DIGICAM_CONTROL");
+        //Log.d("MAVLINK_MSG_ID_DIGICAM_CONTROL", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_DIGICAM_CONTROL -"+" extra_value:"+extra_value+" target_system:"+target_system+" target_component:"+target_component+" session:"+session+" zoom_pos:"+zoom_pos+" zoom_step:"+zoom_step+" focus_lock:"+focus_lock+" shot:"+shot+" command_id:"+command_id+" extra_param:"+extra_param+"";
     }
 }

@@ -57,5 +57,10 @@ public class msg_mount_control extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MOUNT_CONTROL;
         unpack(payload);
         Log.d("MAVLink", "MOUNT_CONTROL");
+        //Log.d("MAVLINK_MSG_ID_MOUNT_CONTROL", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_MOUNT_CONTROL -"+" input_a:"+input_a+" input_b:"+input_b+" input_c:"+input_c+" target_system:"+target_system+" target_component:"+target_component+" save_position:"+save_position+"";
     }
 }

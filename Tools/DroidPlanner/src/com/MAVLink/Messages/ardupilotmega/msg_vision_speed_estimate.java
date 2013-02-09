@@ -47,5 +47,10 @@ public class msg_vision_speed_estimate extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE;
         unpack(payload);
         Log.d("MAVLink", "VISION_SPEED_ESTIMATE");
+        //Log.d("MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE -"+" usec:"+usec+" x:"+x+" y:"+y+" z:"+z+"";
     }
 }

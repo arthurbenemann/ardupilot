@@ -82,5 +82,10 @@ public class msg_command_long extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_COMMAND_LONG;
         unpack(payload);
         Log.d("MAVLink", "COMMAND_LONG");
+        //Log.d("MAVLINK_MSG_ID_COMMAND_LONG", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_COMMAND_LONG -"+" param1:"+param1+" param2:"+param2+" param3:"+param3+" param4:"+param4+" param5:"+param5+" param6:"+param6+" param7:"+param7+" command:"+command+" target_system:"+target_system+" target_component:"+target_component+" confirmation:"+confirmation+"";
     }
 }

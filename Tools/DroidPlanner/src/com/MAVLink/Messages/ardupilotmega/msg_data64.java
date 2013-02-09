@@ -44,5 +44,10 @@ public class msg_data64 extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_DATA64;
         unpack(payload);
         Log.d("MAVLink", "DATA64");
+        //Log.d("MAVLINK_MSG_ID_DATA64", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_DATA64 -"+" type:"+type+" len:"+len+" data:"+data+"";
     }
 }

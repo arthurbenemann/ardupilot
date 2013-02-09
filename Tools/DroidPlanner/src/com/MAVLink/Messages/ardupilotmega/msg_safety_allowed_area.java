@@ -62,5 +62,10 @@ public class msg_safety_allowed_area extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_SAFETY_ALLOWED_AREA;
         unpack(payload);
         Log.d("MAVLink", "SAFETY_ALLOWED_AREA");
+        //Log.d("MAVLINK_MSG_ID_SAFETY_ALLOWED_AREA", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_SAFETY_ALLOWED_AREA -"+" p1x:"+p1x+" p1y:"+p1y+" p1z:"+p1z+" p2x:"+p2x+" p2y:"+p2y+" p2z:"+p2z+" frame:"+frame+"";
     }
 }

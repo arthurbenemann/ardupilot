@@ -39,5 +39,10 @@ public class msg_statustext extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_STATUSTEXT;
         unpack(payload);
         Log.d("MAVLink", "STATUSTEXT");
+        //Log.d("MAVLINK_MSG_ID_STATUSTEXT", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_STATUSTEXT -"+" severity:"+severity+" text:"+text+"";
     }
 }

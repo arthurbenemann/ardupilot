@@ -57,5 +57,10 @@ public class msg_manual_control extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MANUAL_CONTROL;
         unpack(payload);
         Log.d("MAVLink", "MANUAL_CONTROL");
+        //Log.d("MAVLINK_MSG_ID_MANUAL_CONTROL", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_MANUAL_CONTROL -"+" x:"+x+" y:"+y+" z:"+z+" r:"+r+" buttons:"+buttons+" target:"+target+"";
     }
 }

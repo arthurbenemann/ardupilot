@@ -98,5 +98,10 @@ public class msg_mission_item extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MISSION_ITEM;
         unpack(payload);
         Log.d("MAVLink", "MISSION_ITEM");
+        //Log.d("MAVLINK_MSG_ID_MISSION_ITEM", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_MISSION_ITEM -"+" param1:"+param1+" param2:"+param2+" param3:"+param3+" param4:"+param4+" x:"+x+" y:"+y+" z:"+z+" seq:"+seq+" command:"+command+" target_system:"+target_system+" target_component:"+target_component+" frame:"+frame+" current:"+current+" autocontinue:"+autocontinue+"";
     }
 }

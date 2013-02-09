@@ -54,5 +54,10 @@ public class msg_debug_vect extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_DEBUG_VECT;
         unpack(payload);
         Log.d("MAVLink", "DEBUG_VECT");
+        //Log.d("MAVLINK_MSG_ID_DEBUG_VECT", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_DEBUG_VECT -"+" time_usec:"+time_usec+" x:"+x+" y:"+y+" z:"+z+" name:"+name+"";
     }
 }

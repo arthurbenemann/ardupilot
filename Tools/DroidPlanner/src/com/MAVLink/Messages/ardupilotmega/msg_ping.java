@@ -47,5 +47,10 @@ public class msg_ping extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_PING;
         unpack(payload);
         Log.d("MAVLink", "PING");
+        //Log.d("MAVLINK_MSG_ID_PING", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_PING -"+" time_usec:"+time_usec+" seq:"+seq+" target_system:"+target_system+" target_component:"+target_component+"";
     }
 }

@@ -62,5 +62,10 @@ public class msg_attitude extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_ATTITUDE;
         unpack(payload);
         Log.d("MAVLink", "ATTITUDE");
+        //Log.d("MAVLINK_MSG_ID_ATTITUDE", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_ATTITUDE -"+" time_boot_ms:"+time_boot_ms+" roll:"+roll+" pitch:"+pitch+" yaw:"+yaw+" rollspeed:"+rollspeed+" pitchspeed:"+pitchspeed+" yawspeed:"+yawspeed+"";
     }
 }

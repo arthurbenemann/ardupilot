@@ -62,5 +62,10 @@ public class msg_setpoint_6dof extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_SETPOINT_6DOF;
         unpack(payload);
         Log.d("MAVLink", "SETPOINT_6DOF");
+        //Log.d("MAVLINK_MSG_ID_SETPOINT_6DOF", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_SETPOINT_6DOF -"+" trans_x:"+trans_x+" trans_y:"+trans_y+" trans_z:"+trans_z+" rot_x:"+rot_x+" rot_y:"+rot_y+" rot_z:"+rot_z+" target_system:"+target_system+"";
     }
 }

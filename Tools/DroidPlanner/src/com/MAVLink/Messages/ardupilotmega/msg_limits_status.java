@@ -73,5 +73,10 @@ public class msg_limits_status extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_LIMITS_STATUS;
         unpack(payload);
         Log.d("MAVLink", "LIMITS_STATUS");
+        //Log.d("MAVLINK_MSG_ID_LIMITS_STATUS", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_LIMITS_STATUS -"+" last_trigger:"+last_trigger+" last_action:"+last_action+" last_recovery:"+last_recovery+" last_clear:"+last_clear+" breach_count:"+breach_count+" limits_state:"+limits_state+" mods_enabled:"+mods_enabled+" mods_required:"+mods_required+" mods_triggered:"+mods_triggered+"";
     }
 }

@@ -72,5 +72,10 @@ public class msg_state_correction extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_STATE_CORRECTION;
         unpack(payload);
         Log.d("MAVLink", "STATE_CORRECTION");
+        //Log.d("MAVLINK_MSG_ID_STATE_CORRECTION", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_STATE_CORRECTION -"+" xErr:"+xErr+" yErr:"+yErr+" zErr:"+zErr+" rollErr:"+rollErr+" pitchErr:"+pitchErr+" yawErr:"+yawErr+" vxErr:"+vxErr+" vyErr:"+vyErr+" vzErr:"+vzErr+"";
     }
 }

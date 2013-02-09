@@ -77,5 +77,10 @@ public class msg_rc_channels_override extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE;
         unpack(payload);
         Log.d("MAVLink", "RC_CHANNELS_OVERRIDE");
+        //Log.d("MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE -"+" chan1_raw:"+chan1_raw+" chan2_raw:"+chan2_raw+" chan3_raw:"+chan3_raw+" chan4_raw:"+chan4_raw+" chan5_raw:"+chan5_raw+" chan6_raw:"+chan6_raw+" chan7_raw:"+chan7_raw+" chan8_raw:"+chan8_raw+" target_system:"+target_system+" target_component:"+target_component+"";
     }
 }

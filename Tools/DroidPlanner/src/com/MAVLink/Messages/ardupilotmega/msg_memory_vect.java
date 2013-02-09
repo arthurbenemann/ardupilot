@@ -49,5 +49,10 @@ public class msg_memory_vect extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MEMORY_VECT;
         unpack(payload);
         Log.d("MAVLink", "MEMORY_VECT");
+        //Log.d("MAVLINK_MSG_ID_MEMORY_VECT", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_MEMORY_VECT -"+" address:"+address+" ver:"+ver+" type:"+type+" value:"+value+"";
     }
 }

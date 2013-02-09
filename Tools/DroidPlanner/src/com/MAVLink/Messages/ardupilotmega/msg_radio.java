@@ -62,5 +62,10 @@ public class msg_radio extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_RADIO;
         unpack(payload);
         Log.d("MAVLink", "RADIO");
+        //Log.d("MAVLINK_MSG_ID_RADIO", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_RADIO -"+" rxerrors:"+rxerrors+" fixed:"+fixed+" rssi:"+rssi+" remrssi:"+remrssi+" txbuf:"+txbuf+" noise:"+noise+" remnoise:"+remnoise+"";
     }
 }

@@ -82,5 +82,10 @@ public class msg_simstate extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_SIMSTATE;
         unpack(payload);
         Log.d("MAVLink", "SIMSTATE");
+        //Log.d("MAVLINK_MSG_ID_SIMSTATE", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_SIMSTATE -"+" roll:"+roll+" pitch:"+pitch+" yaw:"+yaw+" xacc:"+xacc+" yacc:"+yacc+" zacc:"+zacc+" xgyro:"+xgyro+" ygyro:"+ygyro+" zgyro:"+zgyro+" lat:"+lat+" lng:"+lng+"";
     }
 }

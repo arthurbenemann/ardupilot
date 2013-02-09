@@ -42,5 +42,10 @@ public class msg_data_stream extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_DATA_STREAM;
         unpack(payload);
         Log.d("MAVLink", "DATA_STREAM");
+        //Log.d("MAVLINK_MSG_ID_DATA_STREAM", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_DATA_STREAM -"+" message_rate:"+message_rate+" stream_id:"+stream_id+" on_off:"+on_off+"";
     }
 }

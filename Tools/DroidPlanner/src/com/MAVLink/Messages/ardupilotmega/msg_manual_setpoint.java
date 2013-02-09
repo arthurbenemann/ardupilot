@@ -62,5 +62,10 @@ public class msg_manual_setpoint extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MANUAL_SETPOINT;
         unpack(payload);
         Log.d("MAVLink", "MANUAL_SETPOINT");
+        //Log.d("MAVLINK_MSG_ID_MANUAL_SETPOINT", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_MANUAL_SETPOINT -"+" time_boot_ms:"+time_boot_ms+" roll:"+roll+" pitch:"+pitch+" yaw:"+yaw+" thrust:"+thrust+" mode_switch:"+mode_switch+" manual_override_switch:"+manual_override_switch+"";
     }
 }

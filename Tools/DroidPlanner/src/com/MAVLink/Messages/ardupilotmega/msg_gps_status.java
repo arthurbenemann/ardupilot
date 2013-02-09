@@ -67,5 +67,10 @@ public class msg_gps_status extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_GPS_STATUS;
         unpack(payload);
         Log.d("MAVLink", "GPS_STATUS");
+        //Log.d("MAVLINK_MSG_ID_GPS_STATUS", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_GPS_STATUS -"+" satellites_visible:"+satellites_visible+" satellite_prn:"+satellite_prn+" satellite_used:"+satellite_used+" satellite_elevation:"+satellite_elevation+" satellite_azimuth:"+satellite_azimuth+" satellite_snr:"+satellite_snr+"";
     }
 }

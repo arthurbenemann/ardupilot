@@ -37,5 +37,10 @@ public class msg_hwstatus extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_HWSTATUS;
         unpack(payload);
         Log.d("MAVLink", "HWSTATUS");
+        //Log.d("MAVLINK_MSG_ID_HWSTATUS", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_HWSTATUS -"+" Vcc:"+Vcc+" I2Cerr:"+I2Cerr+"";
     }
 }

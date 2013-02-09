@@ -72,5 +72,10 @@ public class msg_setpoint_8dof extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_SETPOINT_8DOF;
         unpack(payload);
         Log.d("MAVLink", "SETPOINT_8DOF");
+        //Log.d("MAVLINK_MSG_ID_SETPOINT_8DOF", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_SETPOINT_8DOF -"+" val1:"+val1+" val2:"+val2+" val3:"+val3+" val4:"+val4+" val5:"+val5+" val6:"+val6+" val7:"+val7+" val8:"+val8+" target_system:"+target_system+"";
     }
 }

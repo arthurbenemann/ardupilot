@@ -52,5 +52,10 @@ public class msg_mount_status extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MOUNT_STATUS;
         unpack(payload);
         Log.d("MAVLink", "MOUNT_STATUS");
+        //Log.d("MAVLINK_MSG_ID_MOUNT_STATUS", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_MOUNT_STATUS -"+" pointing_a:"+pointing_a+" pointing_b:"+pointing_b+" pointing_c:"+pointing_c+" target_system:"+target_system+" target_component:"+target_component+"";
     }
 }

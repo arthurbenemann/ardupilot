@@ -77,5 +77,10 @@ public class msg_servo_output_raw extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_SERVO_OUTPUT_RAW;
         unpack(payload);
         Log.d("MAVLink", "SERVO_OUTPUT_RAW");
+        //Log.d("MAVLINK_MSG_ID_SERVO_OUTPUT_RAW", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_SERVO_OUTPUT_RAW -"+" time_usec:"+time_usec+" servo1_raw:"+servo1_raw+" servo2_raw:"+servo2_raw+" servo3_raw:"+servo3_raw+" servo4_raw:"+servo4_raw+" servo5_raw:"+servo5_raw+" servo6_raw:"+servo6_raw+" servo7_raw:"+servo7_raw+" servo8_raw:"+servo8_raw+" port:"+port+"";
     }
 }

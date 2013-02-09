@@ -82,5 +82,10 @@ public class msg_rc_channels_scaled extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_RC_CHANNELS_SCALED;
         unpack(payload);
         Log.d("MAVLink", "RC_CHANNELS_SCALED");
+        //Log.d("MAVLINK_MSG_ID_RC_CHANNELS_SCALED", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_RC_CHANNELS_SCALED -"+" time_boot_ms:"+time_boot_ms+" chan1_scaled:"+chan1_scaled+" chan2_scaled:"+chan2_scaled+" chan3_scaled:"+chan3_scaled+" chan4_scaled:"+chan4_scaled+" chan5_scaled:"+chan5_scaled+" chan6_scaled:"+chan6_scaled+" chan7_scaled:"+chan7_scaled+" chan8_scaled:"+chan8_scaled+" port:"+port+" rssi:"+rssi+"";
     }
 }

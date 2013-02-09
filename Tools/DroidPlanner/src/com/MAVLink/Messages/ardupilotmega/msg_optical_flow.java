@@ -67,5 +67,10 @@ public class msg_optical_flow extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_OPTICAL_FLOW;
         unpack(payload);
         Log.d("MAVLink", "OPTICAL_FLOW");
+        //Log.d("MAVLINK_MSG_ID_OPTICAL_FLOW", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_OPTICAL_FLOW -"+" time_usec:"+time_usec+" flow_comp_m_x:"+flow_comp_m_x+" flow_comp_m_y:"+flow_comp_m_y+" ground_distance:"+ground_distance+" flow_x:"+flow_x+" flow_y:"+flow_y+" sensor_id:"+sensor_id+" quality:"+quality+"";
     }
 }

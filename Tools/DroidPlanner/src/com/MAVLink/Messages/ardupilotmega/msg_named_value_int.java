@@ -44,5 +44,10 @@ public class msg_named_value_int extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_NAMED_VALUE_INT;
         unpack(payload);
         Log.d("MAVLink", "NAMED_VALUE_INT");
+        //Log.d("MAVLINK_MSG_ID_NAMED_VALUE_INT", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_NAMED_VALUE_INT -"+" time_boot_ms:"+time_boot_ms+" value:"+value+" name:"+name+"";
     }
 }

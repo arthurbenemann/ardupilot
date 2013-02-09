@@ -67,5 +67,10 @@ public class msg_attitude_quaternion extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_ATTITUDE_QUATERNION;
         unpack(payload);
         Log.d("MAVLink", "ATTITUDE_QUATERNION");
+        //Log.d("MAVLINK_MSG_ID_ATTITUDE_QUATERNION", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_ATTITUDE_QUATERNION -"+" time_boot_ms:"+time_boot_ms+" q1:"+q1+" q2:"+q2+" q3:"+q3+" q4:"+q4+" rollspeed:"+rollspeed+" pitchspeed:"+pitchspeed+" yawspeed:"+yawspeed+"";
     }
 }

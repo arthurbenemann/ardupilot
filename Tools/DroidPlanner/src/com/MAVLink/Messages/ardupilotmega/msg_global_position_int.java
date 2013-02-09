@@ -73,5 +73,10 @@ public class msg_global_position_int extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_GLOBAL_POSITION_INT;
         unpack(payload);
         Log.d("MAVLink", "GLOBAL_POSITION_INT");
+        //Log.d("MAVLINK_MSG_ID_GLOBAL_POSITION_INT", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_GLOBAL_POSITION_INT -"+" time_boot_ms:"+time_boot_ms+" lat:"+lat+" lon:"+lon+" alt:"+alt+" relative_alt:"+relative_alt+" vx:"+vx+" vy:"+vy+" vz:"+vz+" hdg:"+hdg+"";
     }
 }

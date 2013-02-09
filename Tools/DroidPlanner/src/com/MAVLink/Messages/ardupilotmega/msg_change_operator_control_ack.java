@@ -42,5 +42,10 @@ public class msg_change_operator_control_ack extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK;
         unpack(payload);
         Log.d("MAVLink", "CHANGE_OPERATOR_CONTROL_ACK");
+        //Log.d("MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK -"+" gcs_system_id:"+gcs_system_id+" control_request:"+control_request+" ack:"+ack+"";
     }
 }

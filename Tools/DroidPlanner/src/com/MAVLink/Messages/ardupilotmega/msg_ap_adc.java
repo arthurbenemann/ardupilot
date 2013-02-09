@@ -57,5 +57,10 @@ public class msg_ap_adc extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_AP_ADC;
         unpack(payload);
         Log.d("MAVLink", "AP_ADC");
+        //Log.d("MAVLINK_MSG_ID_AP_ADC", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_AP_ADC -"+" adc1:"+adc1+" adc2:"+adc2+" adc3:"+adc3+" adc4:"+adc4+" adc5:"+adc5+" adc6:"+adc6+"";
     }
 }

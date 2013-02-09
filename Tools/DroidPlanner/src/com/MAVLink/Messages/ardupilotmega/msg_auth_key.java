@@ -34,5 +34,10 @@ public class msg_auth_key extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_AUTH_KEY;
         unpack(payload);
         Log.d("MAVLink", "AUTH_KEY");
+        //Log.d("MAVLINK_MSG_ID_AUTH_KEY", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_AUTH_KEY -"+" key:"+key+"";
     }
 }

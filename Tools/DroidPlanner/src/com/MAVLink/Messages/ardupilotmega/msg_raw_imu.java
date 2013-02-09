@@ -77,5 +77,10 @@ public class msg_raw_imu extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_RAW_IMU;
         unpack(payload);
         Log.d("MAVLink", "RAW_IMU");
+        //Log.d("MAVLINK_MSG_ID_RAW_IMU", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_RAW_IMU -"+" time_usec:"+time_usec+" xacc:"+xacc+" yacc:"+yacc+" zacc:"+zacc+" xgyro:"+xgyro+" ygyro:"+ygyro+" zgyro:"+zgyro+" xmag:"+xmag+" ymag:"+ymag+" zmag:"+zmag+"";
     }
 }

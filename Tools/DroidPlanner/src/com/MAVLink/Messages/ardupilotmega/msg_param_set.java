@@ -54,5 +54,10 @@ public class msg_param_set extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_PARAM_SET;
         unpack(payload);
         Log.d("MAVLink", "PARAM_SET");
+        //Log.d("MAVLINK_MSG_ID_PARAM_SET", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_PARAM_SET -"+" param_value:"+param_value+" target_system:"+target_system+" target_component:"+target_component+" param_id:"+param_id+" param_type:"+param_type+"";
     }
 }

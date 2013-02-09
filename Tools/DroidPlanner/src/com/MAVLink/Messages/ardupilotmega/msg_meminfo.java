@@ -37,5 +37,10 @@ public class msg_meminfo extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MEMINFO;
         unpack(payload);
         Log.d("MAVLink", "MEMINFO");
+        //Log.d("MAVLINK_MSG_ID_MEMINFO", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_MEMINFO -"+" brkval:"+brkval+" freemem:"+freemem+"";
     }
 }

@@ -82,5 +82,10 @@ public class msg_digicam_configure extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_DIGICAM_CONFIGURE;
         unpack(payload);
         Log.d("MAVLink", "DIGICAM_CONFIGURE");
+        //Log.d("MAVLINK_MSG_ID_DIGICAM_CONFIGURE", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_DIGICAM_CONFIGURE -"+" extra_value:"+extra_value+" shutter_speed:"+shutter_speed+" target_system:"+target_system+" target_component:"+target_component+" mode:"+mode+" aperture:"+aperture+" iso:"+iso+" exposure_type:"+exposure_type+" command_id:"+command_id+" engine_cut_off:"+engine_cut_off+" extra_param:"+extra_param+"";
     }
 }

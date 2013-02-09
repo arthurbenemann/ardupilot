@@ -47,5 +47,10 @@ public class msg_set_gps_global_origin extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN;
         unpack(payload);
         Log.d("MAVLink", "SET_GPS_GLOBAL_ORIGIN");
+        //Log.d("MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN -"+" latitude:"+latitude+" longitude:"+longitude+" altitude:"+altitude+" target_system:"+target_system+"";
     }
 }

@@ -37,5 +37,10 @@ public class msg_param_request_list extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_PARAM_REQUEST_LIST;
         unpack(payload);
         Log.d("MAVLink", "PARAM_REQUEST_LIST");
+        //Log.d("MAVLINK_MSG_ID_PARAM_REQUEST_LIST", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_PARAM_REQUEST_LIST -"+" target_system:"+target_system+" target_component:"+target_component+"";
     }
 }

@@ -52,5 +52,10 @@ public class msg_set_global_position_setpoint_int extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_SET_GLOBAL_POSITION_SETPOINT_INT;
         unpack(payload);
         Log.d("MAVLink", "SET_GLOBAL_POSITION_SETPOINT_INT");
+        //Log.d("MAVLINK_MSG_ID_SET_GLOBAL_POSITION_SETPOINT_INT", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_SET_GLOBAL_POSITION_SETPOINT_INT -"+" latitude:"+latitude+" longitude:"+longitude+" altitude:"+altitude+" yaw:"+yaw+" coordinate_frame:"+coordinate_frame+"";
     }
 }

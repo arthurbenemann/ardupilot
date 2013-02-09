@@ -102,5 +102,10 @@ public class msg_highres_imu extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_HIGHRES_IMU;
         unpack(payload);
         Log.d("MAVLink", "HIGHRES_IMU");
+        //Log.d("MAVLINK_MSG_ID_HIGHRES_IMU", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_HIGHRES_IMU -"+" time_usec:"+time_usec+" xacc:"+xacc+" yacc:"+yacc+" zacc:"+zacc+" xgyro:"+xgyro+" ygyro:"+ygyro+" zgyro:"+zgyro+" xmag:"+xmag+" ymag:"+ymag+" zmag:"+zmag+" abs_pressure:"+abs_pressure+" diff_pressure:"+diff_pressure+" pressure_alt:"+pressure_alt+" temperature:"+temperature+" fields_updated:"+fields_updated+"";
     }
 }

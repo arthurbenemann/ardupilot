@@ -72,5 +72,10 @@ public class msg_battery_status extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_BATTERY_STATUS;
         unpack(payload);
         Log.d("MAVLink", "BATTERY_STATUS");
+        //Log.d("MAVLINK_MSG_ID_BATTERY_STATUS", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_BATTERY_STATUS -"+" voltage_cell_1:"+voltage_cell_1+" voltage_cell_2:"+voltage_cell_2+" voltage_cell_3:"+voltage_cell_3+" voltage_cell_4:"+voltage_cell_4+" voltage_cell_5:"+voltage_cell_5+" voltage_cell_6:"+voltage_cell_6+" current_battery:"+current_battery+" accu_id:"+accu_id+" battery_remaining:"+battery_remaining+"";
     }
 }

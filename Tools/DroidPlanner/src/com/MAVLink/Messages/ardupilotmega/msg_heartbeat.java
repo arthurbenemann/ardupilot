@@ -57,5 +57,10 @@ public class msg_heartbeat extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_HEARTBEAT;
         unpack(payload);
         Log.d("MAVLink", "HEARTBEAT");
+        //Log.d("MAVLINK_MSG_ID_HEARTBEAT", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_HEARTBEAT -"+" custom_mode:"+custom_mode+" type:"+type+" autopilot:"+autopilot+" base_mode:"+base_mode+" system_status:"+system_status+" mavlink_version:"+mavlink_version+"";
     }
 }

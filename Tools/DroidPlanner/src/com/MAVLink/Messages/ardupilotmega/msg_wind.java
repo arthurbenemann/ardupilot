@@ -42,5 +42,10 @@ public class msg_wind extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_WIND;
         unpack(payload);
         Log.d("MAVLink", "WIND");
+        //Log.d("MAVLINK_MSG_ID_WIND", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_WIND -"+" direction:"+direction+" speed:"+speed+" speed_z:"+speed_z+"";
     }
 }

@@ -47,5 +47,10 @@ public class msg_scaled_pressure extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_SCALED_PRESSURE;
         unpack(payload);
         Log.d("MAVLink", "SCALED_PRESSURE");
+        //Log.d("MAVLINK_MSG_ID_SCALED_PRESSURE", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_SCALED_PRESSURE -"+" time_boot_ms:"+time_boot_ms+" press_abs:"+press_abs+" press_diff:"+press_diff+" temperature:"+temperature+"";
     }
 }

@@ -42,5 +42,10 @@ public class msg_mission_set_current extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MISSION_SET_CURRENT;
         unpack(payload);
         Log.d("MAVLink", "MISSION_SET_CURRENT");
+        //Log.d("MAVLINK_MSG_ID_MISSION_SET_CURRENT", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_MISSION_SET_CURRENT -"+" seq:"+seq+" target_system:"+target_system+" target_component:"+target_component+"";
     }
 }

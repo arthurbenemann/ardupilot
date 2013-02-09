@@ -62,5 +62,10 @@ public class msg_ahrs extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_AHRS;
         unpack(payload);
         Log.d("MAVLink", "AHRS");
+        //Log.d("MAVLINK_MSG_ID_AHRS", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_AHRS -"+" omegaIx:"+omegaIx+" omegaIy:"+omegaIy+" omegaIz:"+omegaIz+" accel_weight:"+accel_weight+" renorm_val:"+renorm_val+" error_rp:"+error_rp+" error_yaw:"+error_yaw+"";
     }
 }

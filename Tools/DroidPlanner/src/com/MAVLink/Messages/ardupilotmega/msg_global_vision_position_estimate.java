@@ -62,5 +62,10 @@ public class msg_global_vision_position_estimate extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE;
         unpack(payload);
         Log.d("MAVLink", "GLOBAL_VISION_POSITION_ESTIMATE");
+        //Log.d("MAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE -"+" usec:"+usec+" x:"+x+" y:"+y+" z:"+z+" roll:"+roll+" pitch:"+pitch+" yaw:"+yaw+"";
     }
 }

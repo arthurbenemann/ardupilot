@@ -42,5 +42,10 @@ public class msg_set_mode extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_SET_MODE;
         unpack(payload);
         Log.d("MAVLink", "SET_MODE");
+        //Log.d("MAVLINK_MSG_ID_SET_MODE", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_SET_MODE -"+" custom_mode:"+custom_mode+" target_system:"+target_system+" base_mode:"+base_mode+"";
     }
 }

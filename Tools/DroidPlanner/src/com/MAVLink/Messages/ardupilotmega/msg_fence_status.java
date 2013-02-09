@@ -48,5 +48,10 @@ public class msg_fence_status extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_FENCE_STATUS;
         unpack(payload);
         Log.d("MAVLink", "FENCE_STATUS");
+        //Log.d("MAVLINK_MSG_ID_FENCE_STATUS", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_FENCE_STATUS -"+" breach_time:"+breach_time+" breach_count:"+breach_count+" breach_status:"+breach_status+" breach_type:"+breach_type+"";
     }
 }

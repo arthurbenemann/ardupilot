@@ -57,5 +57,10 @@ public class msg_set_roll_pitch_yaw_speed_thrust extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_SET_ROLL_PITCH_YAW_SPEED_THRUST;
         unpack(payload);
         Log.d("MAVLink", "SET_ROLL_PITCH_YAW_SPEED_THRUST");
+        //Log.d("MAVLINK_MSG_ID_SET_ROLL_PITCH_YAW_SPEED_THRUST", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_SET_ROLL_PITCH_YAW_SPEED_THRUST -"+" roll_speed:"+roll_speed+" pitch_speed:"+pitch_speed+" yaw_speed:"+yaw_speed+" thrust:"+thrust+" target_system:"+target_system+" target_component:"+target_component+"";
     }
 }

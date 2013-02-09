@@ -37,5 +37,10 @@ public class msg_system_time extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_SYSTEM_TIME;
         unpack(payload);
         Log.d("MAVLink", "SYSTEM_TIME");
+        //Log.d("MAVLINK_MSG_ID_SYSTEM_TIME", toString());
+    }
+
+    public String toString(){
+    	return "MAVLINK_MSG_ID_SYSTEM_TIME -"+" time_unix_usec:"+time_unix_usec+" time_boot_ms:"+time_boot_ms+"";
     }
 }
