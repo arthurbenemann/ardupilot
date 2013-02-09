@@ -35,6 +35,23 @@ public class MAVLinkPacket{
 		}
 		crc.finish_checksum(msgid);
     }
+	public byte[] encodePacket() {
+		byte[] buffer = new byte[6 + len + 2];
+		int i = 0;
+		buffer[i++] = (byte) MAVLINK_STX;
+		buffer[i++] = (byte) len;
+		buffer[i++] = (byte) seq;
+		buffer[i++] = (byte) sysid;
+		buffer[i++] = (byte) compid;
+		buffer[i++] = (byte) msgid;
+		for (byte b : payload.payload) {
+			buffer[i++] = b;
+		}
+		generateCRC();
+		buffer[i++] = (byte) (crc.getLSB());
+		buffer[i++] = (byte) (crc.getMSB());
+		return buffer;
+	}
 	
 	public MAVLinkMessage unpack() {
 		switch (msgid) {
