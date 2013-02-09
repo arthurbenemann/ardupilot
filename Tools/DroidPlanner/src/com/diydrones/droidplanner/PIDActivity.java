@@ -42,7 +42,7 @@ implements OnNavigationListener {
 			//startActivity(new Intent(this, PlanningActivity.class));
 			return false;
 		case 1: // HUD
-			startActivity(new Intent(this, HUD.class));
+			startActivity(new Intent(this, HUDActivity.class));
 			return false;
 		case 2: // Flight Data
 			startActivity(new Intent(this, FightDataActivity.class));

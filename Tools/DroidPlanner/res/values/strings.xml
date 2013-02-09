@@ -8,6 +8,7 @@
 
     <string-array name="menu_dropdown">
         <item>Planning</item>
+        <item>HUD</item>
         <item>Fligth Data</item>
         <item>PID</item>
         <item>Terminal</item>

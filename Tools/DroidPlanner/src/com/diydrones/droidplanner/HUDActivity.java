@@ -9,10 +9,11 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
-public class HUD  extends android.support.v4.app.FragmentActivity
+public class HUDActivity  extends android.support.v4.app.FragmentActivity
 	implements OnNavigationListener {
 
-	
+
+	HUDwidget hudWidget;
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
@@ -28,7 +29,9 @@ public class HUD  extends android.support.v4.app.FragmentActivity
 			actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
 			actionBar.setSelectedNavigationItem(1);
 
-			setContentView(R.layout.flightdata);
+			setContentView(R.layout.hud);
+
+			hudWidget = (HUDwidget)findViewById(R.id.hudWidget);
 		}
 		
 
@@ -42,7 +45,7 @@ public class HUD  extends android.support.v4.app.FragmentActivity
 				startActivity(new Intent(this, PlanningActivity.class));
 				return false;
 			case 1: // HUD
-				startActivity(new Intent(this, HUD.class));
+				//startActivity(new Intent(this, HUDActivity.class));
 				return false;
 			case 2: // Flight Data
 				startActivity(new Intent(this, FightDataActivity.class));
