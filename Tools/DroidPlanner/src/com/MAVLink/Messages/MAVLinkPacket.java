@@ -6,6 +6,7 @@ import com.MAVLink.Messages.ardupilotmega.*;
 
 public class MAVLinkPacket{
 	public int seq;
+	public static final int MAVLINK_STX = 254;
 	public int len;
 	public  int sysid;
 	public int compid;

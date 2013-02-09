@@ -24,7 +24,6 @@ public class Parser {
 	MAV_states state = MAV_states.MAVLINK_PARSE_STATE_UNINIT;
 
 	static boolean msg_received;
-	private static int MAVLINK_STX = 254;
 
 	private MAVLinkPacket m;
 	
@@ -37,7 +36,8 @@ public class Parser {
 		switch (state) {
 		case MAVLINK_PARSE_STATE_UNINIT:
 		case MAVLINK_PARSE_STATE_IDLE:
-			if (c == MAVLINK_STX) {
+			
+			if (c ==  MAVLinkPacket.MAVLINK_STX) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_STX;
 				m = new MAVLinkPacket();
 			}
@@ -48,8 +48,6 @@ public class Parser {
 				msg_received = false;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
 			} else {
-				// NOT counting STX, LENGTH, SEQ, SYSID, COMPID, MSGID, CRC1 and
-				// CRC2
 				m.len = c;
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_LENGTH;
 			}
@@ -95,7 +93,7 @@ public class Parser {
 				Log.d("error", "msg:"+m.msgid+" - "+errorStr);
 				msg_received = false;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
-				if (c == MAVLINK_STX) {
+				if (c == MAVLinkPacket.MAVLINK_STX) {
 					state = MAV_states.MAVLINK_PARSE_STATE_GOT_STX;
 					m.crc.start_checksum();
 				}
@@ -110,7 +108,7 @@ public class Parser {
 			if (false) {
 				msg_received = false;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
-				if (c == MAVLINK_STX) {
+				if (c == MAVLinkPacket.MAVLINK_STX) {
 					state = MAV_states.MAVLINK_PARSE_STATE_GOT_STX;
 					m.crc.start_checksum();
 				}
