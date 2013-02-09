@@ -68,10 +68,16 @@ public class MAVLinkPacket {
 		payload = new MAVLinkPayload();
 	}
 	
+	/**
+	 * Check if the size of the Payload is equal to the "len" byte
+	 */
 	public boolean payloadIsFilled() {
 		return (payload.size() == len);
 	}
 	
+	/**
+	 * Update CRC for this packet.
+	 */
 	public void generateCRC(){
 		crc = new CRC();
 		crc.update_checksum(len);
@@ -109,6 +115,12 @@ public class MAVLinkPacket {
 		return buffer;
 	}
 	
+	
+	/**
+	 * Unpack the data in this packet and return a MAVLink message
+	 * 
+	 * @return MAVLink message decoded from this packet
+	 */
 	public MAVLinkMessage unpack() {
 		switch (msgid) {
 		case msg_sensor_offsets.MAVLINK_MSG_ID_SENSOR_OFFSETS:
