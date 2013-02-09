@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -38,11 +39,35 @@ public class msg_set_quad_swarm_roll_pitch_yaw_thrust extends MAVLinkMessage{
 	*/
 	public byte mode; 
 
-/**
- * Decode a set_quad_swarm_roll_pitch_yaw_thrust message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_SET_QUAD_SWARM_ROLL_PITCH_YAW_THRUST;
+		 for (int i = 0; i < roll.length; i++) {
+                        packet.payload.putShort(roll[i]);
+            }
+		 for (int i = 0; i < pitch.length; i++) {
+                        packet.payload.putShort(pitch[i]);
+            }
+		 for (int i = 0; i < yaw.length; i++) {
+                        packet.payload.putShort(yaw[i]);
+            }
+		 for (int i = 0; i < thrust.length; i++) {
+                        packet.payload.putShort(thrust[i]);
+            }
+		packet.payload.putByte(group);
+		packet.payload.putByte(mode);
+		return packet;		
+	}
+
+    /**
+     * Decode a set_quad_swarm_roll_pitch_yaw_thrust message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	     for (int i = 0; i < roll.length; i++) {
@@ -61,6 +86,11 @@ public class msg_set_quad_swarm_roll_pitch_yaw_thrust extends MAVLinkMessage{
 	    mode = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_set_quad_swarm_roll_pitch_yaw_thrust(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_SET_QUAD_SWARM_ROLL_PITCH_YAW_THRUST;
         unpack(payload);
@@ -68,6 +98,9 @@ public class msg_set_quad_swarm_roll_pitch_yaw_thrust extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_SET_QUAD_SWARM_ROLL_PITCH_YAW_THRUST", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_SET_QUAD_SWARM_ROLL_PITCH_YAW_THRUST -"+" roll:"+roll+" pitch:"+pitch+" yaw:"+yaw+" thrust:"+thrust+" group:"+group+" mode:"+mode+"";
     }

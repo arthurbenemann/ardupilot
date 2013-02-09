@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -22,17 +23,34 @@ public class msg_hwstatus extends MAVLinkMessage{
 	*/
 	public byte I2Cerr; 
 
-/**
- * Decode a hwstatus message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_HWSTATUS;
+		packet.payload.putShort(Vcc);
+		packet.payload.putByte(I2Cerr);
+		return packet;		
+	}
+
+    /**
+     * Decode a hwstatus message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    Vcc = payload.getShort();
 	    I2Cerr = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_hwstatus(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_HWSTATUS;
         unpack(payload);
@@ -40,6 +58,9 @@ public class msg_hwstatus extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_HWSTATUS", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_HWSTATUS -"+" Vcc:"+Vcc+" I2Cerr:"+I2Cerr+"";
     }

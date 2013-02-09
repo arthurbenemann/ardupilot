@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -58,11 +59,32 @@ public class msg_simstate extends MAVLinkMessage{
 	*/
 	public float lng; 
 
-/**
- * Decode a simstate message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_SIMSTATE;
+		packet.payload.putFloat(roll);
+		packet.payload.putFloat(pitch);
+		packet.payload.putFloat(yaw);
+		packet.payload.putFloat(xacc);
+		packet.payload.putFloat(yacc);
+		packet.payload.putFloat(zacc);
+		packet.payload.putFloat(xgyro);
+		packet.payload.putFloat(ygyro);
+		packet.payload.putFloat(zgyro);
+		packet.payload.putFloat(lat);
+		packet.payload.putFloat(lng);
+		return packet;		
+	}
+
+    /**
+     * Decode a simstate message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    roll = payload.getFloat();
@@ -78,6 +100,11 @@ public class msg_simstate extends MAVLinkMessage{
 	    lng = payload.getFloat();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_simstate(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_SIMSTATE;
         unpack(payload);
@@ -85,6 +112,9 @@ public class msg_simstate extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_SIMSTATE", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_SIMSTATE -"+" roll:"+roll+" pitch:"+pitch+" yaw:"+yaw+" xacc:"+xacc+" yacc:"+yacc+" zacc:"+zacc+" xgyro:"+xgyro+" ygyro:"+ygyro+" zgyro:"+zgyro+" lat:"+lat+" lng:"+lng+"";
     }

@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -42,11 +43,28 @@ public class msg_setpoint_6dof extends MAVLinkMessage{
 	*/
 	public byte target_system; 
 
-/**
- * Decode a setpoint_6dof message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_SETPOINT_6DOF;
+		packet.payload.putFloat(trans_x);
+		packet.payload.putFloat(trans_y);
+		packet.payload.putFloat(trans_z);
+		packet.payload.putFloat(rot_x);
+		packet.payload.putFloat(rot_y);
+		packet.payload.putFloat(rot_z);
+		packet.payload.putByte(target_system);
+		return packet;		
+	}
+
+    /**
+     * Decode a setpoint_6dof message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    trans_x = payload.getFloat();
@@ -58,6 +76,11 @@ public class msg_setpoint_6dof extends MAVLinkMessage{
 	    target_system = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_setpoint_6dof(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_SETPOINT_6DOF;
         unpack(payload);
@@ -65,6 +88,9 @@ public class msg_setpoint_6dof extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_SETPOINT_6DOF", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_SETPOINT_6DOF -"+" trans_x:"+trans_x+" trans_y:"+trans_y+" trans_z:"+trans_z+" rot_x:"+rot_x+" rot_y:"+rot_y+" rot_z:"+rot_z+" target_system:"+target_system+"";
     }

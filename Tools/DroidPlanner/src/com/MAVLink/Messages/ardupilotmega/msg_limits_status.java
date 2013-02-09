@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -51,11 +52,30 @@ public class msg_limits_status extends MAVLinkMessage{
 	*/
 	public byte mods_triggered; 
 
-/**
- * Decode a limits_status message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_LIMITS_STATUS;
+		packet.payload.putInt(last_trigger);
+		packet.payload.putInt(last_action);
+		packet.payload.putInt(last_recovery);
+		packet.payload.putInt(last_clear);
+		packet.payload.putShort(breach_count);
+		packet.payload.putByte(limits_state);
+		packet.payload.putByte(mods_enabled);
+		packet.payload.putByte(mods_required);
+		packet.payload.putByte(mods_triggered);
+		return packet;		
+	}
+
+    /**
+     * Decode a limits_status message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    last_trigger = payload.getInt();
@@ -69,6 +89,11 @@ public class msg_limits_status extends MAVLinkMessage{
 	    mods_triggered = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_limits_status(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_LIMITS_STATUS;
         unpack(payload);
@@ -76,6 +101,9 @@ public class msg_limits_status extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_LIMITS_STATUS", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_LIMITS_STATUS -"+" last_trigger:"+last_trigger+" last_action:"+last_action+" last_recovery:"+last_recovery+" last_clear:"+last_clear+" breach_count:"+breach_count+" limits_state:"+limits_state+" mods_enabled:"+mods_enabled+" mods_required:"+mods_required+" mods_triggered:"+mods_triggered+"";
     }

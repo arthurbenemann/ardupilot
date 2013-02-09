@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -54,11 +55,31 @@ public class msg_rc_channels_override extends MAVLinkMessage{
 	*/
 	public byte target_component; 
 
-/**
- * Decode a rc_channels_override message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE;
+		packet.payload.putShort(chan1_raw);
+		packet.payload.putShort(chan2_raw);
+		packet.payload.putShort(chan3_raw);
+		packet.payload.putShort(chan4_raw);
+		packet.payload.putShort(chan5_raw);
+		packet.payload.putShort(chan6_raw);
+		packet.payload.putShort(chan7_raw);
+		packet.payload.putShort(chan8_raw);
+		packet.payload.putByte(target_system);
+		packet.payload.putByte(target_component);
+		return packet;		
+	}
+
+    /**
+     * Decode a rc_channels_override message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    chan1_raw = payload.getShort();
@@ -73,6 +94,11 @@ public class msg_rc_channels_override extends MAVLinkMessage{
 	    target_component = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_rc_channels_override(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE;
         unpack(payload);
@@ -80,6 +106,9 @@ public class msg_rc_channels_override extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE -"+" chan1_raw:"+chan1_raw+" chan2_raw:"+chan2_raw+" chan3_raw:"+chan3_raw+" chan4_raw:"+chan4_raw+" chan5_raw:"+chan5_raw+" chan6_raw:"+chan6_raw+" chan7_raw:"+chan7_raw+" chan8_raw:"+chan8_raw+" target_system:"+target_system+" target_component:"+target_component+"";
     }

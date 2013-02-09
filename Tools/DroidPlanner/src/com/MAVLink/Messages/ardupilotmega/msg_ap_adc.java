@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -38,11 +39,27 @@ public class msg_ap_adc extends MAVLinkMessage{
 	*/
 	public short adc6; 
 
-/**
- * Decode a ap_adc message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_AP_ADC;
+		packet.payload.putShort(adc1);
+		packet.payload.putShort(adc2);
+		packet.payload.putShort(adc3);
+		packet.payload.putShort(adc4);
+		packet.payload.putShort(adc5);
+		packet.payload.putShort(adc6);
+		return packet;		
+	}
+
+    /**
+     * Decode a ap_adc message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    adc1 = payload.getShort();
@@ -53,6 +70,11 @@ public class msg_ap_adc extends MAVLinkMessage{
 	    adc6 = payload.getShort();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_ap_adc(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_AP_ADC;
         unpack(payload);
@@ -60,6 +82,9 @@ public class msg_ap_adc extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_AP_ADC", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_AP_ADC -"+" adc1:"+adc1+" adc2:"+adc2+" adc3:"+adc3+" adc4:"+adc4+" adc5:"+adc5+" adc6:"+adc6+"";
     }

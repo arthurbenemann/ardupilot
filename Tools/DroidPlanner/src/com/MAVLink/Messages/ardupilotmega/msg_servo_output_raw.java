@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -54,11 +55,31 @@ public class msg_servo_output_raw extends MAVLinkMessage{
 	*/
 	public byte port; 
 
-/**
- * Decode a servo_output_raw message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_SERVO_OUTPUT_RAW;
+		packet.payload.putInt(time_usec);
+		packet.payload.putShort(servo1_raw);
+		packet.payload.putShort(servo2_raw);
+		packet.payload.putShort(servo3_raw);
+		packet.payload.putShort(servo4_raw);
+		packet.payload.putShort(servo5_raw);
+		packet.payload.putShort(servo6_raw);
+		packet.payload.putShort(servo7_raw);
+		packet.payload.putShort(servo8_raw);
+		packet.payload.putByte(port);
+		return packet;		
+	}
+
+    /**
+     * Decode a servo_output_raw message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    time_usec = payload.getInt();
@@ -73,6 +94,11 @@ public class msg_servo_output_raw extends MAVLinkMessage{
 	    port = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_servo_output_raw(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_SERVO_OUTPUT_RAW;
         unpack(payload);
@@ -80,6 +106,9 @@ public class msg_servo_output_raw extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_SERVO_OUTPUT_RAW", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_SERVO_OUTPUT_RAW -"+" time_usec:"+time_usec+" servo1_raw:"+servo1_raw+" servo2_raw:"+servo2_raw+" servo3_raw:"+servo3_raw+" servo4_raw:"+servo4_raw+" servo5_raw:"+servo5_raw+" servo6_raw:"+servo6_raw+" servo7_raw:"+servo7_raw+" servo8_raw:"+servo8_raw+" port:"+port+"";
     }

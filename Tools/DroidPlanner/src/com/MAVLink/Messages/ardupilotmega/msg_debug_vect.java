@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -34,11 +35,28 @@ public class msg_debug_vect extends MAVLinkMessage{
 	*/
 	public byte name[] = new byte[10]; 
 
-/**
- * Decode a debug_vect message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_DEBUG_VECT;
+		packet.payload.putLong(time_usec);
+		packet.payload.putFloat(x);
+		packet.payload.putFloat(y);
+		packet.payload.putFloat(z);
+		 for (int i = 0; i < name.length; i++) {
+                        packet.payload.putByte(name[i]);
+            }
+		return packet;		
+	}
+
+    /**
+     * Decode a debug_vect message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    time_usec = payload.getLong();
@@ -50,6 +68,11 @@ public class msg_debug_vect extends MAVLinkMessage{
 		}    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_debug_vect(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_DEBUG_VECT;
         unpack(payload);
@@ -57,6 +80,9 @@ public class msg_debug_vect extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_DEBUG_VECT", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_DEBUG_VECT -"+" time_usec:"+time_usec+" x:"+x+" y:"+y+" z:"+z+" name:"+name+"";
     }

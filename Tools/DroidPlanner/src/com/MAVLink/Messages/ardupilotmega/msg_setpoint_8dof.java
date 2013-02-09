@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -50,11 +51,30 @@ public class msg_setpoint_8dof extends MAVLinkMessage{
 	*/
 	public byte target_system; 
 
-/**
- * Decode a setpoint_8dof message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_SETPOINT_8DOF;
+		packet.payload.putFloat(val1);
+		packet.payload.putFloat(val2);
+		packet.payload.putFloat(val3);
+		packet.payload.putFloat(val4);
+		packet.payload.putFloat(val5);
+		packet.payload.putFloat(val6);
+		packet.payload.putFloat(val7);
+		packet.payload.putFloat(val8);
+		packet.payload.putByte(target_system);
+		return packet;		
+	}
+
+    /**
+     * Decode a setpoint_8dof message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    val1 = payload.getFloat();
@@ -68,6 +88,11 @@ public class msg_setpoint_8dof extends MAVLinkMessage{
 	    target_system = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_setpoint_8dof(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_SETPOINT_8DOF;
         unpack(payload);
@@ -75,6 +100,9 @@ public class msg_setpoint_8dof extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_SETPOINT_8DOF", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_SETPOINT_8DOF -"+" val1:"+val1+" val2:"+val2+" val3:"+val3+" val4:"+val4+" val5:"+val5+" val6:"+val6+" val7:"+val7+" val8:"+val8+" target_system:"+target_system+"";
     }

@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -51,11 +52,30 @@ public class msg_global_position_int extends MAVLinkMessage{
 	*/
 	public short hdg; 
 
-/**
- * Decode a global_position_int message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_GLOBAL_POSITION_INT;
+		packet.payload.putInt(time_boot_ms);
+		packet.payload.putInt(lat);
+		packet.payload.putInt(lon);
+		packet.payload.putInt(alt);
+		packet.payload.putInt(relative_alt);
+		packet.payload.putShort(vx);
+		packet.payload.putShort(vy);
+		packet.payload.putShort(vz);
+		packet.payload.putShort(hdg);
+		return packet;		
+	}
+
+    /**
+     * Decode a global_position_int message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    time_boot_ms = payload.getInt();
@@ -69,6 +89,11 @@ public class msg_global_position_int extends MAVLinkMessage{
 	    hdg = payload.getShort();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_global_position_int(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_GLOBAL_POSITION_INT;
         unpack(payload);
@@ -76,6 +101,9 @@ public class msg_global_position_int extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_GLOBAL_POSITION_INT", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_GLOBAL_POSITION_INT -"+" time_boot_ms:"+time_boot_ms+" lat:"+lat+" lon:"+lon+" alt:"+alt+" relative_alt:"+relative_alt+" vx:"+vx+" vy:"+vy+" vz:"+vz+" hdg:"+hdg+"";
     }

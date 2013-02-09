@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -54,11 +55,31 @@ public class msg_digicam_control extends MAVLinkMessage{
 	*/
 	public byte extra_param; 
 
-/**
- * Decode a digicam_control message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_DIGICAM_CONTROL;
+		packet.payload.putFloat(extra_value);
+		packet.payload.putByte(target_system);
+		packet.payload.putByte(target_component);
+		packet.payload.putByte(session);
+		packet.payload.putByte(zoom_pos);
+		packet.payload.putByte(zoom_step);
+		packet.payload.putByte(focus_lock);
+		packet.payload.putByte(shot);
+		packet.payload.putByte(command_id);
+		packet.payload.putByte(extra_param);
+		return packet;		
+	}
+
+    /**
+     * Decode a digicam_control message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    extra_value = payload.getFloat();
@@ -73,6 +94,11 @@ public class msg_digicam_control extends MAVLinkMessage{
 	    extra_param = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_digicam_control(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_DIGICAM_CONTROL;
         unpack(payload);
@@ -80,6 +106,9 @@ public class msg_digicam_control extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_DIGICAM_CONTROL", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_DIGICAM_CONTROL -"+" extra_value:"+extra_value+" target_system:"+target_system+" target_component:"+target_component+" session:"+session+" zoom_pos:"+zoom_pos+" zoom_step:"+zoom_step+" focus_lock:"+focus_lock+" shot:"+shot+" command_id:"+command_id+" extra_param:"+extra_param+"";
     }

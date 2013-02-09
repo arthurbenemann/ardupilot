@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -58,11 +59,32 @@ public class msg_hil_controls extends MAVLinkMessage{
 	*/
 	public byte nav_mode; 
 
-/**
- * Decode a hil_controls message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_HIL_CONTROLS;
+		packet.payload.putLong(time_usec);
+		packet.payload.putFloat(roll_ailerons);
+		packet.payload.putFloat(pitch_elevator);
+		packet.payload.putFloat(yaw_rudder);
+		packet.payload.putFloat(throttle);
+		packet.payload.putFloat(aux1);
+		packet.payload.putFloat(aux2);
+		packet.payload.putFloat(aux3);
+		packet.payload.putFloat(aux4);
+		packet.payload.putByte(mode);
+		packet.payload.putByte(nav_mode);
+		return packet;		
+	}
+
+    /**
+     * Decode a hil_controls message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    time_usec = payload.getLong();
@@ -78,6 +100,11 @@ public class msg_hil_controls extends MAVLinkMessage{
 	    nav_mode = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_hil_controls(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_HIL_CONTROLS;
         unpack(payload);
@@ -85,6 +112,9 @@ public class msg_hil_controls extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_HIL_CONTROLS", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_HIL_CONTROLS -"+" time_usec:"+time_usec+" roll_ailerons:"+roll_ailerons+" pitch_elevator:"+pitch_elevator+" yaw_rudder:"+yaw_rudder+" throttle:"+throttle+" aux1:"+aux1+" aux2:"+aux2+" aux3:"+aux3+" aux4:"+aux4+" mode:"+mode+" nav_mode:"+nav_mode+"";
     }

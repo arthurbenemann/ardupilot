@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -38,11 +39,27 @@ public class msg_heartbeat extends MAVLinkMessage{
 	*/
 	public byte mavlink_version; 
 
-/**
- * Decode a heartbeat message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_HEARTBEAT;
+		packet.payload.putInt(custom_mode);
+		packet.payload.putByte(type);
+		packet.payload.putByte(autopilot);
+		packet.payload.putByte(base_mode);
+		packet.payload.putByte(system_status);
+		packet.payload.putByte(mavlink_version);
+		return packet;		
+	}
+
+    /**
+     * Decode a heartbeat message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    custom_mode = payload.getInt();
@@ -53,6 +70,11 @@ public class msg_heartbeat extends MAVLinkMessage{
 	    mavlink_version = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_heartbeat(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_HEARTBEAT;
         unpack(payload);
@@ -60,6 +82,9 @@ public class msg_heartbeat extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_HEARTBEAT", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_HEARTBEAT -"+" custom_mode:"+custom_mode+" type:"+type+" autopilot:"+autopilot+" base_mode:"+base_mode+" system_status:"+system_status+" mavlink_version:"+mavlink_version+"";
     }

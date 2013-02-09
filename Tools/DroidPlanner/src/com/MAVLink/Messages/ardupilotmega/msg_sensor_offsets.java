@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -63,11 +64,33 @@ public class msg_sensor_offsets extends MAVLinkMessage{
 	*/
 	public short mag_ofs_z; 
 
-/**
- * Decode a sensor_offsets message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_SENSOR_OFFSETS;
+		packet.payload.putFloat(mag_declination);
+		packet.payload.putInt(raw_press);
+		packet.payload.putInt(raw_temp);
+		packet.payload.putFloat(gyro_cal_x);
+		packet.payload.putFloat(gyro_cal_y);
+		packet.payload.putFloat(gyro_cal_z);
+		packet.payload.putFloat(accel_cal_x);
+		packet.payload.putFloat(accel_cal_y);
+		packet.payload.putFloat(accel_cal_z);
+		packet.payload.putShort(mag_ofs_x);
+		packet.payload.putShort(mag_ofs_y);
+		packet.payload.putShort(mag_ofs_z);
+		return packet;		
+	}
+
+    /**
+     * Decode a sensor_offsets message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    mag_declination = payload.getFloat();
@@ -84,6 +107,11 @@ public class msg_sensor_offsets extends MAVLinkMessage{
 	    mag_ofs_z = payload.getShort();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_sensor_offsets(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_SENSOR_OFFSETS;
         unpack(payload);
@@ -91,6 +119,9 @@ public class msg_sensor_offsets extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_SENSOR_OFFSETS", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_SENSOR_OFFSETS -"+" mag_declination:"+mag_declination+" raw_press:"+raw_press+" raw_temp:"+raw_temp+" gyro_cal_x:"+gyro_cal_x+" gyro_cal_y:"+gyro_cal_y+" gyro_cal_z:"+gyro_cal_z+" accel_cal_x:"+accel_cal_x+" accel_cal_y:"+accel_cal_y+" accel_cal_z:"+accel_cal_z+" mag_ofs_x:"+mag_ofs_x+" mag_ofs_y:"+mag_ofs_y+" mag_ofs_z:"+mag_ofs_z+"";
     }

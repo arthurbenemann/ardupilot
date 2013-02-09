@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -46,11 +47,29 @@ public class msg_nav_controller_output extends MAVLinkMessage{
 	*/
 	public short wp_dist; 
 
-/**
- * Decode a nav_controller_output message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT;
+		packet.payload.putFloat(nav_roll);
+		packet.payload.putFloat(nav_pitch);
+		packet.payload.putFloat(alt_error);
+		packet.payload.putFloat(aspd_error);
+		packet.payload.putFloat(xtrack_error);
+		packet.payload.putShort(nav_bearing);
+		packet.payload.putShort(target_bearing);
+		packet.payload.putShort(wp_dist);
+		return packet;		
+	}
+
+    /**
+     * Decode a nav_controller_output message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    nav_roll = payload.getFloat();
@@ -63,6 +82,11 @@ public class msg_nav_controller_output extends MAVLinkMessage{
 	    wp_dist = payload.getShort();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_nav_controller_output(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT;
         unpack(payload);
@@ -70,6 +94,9 @@ public class msg_nav_controller_output extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT -"+" nav_roll:"+nav_roll+" nav_pitch:"+nav_pitch+" alt_error:"+alt_error+" aspd_error:"+aspd_error+" xtrack_error:"+xtrack_error+" nav_bearing:"+nav_bearing+" target_bearing:"+target_bearing+" wp_dist:"+wp_dist+"";
     }

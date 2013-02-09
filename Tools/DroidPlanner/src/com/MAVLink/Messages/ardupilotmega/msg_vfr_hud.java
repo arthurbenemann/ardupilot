@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -38,11 +39,27 @@ public class msg_vfr_hud extends MAVLinkMessage{
 	*/
 	public short throttle; 
 
-/**
- * Decode a vfr_hud message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_VFR_HUD;
+		packet.payload.putFloat(airspeed);
+		packet.payload.putFloat(groundspeed);
+		packet.payload.putFloat(alt);
+		packet.payload.putFloat(climb);
+		packet.payload.putShort(heading);
+		packet.payload.putShort(throttle);
+		return packet;		
+	}
+
+    /**
+     * Decode a vfr_hud message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    airspeed = payload.getFloat();
@@ -53,6 +70,11 @@ public class msg_vfr_hud extends MAVLinkMessage{
 	    throttle = payload.getShort();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_vfr_hud(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_VFR_HUD;
         unpack(payload);
@@ -60,6 +82,9 @@ public class msg_vfr_hud extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_VFR_HUD", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_VFR_HUD -"+" airspeed:"+airspeed+" groundspeed:"+groundspeed+" alt:"+alt+" climb:"+climb+" heading:"+heading+" throttle:"+throttle+"";
     }

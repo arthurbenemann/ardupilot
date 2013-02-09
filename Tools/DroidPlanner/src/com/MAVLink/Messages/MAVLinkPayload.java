@@ -70,5 +70,36 @@ public class MAVLinkPayload {
 	public float getFloat() {
 		return Float.intBitsToFloat(getInt());
 	}
+	
+	public void putByte(byte data) {
+		add(data);
+	}
+
+	public void putShort(short data) {
+		add((byte) (data >> 0));
+		add((byte) (data >> 8));
+	}
+
+	public void putInt(int data) {
+		add((byte) (data >> 0));
+		add((byte) (data >> 8));
+		add((byte) (data >> 16));
+		add((byte) (data >> 24));
+	}
+
+	public void putLong(long data) {
+		add((byte) (data >> 0));
+		add((byte) (data >> 8));
+		add((byte) (data >> 16));
+		add((byte) (data >> 24));
+		add((byte) (data >> 32));
+		add((byte) (data >> 40));
+		add((byte) (data >> 48));
+		add((byte) (data >> 56));
+	}
+
+	public void putFloat(float data) {
+		putInt(Float.floatToIntBits(data));
+	}
 
 }

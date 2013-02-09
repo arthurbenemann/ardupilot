@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -42,11 +43,28 @@ public class msg_attitude extends MAVLinkMessage{
 	*/
 	public float yawspeed; 
 
-/**
- * Decode a attitude message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_ATTITUDE;
+		packet.payload.putInt(time_boot_ms);
+		packet.payload.putFloat(roll);
+		packet.payload.putFloat(pitch);
+		packet.payload.putFloat(yaw);
+		packet.payload.putFloat(rollspeed);
+		packet.payload.putFloat(pitchspeed);
+		packet.payload.putFloat(yawspeed);
+		return packet;		
+	}
+
+    /**
+     * Decode a attitude message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    time_boot_ms = payload.getInt();
@@ -58,6 +76,11 @@ public class msg_attitude extends MAVLinkMessage{
 	    yawspeed = payload.getFloat();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_attitude(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_ATTITUDE;
         unpack(payload);
@@ -65,6 +88,9 @@ public class msg_attitude extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_ATTITUDE", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_ATTITUDE -"+" time_boot_ms:"+time_boot_ms+" roll:"+roll+" pitch:"+pitch+" yaw:"+yaw+" rollspeed:"+rollspeed+" pitchspeed:"+pitchspeed+" yawspeed:"+yawspeed+"";
     }

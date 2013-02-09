@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -66,11 +67,34 @@ public class msg_sys_status extends MAVLinkMessage{
 	*/
 	public byte battery_remaining; 
 
-/**
- * Decode a sys_status message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_SYS_STATUS;
+		packet.payload.putInt(onboard_control_sensors_present);
+		packet.payload.putInt(onboard_control_sensors_enabled);
+		packet.payload.putInt(onboard_control_sensors_health);
+		packet.payload.putShort(load);
+		packet.payload.putShort(voltage_battery);
+		packet.payload.putShort(current_battery);
+		packet.payload.putShort(drop_rate_comm);
+		packet.payload.putShort(errors_comm);
+		packet.payload.putShort(errors_count1);
+		packet.payload.putShort(errors_count2);
+		packet.payload.putShort(errors_count3);
+		packet.payload.putShort(errors_count4);
+		packet.payload.putByte(battery_remaining);
+		return packet;		
+	}
+
+    /**
+     * Decode a sys_status message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    onboard_control_sensors_present = payload.getInt();
@@ -88,6 +112,11 @@ public class msg_sys_status extends MAVLinkMessage{
 	    battery_remaining = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_sys_status(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_SYS_STATUS;
         unpack(payload);
@@ -95,6 +124,9 @@ public class msg_sys_status extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_SYS_STATUS", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_SYS_STATUS -"+" onboard_control_sensors_present:"+onboard_control_sensors_present+" onboard_control_sensors_enabled:"+onboard_control_sensors_enabled+" onboard_control_sensors_health:"+onboard_control_sensors_health+" load:"+load+" voltage_battery:"+voltage_battery+" current_battery:"+current_battery+" drop_rate_comm:"+drop_rate_comm+" errors_comm:"+errors_comm+" errors_count1:"+errors_count1+" errors_count2:"+errors_count2+" errors_count3:"+errors_count3+" errors_count4:"+errors_count4+" battery_remaining:"+battery_remaining+"";
     }

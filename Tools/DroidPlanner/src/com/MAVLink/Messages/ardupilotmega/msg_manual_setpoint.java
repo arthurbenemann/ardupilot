@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -42,11 +43,28 @@ public class msg_manual_setpoint extends MAVLinkMessage{
 	*/
 	public byte manual_override_switch; 
 
-/**
- * Decode a manual_setpoint message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_MANUAL_SETPOINT;
+		packet.payload.putInt(time_boot_ms);
+		packet.payload.putFloat(roll);
+		packet.payload.putFloat(pitch);
+		packet.payload.putFloat(yaw);
+		packet.payload.putFloat(thrust);
+		packet.payload.putByte(mode_switch);
+		packet.payload.putByte(manual_override_switch);
+		return packet;		
+	}
+
+    /**
+     * Decode a manual_setpoint message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    time_boot_ms = payload.getInt();
@@ -58,6 +76,11 @@ public class msg_manual_setpoint extends MAVLinkMessage{
 	    manual_override_switch = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_manual_setpoint(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_MANUAL_SETPOINT;
         unpack(payload);
@@ -65,6 +88,9 @@ public class msg_manual_setpoint extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_MANUAL_SETPOINT", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_MANUAL_SETPOINT -"+" time_boot_ms:"+time_boot_ms+" roll:"+roll+" pitch:"+pitch+" yaw:"+yaw+" thrust:"+thrust+" mode_switch:"+mode_switch+" manual_override_switch:"+manual_override_switch+"";
     }

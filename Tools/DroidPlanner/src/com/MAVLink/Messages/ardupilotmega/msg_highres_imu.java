@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -74,11 +75,36 @@ public class msg_highres_imu extends MAVLinkMessage{
 	*/
 	public short fields_updated; 
 
-/**
- * Decode a highres_imu message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_HIGHRES_IMU;
+		packet.payload.putLong(time_usec);
+		packet.payload.putFloat(xacc);
+		packet.payload.putFloat(yacc);
+		packet.payload.putFloat(zacc);
+		packet.payload.putFloat(xgyro);
+		packet.payload.putFloat(ygyro);
+		packet.payload.putFloat(zgyro);
+		packet.payload.putFloat(xmag);
+		packet.payload.putFloat(ymag);
+		packet.payload.putFloat(zmag);
+		packet.payload.putFloat(abs_pressure);
+		packet.payload.putFloat(diff_pressure);
+		packet.payload.putFloat(pressure_alt);
+		packet.payload.putFloat(temperature);
+		packet.payload.putShort(fields_updated);
+		return packet;		
+	}
+
+    /**
+     * Decode a highres_imu message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    time_usec = payload.getLong();
@@ -98,6 +124,11 @@ public class msg_highres_imu extends MAVLinkMessage{
 	    fields_updated = payload.getShort();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_highres_imu(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_HIGHRES_IMU;
         unpack(payload);
@@ -105,6 +136,9 @@ public class msg_highres_imu extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_HIGHRES_IMU", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_HIGHRES_IMU -"+" time_usec:"+time_usec+" xacc:"+xacc+" yacc:"+yacc+" zacc:"+zacc+" xgyro:"+xgyro+" ygyro:"+ygyro+" zgyro:"+zgyro+" xmag:"+xmag+" ymag:"+ymag+" zmag:"+zmag+" abs_pressure:"+abs_pressure+" diff_pressure:"+diff_pressure+" pressure_alt:"+pressure_alt+" temperature:"+temperature+" fields_updated:"+fields_updated+"";
     }

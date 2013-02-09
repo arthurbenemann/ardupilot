@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -34,11 +35,26 @@ public class msg_set_quad_motors_setpoint extends MAVLinkMessage{
 	*/
 	public byte target_system; 
 
-/**
- * Decode a set_quad_motors_setpoint message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT;
+		packet.payload.putShort(motor_front_nw);
+		packet.payload.putShort(motor_right_ne);
+		packet.payload.putShort(motor_back_se);
+		packet.payload.putShort(motor_left_sw);
+		packet.payload.putByte(target_system);
+		return packet;		
+	}
+
+    /**
+     * Decode a set_quad_motors_setpoint message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    motor_front_nw = payload.getShort();
@@ -48,6 +64,11 @@ public class msg_set_quad_motors_setpoint extends MAVLinkMessage{
 	    target_system = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_set_quad_motors_setpoint(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT;
         unpack(payload);
@@ -55,6 +76,9 @@ public class msg_set_quad_motors_setpoint extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT -"+" motor_front_nw:"+motor_front_nw+" motor_right_ne:"+motor_right_ne+" motor_back_se:"+motor_back_se+" motor_left_sw:"+motor_left_sw+" target_system:"+target_system+"";
     }

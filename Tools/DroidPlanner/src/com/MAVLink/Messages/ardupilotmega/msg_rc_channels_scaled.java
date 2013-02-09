@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -58,11 +59,32 @@ public class msg_rc_channels_scaled extends MAVLinkMessage{
 	*/
 	public byte rssi; 
 
-/**
- * Decode a rc_channels_scaled message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_RC_CHANNELS_SCALED;
+		packet.payload.putInt(time_boot_ms);
+		packet.payload.putShort(chan1_scaled);
+		packet.payload.putShort(chan2_scaled);
+		packet.payload.putShort(chan3_scaled);
+		packet.payload.putShort(chan4_scaled);
+		packet.payload.putShort(chan5_scaled);
+		packet.payload.putShort(chan6_scaled);
+		packet.payload.putShort(chan7_scaled);
+		packet.payload.putShort(chan8_scaled);
+		packet.payload.putByte(port);
+		packet.payload.putByte(rssi);
+		return packet;		
+	}
+
+    /**
+     * Decode a rc_channels_scaled message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    time_boot_ms = payload.getInt();
@@ -78,6 +100,11 @@ public class msg_rc_channels_scaled extends MAVLinkMessage{
 	    rssi = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_rc_channels_scaled(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_RC_CHANNELS_SCALED;
         unpack(payload);
@@ -85,6 +112,9 @@ public class msg_rc_channels_scaled extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_RC_CHANNELS_SCALED", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_RC_CHANNELS_SCALED -"+" time_boot_ms:"+time_boot_ms+" chan1_scaled:"+chan1_scaled+" chan2_scaled:"+chan2_scaled+" chan3_scaled:"+chan3_scaled+" chan4_scaled:"+chan4_scaled+" chan5_scaled:"+chan5_scaled+" chan6_scaled:"+chan6_scaled+" chan7_scaled:"+chan7_scaled+" chan8_scaled:"+chan8_scaled+" port:"+port+" rssi:"+rssi+"";
     }

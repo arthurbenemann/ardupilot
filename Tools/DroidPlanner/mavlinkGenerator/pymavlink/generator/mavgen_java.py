@@ -151,6 +151,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -167,17 +168,35 @@ ${{ordered_fields: 	/**
 	public ${type} ${name}${array_suffix}; 
 }}
 
-/**
- * Decode a ${name_lower} message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_${name};
+		packet.len = MAVLINK_MSG_LENGTH;
+${{ordered_fields:		${packField}
+}}
+		return packet;		
+	}
+
+    /**
+     * Decode a ${name_lower} message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 ${{ordered_fields:	    ${unpackField}
 }}    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_${name_lower}(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_${name};
         unpack(payload);
@@ -185,6 +204,9 @@ ${{ordered_fields:	    ${unpackField}
         //Log.d("MAVLINK_MSG_ID_${name}", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_${name} -"+${{ordered_fields:" ${name}:"+${name}+}}"";
     }
@@ -391,6 +413,9 @@ def generate_one(basename, xml):
                 f.unpackField = ''' for (int i = 0; i < %s.length; i++) {
 			%s[i] = payload.get%s();
 		}''' % (f.name, f.name, mavfmt(f).title() )
+                f.packField = ''' for (int i = 0; i < %s.length; i++) {
+                        packet.payload.put%s(%s[i]);
+            }''' % (f.name, mavfmt(f).title(),f.name)
                 f.return_type = 'uint16_t'
                 f.get_arg = ', %s *%s' % (f.type, f.name)
                 if f.type == 'char':
@@ -410,6 +435,10 @@ def generate_one(basename, xml):
                 f.decode_left =  '%s' % (f.name)
                 f.decode_right = ''
                 f.unpackField = '%s = payload.get%s();' % (f.name, mavfmt(f).title())
+                f.packField = 'packet.payload.put%s(%s);' % (mavfmt(f).title(),f.name)
+                   
+		
+
                 f.get_arg = ''
                 f.return_type = f.type
                 if f.type == 'char':

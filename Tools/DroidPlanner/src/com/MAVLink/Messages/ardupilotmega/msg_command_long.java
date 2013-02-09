@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -58,11 +59,32 @@ public class msg_command_long extends MAVLinkMessage{
 	*/
 	public byte confirmation; 
 
-/**
- * Decode a command_long message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_COMMAND_LONG;
+		packet.payload.putFloat(param1);
+		packet.payload.putFloat(param2);
+		packet.payload.putFloat(param3);
+		packet.payload.putFloat(param4);
+		packet.payload.putFloat(param5);
+		packet.payload.putFloat(param6);
+		packet.payload.putFloat(param7);
+		packet.payload.putShort(command);
+		packet.payload.putByte(target_system);
+		packet.payload.putByte(target_component);
+		packet.payload.putByte(confirmation);
+		return packet;		
+	}
+
+    /**
+     * Decode a command_long message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    param1 = payload.getFloat();
@@ -78,6 +100,11 @@ public class msg_command_long extends MAVLinkMessage{
 	    confirmation = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_command_long(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_COMMAND_LONG;
         unpack(payload);
@@ -85,6 +112,9 @@ public class msg_command_long extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_COMMAND_LONG", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_COMMAND_LONG -"+" param1:"+param1+" param2:"+param2+" param3:"+param3+" param4:"+param4+" param5:"+param5+" param6:"+param6+" param7:"+param7+" command:"+command+" target_system:"+target_system+" target_component:"+target_component+" confirmation:"+confirmation+"";
     }

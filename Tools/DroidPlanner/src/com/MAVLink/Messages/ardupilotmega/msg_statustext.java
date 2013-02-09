@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -22,11 +23,25 @@ public class msg_statustext extends MAVLinkMessage{
 	*/
 	public byte text[] = new byte[50]; 
 
-/**
- * Decode a statustext message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_STATUSTEXT;
+		packet.payload.putByte(severity);
+		 for (int i = 0; i < text.length; i++) {
+                        packet.payload.putByte(text[i]);
+            }
+		return packet;		
+	}
+
+    /**
+     * Decode a statustext message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    severity = payload.getByte();
@@ -35,6 +50,11 @@ public class msg_statustext extends MAVLinkMessage{
 		}    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_statustext(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_STATUSTEXT;
         unpack(payload);
@@ -42,6 +62,9 @@ public class msg_statustext extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_STATUSTEXT", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_STATUSTEXT -"+" severity:"+severity+" text:"+text+"";
     }

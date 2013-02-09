@@ -3,6 +3,7 @@ package com.MAVLink.Messages.ardupilotmega;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPayload;
+import com.MAVLink.Messages.MAVLinkPacket;
 import android.util.Log;
 
 /**
@@ -34,11 +35,28 @@ public class msg_file_transfer_start extends MAVLinkMessage{
 	*/
 	public byte flags; 
 
-/**
- * Decode a file_transfer_start message into this class fields
- *
- * @param payload The message to decode
- */
+	/**
+	 * Generates the payload for a mavlink message for a message of this type
+	 * @return
+	 */
+	public MAVLinkPacket pack(){
+		MAVLinkPacket packet = new MAVLinkPacket();
+		packet.msgid = MAVLINK_MSG_ID_FILE_TRANSFER_START;
+		packet.payload.putLong(transfer_uid);
+		packet.payload.putInt(file_size);
+		 for (int i = 0; i < dest_path.length; i++) {
+                        packet.payload.putByte(dest_path[i]);
+            }
+		packet.payload.putByte(direction);
+		packet.payload.putByte(flags);
+		return packet;		
+	}
+
+    /**
+     * Decode a file_transfer_start message into this class fields
+     *
+     * @param payload The message to decode
+     */
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    transfer_uid = payload.getLong();
@@ -50,6 +68,11 @@ public class msg_file_transfer_start extends MAVLinkMessage{
 	    flags = payload.getByte();    
     }
 
+    /**
+     * Constructor for a new message, initializes the message with the payload
+     * from a mavlink packet
+     * 
+     */
     public msg_file_transfer_start(MAVLinkPayload payload){
         msgid = MAVLINK_MSG_ID_FILE_TRANSFER_START;
         unpack(payload);
@@ -57,6 +80,9 @@ public class msg_file_transfer_start extends MAVLinkMessage{
         //Log.d("MAVLINK_MSG_ID_FILE_TRANSFER_START", toString());
     }
 
+    /**
+     * Returns a string with the MSG name and data
+     */
     public String toString(){
     	return "MAVLINK_MSG_ID_FILE_TRANSFER_START -"+" transfer_uid:"+transfer_uid+" file_size:"+file_size+" dest_path:"+dest_path+" direction:"+direction+" flags:"+flags+"";
     }
