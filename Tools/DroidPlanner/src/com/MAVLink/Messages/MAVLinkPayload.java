@@ -29,14 +29,14 @@ public class MAVLinkPayload {
 	}
 
 	public byte getByte() {
-		int result = 0;
+		byte result = 0;
 		result |= (payload.get(index + 0) & 0xFF);
 		index += 1;
 		return (byte) result;
 	}
 
 	public short getShort() {
-		int result = 0;
+		short result = 0;
 		result |= (payload.get(index + 1) & 0xFF) << 8;
 		result |= (payload.get(index + 0) & 0xFF);
 		index += 2;
