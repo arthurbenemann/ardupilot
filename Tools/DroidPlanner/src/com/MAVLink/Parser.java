@@ -1,22 +1,13 @@
 package com.MAVLink;
 
-import android.util.Log;
-
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPacket;
 
 public class Parser {
 
 	/**
-	 * This is a convenience function which handles the complete MAVLink
-	 * parsing. the function will parse one byte at a time and return the
-	 * complete packet once it could be successfully decoded. Checksum and other
-	 * failures will be silently ignored.
-	 * 
-	 * @param c
-	 *            The char to parse	
+	 * States from the parsing state machine
 	 */
-
 	enum MAV_states {
 		MAVLINK_PARSE_STATE_UNINIT, MAVLINK_PARSE_STATE_IDLE, MAVLINK_PARSE_STATE_GOT_STX, MAVLINK_PARSE_STATE_GOT_LENGTH, MAVLINK_PARSE_STATE_GOT_SEQ, MAVLINK_PARSE_STATE_GOT_SYSID, MAVLINK_PARSE_STATE_GOT_COMPID, MAVLINK_PARSE_STATE_GOT_MSGID, MAVLINK_PARSE_STATE_GOT_CRC1, MAVLINK_PARSE_STATE_GOT_PAYLOAD
 	}
@@ -26,18 +17,27 @@ public class Parser {
 	static boolean msg_received;
 
 	private MAVLinkPacket m;
-	
+
 	MAVLinkMessage message;
-	
+
+	/**
+	 * This is a convenience function which handles the complete MAVLink
+	 * parsing. the function will parse one byte at a time and return the
+	 * complete packet once it could be successfully decoded. Checksum and other
+	 * failures will be silently ignored.
+	 * 
+	 * @param c
+	 *            The char to parse
+	 */
 	public MAVLinkMessage mavlink_parse_char(int c) {
 		msg_received = false;
 		message = null;
-		
+
 		switch (state) {
 		case MAVLINK_PARSE_STATE_UNINIT:
 		case MAVLINK_PARSE_STATE_IDLE:
-			
-			if (c ==  MAVLinkPacket.MAVLINK_STX) {
+
+			if (c == MAVLinkPacket.MAVLINK_STX) {
 				state = MAV_states.MAVLINK_PARSE_STATE_GOT_STX;
 				m = new MAVLinkPacket();
 			}
@@ -87,10 +87,8 @@ public class Parser {
 		case MAVLINK_PARSE_STATE_GOT_PAYLOAD:
 			m.generateCRC();
 			// Check first checksum byte
-			//if (c != m.crc.getLSB()) {
+			// if (c != m.crc.getLSB()) {
 			if (false) {
-				String errorStr = getError(c,m);
-				Log.d("error", "msg:"+m.msgid+" - "+errorStr);
 				msg_received = false;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
 				if (c == MAVLinkPacket.MAVLINK_STX) {
@@ -104,7 +102,7 @@ public class Parser {
 
 		case MAVLINK_PARSE_STATE_GOT_CRC1:
 			// Check second checksum byte
-			//if (c != m.crc.getMSB()) {
+			// if (c != m.crc.getMSB()) {
 			if (false) {
 				msg_received = false;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
@@ -114,7 +112,7 @@ public class Parser {
 				}
 			} else { // Successfully received the message
 				try {
-					 message = m.unpack();
+					message = m.unpack();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -127,23 +125,7 @@ public class Parser {
 
 		}
 
-			return message;	
-	}
-
-	private String getError(int c, MAVLinkPacket m) {
-		String str = new String();
-		str = (m.len)+":"; 
-		str += (m.seq)+":"; 
-		str += (m.sysid)+":"; 
-		str += (m.compid)+":"; 
-		str += (m.msgid)+".";
-		m.payload.resetIndex();
-		for (int i = 0; i < m.payload.size(); i++) {
-			str += (m.payload.getByte())+":";
-		}
-		str += (c)+":"; 
-		
-		return str;
+		return message;
 	}
 
 }
