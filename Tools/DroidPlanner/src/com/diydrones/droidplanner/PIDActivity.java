@@ -26,7 +26,7 @@ implements OnNavigationListener {
 				android.R.layout.simple_spinner_dropdown_item);
 
 		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
-		actionBar.setSelectedNavigationItem(2);
+		actionBar.setSelectedNavigationItem(3);
 		 
 		setContentView(R.layout.pid);
 	}
@@ -39,18 +39,23 @@ implements OnNavigationListener {
 		switch (itemPosition) {
 		default:
 		case 0: // Planning
-			startActivity(new Intent(this, PlanningActivity.class));
+			//startActivity(new Intent(this, PlanningActivity.class));
 			return false;
-		case 1: // Flight Data
+		case 1: // HUD
+			startActivity(new Intent(this, HUD.class));
+			return false;
+		case 2: // Flight Data
 			startActivity(new Intent(this, FightDataActivity.class));
 			return false;
-		case 2: // PID
+		case 3: // PID
 			//startActivity(new Intent(this, PIDActivity.class));
 			return false;
-		case 3: // Terminal
+		case 4: // Terminal
 			startActivity(new Intent(this, TerminalActivity.class));
 			return false;
-
+		case 5: // GCP
+			startActivity(new Intent(this, GCPActivity.class));
+			return false;
 		}
 	}
 	public boolean onCreateOptionsMenu(Menu menu) {

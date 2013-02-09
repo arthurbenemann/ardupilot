@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
-public class FightDataActivity  extends android.support.v4.app.FragmentActivity
+public class HUD  extends android.support.v4.app.FragmentActivity
 	implements OnNavigationListener {
 
 	
@@ -26,7 +26,7 @@ public class FightDataActivity  extends android.support.v4.app.FragmentActivity
 					android.R.layout.simple_spinner_dropdown_item);
 
 			actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
-			actionBar.setSelectedNavigationItem(2);
+			actionBar.setSelectedNavigationItem(1);
 
 			setContentView(R.layout.flightdata);
 		}
@@ -39,13 +39,13 @@ public class FightDataActivity  extends android.support.v4.app.FragmentActivity
 			switch (itemPosition) {
 			default:
 			case 0: // Planning
-				//startActivity(new Intent(this, PlanningActivity.class));
+				startActivity(new Intent(this, PlanningActivity.class));
 				return false;
 			case 1: // HUD
 				startActivity(new Intent(this, HUD.class));
 				return false;
 			case 2: // Flight Data
-				//startActivity(new Intent(this, FightDataActivity.class));
+				startActivity(new Intent(this, FightDataActivity.class));
 				return false;
 			case 3: // PID
 				startActivity(new Intent(this, PIDActivity.class));
@@ -58,6 +58,7 @@ public class FightDataActivity  extends android.support.v4.app.FragmentActivity
 				return false;
 			}
 		}
+		
 		public boolean onCreateOptionsMenu(Menu menu) {
 			// Inflate the menu; this adds items to the action bar if it is present.
 			getMenuInflater().inflate(R.menu.menu_flightdata, menu);

@@ -209,18 +209,21 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		switch (itemPosition) {
 		default:
 		case 0: // Planning
-			// startActivity(new Intent(this, PlanningActivity.class));
+			//startActivity(new Intent(this, PlanningActivity.class));
 			return false;
-		case 1: // Flight Data
+		case 1: // HUD
+			startActivity(new Intent(this, HUD.class));
+			return false;
+		case 2: // Flight Data
 			startActivity(new Intent(this, FightDataActivity.class));
 			return false;
-		case 2: // PID
+		case 3: // PID
 			startActivity(new Intent(this, PIDActivity.class));
 			return false;
-		case 3: // Terminal
+		case 4: // Terminal
 			startActivity(new Intent(this, TerminalActivity.class));
 			return false;
-		case 4: // GCP
+		case 5: // GCP
 			startActivity(new Intent(this, GCPActivity.class));
 			return false;
 		}

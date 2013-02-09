@@ -57,7 +57,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 				android.R.layout.simple_spinner_dropdown_item);
 
 		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
-		actionBar.setSelectedNavigationItem(3);
+		actionBar.setSelectedNavigationItem(4);
 
 		setContentView(R.layout.terminal);
 
@@ -77,19 +77,21 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		case 0: // Planning
 			startActivity(new Intent(this, PlanningActivity.class));
 			return false;
-		case 1: // Flight Data
+		case 1: // HUD
+			startActivity(new Intent(this, HUD.class));
+			return false;
+		case 2: // Flight Data
 			startActivity(new Intent(this, FightDataActivity.class));
 			return false;
-		case 2: // PID
+		case 3: // PID
 			startActivity(new Intent(this, PIDActivity.class));
 			return false;
-		case 3: // Terminal
-			// startActivity(new Intent(this, TerminalActivity.class));
+		case 4: // Terminal
+			//startActivity(new Intent(this, TerminalActivity.class));
 			return false;
-		case 4: // GCP
+		case 5: // GCP
 			startActivity(new Intent(this, GCPActivity.class));
 			return false;
-
 		}
 	}
 
