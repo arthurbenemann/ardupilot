@@ -54,6 +54,7 @@ public class msg_attitude_quaternion extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_ATTITUDE_QUATERNION;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putInt(time_boot_ms);
 		packet.payload.putFloat(q1);
 		packet.payload.putFloat(q2);

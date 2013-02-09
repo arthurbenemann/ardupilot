@@ -50,6 +50,7 @@ public class msg_setpoint_6dof extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_SETPOINT_6DOF;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(trans_x);
 		packet.payload.putFloat(trans_y);
 		packet.payload.putFloat(trans_z);

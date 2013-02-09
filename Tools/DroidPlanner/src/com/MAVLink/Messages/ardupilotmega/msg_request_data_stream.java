@@ -42,6 +42,7 @@ public class msg_request_data_stream extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_REQUEST_DATA_STREAM;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(req_message_rate);
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(target_component);

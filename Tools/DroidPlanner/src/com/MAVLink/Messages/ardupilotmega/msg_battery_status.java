@@ -58,6 +58,7 @@ public class msg_battery_status extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_BATTERY_STATUS;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(voltage_cell_1);
 		packet.payload.putShort(voltage_cell_2);
 		packet.payload.putShort(voltage_cell_3);

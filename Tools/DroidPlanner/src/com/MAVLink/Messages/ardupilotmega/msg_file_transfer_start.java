@@ -42,6 +42,7 @@ public class msg_file_transfer_start extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_FILE_TRANSFER_START;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putLong(transfer_uid);
 		packet.payload.putInt(file_size);
 		 for (int i = 0; i < dest_path.length; i++) {

@@ -34,6 +34,7 @@ public class msg_mission_set_current extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_MISSION_SET_CURRENT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(seq);
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(target_component);

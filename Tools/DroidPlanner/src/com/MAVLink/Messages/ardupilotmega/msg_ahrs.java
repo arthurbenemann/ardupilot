@@ -50,6 +50,7 @@ public class msg_ahrs extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_AHRS;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(omegaIx);
 		packet.payload.putFloat(omegaIy);
 		packet.payload.putFloat(omegaIz);

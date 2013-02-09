@@ -34,6 +34,7 @@ public class msg_file_transfer_dir_list extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_FILE_TRANSFER_DIR_LIST;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putLong(transfer_uid);
 		 for (int i = 0; i < dir_path.length; i++) {
                         packet.payload.putByte(dir_path[i]);

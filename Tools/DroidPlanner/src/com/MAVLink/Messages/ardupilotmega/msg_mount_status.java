@@ -42,6 +42,7 @@ public class msg_mount_status extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_MOUNT_STATUS;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putInt(pointing_a);
 		packet.payload.putInt(pointing_b);
 		packet.payload.putInt(pointing_c);

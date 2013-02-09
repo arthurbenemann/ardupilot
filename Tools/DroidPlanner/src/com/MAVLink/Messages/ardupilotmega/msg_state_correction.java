@@ -58,6 +58,7 @@ public class msg_state_correction extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_STATE_CORRECTION;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(xErr);
 		packet.payload.putFloat(yErr);
 		packet.payload.putFloat(zErr);

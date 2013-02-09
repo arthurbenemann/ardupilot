@@ -34,6 +34,7 @@ public class msg_fence_fetch_point extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_FENCE_FETCH_POINT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(target_component);
 		packet.payload.putByte(idx);

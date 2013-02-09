@@ -50,6 +50,7 @@ public class msg_safety_allowed_area extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_SAFETY_ALLOWED_AREA;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(p1x);
 		packet.payload.putFloat(p1y);
 		packet.payload.putFloat(p1z);

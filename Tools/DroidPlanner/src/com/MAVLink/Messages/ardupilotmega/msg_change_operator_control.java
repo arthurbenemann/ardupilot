@@ -38,6 +38,7 @@ public class msg_change_operator_control extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(control_request);
 		packet.payload.putByte(version);

@@ -50,6 +50,7 @@ public class msg_radio extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_RADIO;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(rxerrors);
 		packet.payload.putShort(fixed);
 		packet.payload.putByte(rssi);

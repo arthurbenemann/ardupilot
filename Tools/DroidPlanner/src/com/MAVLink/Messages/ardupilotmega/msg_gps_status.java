@@ -46,6 +46,7 @@ public class msg_gps_status extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_GPS_STATUS;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putByte(satellites_visible);
 		 for (int i = 0; i < satellite_prn.length; i++) {
                         packet.payload.putByte(satellite_prn[i]);

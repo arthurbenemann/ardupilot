@@ -166,7 +166,8 @@ public class MAVLinkPacket {
 		case msg_data64.MAVLINK_MSG_ID_DATA64:
 			return  new msg_data64(payload);
 		case msg_data96.MAVLINK_MSG_ID_DATA96:
-			return  new msg_data96(payload);		case msg_heartbeat.MAVLINK_MSG_ID_HEARTBEAT:
+			return  new msg_data96(payload);
+		case msg_heartbeat.MAVLINK_MSG_ID_HEARTBEAT:
 			return  new msg_heartbeat(payload);
 		case msg_sys_status.MAVLINK_MSG_ID_SYS_STATUS:
 			return  new msg_sys_status(payload);

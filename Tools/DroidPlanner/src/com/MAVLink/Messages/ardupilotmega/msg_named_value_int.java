@@ -34,6 +34,7 @@ public class msg_named_value_int extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_NAMED_VALUE_INT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putInt(time_boot_ms);
 		packet.payload.putInt(value);
 		 for (int i = 0; i < name.length; i++) {

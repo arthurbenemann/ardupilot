@@ -46,6 +46,7 @@ public class msg_vfr_hud extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_VFR_HUD;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(airspeed);
 		packet.payload.putFloat(groundspeed);
 		packet.payload.putFloat(alt);

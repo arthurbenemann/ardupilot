@@ -42,6 +42,7 @@ public class msg_local_position_setpoint extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_LOCAL_POSITION_SETPOINT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(x);
 		packet.payload.putFloat(y);
 		packet.payload.putFloat(z);

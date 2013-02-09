@@ -46,6 +46,7 @@ public class msg_mount_configure extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_MOUNT_CONFIGURE;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(target_component);
 		packet.payload.putByte(mount_mode);

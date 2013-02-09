@@ -30,6 +30,7 @@ public class msg_param_request_list extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_PARAM_REQUEST_LIST;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(target_component);
 		return packet;		

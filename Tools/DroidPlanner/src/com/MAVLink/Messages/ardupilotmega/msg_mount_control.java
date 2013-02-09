@@ -46,6 +46,7 @@ public class msg_mount_control extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_MOUNT_CONTROL;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putInt(input_a);
 		packet.payload.putInt(input_b);
 		packet.payload.putInt(input_c);

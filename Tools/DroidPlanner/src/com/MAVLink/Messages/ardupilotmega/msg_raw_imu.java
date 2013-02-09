@@ -62,6 +62,7 @@ public class msg_raw_imu extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_RAW_IMU;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putLong(time_usec);
 		packet.payload.putShort(xacc);
 		packet.payload.putShort(yacc);

@@ -66,6 +66,7 @@ public class msg_digicam_configure extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_DIGICAM_CONFIGURE;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(extra_value);
 		packet.payload.putShort(shutter_speed);
 		packet.payload.putByte(target_system);

@@ -30,6 +30,7 @@ public class msg_statustext extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_STATUSTEXT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putByte(severity);
 		 for (int i = 0; i < text.length; i++) {
                         packet.payload.putByte(text[i]);

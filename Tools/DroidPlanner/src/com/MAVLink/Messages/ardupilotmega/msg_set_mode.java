@@ -34,6 +34,7 @@ public class msg_set_mode extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_SET_MODE;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putInt(custom_mode);
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(base_mode);

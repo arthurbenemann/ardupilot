@@ -34,6 +34,7 @@ public class msg_gps_global_origin extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_GPS_GLOBAL_ORIGIN;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putInt(latitude);
 		packet.payload.putInt(longitude);
 		packet.payload.putInt(altitude);

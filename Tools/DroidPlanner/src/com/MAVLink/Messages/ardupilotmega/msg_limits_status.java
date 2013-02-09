@@ -59,6 +59,7 @@ public class msg_limits_status extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_LIMITS_STATUS;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putInt(last_trigger);
 		packet.payload.putInt(last_action);
 		packet.payload.putInt(last_recovery);

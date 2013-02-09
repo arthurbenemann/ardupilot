@@ -63,6 +63,7 @@ public class msg_gps_raw_int extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_GPS_RAW_INT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putLong(time_usec);
 		packet.payload.putInt(lat);
 		packet.payload.putInt(lon);

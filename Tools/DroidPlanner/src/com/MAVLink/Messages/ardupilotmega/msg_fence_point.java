@@ -47,6 +47,7 @@ public class msg_fence_point extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_FENCE_POINT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(lat);
 		packet.payload.putFloat(lng);
 		packet.payload.putByte(target_system);

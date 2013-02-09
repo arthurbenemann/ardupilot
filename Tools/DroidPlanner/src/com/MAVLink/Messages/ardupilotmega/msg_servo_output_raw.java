@@ -62,6 +62,7 @@ public class msg_servo_output_raw extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_SERVO_OUTPUT_RAW;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putInt(time_usec);
 		packet.payload.putShort(servo1_raw);
 		packet.payload.putShort(servo2_raw);

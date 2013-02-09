@@ -62,6 +62,7 @@ public class msg_rc_channels_override extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(chan1_raw);
 		packet.payload.putShort(chan2_raw);
 		packet.payload.putShort(chan3_raw);

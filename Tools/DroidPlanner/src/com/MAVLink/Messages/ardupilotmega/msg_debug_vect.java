@@ -42,6 +42,7 @@ public class msg_debug_vect extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_DEBUG_VECT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putLong(time_usec);
 		packet.payload.putFloat(x);
 		packet.payload.putFloat(y);

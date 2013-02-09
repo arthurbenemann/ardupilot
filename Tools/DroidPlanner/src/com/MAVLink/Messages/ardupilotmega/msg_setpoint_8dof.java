@@ -58,6 +58,7 @@ public class msg_setpoint_8dof extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_SETPOINT_8DOF;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(val1);
 		packet.payload.putFloat(val2);
 		packet.payload.putFloat(val3);

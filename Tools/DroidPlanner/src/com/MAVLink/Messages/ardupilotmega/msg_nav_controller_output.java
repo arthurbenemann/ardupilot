@@ -54,6 +54,7 @@ public class msg_nav_controller_output extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(nav_roll);
 		packet.payload.putFloat(nav_pitch);
 		packet.payload.putFloat(alt_error);

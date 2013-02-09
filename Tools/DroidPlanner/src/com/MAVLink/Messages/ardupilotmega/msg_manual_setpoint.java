@@ -50,6 +50,7 @@ public class msg_manual_setpoint extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_MANUAL_SETPOINT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putInt(time_boot_ms);
 		packet.payload.putFloat(roll);
 		packet.payload.putFloat(pitch);

@@ -62,6 +62,7 @@ public class msg_scaled_imu extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_SCALED_IMU;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putInt(time_boot_ms);
 		packet.payload.putShort(xacc);
 		packet.payload.putShort(yacc);

@@ -42,6 +42,7 @@ public class msg_raw_pressure extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_RAW_PRESSURE;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putLong(time_usec);
 		packet.payload.putShort(press_abs);
 		packet.payload.putShort(press_diff1);

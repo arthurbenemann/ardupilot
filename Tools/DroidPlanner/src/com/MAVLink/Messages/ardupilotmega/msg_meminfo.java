@@ -30,6 +30,7 @@ public class msg_meminfo extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_MEMINFO;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(brkval);
 		packet.payload.putShort(freemem);
 		return packet;		

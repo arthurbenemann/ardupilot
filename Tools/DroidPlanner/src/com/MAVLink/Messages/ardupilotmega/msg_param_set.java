@@ -42,6 +42,7 @@ public class msg_param_set extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_PARAM_SET;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(param_value);
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(target_component);

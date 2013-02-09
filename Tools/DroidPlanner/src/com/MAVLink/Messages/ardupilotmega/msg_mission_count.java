@@ -34,6 +34,7 @@ public class msg_mission_count extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_MISSION_COUNT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(count);
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(target_component);

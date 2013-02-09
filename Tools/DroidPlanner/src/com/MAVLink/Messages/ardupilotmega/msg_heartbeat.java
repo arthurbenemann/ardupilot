@@ -46,6 +46,7 @@ public class msg_heartbeat extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_HEARTBEAT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putInt(custom_mode);
 		packet.payload.putByte(type);
 		packet.payload.putByte(autopilot);

@@ -66,6 +66,7 @@ public class msg_hil_controls extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_HIL_CONTROLS;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putLong(time_usec);
 		packet.payload.putFloat(roll_ailerons);
 		packet.payload.putFloat(pitch_elevator);

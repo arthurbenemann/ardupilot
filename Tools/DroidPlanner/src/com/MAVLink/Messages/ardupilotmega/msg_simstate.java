@@ -66,6 +66,7 @@ public class msg_simstate extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_SIMSTATE;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(roll);
 		packet.payload.putFloat(pitch);
 		packet.payload.putFloat(yaw);

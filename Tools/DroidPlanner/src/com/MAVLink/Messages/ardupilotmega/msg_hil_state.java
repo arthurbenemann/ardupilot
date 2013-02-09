@@ -86,6 +86,7 @@ public class msg_hil_state extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_HIL_STATE;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putLong(time_usec);
 		packet.payload.putFloat(roll);
 		packet.payload.putFloat(pitch);

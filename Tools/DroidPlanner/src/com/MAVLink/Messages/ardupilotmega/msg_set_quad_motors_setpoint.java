@@ -42,6 +42,7 @@ public class msg_set_quad_motors_setpoint extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(motor_front_nw);
 		packet.payload.putShort(motor_right_ne);
 		packet.payload.putShort(motor_back_se);

@@ -82,6 +82,7 @@ public class msg_highres_imu extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_HIGHRES_IMU;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putLong(time_usec);
 		packet.payload.putFloat(xacc);
 		packet.payload.putFloat(yacc);

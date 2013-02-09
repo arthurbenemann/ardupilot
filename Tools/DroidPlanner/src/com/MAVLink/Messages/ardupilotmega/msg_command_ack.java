@@ -30,6 +30,7 @@ public class msg_command_ack extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_COMMAND_ACK;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(command);
 		packet.payload.putByte(result);
 		return packet;		

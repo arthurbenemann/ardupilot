@@ -46,6 +46,7 @@ public class msg_ap_adc extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_AP_ADC;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(adc1);
 		packet.payload.putShort(adc2);
 		packet.payload.putShort(adc3);

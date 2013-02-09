@@ -50,6 +50,7 @@ public class msg_vision_position_estimate extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_VISION_POSITION_ESTIMATE;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putLong(usec);
 		packet.payload.putFloat(x);
 		packet.payload.putFloat(y);

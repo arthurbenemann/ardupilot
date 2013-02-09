@@ -42,6 +42,7 @@ public class msg_set_mag_offsets extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_SET_MAG_OFFSETS;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(mag_ofs_x);
 		packet.payload.putShort(mag_ofs_y);
 		packet.payload.putShort(mag_ofs_z);

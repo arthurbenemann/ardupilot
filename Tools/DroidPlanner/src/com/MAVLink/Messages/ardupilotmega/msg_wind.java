@@ -34,6 +34,7 @@ public class msg_wind extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_WIND;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(direction);
 		packet.payload.putFloat(speed);
 		packet.payload.putFloat(speed_z);

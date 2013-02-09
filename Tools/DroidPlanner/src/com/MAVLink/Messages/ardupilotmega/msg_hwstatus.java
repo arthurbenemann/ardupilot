@@ -30,6 +30,7 @@ public class msg_hwstatus extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_HWSTATUS;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(Vcc);
 		packet.payload.putByte(I2Cerr);
 		return packet;		

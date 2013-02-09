@@ -38,6 +38,7 @@ public class msg_memory_vect extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_MEMORY_VECT;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(address);
 		packet.payload.putByte(ver);
 		packet.payload.putByte(type);

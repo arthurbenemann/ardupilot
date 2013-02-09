@@ -66,6 +66,7 @@ public class msg_rc_channels_scaled extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_RC_CHANNELS_SCALED;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putInt(time_boot_ms);
 		packet.payload.putShort(chan1_scaled);
 		packet.payload.putShort(chan2_scaled);

@@ -30,6 +30,7 @@ public class msg_system_time extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_SYSTEM_TIME;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putLong(time_unix_usec);
 		packet.payload.putInt(time_boot_ms);
 		return packet;		

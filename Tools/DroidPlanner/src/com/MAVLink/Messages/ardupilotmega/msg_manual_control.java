@@ -46,6 +46,7 @@ public class msg_manual_control extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_MANUAL_CONTROL;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(x);
 		packet.payload.putShort(y);
 		packet.payload.putShort(z);

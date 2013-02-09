@@ -34,6 +34,7 @@ public class msg_change_operator_control_ack extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putByte(gcs_system_id);
 		packet.payload.putByte(control_request);
 		packet.payload.putByte(ack);

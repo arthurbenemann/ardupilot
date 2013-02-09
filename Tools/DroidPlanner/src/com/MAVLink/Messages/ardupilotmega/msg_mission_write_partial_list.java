@@ -38,6 +38,7 @@ public class msg_mission_write_partial_list extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_MISSION_WRITE_PARTIAL_LIST;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putShort(start_index);
 		packet.payload.putShort(end_index);
 		packet.payload.putByte(target_system);

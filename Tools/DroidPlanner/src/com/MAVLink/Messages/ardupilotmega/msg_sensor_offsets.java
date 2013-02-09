@@ -71,6 +71,7 @@ public class msg_sensor_offsets extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_SENSOR_OFFSETS;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putFloat(mag_declination);
 		packet.payload.putInt(raw_press);
 		packet.payload.putInt(raw_temp);

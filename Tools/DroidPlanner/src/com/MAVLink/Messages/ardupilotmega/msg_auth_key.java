@@ -26,6 +26,7 @@ public class msg_auth_key extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_AUTH_KEY;
+		packet.len = MAVLINK_MSG_LENGTH;
 		 for (int i = 0; i < key.length; i++) {
                         packet.payload.putByte(key[i]);
             }

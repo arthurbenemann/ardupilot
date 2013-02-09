@@ -30,6 +30,7 @@ public class msg_mission_clear_all extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_MISSION_CLEAR_ALL;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(target_component);
 		return packet;		

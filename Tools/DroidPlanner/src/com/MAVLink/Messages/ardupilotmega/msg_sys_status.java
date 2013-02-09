@@ -74,6 +74,7 @@ public class msg_sys_status extends MAVLinkMessage{
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
 		packet.msgid = MAVLINK_MSG_ID_SYS_STATUS;
+		packet.len = MAVLINK_MSG_LENGTH;
 		packet.payload.putInt(onboard_control_sensors_present);
 		packet.payload.putInt(onboard_control_sensors_enabled);
 		packet.payload.putInt(onboard_control_sensors_health);
