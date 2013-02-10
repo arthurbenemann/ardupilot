@@ -150,7 +150,7 @@ public class GCPActivity extends android.support.v4.app.FragmentActivity
 		switch (itemPosition) {
 		default:
 		case 0: // Planning
-			//startActivity(new Intent(this, PlanningActivity.class));
+			startActivity(new Intent(this, PlanningActivity.class));
 			return false;
 		case 1: // HUD
 			startActivity(new Intent(this, HUDActivity.class));
