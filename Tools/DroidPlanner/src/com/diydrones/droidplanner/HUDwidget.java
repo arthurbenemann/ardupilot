@@ -210,7 +210,7 @@ public class HUDwidget extends SurfaceView implements SurfaceHolder.Callback {
 			}
 		}
 		
-		float dx = (float)Math.sin(-roll * Math.PI / 180) * r;
+		float dx = (float)Math.sin(roll * Math.PI / 180) * r;
 		float dy = (float)Math.cos(-roll * Math.PI / 180) * r;
 		canvas.drawCircle(dx, centerY-dy, 10, redSolid);
 		
