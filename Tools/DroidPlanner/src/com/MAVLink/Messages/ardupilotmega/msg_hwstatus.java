@@ -52,7 +52,7 @@ public class msg_hwstatus extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_hwstatus(){
     	msgid = MAVLINK_MSG_ID_HWSTATUS;
     }
 

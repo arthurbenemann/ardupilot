@@ -50,7 +50,7 @@ public class msg_auth_key extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_auth_key(){
     	msgid = MAVLINK_MSG_ID_AUTH_KEY;
     }
 

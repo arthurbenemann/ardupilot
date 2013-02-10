@@ -58,7 +58,7 @@ public class msg_change_operator_control_ack extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_change_operator_control_ack(){
     	msgid = MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK;
     }
 

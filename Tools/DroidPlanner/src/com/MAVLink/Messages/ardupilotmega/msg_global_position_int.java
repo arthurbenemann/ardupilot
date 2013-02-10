@@ -95,7 +95,7 @@ public class msg_global_position_int extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_global_position_int(){
     	msgid = MAVLINK_MSG_ID_GLOBAL_POSITION_INT;
     }
 

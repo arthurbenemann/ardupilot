@@ -62,7 +62,7 @@ public class msg_data16 extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_data16(){
     	msgid = MAVLINK_MSG_ID_DATA16;
     }
 

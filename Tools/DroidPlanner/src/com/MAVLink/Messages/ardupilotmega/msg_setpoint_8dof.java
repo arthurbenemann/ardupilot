@@ -94,7 +94,7 @@ public class msg_setpoint_8dof extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_setpoint_8dof(){
     	msgid = MAVLINK_MSG_ID_SETPOINT_8DOF;
     }
 

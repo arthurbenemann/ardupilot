@@ -70,7 +70,7 @@ public class msg_roll_pitch_yaw_thrust_setpoint extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_roll_pitch_yaw_thrust_setpoint(){
     	msgid = MAVLINK_MSG_ID_ROLL_PITCH_YAW_THRUST_SETPOINT;
     }
 

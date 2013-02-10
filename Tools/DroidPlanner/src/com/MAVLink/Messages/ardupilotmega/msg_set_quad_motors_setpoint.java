@@ -70,7 +70,7 @@ public class msg_set_quad_motors_setpoint extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_set_quad_motors_setpoint(){
     	msgid = MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT;
     }
 

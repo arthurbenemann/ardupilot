@@ -64,7 +64,7 @@ public class msg_scaled_pressure extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_scaled_pressure(){
     	msgid = MAVLINK_MSG_ID_SCALED_PRESSURE;
     }
 

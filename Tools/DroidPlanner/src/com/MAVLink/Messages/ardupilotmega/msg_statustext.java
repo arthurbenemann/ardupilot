@@ -56,7 +56,7 @@ public class msg_statustext extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_statustext(){
     	msgid = MAVLINK_MSG_ID_STATUSTEXT;
     }
 

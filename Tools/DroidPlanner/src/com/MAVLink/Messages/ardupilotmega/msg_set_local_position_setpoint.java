@@ -82,7 +82,7 @@ public class msg_set_local_position_setpoint extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_set_local_position_setpoint(){
     	msgid = MAVLINK_MSG_ID_SET_LOCAL_POSITION_SETPOINT;
     }
 

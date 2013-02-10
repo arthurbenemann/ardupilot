@@ -58,7 +58,7 @@ public class msg_gps_global_origin extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_gps_global_origin(){
     	msgid = MAVLINK_MSG_ID_GPS_GLOBAL_ORIGIN;
     }
 

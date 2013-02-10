@@ -95,7 +95,7 @@ public class msg_limits_status extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_limits_status(){
     	msgid = MAVLINK_MSG_ID_LIMITS_STATUS;
     }
 

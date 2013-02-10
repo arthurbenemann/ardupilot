@@ -58,7 +58,7 @@ public class msg_fence_fetch_point extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_fence_fetch_point(){
     	msgid = MAVLINK_MSG_ID_FENCE_FETCH_POINT;
     }
 

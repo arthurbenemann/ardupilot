@@ -100,7 +100,7 @@ public class msg_servo_output_raw extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_servo_output_raw(){
     	msgid = MAVLINK_MSG_ID_SERVO_OUTPUT_RAW;
     }
 

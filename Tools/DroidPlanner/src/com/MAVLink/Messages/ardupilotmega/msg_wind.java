@@ -58,7 +58,7 @@ public class msg_wind extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_wind(){
     	msgid = MAVLINK_MSG_ID_WIND;
     }
 

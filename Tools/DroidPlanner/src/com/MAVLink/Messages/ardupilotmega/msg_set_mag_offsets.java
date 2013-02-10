@@ -70,7 +70,7 @@ public class msg_set_mag_offsets extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_set_mag_offsets(){
     	msgid = MAVLINK_MSG_ID_SET_MAG_OFFSETS;
     }
 

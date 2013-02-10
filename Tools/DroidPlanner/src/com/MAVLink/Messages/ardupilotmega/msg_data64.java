@@ -62,7 +62,7 @@ public class msg_data64 extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_data64(){
     	msgid = MAVLINK_MSG_ID_DATA64;
     }
 

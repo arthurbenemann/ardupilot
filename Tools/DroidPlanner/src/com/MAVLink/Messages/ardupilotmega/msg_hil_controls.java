@@ -106,7 +106,7 @@ public class msg_hil_controls extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_hil_controls(){
     	msgid = MAVLINK_MSG_ID_HIL_CONTROLS;
     }
 

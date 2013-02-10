@@ -46,7 +46,7 @@ public class msg_mission_item_reached extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_mission_item_reached(){
     	msgid = MAVLINK_MSG_ID_MISSION_ITEM_REACHED;
     }
 

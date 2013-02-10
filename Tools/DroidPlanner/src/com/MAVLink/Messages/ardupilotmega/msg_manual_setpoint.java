@@ -82,7 +82,7 @@ public class msg_manual_setpoint extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_manual_setpoint(){
     	msgid = MAVLINK_MSG_ID_MANUAL_SETPOINT;
     }
 

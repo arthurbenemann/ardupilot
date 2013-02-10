@@ -52,7 +52,7 @@ public class msg_system_time extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_system_time(){
     	msgid = MAVLINK_MSG_ID_SYSTEM_TIME;
     }
 

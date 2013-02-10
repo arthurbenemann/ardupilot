@@ -76,7 +76,7 @@ public class msg_ap_adc extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_ap_adc(){
     	msgid = MAVLINK_MSG_ID_AP_ADC;
     }
 

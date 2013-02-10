@@ -82,7 +82,7 @@ public class msg_vision_position_estimate extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_vision_position_estimate(){
     	msgid = MAVLINK_MSG_ID_VISION_POSITION_ESTIMATE;
     }
 

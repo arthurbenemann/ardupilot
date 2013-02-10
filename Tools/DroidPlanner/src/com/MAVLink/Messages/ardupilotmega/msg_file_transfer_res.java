@@ -52,7 +52,7 @@ public class msg_file_transfer_res extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_file_transfer_res(){
     	msgid = MAVLINK_MSG_ID_FILE_TRANSFER_RES;
     }
 

@@ -68,7 +68,7 @@ public class msg_param_request_read extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_param_request_read(){
     	msgid = MAVLINK_MSG_ID_PARAM_REQUEST_READ;
     }
 

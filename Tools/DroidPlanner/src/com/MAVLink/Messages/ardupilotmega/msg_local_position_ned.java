@@ -82,7 +82,7 @@ public class msg_local_position_ned extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_local_position_ned(){
     	msgid = MAVLINK_MSG_ID_LOCAL_POSITION_NED;
     }
 

@@ -106,7 +106,7 @@ public class msg_rc_channels_raw extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_rc_channels_raw(){
     	msgid = MAVLINK_MSG_ID_RC_CHANNELS_RAW;
     }
 

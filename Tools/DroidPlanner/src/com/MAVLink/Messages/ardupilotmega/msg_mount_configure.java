@@ -76,7 +76,7 @@ public class msg_mount_configure extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_mount_configure(){
     	msgid = MAVLINK_MSG_ID_MOUNT_CONFIGURE;
     }
 

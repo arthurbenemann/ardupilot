@@ -198,7 +198,7 @@ ${{ordered_fields:	    ${unpackField}
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_${name_lower}(){
     	msgid = MAVLINK_MSG_ID_${name};
     }
 

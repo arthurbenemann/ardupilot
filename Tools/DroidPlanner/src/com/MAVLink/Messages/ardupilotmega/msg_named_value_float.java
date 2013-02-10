@@ -62,7 +62,7 @@ public class msg_named_value_float extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_named_value_float(){
     	msgid = MAVLINK_MSG_ID_NAMED_VALUE_FLOAT;
     }
 

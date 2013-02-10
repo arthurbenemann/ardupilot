@@ -82,7 +82,7 @@ public class msg_safety_allowed_area extends MAVLinkMessage{
      /**
      * Constructor for a new message, just initializes the msgid
      */
-    public msg_param_request_list(){
+    public msg_safety_allowed_area(){
     	msgid = MAVLINK_MSG_ID_SAFETY_ALLOWED_AREA;
     }
 
