@@ -85,8 +85,10 @@ public class msg_hil_state extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_HIL_STATE;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_HIL_STATE;
 		packet.payload.putLong(time_usec);
 		packet.payload.putFloat(roll);
 		packet.payload.putFloat(pitch);
@@ -129,6 +131,13 @@ public class msg_hil_state extends MAVLinkMessage{
 	    xacc = payload.getShort();
 	    yacc = payload.getShort();
 	    zacc = payload.getShort();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_HIL_STATE;
     }
 
     /**

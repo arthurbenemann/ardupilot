@@ -45,8 +45,10 @@ public class msg_mount_control extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_MOUNT_CONTROL;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_MOUNT_CONTROL;
 		packet.payload.putInt(input_a);
 		packet.payload.putInt(input_b);
 		packet.payload.putInt(input_c);
@@ -69,6 +71,13 @@ public class msg_mount_control extends MAVLinkMessage{
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();
 	    save_position = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_MOUNT_CONTROL;
     }
 
     /**

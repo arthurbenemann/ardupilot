@@ -57,8 +57,10 @@ public class msg_battery_status extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_BATTERY_STATUS;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_BATTERY_STATUS;
 		packet.payload.putShort(voltage_cell_1);
 		packet.payload.putShort(voltage_cell_2);
 		packet.payload.putShort(voltage_cell_3);
@@ -87,6 +89,13 @@ public class msg_battery_status extends MAVLinkMessage{
 	    current_battery = payload.getShort();
 	    accu_id = payload.getByte();
 	    battery_remaining = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_BATTERY_STATUS;
     }
 
     /**

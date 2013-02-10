@@ -49,8 +49,10 @@ public class msg_setpoint_6dof extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_SETPOINT_6DOF;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_SETPOINT_6DOF;
 		packet.payload.putFloat(trans_x);
 		packet.payload.putFloat(trans_y);
 		packet.payload.putFloat(trans_z);
@@ -75,6 +77,13 @@ public class msg_setpoint_6dof extends MAVLinkMessage{
 	    rot_y = payload.getFloat();
 	    rot_z = payload.getFloat();
 	    target_system = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_SETPOINT_6DOF;
     }
 
     /**

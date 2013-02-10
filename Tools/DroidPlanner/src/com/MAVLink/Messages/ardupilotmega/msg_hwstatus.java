@@ -29,8 +29,10 @@ public class msg_hwstatus extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_HWSTATUS;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_HWSTATUS;
 		packet.payload.putShort(Vcc);
 		packet.payload.putByte(I2Cerr);
 		return packet;		
@@ -45,6 +47,13 @@ public class msg_hwstatus extends MAVLinkMessage{
         payload.resetIndex();
 	    Vcc = payload.getShort();
 	    I2Cerr = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_HWSTATUS;
     }
 
     /**

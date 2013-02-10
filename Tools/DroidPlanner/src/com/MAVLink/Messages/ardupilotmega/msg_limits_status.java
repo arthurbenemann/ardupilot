@@ -58,8 +58,10 @@ public class msg_limits_status extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_LIMITS_STATUS;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_LIMITS_STATUS;
 		packet.payload.putInt(last_trigger);
 		packet.payload.putInt(last_action);
 		packet.payload.putInt(last_recovery);
@@ -88,6 +90,13 @@ public class msg_limits_status extends MAVLinkMessage{
 	    mods_enabled = payload.getByte();
 	    mods_required = payload.getByte();
 	    mods_triggered = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_LIMITS_STATUS;
     }
 
     /**

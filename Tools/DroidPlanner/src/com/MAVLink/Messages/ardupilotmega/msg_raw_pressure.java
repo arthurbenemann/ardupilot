@@ -41,8 +41,10 @@ public class msg_raw_pressure extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_RAW_PRESSURE;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_RAW_PRESSURE;
 		packet.payload.putLong(time_usec);
 		packet.payload.putShort(press_abs);
 		packet.payload.putShort(press_diff1);
@@ -63,6 +65,13 @@ public class msg_raw_pressure extends MAVLinkMessage{
 	    press_diff1 = payload.getShort();
 	    press_diff2 = payload.getShort();
 	    temperature = payload.getShort();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_RAW_PRESSURE;
     }
 
     /**

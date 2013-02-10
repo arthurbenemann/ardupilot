@@ -37,8 +37,10 @@ public class msg_mission_write_partial_list extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_MISSION_WRITE_PARTIAL_LIST;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_MISSION_WRITE_PARTIAL_LIST;
 		packet.payload.putShort(start_index);
 		packet.payload.putShort(end_index);
 		packet.payload.putByte(target_system);
@@ -57,6 +59,13 @@ public class msg_mission_write_partial_list extends MAVLinkMessage{
 	    end_index = payload.getShort();
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_MISSION_WRITE_PARTIAL_LIST;
     }
 
     /**

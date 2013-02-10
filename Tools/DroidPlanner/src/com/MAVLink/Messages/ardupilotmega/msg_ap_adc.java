@@ -45,8 +45,10 @@ public class msg_ap_adc extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_AP_ADC;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_AP_ADC;
 		packet.payload.putShort(adc1);
 		packet.payload.putShort(adc2);
 		packet.payload.putShort(adc3);
@@ -69,6 +71,13 @@ public class msg_ap_adc extends MAVLinkMessage{
 	    adc4 = payload.getShort();
 	    adc5 = payload.getShort();
 	    adc6 = payload.getShort();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_AP_ADC;
     }
 
     /**

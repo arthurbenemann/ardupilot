@@ -45,8 +45,10 @@ public class msg_set_roll_pitch_yaw_speed_thrust extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_SET_ROLL_PITCH_YAW_SPEED_THRUST;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_SET_ROLL_PITCH_YAW_SPEED_THRUST;
 		packet.payload.putFloat(roll_speed);
 		packet.payload.putFloat(pitch_speed);
 		packet.payload.putFloat(yaw_speed);
@@ -69,6 +71,13 @@ public class msg_set_roll_pitch_yaw_speed_thrust extends MAVLinkMessage{
 	    thrust = payload.getFloat();
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_SET_ROLL_PITCH_YAW_SPEED_THRUST;
     }
 
     /**

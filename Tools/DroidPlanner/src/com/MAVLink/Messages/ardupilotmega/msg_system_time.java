@@ -29,8 +29,10 @@ public class msg_system_time extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_SYSTEM_TIME;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_SYSTEM_TIME;
 		packet.payload.putLong(time_unix_usec);
 		packet.payload.putInt(time_boot_ms);
 		return packet;		
@@ -45,6 +47,13 @@ public class msg_system_time extends MAVLinkMessage{
         payload.resetIndex();
 	    time_unix_usec = payload.getLong();
 	    time_boot_ms = payload.getInt();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_SYSTEM_TIME;
     }
 
     /**

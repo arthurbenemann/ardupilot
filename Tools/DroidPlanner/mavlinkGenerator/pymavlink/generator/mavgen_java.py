@@ -175,8 +175,10 @@ ${{ordered_fields: 	/**
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_${name};
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_${name};
 ${{ordered_fields:		${packField}
 }}
 		return packet;		
@@ -191,6 +193,13 @@ ${{ordered_fields:		${packField}
         payload.resetIndex();
 ${{ordered_fields:	    ${unpackField}
 }}    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_${name};
     }
 
     /**

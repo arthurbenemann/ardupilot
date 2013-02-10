@@ -57,8 +57,10 @@ public class msg_safety_set_allowed_area extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA;
 		packet.payload.putFloat(p1x);
 		packet.payload.putFloat(p1y);
 		packet.payload.putFloat(p1z);
@@ -87,6 +89,13 @@ public class msg_safety_set_allowed_area extends MAVLinkMessage{
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();
 	    frame = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA;
     }
 
     /**

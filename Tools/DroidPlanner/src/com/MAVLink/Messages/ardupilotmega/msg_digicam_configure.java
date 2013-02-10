@@ -65,8 +65,10 @@ public class msg_digicam_configure extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_DIGICAM_CONFIGURE;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_DIGICAM_CONFIGURE;
 		packet.payload.putFloat(extra_value);
 		packet.payload.putShort(shutter_speed);
 		packet.payload.putByte(target_system);
@@ -99,6 +101,13 @@ public class msg_digicam_configure extends MAVLinkMessage{
 	    command_id = payload.getByte();
 	    engine_cut_off = payload.getByte();
 	    extra_param = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_DIGICAM_CONFIGURE;
     }
 
     /**

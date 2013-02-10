@@ -61,8 +61,10 @@ public class msg_raw_imu extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_RAW_IMU;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_RAW_IMU;
 		packet.payload.putLong(time_usec);
 		packet.payload.putShort(xacc);
 		packet.payload.putShort(yacc);
@@ -93,6 +95,13 @@ public class msg_raw_imu extends MAVLinkMessage{
 	    xmag = payload.getShort();
 	    ymag = payload.getShort();
 	    zmag = payload.getShort();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_RAW_IMU;
     }
 
     /**

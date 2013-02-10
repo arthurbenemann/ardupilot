@@ -61,8 +61,10 @@ public class msg_rc_channels_override extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE;
 		packet.payload.putShort(chan1_raw);
 		packet.payload.putShort(chan2_raw);
 		packet.payload.putShort(chan3_raw);
@@ -93,6 +95,13 @@ public class msg_rc_channels_override extends MAVLinkMessage{
 	    chan8_raw = payload.getShort();
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE;
     }
 
     /**

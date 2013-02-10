@@ -49,8 +49,10 @@ public class msg_radio extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_RADIO;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_RADIO;
 		packet.payload.putShort(rxerrors);
 		packet.payload.putShort(fixed);
 		packet.payload.putByte(rssi);
@@ -75,6 +77,13 @@ public class msg_radio extends MAVLinkMessage{
 	    txbuf = payload.getByte();
 	    noise = payload.getByte();
 	    remnoise = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_RADIO;
     }
 
     /**

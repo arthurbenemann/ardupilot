@@ -33,8 +33,10 @@ public class msg_named_value_int extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_NAMED_VALUE_INT;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_NAMED_VALUE_INT;
 		packet.payload.putInt(time_boot_ms);
 		packet.payload.putInt(value);
 		 for (int i = 0; i < name.length; i++) {
@@ -55,6 +57,13 @@ public class msg_named_value_int extends MAVLinkMessage{
 	     for (int i = 0; i < name.length; i++) {
 			name[i] = payload.getByte();
 		}    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_NAMED_VALUE_INT;
     }
 
     /**

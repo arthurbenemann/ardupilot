@@ -49,8 +49,10 @@ public class msg_vision_position_estimate extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_VISION_POSITION_ESTIMATE;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_VISION_POSITION_ESTIMATE;
 		packet.payload.putLong(usec);
 		packet.payload.putFloat(x);
 		packet.payload.putFloat(y);
@@ -75,6 +77,13 @@ public class msg_vision_position_estimate extends MAVLinkMessage{
 	    roll = payload.getFloat();
 	    pitch = payload.getFloat();
 	    yaw = payload.getFloat();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_VISION_POSITION_ESTIMATE;
     }
 
     /**

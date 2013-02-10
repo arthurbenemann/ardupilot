@@ -41,8 +41,10 @@ public class msg_param_value extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_PARAM_VALUE;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_PARAM_VALUE;
 		packet.payload.putFloat(param_value);
 		packet.payload.putShort(param_count);
 		packet.payload.putShort(param_index);
@@ -67,6 +69,13 @@ public class msg_param_value extends MAVLinkMessage{
 			param_id[i] = payload.getByte();
 		}
 	    param_type = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_PARAM_VALUE;
     }
 
     /**

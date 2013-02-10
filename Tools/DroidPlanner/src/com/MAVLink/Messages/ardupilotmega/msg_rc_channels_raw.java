@@ -65,8 +65,10 @@ public class msg_rc_channels_raw extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_RC_CHANNELS_RAW;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_RC_CHANNELS_RAW;
 		packet.payload.putInt(time_boot_ms);
 		packet.payload.putShort(chan1_raw);
 		packet.payload.putShort(chan2_raw);
@@ -99,6 +101,13 @@ public class msg_rc_channels_raw extends MAVLinkMessage{
 	    chan8_raw = payload.getShort();
 	    port = payload.getByte();
 	    rssi = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_RC_CHANNELS_RAW;
     }
 
     /**

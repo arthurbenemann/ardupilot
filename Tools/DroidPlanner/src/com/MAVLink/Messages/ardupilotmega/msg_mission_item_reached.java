@@ -25,8 +25,10 @@ public class msg_mission_item_reached extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_MISSION_ITEM_REACHED;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_MISSION_ITEM_REACHED;
 		packet.payload.putShort(seq);
 		return packet;		
 	}
@@ -39,6 +41,13 @@ public class msg_mission_item_reached extends MAVLinkMessage{
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	    seq = payload.getShort();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_MISSION_ITEM_REACHED;
     }
 
     /**

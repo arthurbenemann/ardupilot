@@ -33,8 +33,10 @@ public class msg_data_stream extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_DATA_STREAM;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_DATA_STREAM;
 		packet.payload.putShort(message_rate);
 		packet.payload.putByte(stream_id);
 		packet.payload.putByte(on_off);
@@ -51,6 +53,13 @@ public class msg_data_stream extends MAVLinkMessage{
 	    message_rate = payload.getShort();
 	    stream_id = payload.getByte();
 	    on_off = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_DATA_STREAM;
     }
 
     /**

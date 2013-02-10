@@ -78,8 +78,10 @@ public class msg_mission_item extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_MISSION_ITEM;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_MISSION_ITEM;
 		packet.payload.putFloat(param1);
 		packet.payload.putFloat(param2);
 		packet.payload.putFloat(param3);
@@ -118,6 +120,13 @@ public class msg_mission_item extends MAVLinkMessage{
 	    frame = payload.getByte();
 	    current = payload.getByte();
 	    autocontinue = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_MISSION_ITEM;
     }
 
     /**

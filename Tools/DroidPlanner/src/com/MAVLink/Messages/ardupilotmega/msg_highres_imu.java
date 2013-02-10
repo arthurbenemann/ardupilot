@@ -81,8 +81,10 @@ public class msg_highres_imu extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_HIGHRES_IMU;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_HIGHRES_IMU;
 		packet.payload.putLong(time_usec);
 		packet.payload.putFloat(xacc);
 		packet.payload.putFloat(yacc);
@@ -123,6 +125,13 @@ public class msg_highres_imu extends MAVLinkMessage{
 	    pressure_alt = payload.getFloat();
 	    temperature = payload.getFloat();
 	    fields_updated = payload.getShort();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_HIGHRES_IMU;
     }
 
     /**

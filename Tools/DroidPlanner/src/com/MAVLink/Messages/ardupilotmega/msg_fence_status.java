@@ -38,8 +38,10 @@ public class msg_fence_status extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_FENCE_STATUS;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_FENCE_STATUS;
 		packet.payload.putInt(breach_time);
 		packet.payload.putShort(breach_count);
 		packet.payload.putByte(breach_status);
@@ -58,6 +60,13 @@ public class msg_fence_status extends MAVLinkMessage{
 	    breach_count = payload.getShort();
 	    breach_status = payload.getByte();
 	    breach_type = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_FENCE_STATUS;
     }
 
     /**

@@ -57,8 +57,10 @@ public class msg_setpoint_8dof extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_SETPOINT_8DOF;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_SETPOINT_8DOF;
 		packet.payload.putFloat(val1);
 		packet.payload.putFloat(val2);
 		packet.payload.putFloat(val3);
@@ -87,6 +89,13 @@ public class msg_setpoint_8dof extends MAVLinkMessage{
 	    val7 = payload.getFloat();
 	    val8 = payload.getFloat();
 	    target_system = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_SETPOINT_8DOF;
     }
 
     /**

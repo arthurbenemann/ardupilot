@@ -65,8 +65,10 @@ public class msg_hil_controls extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_HIL_CONTROLS;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_HIL_CONTROLS;
 		packet.payload.putLong(time_usec);
 		packet.payload.putFloat(roll_ailerons);
 		packet.payload.putFloat(pitch_elevator);
@@ -99,6 +101,13 @@ public class msg_hil_controls extends MAVLinkMessage{
 	    aux4 = payload.getFloat();
 	    mode = payload.getByte();
 	    nav_mode = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_HIL_CONTROLS;
     }
 
     /**

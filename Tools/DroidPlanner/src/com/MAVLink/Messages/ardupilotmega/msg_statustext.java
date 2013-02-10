@@ -29,8 +29,10 @@ public class msg_statustext extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_STATUSTEXT;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_STATUSTEXT;
 		packet.payload.putByte(severity);
 		 for (int i = 0; i < text.length; i++) {
                         packet.payload.putByte(text[i]);
@@ -49,6 +51,13 @@ public class msg_statustext extends MAVLinkMessage{
 	     for (int i = 0; i < text.length; i++) {
 			text[i] = payload.getByte();
 		}    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_STATUSTEXT;
     }
 
     /**

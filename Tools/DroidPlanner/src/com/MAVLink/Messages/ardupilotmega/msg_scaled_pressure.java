@@ -37,8 +37,10 @@ public class msg_scaled_pressure extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_SCALED_PRESSURE;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_SCALED_PRESSURE;
 		packet.payload.putInt(time_boot_ms);
 		packet.payload.putFloat(press_abs);
 		packet.payload.putFloat(press_diff);
@@ -57,6 +59,13 @@ public class msg_scaled_pressure extends MAVLinkMessage{
 	    press_abs = payload.getFloat();
 	    press_diff = payload.getFloat();
 	    temperature = payload.getShort();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_SCALED_PRESSURE;
     }
 
     /**

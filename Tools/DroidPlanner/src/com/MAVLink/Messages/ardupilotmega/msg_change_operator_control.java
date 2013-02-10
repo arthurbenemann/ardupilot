@@ -37,8 +37,10 @@ public class msg_change_operator_control extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL;
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(control_request);
 		packet.payload.putByte(version);
@@ -61,6 +63,13 @@ public class msg_change_operator_control extends MAVLinkMessage{
 	     for (int i = 0; i < passkey.length; i++) {
 			passkey[i] = payload.getByte();
 		}    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL;
     }
 
     /**

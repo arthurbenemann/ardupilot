@@ -37,8 +37,10 @@ public class msg_set_gps_global_origin extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN;
 		packet.payload.putInt(latitude);
 		packet.payload.putInt(longitude);
 		packet.payload.putInt(altitude);
@@ -57,6 +59,13 @@ public class msg_set_gps_global_origin extends MAVLinkMessage{
 	    longitude = payload.getInt();
 	    altitude = payload.getInt();
 	    target_system = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN;
     }
 
     /**

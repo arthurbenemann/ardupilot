@@ -73,8 +73,10 @@ public class msg_sys_status extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_SYS_STATUS;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_SYS_STATUS;
 		packet.payload.putInt(onboard_control_sensors_present);
 		packet.payload.putInt(onboard_control_sensors_enabled);
 		packet.payload.putInt(onboard_control_sensors_health);
@@ -111,6 +113,13 @@ public class msg_sys_status extends MAVLinkMessage{
 	    errors_count3 = payload.getShort();
 	    errors_count4 = payload.getShort();
 	    battery_remaining = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_SYS_STATUS;
     }
 
     /**

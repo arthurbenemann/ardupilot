@@ -158,10 +158,8 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 
 	public void sendMessage(String message) {
 		msg_param_request_list msg = new msg_param_request_list();
-		msg.sysid = 255;
-		msg.compid = 190;
-		msg.target_system = 0;
-		msg.target_component = 0; 
+		msg.target_system = 1;
+		msg.target_component = 1; 
 		byte[] buffer = msg.pack().encodePacket();
 		
 		String str ="";

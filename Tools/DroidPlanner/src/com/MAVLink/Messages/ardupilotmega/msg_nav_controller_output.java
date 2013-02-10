@@ -53,8 +53,10 @@ public class msg_nav_controller_output extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT;
 		packet.payload.putFloat(nav_roll);
 		packet.payload.putFloat(nav_pitch);
 		packet.payload.putFloat(alt_error);
@@ -81,6 +83,13 @@ public class msg_nav_controller_output extends MAVLinkMessage{
 	    nav_bearing = payload.getShort();
 	    target_bearing = payload.getShort();
 	    wp_dist = payload.getShort();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT;
     }
 
     /**

@@ -33,8 +33,10 @@ public class msg_mission_set_current extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_MISSION_SET_CURRENT;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_MISSION_SET_CURRENT;
 		packet.payload.putShort(seq);
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(target_component);
@@ -51,6 +53,13 @@ public class msg_mission_set_current extends MAVLinkMessage{
 	    seq = payload.getShort();
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_MISSION_SET_CURRENT;
     }
 
     /**

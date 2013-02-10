@@ -37,8 +37,10 @@ public class msg_param_request_read extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_PARAM_REQUEST_READ;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_PARAM_REQUEST_READ;
 		packet.payload.putShort(param_index);
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(target_component);
@@ -61,6 +63,13 @@ public class msg_param_request_read extends MAVLinkMessage{
 	     for (int i = 0; i < param_id.length; i++) {
 			param_id[i] = payload.getByte();
 		}    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_PARAM_REQUEST_READ;
     }
 
     /**

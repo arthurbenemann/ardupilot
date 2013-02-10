@@ -45,8 +45,10 @@ public class msg_heartbeat extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_HEARTBEAT;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_HEARTBEAT;
 		packet.payload.putInt(custom_mode);
 		packet.payload.putByte(type);
 		packet.payload.putByte(autopilot);
@@ -69,6 +71,13 @@ public class msg_heartbeat extends MAVLinkMessage{
 	    base_mode = payload.getByte();
 	    system_status = payload.getByte();
 	    mavlink_version = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_HEARTBEAT;
     }
 
     /**

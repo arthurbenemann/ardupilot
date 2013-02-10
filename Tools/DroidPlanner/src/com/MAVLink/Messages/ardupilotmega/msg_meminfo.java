@@ -29,8 +29,10 @@ public class msg_meminfo extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_MEMINFO;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_MEMINFO;
 		packet.payload.putShort(brkval);
 		packet.payload.putShort(freemem);
 		return packet;		
@@ -45,6 +47,13 @@ public class msg_meminfo extends MAVLinkMessage{
         payload.resetIndex();
 	    brkval = payload.getShort();
 	    freemem = payload.getShort();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_MEMINFO;
     }
 
     /**

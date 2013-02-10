@@ -49,8 +49,10 @@ public class msg_attitude extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_ATTITUDE;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_ATTITUDE;
 		packet.payload.putInt(time_boot_ms);
 		packet.payload.putFloat(roll);
 		packet.payload.putFloat(pitch);
@@ -75,6 +77,13 @@ public class msg_attitude extends MAVLinkMessage{
 	    rollspeed = payload.getFloat();
 	    pitchspeed = payload.getFloat();
 	    yawspeed = payload.getFloat();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_ATTITUDE;
     }
 
     /**

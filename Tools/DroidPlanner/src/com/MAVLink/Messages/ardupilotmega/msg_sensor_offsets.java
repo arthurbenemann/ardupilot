@@ -70,8 +70,10 @@ public class msg_sensor_offsets extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_SENSOR_OFFSETS;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_SENSOR_OFFSETS;
 		packet.payload.putFloat(mag_declination);
 		packet.payload.putInt(raw_press);
 		packet.payload.putInt(raw_temp);
@@ -106,6 +108,13 @@ public class msg_sensor_offsets extends MAVLinkMessage{
 	    mag_ofs_x = payload.getShort();
 	    mag_ofs_y = payload.getShort();
 	    mag_ofs_z = payload.getShort();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_SENSOR_OFFSETS;
     }
 
     /**

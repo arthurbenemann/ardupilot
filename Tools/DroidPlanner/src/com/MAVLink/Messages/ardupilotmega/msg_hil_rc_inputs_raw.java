@@ -77,8 +77,10 @@ public class msg_hil_rc_inputs_raw extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_HIL_RC_INPUTS_RAW;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_HIL_RC_INPUTS_RAW;
 		packet.payload.putLong(time_usec);
 		packet.payload.putShort(chan1_raw);
 		packet.payload.putShort(chan2_raw);
@@ -117,6 +119,13 @@ public class msg_hil_rc_inputs_raw extends MAVLinkMessage{
 	    chan11_raw = payload.getShort();
 	    chan12_raw = payload.getShort();
 	    rssi = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_HIL_RC_INPUTS_RAW;
     }
 
     /**

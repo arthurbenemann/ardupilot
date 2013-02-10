@@ -53,8 +53,10 @@ public class msg_optical_flow extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_OPTICAL_FLOW;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_OPTICAL_FLOW;
 		packet.payload.putLong(time_usec);
 		packet.payload.putFloat(flow_comp_m_x);
 		packet.payload.putFloat(flow_comp_m_y);
@@ -81,6 +83,13 @@ public class msg_optical_flow extends MAVLinkMessage{
 	    flow_y = payload.getShort();
 	    sensor_id = payload.getByte();
 	    quality = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_OPTICAL_FLOW;
     }
 
     /**

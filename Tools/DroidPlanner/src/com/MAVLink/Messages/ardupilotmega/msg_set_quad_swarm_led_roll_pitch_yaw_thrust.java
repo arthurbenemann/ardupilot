@@ -57,8 +57,10 @@ public class msg_set_quad_swarm_led_roll_pitch_yaw_thrust extends MAVLinkMessage
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_SET_QUAD_SWARM_LED_ROLL_PITCH_YAW_THRUST;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_SET_QUAD_SWARM_LED_ROLL_PITCH_YAW_THRUST;
 		 for (int i = 0; i < roll.length; i++) {
                         packet.payload.putShort(roll[i]);
             }
@@ -115,6 +117,13 @@ public class msg_set_quad_swarm_led_roll_pitch_yaw_thrust extends MAVLinkMessage
 	     for (int i = 0; i < led_green.length; i++) {
 			led_green[i] = payload.getByte();
 		}    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_SET_QUAD_SWARM_LED_ROLL_PITCH_YAW_THRUST;
     }
 
     /**

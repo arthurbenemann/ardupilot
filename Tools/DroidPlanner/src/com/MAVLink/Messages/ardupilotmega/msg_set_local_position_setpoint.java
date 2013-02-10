@@ -49,8 +49,10 @@ public class msg_set_local_position_setpoint extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_SET_LOCAL_POSITION_SETPOINT;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_SET_LOCAL_POSITION_SETPOINT;
 		packet.payload.putFloat(x);
 		packet.payload.putFloat(y);
 		packet.payload.putFloat(z);
@@ -75,6 +77,13 @@ public class msg_set_local_position_setpoint extends MAVLinkMessage{
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();
 	    coordinate_frame = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_SET_LOCAL_POSITION_SETPOINT;
     }
 
     /**

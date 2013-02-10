@@ -41,8 +41,10 @@ public class msg_mount_status extends MAVLinkMessage{
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
-		packet.msgid = MAVLINK_MSG_ID_MOUNT_STATUS;
 		packet.len = MAVLINK_MSG_LENGTH;
+		packet.sysid = 255;
+		packet.compid = 190;
+		packet.msgid = MAVLINK_MSG_ID_MOUNT_STATUS;
 		packet.payload.putInt(pointing_a);
 		packet.payload.putInt(pointing_b);
 		packet.payload.putInt(pointing_c);
@@ -63,6 +65,13 @@ public class msg_mount_status extends MAVLinkMessage{
 	    pointing_c = payload.getInt();
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();    
+    }
+
+     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_param_request_list(){
+    	msgid = MAVLINK_MSG_ID_MOUNT_STATUS;
     }
 
     /**
