@@ -193,13 +193,6 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 						m = parser.mavlink_parse_char(data);
 						if (m != null) {
 							if (m.msgid == msg_attitude.MAVLINK_MSG_ID_ATTITUDE) {
-								attitudeString = String.format(
-										"Roll:%3.1f \t Yaw:%3.1f \t Pitch:%3.1f \t time:%d",
-										((msg_attitude) m).roll*57.3,
-										((msg_attitude) m).yaw*57.3,
-										((msg_attitude) m).pitch*57.3,
-										((msg_attitude) m).time_boot_ms);
-								Log.d("ROLL", attitudeString);
 							}
 							cnt++;
 							
