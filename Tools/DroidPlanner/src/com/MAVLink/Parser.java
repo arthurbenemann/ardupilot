@@ -90,7 +90,7 @@ public class Parser {
 			m.generateCRC();
 			// Check first checksum byte
 			if (c != m.crc.getLSB()) {
-				Log.e("CRC", "Invalid CRC");
+				Log.e("CRC", "Invalid CRC, msgid:"+m.msgid);
 				msg_received = false;
 				state = MAV_states.MAVLINK_PARSE_STATE_IDLE;
 				if (c == MAVLinkPacket.MAVLINK_STX) {
