@@ -60,6 +60,13 @@ public class msg_ping extends MAVLinkMessage{
     }
 
     /**
+     * Constructor for a new message, just initializes the msgid
+     */
+    public msg_ping() {
+    	msgid = MAVLINK_MSG_ID_PING;
+    }
+    
+    /**
      * Constructor for a new message, initializes the message with the payload
      * from a mavlink packet
      * 

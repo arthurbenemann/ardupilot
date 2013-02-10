@@ -25,7 +25,7 @@ public class msg_mission_request_list extends MAVLinkMessage{
 
 	/**
 	 * Generates the payload for a mavlink message for a message of this type
-	 * @return
+	 * @return MAVLinkPacket with the payload from this message
 	 */
 	public MAVLinkPacket pack(){
 		MAVLinkPacket packet = new MAVLinkPacket();
@@ -57,6 +57,13 @@ public class msg_mission_request_list extends MAVLinkMessage{
         unpack(payload);
         Log.d("MAVLink", "MISSION_REQUEST_LIST");
         //Log.d("MAVLINK_MSG_ID_MISSION_REQUEST_LIST", toString());
+    }
+    
+    /**
+     * Constructor for a new message, just initializes the msgid 
+     */
+    public msg_mission_request_list(){
+        msgid = MAVLINK_MSG_ID_MISSION_REQUEST_LIST;
     }
 
     /**

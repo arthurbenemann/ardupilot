@@ -1,6 +1,7 @@
 package com.diydrones.droidplanner;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,6 +33,8 @@ import android.widget.TextView;
 import com.MAVLink.Parser;
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.ardupilotmega.msg_attitude;
+import com.MAVLink.Messages.ardupilotmega.msg_mission_request_list;
+import com.MAVLink.Messages.ardupilotmega.msg_param_request_list;
 
 public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		implements OnNavigationListener {
@@ -151,12 +154,30 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 	private BufferedInputStream in;
 	public FileOutputStream logWriter;
 	
-	PrintWriter out;
+	BufferedOutputStream out;
 
 	public void sendMessage(String message) {
-		if (out != null && !out.checkError()) {
-			out.println(message);
-			out.flush();
+		msg_param_request_list msg = new msg_param_request_list();
+		msg.sysid = 0;
+		msg.compid = 0;
+		msg.target_system = 0;
+		msg.target_component = 0; 
+		byte[] buffer = msg.pack().encodePacket();
+		
+		String str ="";
+		for (int i = 0; i < buffer.length; i++) {
+			str += Integer.toHexString(buffer[i] & 0xff)+".";
+		}
+		Log.d("BUFF", str);
+		
+		if (out != null) {
+			try {
+				out.write(buffer);
+				out.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -178,8 +199,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 				InetAddress serverAddr = InetAddress.getByName(SERVERIP);
 				socket = new Socket(serverAddr, SERVERPORT);
 
-				out = new PrintWriter(new BufferedWriter(
-						new OutputStreamWriter(socket.getOutputStream())), true);
+				out = new BufferedOutputStream((socket.getOutputStream()));
 				Log.e("TCP Client", "C: Done.");
 				// receive the message which the server sends back
 				in = new BufferedInputStream(socket.getInputStream());
