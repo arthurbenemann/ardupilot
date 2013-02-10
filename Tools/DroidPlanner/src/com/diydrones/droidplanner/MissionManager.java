@@ -278,4 +278,8 @@ public class MissionManager {
 			return home;
 	}
 
+	public void setHome(waypoint home) {
+		this.home = home;
+	}
+
 }

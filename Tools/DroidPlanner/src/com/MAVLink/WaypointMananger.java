@@ -45,8 +45,8 @@ public abstract class WaypointMananger {
 			requestWayPoint();
 			return true;
 		case msg_mission_item.MAVLINK_MSG_ID_MISSION_ITEM:
-			Double Lng = (double) ((msg_mission_item) msg).x;
-			Double Lat = (double) ((msg_mission_item) msg).y;
+			Double Lat = (double) ((msg_mission_item) msg).x;
+			Double Lng = (double) ((msg_mission_item) msg).y;
 			Double h = (double) ((msg_mission_item) msg).z;
 			waypoints.add(new waypoint(Lat, Lng, h));
 			Log.d("Mission", "Item:"+waypoints.size()+" Lng:"+Lng+" Lat:"+Lat+" h:"+h);

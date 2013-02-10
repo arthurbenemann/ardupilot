@@ -2,6 +2,7 @@ package com.diydrones.droidplanner;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.List;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
@@ -23,6 +24,9 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.MAVLink.MAVLink;
+import com.MAVLink.WaypointMananger;
+import com.MAVLink.Messages.MAVLinkMessage;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
@@ -48,7 +52,40 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 	public modes mode;
 	
 	TextView WaypointListNumber;
+	private MenuItem connectButton;
+	
+	MAVLink MAV = new MAVLink() {
+		@Override
+		public void onReceiveMessage(MAVLinkMessage msg) {
+			waypointMananger.processMessage(msg);
+		}		
+		@Override
+		public void onDisconnect() {
+			connectButton.setTitle(getResources().getString(R.string.menu_connect));			
+		}		
+		@Override
+		public void onConnect() {
+			connectButton.setTitle(getResources().getString(R.string.menu_disconnect));
+		}
+	};
+	
+	WaypointMananger waypointMananger = new WaypointMananger(MAV) {
+		@Override
+		public void onWaypointsReceived(List<waypoint> waypoints) {
+			if(waypoints!=null){
+				mission.setHome(waypoints.get(0));
+				mission.clearWaypoints();
+				for (int i = 0; i < waypoints.size(); i++) {
+					mission.addWaypoints(waypoints);
+				}
+				updateMarkersAndPath();
+				zoomToExtents();
+			}
+		}
+		
+	};
 
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -85,8 +122,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 			getMenuInflater().inflate(R.menu.menu_planning_polygon, menu);
 			break;
 		}
-		
-
+		connectButton = menu.findItem(R.id.menu_connect);
 		return true;
 	}
 
@@ -236,8 +272,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 			clearWaypointsAndUpdate();
 			return true;
 		case R.id.menu_load_from_apm:
-			Toast.makeText(this, "not yet implemented", Toast.LENGTH_SHORT)
-					.show();
+			waypointMananger.getWaypoints();
 			return true;
 		case R.id.menu_send_to_apm:
 			Toast.makeText(this, "not yet implemented", Toast.LENGTH_SHORT)
@@ -254,8 +289,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 					.show();
 			return true;
 		case R.id.menu_connect:
-			Toast.makeText(this, "not yet implemented", Toast.LENGTH_SHORT)
-					.show();
+			MAV.toggleConnectionState();
 			return true;
 		case R.id.menu_zoom:
 			zoomToExtents();
