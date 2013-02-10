@@ -71,7 +71,7 @@ public class msg_mission_count extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MISSION_COUNT;
         unpack(payload);
         Log.d("MAVLink", "MISSION_COUNT");
-        //Log.d("MAVLINK_MSG_ID_MISSION_COUNT", toString());
+        Log.d("MAVLINK_MSG_ID_MISSION_COUNT", toString());
     }
 
     /**

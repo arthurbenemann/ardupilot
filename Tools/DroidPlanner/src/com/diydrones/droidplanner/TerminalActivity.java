@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,8 +13,8 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.MAVLink.MAVLink;
+import com.MAVLink.WaypointMananger;
 import com.MAVLink.Messages.MAVLinkMessage;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_request_list;
 
 public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		implements OnNavigationListener {
@@ -31,6 +30,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 			String terminalMsg = "Received " + MAV.receivedCount
 					+ " packets\nLast packet was: " + msg.msgid + "\n";
 			terminal.setText(terminalMsg);
+			waypointMananger.processMessage(msg);
 		}
 
 		@Override
@@ -43,6 +43,8 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 			connectButton.setTitle(getResources().getString(R.string.menu_connect));
 		}
 	};
+
+	WaypointMananger waypointMananger = new WaypointMananger(MAV);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +70,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 	}
 	
 	public void sendData(View view) {
-	    Log.d("teste", "Sended");
-	    
-		msg_mission_request_list msg = new msg_mission_request_list();
-		msg.target_system = 1;
-		msg.target_component = 1;
-	    MAV.sendMavPacket(msg.pack());
-	    
+	   waypointMananger.requestWaypointsList();	    
 	}
 
 	@Override

@@ -138,7 +138,7 @@ public class msg_mission_item extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MISSION_ITEM;
         unpack(payload);
         Log.d("MAVLink", "MISSION_ITEM");
-        //Log.d("MAVLINK_MSG_ID_MISSION_ITEM", toString());
+        Log.d("MAVLINK_MSG_ID_MISSION_ITEM", toString());
     }
 
     /**
