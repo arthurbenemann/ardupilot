@@ -20,37 +20,24 @@ import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPacket;
 
 public abstract class MAVLink {
+	public static final String SERVERIP = "10.0.0.99";
+	public static final int SERVERPORT = 5760;
 
 	boolean connected = false;
 	private BufferedInputStream mavIn;
 	public FileOutputStream logWriter;
 	BufferedOutputStream mavOut;
 	public int receivedCount = 0;
-	
 
-	public void sendMavPacket(MAVLinkPacket msg) {	 
-		byte[] buffer = msg.encodePacket();
-		sendBuffer(buffer);
-	}
-	
-	public void sendBuffer(byte[] buffer){
-		if (mavOut != null) {
-			try {
-				mavOut.write(buffer);
-				mavOut.flush();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}		
-	}
+	public abstract void onReceiveMessage(MAVLinkMessage msg);
+
+	public abstract void onDisconnect();
+
+	public abstract void onConnect();
 
 	public class connectTask extends AsyncTask<String, MAVLinkMessage, String> {
-		public static final String SERVERIP = "10.0.0.99";
-		public static final int SERVERPORT = 5760;
 
 		public Parser parser;
-		
 
 		@Override
 		protected String doInBackground(String... message) {
@@ -58,8 +45,8 @@ public abstract class MAVLink {
 			parser = new Parser();
 			try {
 
-				logWriter = getFileStream();	
-				
+				logWriter = getFileStream();
+
 				InetAddress serverAddr = InetAddress.getByName(SERVERIP);
 				socket = new Socket(serverAddr, SERVERPORT);
 
@@ -73,7 +60,7 @@ public abstract class MAVLink {
 				while (connected) {
 					int data;
 					if ((data = mavIn.read()) >= 0) {
-						//logWriter.write(data);
+						// logWriter.write(data);
 						m = parser.mavlink_parse_char(data);
 						if (m != null) {
 							receivedCount++;
@@ -87,7 +74,6 @@ public abstract class MAVLink {
 			}
 			return null;
 		}
-
 		
 		@Override
 		protected void onProgressUpdate(MAVLinkMessage... values) {
@@ -102,47 +88,92 @@ public abstract class MAVLink {
 			closeConnection();
 		}
 	}
-	
-	public abstract void onReceiveMessage(MAVLinkMessage msg);
 
-	public boolean toggleConnectionState() {
-		if(isConnected()){
-			closeConnection();
-		}else {
-			openConnection();
+	/**
+	 * Format and send a Mavlink packet via the MAVlink stream
+	 * @param packet MavLink packet to be transmitted
+	 */
+	public void sendMavPacket(MAVLinkPacket packet) {
+		byte[] buffer = packet.encodePacket();
+		sendBuffer(buffer);
+	}
+
+	/**
+	 * Sends a buffer thought the MAVlink stream
+	 * @param buffer Buffer with the data to be transmitted
+	 */
+	public void sendBuffer(byte[] buffer) {
+		if (mavOut != null) {
+			try {
+				mavOut.write(buffer);
+				mavOut.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		return isConnected();
 	}
 	
+	/**
+	 * Toggle the current state of the MAVlink connection. Starting and closing
+	 * the as needed. May throw a onConnect or onDisconnect callback
+	 */
+	public void toggleConnectionState() {
+		if (isConnected()) {
+			closeConnection();
+		} else {
+			openConnection();
+		}
+	}
+
+	/*
+	 * Close the MAVlink Connection
+	 */
 	private void closeConnection() {
 		Log.d("TCP IN", "closing TCP");
 		connected = false;
+		onDisconnect();
 	}
 
+	/**
+	 * Start the MAVlink Connection
+	 */
 	private void openConnection() {
 		Log.d("TCP IN", "starting TCP");
 		connected = true;
 		new connectTask().execute("");
+		onConnect();
 	}
-	
+
+	/**
+	 * State of the MAVlink Connection
+	 * 
+	 * @return true for connected
+	 */
 	private boolean isConnected() {
 		return connected;
 	}
-	
+
 	/**
 	 * Timestamp for logs in the Mission Planner Format
 	 */
 	private String getTimeStamp() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss",Locale.US);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss",
+				Locale.US);
 		String timeStamp = sdf.format(new Date());
 		return timeStamp;
-	}	
-	
+	}
+
+	/**
+	 * Get a file Stream for logging purposes
+	 * 
+	 * @return output file stream for the log file
+	 */
 	private FileOutputStream getFileStream() throws FileNotFoundException {
 		String root = Environment.getExternalStorageDirectory().toString();
-		File myDir = new File(root+"/DroidPlanner/logs");
+		File myDir = new File(root + "/DroidPlanner/logs");
 		myDir.mkdirs();
-		File file = new File(myDir, getTimeStamp()+".tlog");
+		File file = new File(myDir, getTimeStamp() + ".tlog");
 		if (file.exists())
 			file.delete();
 		FileOutputStream out = new FileOutputStream(file);

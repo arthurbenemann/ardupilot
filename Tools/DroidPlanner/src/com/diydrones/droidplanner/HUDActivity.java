@@ -28,6 +28,16 @@ public class HUDActivity extends android.support.v4.app.FragmentActivity
 				hudWidget.newFlightData(m.roll, m.pitch, m.yaw);
 			}			
 		}
+		
+		@Override
+		public void onConnect() {
+			connectButton.setTitle(getResources().getString(R.string.menu_disconnect));
+		}
+
+		@Override
+		public void onDisconnect() {		
+			connectButton.setTitle(getResources().getString(R.string.menu_connect));
+		}
 	};
 
 	@Override
@@ -91,11 +101,7 @@ public class HUDActivity extends android.support.v4.app.FragmentActivity
 			MAV.sendBuffer(buff); // TODO only used for debbuging
 			return true;
 		case R.id.menu_connect:
-			if(MAV.toggleConnectionState()){
-				connectButton.setTitle(getResources().getString(R.string.menu_disconnect));
-			}else {
-				connectButton.setTitle(getResources().getString(R.string.menu_connect));
-			}
+			MAV.toggleConnectionState();
 			return true;
 		default:
 			return super.onMenuItemSelected(featureId, item);

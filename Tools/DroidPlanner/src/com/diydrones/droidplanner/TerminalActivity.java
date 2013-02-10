@@ -32,6 +32,16 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 					+ " packets\nLast packet was: " + msg.msgid + "\n";
 			terminal.setText(terminalMsg);
 		}
+
+		@Override
+		public void onConnect() {
+			connectButton.setTitle(getResources().getString(R.string.menu_disconnect));
+		}
+
+		@Override
+		public void onDisconnect() {		
+			connectButton.setTitle(getResources().getString(R.string.menu_connect));
+		}
 	};
 	
 	@Override
@@ -106,19 +116,10 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		case R.id.menu_settings:
 			return true;
 		case R.id.menu_connect:
-			toggleConnectionState();				
+			MAV.toggleConnectionState();				
 			return true;
 		default:
 			return super.onMenuItemSelected(featureId, item);
-		}
-	}
-
-
-	private void toggleConnectionState() {
-		if(MAV.toggleConnectionState()){
-			connectButton.setTitle(getResources().getString(R.string.menu_disconnect));
-		}else {
-			connectButton.setTitle(getResources().getString(R.string.menu_connect));
 		}
 	}
 
