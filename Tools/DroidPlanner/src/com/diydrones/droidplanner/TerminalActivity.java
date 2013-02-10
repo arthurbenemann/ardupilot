@@ -1,5 +1,7 @@
 package com.diydrones.droidplanner;
 
+import java.util.List;
+
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
 import android.content.Intent;
@@ -44,7 +46,14 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		}
 	};
 
-	WaypointMananger waypointMananger = new WaypointMananger(MAV);
+	WaypointMananger waypointMananger = new WaypointMananger(MAV) {
+
+		@Override
+		public void onWaypointsReceived(List<waypoint> waypoints) {
+			// TODO Auto-generated method stub			
+		}
+		
+	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +79,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 	}
 	
 	public void sendData(View view) {
-	   waypointMananger.requestWaypointsList();	    
+	   waypointMananger.getWaypoints();	    
 	}
 
 	@Override
