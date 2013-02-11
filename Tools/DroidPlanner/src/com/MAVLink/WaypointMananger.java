@@ -140,14 +140,17 @@ public abstract class WaypointMananger {
 			processReceivedWaypoint((msg_mission_item) msg);
 			return true;
 		case msg_mission_request.MAVLINK_MSG_ID_MISSION_REQUEST:
-			sendWaypoint(waypoints.get(writeIndex++));
+			sendWaypoint(writeIndex++);
 			return true;
 		case msg_mission_ack.MAVLINK_MSG_ID_MISSION_ACK:
 			onWriteWaypoints((msg_mission_ack) msg);
+			return true;
 		case msg_mission_item_reached.MAVLINK_MSG_ID_MISSION_ITEM_REACHED:
 			onWaypointReached(((msg_mission_item_reached) msg).seq);
+			return true;
 		case msg_mission_current.MAVLINK_MSG_ID_MISSION_CURRENT:
 			onCurrentWaypointUpdate(((msg_mission_current) msg).seq);
+			return true;
 		default:
 			return false;
 		}
@@ -204,7 +207,7 @@ public abstract class WaypointMananger {
 	}
 
 	private void sendWaypointCount() {
-		Log.d("Mission", "sendWaypointCount");
+		Log.d("Mission", "sendWaypointCount:"+(short) waypoints.size());
 		msg_mission_count msg = new msg_mission_count();
 		msg.target_system = 1;
 		msg.target_component = 1;
@@ -212,15 +215,23 @@ public abstract class WaypointMananger {
 		MAV.sendMavPacket(msg.pack());
 	}
 
-	private void sendWaypoint(waypoint waypoint) {
-		Log.d("Mission", "sendWaypoint");
+	private void sendWaypoint(int index) {
+		Log.d("Mission", "sendWaypoint:"+ index);
 		msg_mission_item msg = new msg_mission_item();
+		msg.seq = (short) index;
+		msg.current = (byte) ((index==0)?1:0); //TODO use correct parameter for HOME
+		msg.frame = 0; //TODO use correct parameter
+		msg.command = 16; //TODO use correct parameter
+		msg.param1 = 0; //TODO use correct parameter
+		msg.param2 = 0; //TODO use correct parameter
+		msg.param3 = 0; //TODO use correct parameter
+		msg.param4 = 0; //TODO use correct parameter
+		msg.x = (float) waypoints.get(index).coord.latitude;
+		msg.y = (float) waypoints.get(index).coord.longitude;
+		msg.z = waypoints.get(index).Height.floatValue();
+		msg.autocontinue = 1; //TODO use correct parameter
 		msg.target_system = 1;
 		msg.target_component = 1;
-		msg.x = (float) waypoint.coord.latitude;
-		msg.y = (float) waypoint.coord.longitude;
-		msg.z = waypoint.Height.floatValue();
-		// TODO add all the other parameters
 		Log.d("Mission", msg.toString());
 		MAV.sendMavPacket(msg.pack());
 	}

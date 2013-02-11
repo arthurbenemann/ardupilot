@@ -2,6 +2,7 @@ package com.diydrones.droidplanner;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ActionBar;
@@ -279,8 +280,10 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 			waypointMananger.getWaypoints();
 			return true;
 		case R.id.menu_send_to_apm:
-			Toast.makeText(this, "not yet implemented", Toast.LENGTH_SHORT)
-					.show();
+			List<waypoint> data = new ArrayList<waypoint>();
+			data.add(mission.getHome());
+			data.addAll(mission.getWaypoints());
+			waypointMananger.writeWaypoints(data);
 			return true;
 		case R.id.menu_open_file:
 			OpenWaypointDialog();
