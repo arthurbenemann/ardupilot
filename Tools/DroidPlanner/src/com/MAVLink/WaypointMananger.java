@@ -8,65 +8,100 @@ import android.util.Log;
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_ack;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_count;
+import com.MAVLink.Messages.ardupilotmega.msg_mission_current;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_item;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_item_reached;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_request;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_request_list;
+import com.MAVLink.Messages.ardupilotmega.msg_mission_set_current;
 import com.diydrones.droidplanner.waypoint;
 
 /**
- * Class to manage the communication of waypoints to the MAV. 
+ * Class to manage the communication of waypoints to the MAV.
  * 
- * Should be initialized with a MAVLink Object, so the manager can send messages via the
- * MAV link. The function processMessage must be called with every new MAV Message.
+ * Should be initialized with a MAVLink Object, so the manager can send messages
+ * via the MAV link. The function processMessage must be called with every new
+ * MAV Message.
  * 
  */
 public abstract class WaypointMananger {
 	/**
-	 * Try to receive all waypoints from the MAV. 
+	 * Try to receive all waypoints from the MAV.
 	 * 
-	 * If all runs well the callback will return the list of waypoints. 
+	 * If all runs well the callback will return the list of waypoints.
 	 */
-	public void getWaypoints(){
-		if(MAV.isConnected()){
+	public void getWaypoints() {
+		if (MAV.isConnected()) {
 			requestWaypointsList();
 		}
 	}
-	
+
 	/**
 	 * Write a list of waypoints to the MAV.
 	 * 
 	 * The callback will return the status of this operation
-	 * @param data waypoints to be written
+	 * 
+	 * @param data
+	 *            waypoints to be written
 	 */
-	public void writeWaypoints(List<waypoint> data){
-		if((waypoints!=null) && (MAV.isConnected())){
+	public void writeWaypoints(List<waypoint> data) {
+		if ((waypoints != null) && (MAV.isConnected())) {
 			waypoints = data;
 			writeIndex = 0;
 			sendWaypointCount();
 		}
 	}
-	
+
+	/**
+	 * Sets the current waypoint in the MAV
+	 * 
+	 * The callback will return the status of this operation
+	 * 
+	 * @param data
+	 *            waypoints to be written
+	 */
+	public void setCurrentWaypoint(short i) {
+		if ((waypoints != null) && (MAV.isConnected())) {
+			sendSetCurrentWaypoint(i);
+		}
+	}
 
 	/**
 	 * Callback for when all waypoints have been received.
-	 * @param waypoints list with received waypoints.
+	 * 
+	 * @param waypoints
+	 *            list with received waypoints.
 	 */
 	public abstract void onWaypointsReceived(List<waypoint> waypoints);
-	
+
 	/**
 	 * Callback for when all waypoints have been written.
-	 * @param msg Acknowledgment message from the MAV 
+	 * 
+	 * @param msg
+	 *            Acknowledgment message from the MAV
 	 */
 	public abstract void onWriteWaypoints(msg_mission_ack msg);
-	
-	/** Callback for when a waypoint has been reached
-	 * @param msg
+
+	/**
+	 * Callback for when a waypoint has been reached
+	 * 
+	 * @param wpNumber
+	 *            number of the completed waypoint
 	 */
-	public void onWaypointReached(int wpNumber){
-		
+	public void onWaypointReached(int wpNumber) {
+
 	}
-	
+
+	/**
+	 * Callback for a change in the current waypoint the MAV is heading for
+	 * 
+	 * @param seq
+	 *            number of the updated waypoint
+	 */
+	private void onCurrentWaypointUpdate(short seq) {
+
+	}
+
 	/**
 	 * Object with a MAVlink connection
 	 */
@@ -83,42 +118,44 @@ public abstract class WaypointMananger {
 	 * waypoint witch is currently being written
 	 */
 	private int writeIndex;
-	
-	public WaypointMananger(MAVLink MAV){
+
+	public WaypointMananger(MAVLink MAV) {
 		this.MAV = MAV;
 		waypoints = new ArrayList<waypoint>();
 	}
-	
+
 	/**
 	 * Try to process a Mavlink message if it is a mission related message
-	 * @param msg Mavlink message to process
+	 * 
+	 * @param msg
+	 *            Mavlink message to process
 	 * @return Returns true if the message has been processed
 	 */
-	public boolean processMessage(MAVLinkMessage msg){
+	public boolean processMessage(MAVLinkMessage msg) {
 		switch (msg.msgid) {
 		case msg_mission_count.MAVLINK_MSG_ID_MISSION_COUNT:
 			requestFirstWaypoint(msg);
 			return true;
 		case msg_mission_item.MAVLINK_MSG_ID_MISSION_ITEM:
 			processReceivedWaypoint((msg_mission_item) msg);
-			return true;			
+			return true;
 		case msg_mission_request.MAVLINK_MSG_ID_MISSION_REQUEST:
 			sendWaypoint(waypoints.get(writeIndex++));
 			return true;
 		case msg_mission_ack.MAVLINK_MSG_ID_MISSION_ACK:
-			onWriteWaypoints((msg_mission_ack)msg);
+			onWriteWaypoints((msg_mission_ack) msg);
 		case msg_mission_item_reached.MAVLINK_MSG_ID_MISSION_ITEM_REACHED:
-			onWaypointReached(((msg_mission_item_reached)msg).seq);
+			onWaypointReached(((msg_mission_item_reached) msg).seq);
+		case msg_mission_current.MAVLINK_MSG_ID_MISSION_CURRENT:
+			onCurrentWaypointUpdate(((msg_mission_current) msg).seq);
 		default:
 			return false;
-		}		
+		}
 	}
-
-
 
 	private void requestFirstWaypoint(MAVLinkMessage msg) {
 		waypointCount = ((msg_mission_count) msg).count;
-		Log.d("Mission", "Count:"+waypointCount);
+		Log.d("Mission", "Count:" + waypointCount);
 		waypoints.clear();
 		requestWayPoint();
 	}
@@ -128,44 +165,43 @@ public abstract class WaypointMananger {
 		Double Lng = (double) msg.y;
 		Double h = (double) msg.z;
 		waypoints.add(new waypoint(Lat, Lng, h));
-		Log.d("Mission", "Item:"+waypoints.size()+" Lng:"+Lng+" Lat:"+Lat+" h:"+h);
-		
-		if(waypoints.size()<waypointCount){
+		Log.d("Mission", "Item:" + waypoints.size() + " Lng:" + Lng + " Lat:"
+				+ Lat + " h:" + h);
+
+		if (waypoints.size() < waypointCount) {
 			requestWayPoint();
-		}else{
+		} else {
 			sendAck();
 			onWaypointsReceived(waypoints);
 		}
 	}
-
 
 	private void sendAck() {
 		Log.d("Mission", "Ack");
 		msg_mission_ack msg = new msg_mission_ack();
 		msg.target_system = 1;
 		msg.target_component = 1;
-		msg.type = 0; //TODO use MAV_MISSION_RESULT constant
-	    MAV.sendMavPacket(msg.pack());	
-		
+		msg.type = 0; // TODO use MAV_MISSION_RESULT constant
+		MAV.sendMavPacket(msg.pack());
+
 	}
 
-	private void requestWaypointsList(){
+	private void requestWaypointsList() {
 		Log.d("Mission", "requestList");
 		msg_mission_request_list msg = new msg_mission_request_list();
 		msg.target_system = 1;
 		msg.target_component = 1;
-	    MAV.sendMavPacket(msg.pack());
+		MAV.sendMavPacket(msg.pack());
 	}
-	
+
 	private void requestWayPoint() {
 		Log.d("Mission", "requestPoint");
 		msg_mission_request msg = new msg_mission_request();
 		msg.target_system = 1;
 		msg.target_component = 1;
 		msg.seq = (short) waypoints.size();
-	    MAV.sendMavPacket(msg.pack());			
+		MAV.sendMavPacket(msg.pack());
 	}
-	
 
 	private void sendWaypointCount() {
 		Log.d("Mission", "sendWaypointCount");
@@ -173,9 +209,9 @@ public abstract class WaypointMananger {
 		msg.target_system = 1;
 		msg.target_component = 1;
 		msg.count = (short) waypoints.size();
-	    MAV.sendMavPacket(msg.pack());		
+		MAV.sendMavPacket(msg.pack());
 	}
-	
+
 	private void sendWaypoint(waypoint waypoint) {
 		Log.d("Mission", "sendWaypoint");
 		msg_mission_item msg = new msg_mission_item();
@@ -186,7 +222,16 @@ public abstract class WaypointMananger {
 		msg.z = waypoint.Height.floatValue();
 		// TODO add all the other parameters
 		Log.d("Mission", msg.toString());
-	    MAV.sendMavPacket(msg.pack());				
+		MAV.sendMavPacket(msg.pack());
 	}
-	
+
+	private void sendSetCurrentWaypoint(short i) {
+		Log.d("Mission", "send setCurrent");
+		msg_mission_set_current msg = new msg_mission_set_current();
+		msg.target_system = 1;
+		msg.target_component = 1;
+		msg.seq = i;
+		MAV.sendMavPacket(msg.pack());
+
+	}
 }
