@@ -13,29 +13,69 @@ import com.MAVLink.Messages.ardupilotmega.msg_mission_request;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_request_list;
 import com.diydrones.droidplanner.waypoint;
 
+/**
+ * Class to manage the communication of waypoints to the MAV. 
+ * 
+ * Should be initialized with a MAVLink Object, so the manager can send messages via the
+ * MAV link. The function processMessage must be called with every new MAV Message.
+ * 
+ */
 public abstract class WaypointMananger {
-	MAVLink MAV;
-	private short waypointCount;
-
-	private List<waypoint> waypoints;
-	int writeIndex;
-	
-
-	public abstract void onWaypointsReceived(List<waypoint> waypoints);
-	
-	public abstract void onWriteWaypoints(msg_mission_ack msg);
-	
+	/**
+	 * Try to receive all waypoints from the MAV. 
+	 * 
+	 * If all runs well the callback will return the list of waypoints. 
+	 */
 	public void getWaypoints(){
-		requestWaypointsList();
+		if(MAV.isConnected()){
+			requestWaypointsList();
+		}
 	}
 	
-	public void writeWaypoints(){
-		if(waypoints!=null){
+	/**
+	 * Write a list of waypoints to the MAV.
+	 * 
+	 * The callback will return the status of this operation
+	 * @param data waypoints to be written
+	 */
+	public void writeWaypoints(List<waypoint> data){
+		if((waypoints!=null) && (MAV.isConnected())){
+			waypoints = data;
 			writeIndex = 0;
 			sendWaypointCount();
 		}
 	}
+	
 
+	/**
+	 * Callback for when all waypoints have been received.
+	 * @param waypoints list with received waypoints.
+	 */
+	public abstract void onWaypointsReceived(List<waypoint> waypoints);
+	
+	/**
+	 * Callback for when all waypoints have been written.
+	 * @param msg Acknowledgment message from the MAV
+	 */
+	public abstract void onWriteWaypoints(msg_mission_ack msg);
+	
+	/**
+	 * Object with a MAVlink connection
+	 */
+	MAVLink MAV;
+	/**
+	 * number of waypoints to be received, used when reading waypoints
+	 */
+	private short waypointCount;
+	/**
+	 * list of waypoints used when writing or receiving
+	 */
+	private List<waypoint> waypoints;
+	/**
+	 * waypoint witch is currently being written
+	 */
+	private int writeIndex;
+	
 	public WaypointMananger(MAVLink MAV){
 		this.MAV = MAV;
 		waypoints = new ArrayList<waypoint>();

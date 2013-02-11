@@ -150,7 +150,7 @@ public abstract class MAVLink {
 	 * 
 	 * @return true for connected
 	 */
-	private boolean isConnected() {
+	public boolean isConnected() {
 		return connected;
 	}
 
