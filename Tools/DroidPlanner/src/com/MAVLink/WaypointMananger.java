@@ -9,6 +9,7 @@ import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_ack;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_count;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_item;
+import com.MAVLink.Messages.ardupilotmega.msg_mission_item_reached;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_request;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_request_list;
 import com.diydrones.droidplanner.waypoint;
@@ -55,9 +56,16 @@ public abstract class WaypointMananger {
 	
 	/**
 	 * Callback for when all waypoints have been written.
-	 * @param msg Acknowledgment message from the MAV
+	 * @param msg Acknowledgment message from the MAV 
 	 */
 	public abstract void onWriteWaypoints(msg_mission_ack msg);
+	
+	/** Callback for when a waypoint has been reached
+	 * @param msg
+	 */
+	public void onWaypointReached(int wpNumber){
+		
+	}
 	
 	/**
 	 * Object with a MAVlink connection
@@ -99,10 +107,14 @@ public abstract class WaypointMananger {
 			return true;
 		case msg_mission_ack.MAVLINK_MSG_ID_MISSION_ACK:
 			onWriteWaypoints((msg_mission_ack)msg);
+		case msg_mission_item_reached.MAVLINK_MSG_ID_MISSION_ITEM_REACHED:
+			onWaypointReached(((msg_mission_item_reached)msg).seq);
 		default:
 			return false;
 		}		
 	}
+
+
 
 	private void requestFirstWaypoint(MAVLinkMessage msg) {
 		waypointCount = ((msg_mission_count) msg).count;
