@@ -18,14 +18,24 @@ public abstract class WaypointMananger {
 	private short waypointCount;
 
 	private List<waypoint> waypoints;
+	int writeIndex;
 	
 
 	public abstract void onWaypointsReceived(List<waypoint> waypoints);
+	
+	public abstract void onWriteWaypoints(msg_mission_ack msg);
 	
 	public void getWaypoints(){
 		requestWaypointsList();
 	}
 	
+	public void writeWaypoints(){
+		if(waypoints!=null){
+			writeIndex = 0;
+			sendWaypointCount();
+		}
+	}
+
 	public WaypointMananger(MAVLink MAV){
 		this.MAV = MAV;
 		waypoints = new ArrayList<waypoint>();
@@ -39,30 +49,43 @@ public abstract class WaypointMananger {
 	public boolean processMessage(MAVLinkMessage msg){
 		switch (msg.msgid) {
 		case msg_mission_count.MAVLINK_MSG_ID_MISSION_COUNT:
-			waypointCount = ((msg_mission_count) msg).count;
-			Log.d("Mission", "Count:"+waypointCount);
-			waypoints.clear();
-			requestWayPoint();
+			requestFirstWaypoint(msg);
 			return true;
 		case msg_mission_item.MAVLINK_MSG_ID_MISSION_ITEM:
-			Double Lat = (double) ((msg_mission_item) msg).x;
-			Double Lng = (double) ((msg_mission_item) msg).y;
-			Double h = (double) ((msg_mission_item) msg).z;
-			waypoints.add(new waypoint(Lat, Lng, h));
-			Log.d("Mission", "Item:"+waypoints.size()+" Lng:"+Lng+" Lat:"+Lat+" h:"+h);
-			
-			if(waypoints.size()<waypointCount){
-				requestWayPoint();
-			}else{
-				sendAck();
-				onWaypointsReceived(waypoints);
-			}
+			processReceivedWaypoint((msg_mission_item) msg);
+			return true;			
+		case msg_mission_request.MAVLINK_MSG_ID_MISSION_REQUEST:
+			sendWaypoint(waypoints.get(writeIndex++));
 			return true;
+		case msg_mission_ack.MAVLINK_MSG_ID_MISSION_ACK:
+			onWriteWaypoints((msg_mission_ack)msg);
 		default:
 			return false;
-		}
-		
+		}		
 	}
+
+	private void requestFirstWaypoint(MAVLinkMessage msg) {
+		waypointCount = ((msg_mission_count) msg).count;
+		Log.d("Mission", "Count:"+waypointCount);
+		waypoints.clear();
+		requestWayPoint();
+	}
+
+	private void processReceivedWaypoint(msg_mission_item msg) {
+		Double Lat = (double) msg.x;
+		Double Lng = (double) msg.y;
+		Double h = (double) msg.z;
+		waypoints.add(new waypoint(Lat, Lng, h));
+		Log.d("Mission", "Item:"+waypoints.size()+" Lng:"+Lng+" Lat:"+Lat+" h:"+h);
+		
+		if(waypoints.size()<waypointCount){
+			requestWayPoint();
+		}else{
+			sendAck();
+			onWaypointsReceived(waypoints);
+		}
+	}
+
 
 	private void sendAck() {
 		Log.d("Mission", "Ack");
@@ -90,4 +113,28 @@ public abstract class WaypointMananger {
 		msg.seq = (short) waypoints.size();
 	    MAV.sendMavPacket(msg.pack());			
 	}
+	
+
+	private void sendWaypointCount() {
+		Log.d("Mission", "sendWaypointCount");
+		msg_mission_count msg = new msg_mission_count();
+		msg.target_system = 1;
+		msg.target_component = 1;
+		msg.count = (short) waypoints.size();
+	    MAV.sendMavPacket(msg.pack());		
+	}
+	
+	private void sendWaypoint(waypoint waypoint) {
+		Log.d("Mission", "sendWaypoint");
+		msg_mission_item msg = new msg_mission_item();
+		msg.target_system = 1;
+		msg.target_component = 1;
+		msg.x = (float) waypoint.coord.latitude;
+		msg.y = (float) waypoint.coord.longitude;
+		msg.z = waypoint.Height.floatValue();
+		// TODO add all the other parameters
+		Log.d("Mission", msg.toString());
+	    MAV.sendMavPacket(msg.pack());				
+	}
+	
 }

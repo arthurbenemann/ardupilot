@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.MAVLink.MAVLink;
 import com.MAVLink.WaypointMananger;
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.ardupilotmega.msg_mission_ack;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
@@ -82,7 +83,10 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 				zoomToExtents();
 			}
 		}
-		
+		@Override
+		public void onWriteWaypoints(msg_mission_ack msg) {
+			// TODO Auto-generated method stub	
+		}
 	};
 
 	

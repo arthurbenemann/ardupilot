@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.MAVLink.MAVLink;
 import com.MAVLink.WaypointMananger;
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.ardupilotmega.msg_mission_ack;
 
 public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		implements OnNavigationListener {
@@ -47,12 +48,14 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 	};
 
 	WaypointMananger waypointMananger = new WaypointMananger(MAV) {
-
 		@Override
 		public void onWaypointsReceived(List<waypoint> waypoints) {
 			// TODO Auto-generated method stub			
 		}
-		
+		@Override
+		public void onWriteWaypoints(msg_mission_ack msg) {
+			// TODO Auto-generated method stub	
+		}	
 	};
 	
 	@Override
