@@ -232,7 +232,7 @@ def generate_MAVLinkMessage(directory, xml_list):
     f.write('''package com.MAVLink.Messages;
 
 import android.util.Log;
-
+import java.io.Serializable;
 import com.MAVLink.Messages.ardupilotmega.*;
 
 /**
@@ -257,7 +257,9 @@ import com.MAVLink.Messages.ardupilotmega.*;
  * @author ghelle
  *
  */
-public class MAVLinkPacket {
+public class MAVLinkPacket implements Serializable {
+	private static final long serialVersionUID = 2095947771227815314L;
+	
 	public static final int MAVLINK_STX = 254;
 	
 	/**

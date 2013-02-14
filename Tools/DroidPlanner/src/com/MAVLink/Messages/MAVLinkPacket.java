@@ -1,9 +1,7 @@
 package com.MAVLink.Messages;
 
-import java.io.Serializable;
-
 import android.util.Log;
-
+import java.io.Serializable;
 import com.MAVLink.Messages.ardupilotmega.*;
 
 /**
@@ -29,8 +27,8 @@ import com.MAVLink.Messages.ardupilotmega.*;
  *
  */
 public class MAVLinkPacket implements Serializable {
-	private static final long serialVersionUID = 3272146638076265936L;
-
+	private static final long serialVersionUID = 2095947771227815314L;
+	
 	public static final int MAVLINK_STX = 254;
 	
 	/**
