@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -20,7 +21,7 @@ import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPacket;
 
 public abstract class MAVLink {
-	public static final String SERVERIP = "192.168.40.165";	//TODO add Settings screen for this stuff
+	public static final String SERVERIP = "192.168.40.10";	//TODO add Settings screen for this stuff
 	public static final int SERVERPORT = 5760;
 
 	boolean connected = false;
@@ -38,23 +39,15 @@ public abstract class MAVLink {
 	public class connectTask extends AsyncTask<String, MAVLinkMessage, String> {
 
 		public Parser parser;
+		Socket socket = null;
 
 		@Override
 		protected String doInBackground(String... message) {
-			Socket socket = null;
 			parser = new Parser();
 			try {
-
 				logWriter = getFileStream();
-
-				InetAddress serverAddr = InetAddress.getByName(SERVERIP);
-				socket = new Socket(serverAddr, SERVERPORT);
-
-				mavOut = new BufferedOutputStream((socket.getOutputStream()));
-				Log.e("TCP Client", "C: Done.");
-				// receive the message which the server sends back
-				mavIn = new BufferedInputStream(socket.getInputStream());
-
+				getTCPStream();
+				
 				MAVLinkMessage m;
 
 				while (connected) {
@@ -73,6 +66,17 @@ public abstract class MAVLink {
 				e.printStackTrace();
 			}
 			return null;
+		}
+
+
+
+		private void getTCPStream() throws UnknownHostException, IOException {
+			InetAddress serverAddr = InetAddress.getByName(SERVERIP);
+			socket = new Socket(serverAddr, SERVERPORT);
+			mavOut = new BufferedOutputStream((socket.getOutputStream()));
+			Log.d("TCP Client", "TCP connection started");
+			// receive the message which the server sends back
+			mavIn = new BufferedInputStream(socket.getInputStream());
 		}
 		
 		@Override
