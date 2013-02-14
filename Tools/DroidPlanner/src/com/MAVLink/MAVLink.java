@@ -20,7 +20,7 @@ import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPacket;
 
 public abstract class MAVLink {
-	public static final String SERVERIP = "10.0.0.99";
+	public static final String SERVERIP = "192.168.40.165";	//TODO add Settings screen for this stuff
 	public static final int SERVERPORT = 5760;
 
 	boolean connected = false;
