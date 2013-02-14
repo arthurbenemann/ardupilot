@@ -13,6 +13,8 @@ public class msg_debug extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_DEBUG = 254;
 	public static final int MAVLINK_MSG_LENGTH = 9;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_DEBUG;
+	
 
  	/**
 	*Timestamp (milliseconds since system boot)

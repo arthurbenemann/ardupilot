@@ -25,7 +25,6 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.MAVLink.MAVLink;
 import com.MAVLink.WaypointMananger;
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_ack;
@@ -56,22 +55,23 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 	TextView WaypointListNumber;
 	private MenuItem connectButton;
 	
-	MAVLink MAV = new MAVLink() {
+	public MAVLinkClient MAVClient = new MAVLinkClient(this) {
 		@Override
-		public void onReceiveMessage(MAVLinkMessage msg) {
-			waypointMananger.processMessage(msg);
-		}		
+		public void notifyReceivedData(MAVLinkMessage m) {
+			waypointMananger.processMessage(m);			
+		}
 		@Override
-		public void onDisconnect() {
-			connectButton.setTitle(getResources().getString(R.string.menu_connect));			
-		}		
+		public void notifyConnected() {
+			connectButton.setTitle(getResources().getString(R.string.menu_disconnect));		
+		}
 		@Override
-		public void onConnect() {
-			connectButton.setTitle(getResources().getString(R.string.menu_disconnect));
+		public void notifyDisconnected() {
+			connectButton.setTitle(getResources().getString(R.string.menu_connect));					
 		}
 	};
 	
-	WaypointMananger waypointMananger = new WaypointMananger(MAV) {
+	
+	WaypointMananger waypointMananger = new WaypointMananger(MAVClient) {
 		@Override
 		public void onWaypointsReceived(List<waypoint> waypoints) {
 			if(waypoints!=null){
@@ -89,7 +89,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 			// TODO Auto-generated method stub	
 		}
 	};
-	
+
 	
 	@Override
 	protected void onResume() {
@@ -114,6 +114,14 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		setUpMapIfNeeded();
 		
 		updateMarkersAndPath();
+
+		MAVClient.init();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		MAVClient.onDestroy();
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -296,7 +304,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 					.show();
 			return true;
 		case R.id.menu_connect:
-			MAV.toggleConnectionState();
+			MAVClient.sendConnectMessage();
 			return true;
 		case R.id.menu_zoom:
 			zoomToExtents();

@@ -13,6 +13,8 @@ public class msg_set_mag_offsets extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SET_MAG_OFFSETS = 151;
 	public static final int MAVLINK_MSG_LENGTH = 8;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SET_MAG_OFFSETS;
+	
 
  	/**
 	*magnetometer X offset

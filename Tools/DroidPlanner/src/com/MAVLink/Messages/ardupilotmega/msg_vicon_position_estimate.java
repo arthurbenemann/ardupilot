@@ -13,6 +13,8 @@ public class msg_vicon_position_estimate extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_VICON_POSITION_ESTIMATE = 104;
 	public static final int MAVLINK_MSG_LENGTH = 32;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_VICON_POSITION_ESTIMATE;
+	
 
  	/**
 	*Timestamp (microseconds, synced to UNIX time or since system boot)

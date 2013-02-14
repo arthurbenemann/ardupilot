@@ -13,6 +13,8 @@ public class msg_change_operator_control extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL = 5;
 	public static final int MAVLINK_MSG_LENGTH = 28;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL;
+	
 
  	/**
 	*System the GCS requests control for

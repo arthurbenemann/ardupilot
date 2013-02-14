@@ -13,6 +13,8 @@ public class msg_ahrs extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_AHRS = 163;
 	public static final int MAVLINK_MSG_LENGTH = 28;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_AHRS;
+	
 
  	/**
 	*X gyro drift estimate rad/s

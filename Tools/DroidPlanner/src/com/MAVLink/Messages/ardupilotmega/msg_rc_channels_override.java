@@ -13,6 +13,8 @@ public class msg_rc_channels_override extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE = 70;
 	public static final int MAVLINK_MSG_LENGTH = 18;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE;
+	
 
  	/**
 	*RC channel 1 value, in microseconds

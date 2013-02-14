@@ -13,6 +13,8 @@ public class msg_mission_request_list extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_MISSION_REQUEST_LIST = 43;
 	public static final int MAVLINK_MSG_LENGTH = 2;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_MISSION_REQUEST_LIST;
+	
 
  	/**
 	*System ID

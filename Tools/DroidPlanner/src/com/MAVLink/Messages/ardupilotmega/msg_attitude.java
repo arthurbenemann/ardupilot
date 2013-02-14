@@ -13,6 +13,8 @@ public class msg_attitude extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_ATTITUDE = 30;
 	public static final int MAVLINK_MSG_LENGTH = 28;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_ATTITUDE;
+	
 
  	/**
 	*Timestamp (milliseconds since system boot)

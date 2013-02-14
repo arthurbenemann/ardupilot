@@ -13,6 +13,8 @@ public class msg_debug_vect extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_DEBUG_VECT = 250;
 	public static final int MAVLINK_MSG_LENGTH = 30;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_DEBUG_VECT;
+	
 
  	/**
 	*Timestamp

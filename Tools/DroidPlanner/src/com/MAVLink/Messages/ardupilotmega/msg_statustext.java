@@ -13,6 +13,8 @@ public class msg_statustext extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_STATUSTEXT = 253;
 	public static final int MAVLINK_MSG_LENGTH = 51;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_STATUSTEXT;
+	
 
  	/**
 	*Severity of status. Relies on the definitions within RFC-5424. See enum MAV_SEVERITY.

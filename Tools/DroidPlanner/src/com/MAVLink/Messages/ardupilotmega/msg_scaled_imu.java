@@ -13,6 +13,8 @@ public class msg_scaled_imu extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SCALED_IMU = 26;
 	public static final int MAVLINK_MSG_LENGTH = 22;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SCALED_IMU;
+	
 
  	/**
 	*Timestamp (milliseconds since system boot)

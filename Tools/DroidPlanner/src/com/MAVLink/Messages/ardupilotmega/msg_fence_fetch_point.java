@@ -13,6 +13,8 @@ public class msg_fence_fetch_point extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_FENCE_FETCH_POINT = 161;
 	public static final int MAVLINK_MSG_LENGTH = 3;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_FENCE_FETCH_POINT;
+	
 
  	/**
 	*System ID

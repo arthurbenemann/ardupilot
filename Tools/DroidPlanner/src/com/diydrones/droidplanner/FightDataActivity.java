@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
 import com.MAVLink.GPSMananger;
-import com.MAVLink.MAVLink;
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -29,22 +28,22 @@ public class FightDataActivity extends android.support.v4.app.FragmentActivity
 	private MenuItem connectButton;
 	private Bitmap planeBitmap;
 
-	MAVLink MAV = new MAVLink() {
+	public MAVLinkClient MAVClient = new MAVLinkClient(this) {
 		@Override
-		public void onReceiveMessage(MAVLinkMessage msg) {
+		public void notifyReceivedData(MAVLinkMessage msg) {
 			gpsManager.processMessage(msg);
 		}		
 		@Override
-		public void onDisconnect() {
+		public void notifyDisconnected() {
 			connectButton.setTitle(getResources().getString(R.string.menu_connect));			
 		}		
 		@Override
-		public void onConnect() {
+		public void notifyConnected() {
 			connectButton.setTitle(getResources().getString(R.string.menu_disconnect));
 		}
 	};
 	
-	GPSMananger gpsManager = new GPSMananger(MAV) {		
+	GPSMananger gpsManager = new GPSMananger(MAVClient) {		
 		@Override
 		public void onGpsDataReceived(GPSdata data) {
 			//Log.d("GPS", "LAT:"+data.position.coord.latitude+" LNG:"+data.position.coord.longitude+"ALT:"+data.position.Height+" heading:"+data.heading);
@@ -74,6 +73,14 @@ public class FightDataActivity extends android.support.v4.app.FragmentActivity
 		setContentView(R.layout.flightdata);
 		
 		setUpMapIfNeeded();
+		
+		MAVClient.init();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		MAVClient.onDestroy();
 	}
 
 	
@@ -121,12 +128,9 @@ public class FightDataActivity extends android.support.v4.app.FragmentActivity
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_settings:
-			byte[] buff = new byte[1];
-			buff[0] = '1';
-			MAV.sendBuffer(buff); // TODO only used for debbuging
 			return true;
 		case R.id.menu_connect:
-			MAV.toggleConnectionState();
+			MAVClient.sendConnectMessage();
 			return true;
 		default:
 			return super.onMenuItemSelected(featureId, item);
@@ -172,5 +176,4 @@ public class FightDataActivity extends android.support.v4.app.FragmentActivity
 						.fromBitmap(rotatedPlane)));
 	}	
 	
-
 }

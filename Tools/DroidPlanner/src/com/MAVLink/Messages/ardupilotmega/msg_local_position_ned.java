@@ -13,6 +13,8 @@ public class msg_local_position_ned extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_LOCAL_POSITION_NED = 32;
 	public static final int MAVLINK_MSG_LENGTH = 28;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_LOCAL_POSITION_NED;
+	
 
  	/**
 	*Timestamp (milliseconds since system boot)

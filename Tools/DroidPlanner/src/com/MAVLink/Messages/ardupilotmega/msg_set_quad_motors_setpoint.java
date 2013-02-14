@@ -13,6 +13,8 @@ public class msg_set_quad_motors_setpoint extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT = 60;
 	public static final int MAVLINK_MSG_LENGTH = 9;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT;
+	
 
  	/**
 	*Front motor in + configuration, front left motor in x configuration

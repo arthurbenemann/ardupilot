@@ -13,6 +13,8 @@ public class msg_raw_pressure extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_RAW_PRESSURE = 28;
 	public static final int MAVLINK_MSG_LENGTH = 16;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_RAW_PRESSURE;
+	
 
  	/**
 	*Timestamp (microseconds since UNIX epoch or microseconds since system boot)

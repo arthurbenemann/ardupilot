@@ -13,6 +13,8 @@ public class msg_ping extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_PING = 4;
 	public static final int MAVLINK_MSG_LENGTH = 14;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_PING;
+	
 
  	/**
 	*Unix timestamp in microseconds

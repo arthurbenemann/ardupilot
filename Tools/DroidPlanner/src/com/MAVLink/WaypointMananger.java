@@ -14,6 +14,7 @@ import com.MAVLink.Messages.ardupilotmega.msg_mission_item_reached;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_request;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_request_list;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_set_current;
+import com.diydrones.droidplanner.MAVLinkClient;
 import com.diydrones.droidplanner.waypoint;
 
 /**
@@ -109,7 +110,7 @@ public abstract class WaypointMananger {
 	/**
 	 * Object with a MAVlink connection
 	 */
-	MAVLink MAV;
+	MAVLinkClient MAV;
 	/**
 	 * number of waypoints to be received, used when reading waypoints
 	 */
@@ -123,7 +124,7 @@ public abstract class WaypointMananger {
 	 */
 	private int writeIndex;
 
-	public WaypointMananger(MAVLink MAV) {
+	public WaypointMananger(MAVLinkClient MAV) {
 		this.MAV = MAV;
 		waypoints = new ArrayList<waypoint>();
 	}

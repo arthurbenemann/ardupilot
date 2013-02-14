@@ -13,6 +13,8 @@ public class msg_hil_controls extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_HIL_CONTROLS = 91;
 	public static final int MAVLINK_MSG_LENGTH = 42;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_HIL_CONTROLS;
+	
 
  	/**
 	*Timestamp (microseconds since UNIX epoch or microseconds since system boot)

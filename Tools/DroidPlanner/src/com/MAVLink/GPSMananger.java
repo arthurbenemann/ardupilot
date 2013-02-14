@@ -2,6 +2,7 @@ package com.MAVLink;
 
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.ardupilotmega.msg_global_position_int;
+import com.diydrones.droidplanner.MAVLinkClient;
 import com.diydrones.droidplanner.waypoint;
 
 /**
@@ -24,14 +25,14 @@ public abstract class GPSMananger {
 	/**
 	 * Object with a MAVlink connection
 	 */
-	MAVLink MAV;
+	MAVLinkClient MAV;
 
 	public class GPSdata{
 		public waypoint position;
 		public float heading;
 	}
 	
-	public GPSMananger(MAVLink MAV) {
+	public GPSMananger(MAVLinkClient MAV) {
 		this.MAV = MAV;
 	}
 

@@ -13,6 +13,8 @@ public class msg_wind extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_WIND = 168;
 	public static final int MAVLINK_MSG_LENGTH = 12;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_WIND;
+	
 
  	/**
 	*wind direction that wind is coming from (degrees)

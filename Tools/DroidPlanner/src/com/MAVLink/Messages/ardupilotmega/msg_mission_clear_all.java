@@ -13,6 +13,8 @@ public class msg_mission_clear_all extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_MISSION_CLEAR_ALL = 45;
 	public static final int MAVLINK_MSG_LENGTH = 2;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_MISSION_CLEAR_ALL;
+	
 
  	/**
 	*System ID

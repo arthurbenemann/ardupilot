@@ -13,6 +13,8 @@ public class msg_file_transfer_dir_list extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_FILE_TRANSFER_DIR_LIST = 111;
 	public static final int MAVLINK_MSG_LENGTH = 249;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_FILE_TRANSFER_DIR_LIST;
+	
 
  	/**
 	*Unique transfer ID

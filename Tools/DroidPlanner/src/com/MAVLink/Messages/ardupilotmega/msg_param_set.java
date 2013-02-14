@@ -13,6 +13,8 @@ public class msg_param_set extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_PARAM_SET = 23;
 	public static final int MAVLINK_MSG_LENGTH = 23;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_PARAM_SET;
+	
 
  	/**
 	*Onboard parameter value

@@ -13,6 +13,8 @@ public class msg_set_roll_pitch_yaw_speed_thrust extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SET_ROLL_PITCH_YAW_SPEED_THRUST = 57;
 	public static final int MAVLINK_MSG_LENGTH = 18;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SET_ROLL_PITCH_YAW_SPEED_THRUST;
+	
 
  	/**
 	*Desired roll angular speed in rad/s

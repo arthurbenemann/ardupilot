@@ -14,6 +14,8 @@ public class msg_limits_status extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_LIMITS_STATUS = 167;
 	public static final int MAVLINK_MSG_LENGTH = 22;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_LIMITS_STATUS;
+	
 
  	/**
 	*time of last breach in milliseconds since boot

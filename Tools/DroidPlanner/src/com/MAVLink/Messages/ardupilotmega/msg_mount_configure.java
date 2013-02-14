@@ -13,6 +13,8 @@ public class msg_mount_configure extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_MOUNT_CONFIGURE = 156;
 	public static final int MAVLINK_MSG_LENGTH = 6;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_MOUNT_CONFIGURE;
+	
 
  	/**
 	*System ID

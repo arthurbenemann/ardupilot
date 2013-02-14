@@ -13,6 +13,8 @@ public class msg_vision_speed_estimate extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE = 103;
 	public static final int MAVLINK_MSG_LENGTH = 20;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE;
+	
 
  	/**
 	*Timestamp (microseconds, synced to UNIX time or since system boot)

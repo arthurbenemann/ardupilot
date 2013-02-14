@@ -13,6 +13,8 @@ public class msg_manual_control extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_MANUAL_CONTROL = 69;
 	public static final int MAVLINK_MSG_LENGTH = 11;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_MANUAL_CONTROL;
+	
 
  	/**
 	*X-axis, normalized to the range [-1000,1000]. A value of INT16_MAX indicates that this axis is invalid. Generally corresponds to forward(1000)-backward(-1000) movement on a joystick and the pitch of a vehicle.

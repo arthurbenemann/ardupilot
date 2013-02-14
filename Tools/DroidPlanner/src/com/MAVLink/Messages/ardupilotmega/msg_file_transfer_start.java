@@ -13,6 +13,8 @@ public class msg_file_transfer_start extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_FILE_TRANSFER_START = 110;
 	public static final int MAVLINK_MSG_LENGTH = 254;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_FILE_TRANSFER_START;
+	
 
  	/**
 	*Unique transfer ID

@@ -13,6 +13,8 @@ public class msg_set_gps_global_origin extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN = 48;
 	public static final int MAVLINK_MSG_LENGTH = 13;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN;
+	
 
  	/**
 	*global position * 1E7

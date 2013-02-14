@@ -13,6 +13,8 @@ public class msg_local_position_ned_system_global_offset extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET = 89;
 	public static final int MAVLINK_MSG_LENGTH = 28;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET;
+	
 
  	/**
 	*Timestamp (milliseconds since system boot)

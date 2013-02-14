@@ -13,6 +13,8 @@ public class msg_setpoint_6dof extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SETPOINT_6DOF = 149;
 	public static final int MAVLINK_MSG_LENGTH = 25;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SETPOINT_6DOF;
+	
 
  	/**
 	*Translational Component in x

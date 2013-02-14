@@ -13,6 +13,8 @@ public class msg_servo_output_raw extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SERVO_OUTPUT_RAW = 36;
 	public static final int MAVLINK_MSG_LENGTH = 21;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SERVO_OUTPUT_RAW;
+	
 
  	/**
 	*Timestamp (microseconds since system boot)

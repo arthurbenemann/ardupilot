@@ -13,6 +13,8 @@ public class msg_rc_channels_raw extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_RC_CHANNELS_RAW = 35;
 	public static final int MAVLINK_MSG_LENGTH = 22;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_RC_CHANNELS_RAW;
+	
 
  	/**
 	*Timestamp (milliseconds since system boot)

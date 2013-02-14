@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.MAVLink.MAVLink;
 import com.MAVLink.WaypointMananger;
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_ack;
@@ -22,32 +21,33 @@ import com.MAVLink.Messages.ardupilotmega.msg_mission_ack;
 public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		implements OnNavigationListener {
 
+
 	TextView terminal;
 	Button sendButton;
 	Menu menu;
 	MenuItem connectButton;
-
-	MAVLink MAV = new MAVLink() {
+	
+	public MAVLinkClient MAVClient = new MAVLinkClient(this) {
+		
 		@Override
-		public void onReceiveMessage(MAVLinkMessage msg) {
-			String terminalMsg = "Received " + MAV.receivedCount
-					+ " packets\nLast packet was: " + msg.msgid + "\n";
-			terminal.setText(terminalMsg);
-			waypointMananger.processMessage(msg);
+		public void notifyReceivedData(MAVLinkMessage m) {
+				String terminalMsg = "Received lenght packets\nLast packet was: " + m.msgid + "\n";
+				terminal.setText(terminalMsg);
+				waypointMananger.processMessage(m);
 		}
-
+		
 		@Override
-		public void onConnect() {
-			connectButton.setTitle(getResources().getString(R.string.menu_disconnect));
-		}
-
-		@Override
-		public void onDisconnect() {		
+		public void notifyDisconnected() {
 			connectButton.setTitle(getResources().getString(R.string.menu_connect));
+		}
+			
+		@Override
+		public void notifyConnected() {
+			connectButton.setTitle(getResources().getString(R.string.menu_disconnect));
 		}
 	};
 
-	WaypointMananger waypointMananger = new WaypointMananger(MAV) {
+	WaypointMananger waypointMananger = new WaypointMananger(MAVClient) {
 		@Override
 		public void onWaypointsReceived(List<waypoint> waypoints) {
 			// TODO Auto-generated method stub			
@@ -79,10 +79,18 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		terminal = (TextView) findViewById(R.id.textViewTerminal);
 		sendButton = (Button) findViewById(R.id.buttonSend);
 		
+		MAVClient.init();
+		
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		MAVClient.onDestroy();
 	}
 	
 	public void sendData(View view) {
-	   waypointMananger.getWaypoints();	    
+	   waypointMananger.getWaypoints();	   
 	}
 
 	@Override
@@ -124,11 +132,11 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		case R.id.menu_settings:
 			return true;
 		case R.id.menu_connect:
-			MAV.toggleConnectionState();				
+			MAVClient.sendConnectMessage();			
 			return true;
 		default:
 			return super.onMenuItemSelected(featureId, item);
 		}
 	}
-
+	
 }

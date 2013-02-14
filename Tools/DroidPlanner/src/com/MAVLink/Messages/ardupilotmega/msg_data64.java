@@ -13,6 +13,8 @@ public class msg_data64 extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_DATA64 = 171;
 	public static final int MAVLINK_MSG_LENGTH = 66;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_DATA64;
+	
 
  	/**
 	*data type

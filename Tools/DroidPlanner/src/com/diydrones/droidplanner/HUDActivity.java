@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
-import com.MAVLink.MAVLink;
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.ardupilotmega.msg_attitude;
 
@@ -20,9 +19,9 @@ public class HUDActivity extends android.support.v4.app.FragmentActivity
 	public boolean running;
 	MenuItem connectButton;
 	
-	MAVLink MAV = new MAVLink() {		
+	public MAVLinkClient MAVClient = new MAVLinkClient(this) {	
 		@Override
-		public void onReceiveMessage(MAVLinkMessage msg) {
+		public void notifyReceivedData(MAVLinkMessage msg) {
 			if(msg.msgid == msg_attitude.MAVLINK_MSG_ID_ATTITUDE){
 				msg_attitude m = (msg_attitude) msg;
 				hudWidget.newFlightData(m.roll, m.pitch, m.yaw);
@@ -30,14 +29,15 @@ public class HUDActivity extends android.support.v4.app.FragmentActivity
 		}
 		
 		@Override
-		public void onConnect() {
+		public void notifyConnected() {
 			connectButton.setTitle(getResources().getString(R.string.menu_disconnect));
 		}
 
 		@Override
-		public void onDisconnect() {		
+		public void notifyDisconnected() {		
 			connectButton.setTitle(getResources().getString(R.string.menu_connect));
 		}
+
 	};
 
 	@Override
@@ -58,7 +58,16 @@ public class HUDActivity extends android.support.v4.app.FragmentActivity
 		setContentView(R.layout.hud);
 
 		hudWidget = (HUDwidget) findViewById(R.id.hudWidget);
+		
+		MAVClient.init();
 	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		MAVClient.onDestroy();
+	}
+
 
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
@@ -98,16 +107,14 @@ public class HUDActivity extends android.support.v4.app.FragmentActivity
 		case R.id.menu_settings:
 			byte[] buff = new byte[1];
 			buff[0] = '1';
-			MAV.sendBuffer(buff); // TODO only used for debbuging
+			//MAVLinkClient.sendBuffer(buff); // TODO only used for debbuging
 			return true;
 		case R.id.menu_connect:
-			MAV.toggleConnectionState();
+			MAVClient.sendConnectMessage();
 			return true;
 		default:
 			return super.onMenuItemSelected(featureId, item);
 		}
 	}
-
-
 
 }

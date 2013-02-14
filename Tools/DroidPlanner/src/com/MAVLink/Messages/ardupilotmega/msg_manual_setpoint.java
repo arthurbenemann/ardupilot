@@ -13,6 +13,8 @@ public class msg_manual_setpoint extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_MANUAL_SETPOINT = 81;
 	public static final int MAVLINK_MSG_LENGTH = 22;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_MANUAL_SETPOINT;
+	
 
  	/**
 	*Timestamp in milliseconds since system boot

@@ -13,6 +13,8 @@ public class msg_mission_count extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_MISSION_COUNT = 44;
 	public static final int MAVLINK_MSG_LENGTH = 4;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_MISSION_COUNT;
+	
 
  	/**
 	*Number of mission items in the sequence
@@ -71,7 +73,7 @@ public class msg_mission_count extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MISSION_COUNT;
         unpack(payload);
         Log.d("MAVLink", "MISSION_COUNT");
-        Log.d("MAVLINK_MSG_ID_MISSION_COUNT", toString());
+        //Log.d("MAVLINK_MSG_ID_MISSION_COUNT", toString());
     }
 
     /**

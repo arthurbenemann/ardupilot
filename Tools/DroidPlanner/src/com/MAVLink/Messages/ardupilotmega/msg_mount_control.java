@@ -13,6 +13,8 @@ public class msg_mount_control extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_MOUNT_CONTROL = 157;
 	public static final int MAVLINK_MSG_LENGTH = 15;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_MOUNT_CONTROL;
+	
 
  	/**
 	*pitch(deg*100) or lat, depending on mount mode

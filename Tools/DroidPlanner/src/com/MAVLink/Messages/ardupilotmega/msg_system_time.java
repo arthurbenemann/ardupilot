@@ -13,6 +13,8 @@ public class msg_system_time extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SYSTEM_TIME = 2;
 	public static final int MAVLINK_MSG_LENGTH = 12;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SYSTEM_TIME;
+	
 
  	/**
 	*Timestamp of the master clock in microseconds since UNIX epoch.

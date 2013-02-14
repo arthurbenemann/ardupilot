@@ -13,6 +13,8 @@ public class msg_set_quad_swarm_led_roll_pitch_yaw_thrust extends MAVLinkMessage
 
 	public static final int MAVLINK_MSG_ID_SET_QUAD_SWARM_LED_ROLL_PITCH_YAW_THRUST = 63;
 	public static final int MAVLINK_MSG_LENGTH = 46;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SET_QUAD_SWARM_LED_ROLL_PITCH_YAW_THRUST;
+	
 
  	/**
 	*Desired roll angle in radians +-PI (+-32767)

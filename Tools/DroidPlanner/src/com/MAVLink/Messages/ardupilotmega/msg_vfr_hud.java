@@ -13,6 +13,8 @@ public class msg_vfr_hud extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_VFR_HUD = 74;
 	public static final int MAVLINK_MSG_LENGTH = 20;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_VFR_HUD;
+	
 
  	/**
 	*Current airspeed in m/s

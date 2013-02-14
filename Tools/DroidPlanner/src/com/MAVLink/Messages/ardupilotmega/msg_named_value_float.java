@@ -13,6 +13,8 @@ public class msg_named_value_float extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_NAMED_VALUE_FLOAT = 251;
 	public static final int MAVLINK_MSG_LENGTH = 18;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_NAMED_VALUE_FLOAT;
+	
 
  	/**
 	*Timestamp (milliseconds since system boot)

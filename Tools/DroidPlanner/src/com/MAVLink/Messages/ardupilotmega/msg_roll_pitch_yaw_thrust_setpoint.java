@@ -13,6 +13,8 @@ public class msg_roll_pitch_yaw_thrust_setpoint extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_ROLL_PITCH_YAW_THRUST_SETPOINT = 58;
 	public static final int MAVLINK_MSG_LENGTH = 20;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_ROLL_PITCH_YAW_THRUST_SETPOINT;
+	
 
  	/**
 	*Timestamp in milliseconds since system boot

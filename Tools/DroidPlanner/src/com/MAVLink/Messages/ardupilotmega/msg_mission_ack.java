@@ -13,6 +13,8 @@ public class msg_mission_ack extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_MISSION_ACK = 47;
 	public static final int MAVLINK_MSG_LENGTH = 3;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_MISSION_ACK;
+	
 
  	/**
 	*System ID
@@ -71,7 +73,7 @@ public class msg_mission_ack extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MISSION_ACK;
         unpack(payload);
         Log.d("MAVLink", "MISSION_ACK");
-        Log.d("MAVLINK_MSG_ID_MISSION_ACK", toString());
+        //Log.d("MAVLINK_MSG_ID_MISSION_ACK", toString());
     }
 
     /**

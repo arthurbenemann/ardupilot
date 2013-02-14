@@ -13,6 +13,8 @@ public class msg_mission_set_current extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_MISSION_SET_CURRENT = 41;
 	public static final int MAVLINK_MSG_LENGTH = 4;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_MISSION_SET_CURRENT;
+	
 
  	/**
 	*Sequence

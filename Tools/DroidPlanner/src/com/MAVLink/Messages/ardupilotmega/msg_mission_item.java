@@ -14,6 +14,8 @@ public class msg_mission_item extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_MISSION_ITEM = 39;
 	public static final int MAVLINK_MSG_LENGTH = 37;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_MISSION_ITEM;
+	
 
  	/**
 	*PARAM1 / For NAV command MISSIONs: Radius in which the MISSION is accepted as reached, in meters
@@ -138,7 +140,7 @@ public class msg_mission_item extends MAVLinkMessage{
         msgid = MAVLINK_MSG_ID_MISSION_ITEM;
         unpack(payload);
         Log.d("MAVLink", "MISSION_ITEM");
-        Log.d("MAVLINK_MSG_ID_MISSION_ITEM", toString());
+        //Log.d("MAVLINK_MSG_ID_MISSION_ITEM", toString());
     }
 
     /**

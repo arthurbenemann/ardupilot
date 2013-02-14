@@ -13,6 +13,8 @@ public class msg_param_request_read extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_PARAM_REQUEST_READ = 20;
 	public static final int MAVLINK_MSG_LENGTH = 20;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_PARAM_REQUEST_READ;
+	
 
  	/**
 	*Parameter index. Send -1 to use the param ID field as identifier (else the param id will be ignored)

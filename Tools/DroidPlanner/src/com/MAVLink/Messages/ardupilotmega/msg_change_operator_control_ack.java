@@ -13,6 +13,8 @@ public class msg_change_operator_control_ack extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK = 6;
 	public static final int MAVLINK_MSG_LENGTH = 3;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK;
+	
 
  	/**
 	*ID of the GCS this message 

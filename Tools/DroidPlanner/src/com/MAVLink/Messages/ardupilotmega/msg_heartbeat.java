@@ -13,6 +13,8 @@ public class msg_heartbeat extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_HEARTBEAT = 0;
 	public static final int MAVLINK_MSG_LENGTH = 9;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_HEARTBEAT;
+	
 
  	/**
 	*A bitfield for use for autopilot-specific flags.

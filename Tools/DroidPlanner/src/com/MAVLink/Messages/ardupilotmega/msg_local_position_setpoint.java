@@ -13,6 +13,8 @@ public class msg_local_position_setpoint extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_LOCAL_POSITION_SETPOINT = 51;
 	public static final int MAVLINK_MSG_LENGTH = 17;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_LOCAL_POSITION_SETPOINT;
+	
 
  	/**
 	*x position

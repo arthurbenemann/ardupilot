@@ -13,6 +13,8 @@ public class msg_named_value_int extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_NAMED_VALUE_INT = 252;
 	public static final int MAVLINK_MSG_LENGTH = 18;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_NAMED_VALUE_INT;
+	
 
  	/**
 	*Timestamp (milliseconds since system boot)

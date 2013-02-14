@@ -13,6 +13,8 @@ public class msg_safety_allowed_area extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SAFETY_ALLOWED_AREA = 55;
 	public static final int MAVLINK_MSG_LENGTH = 25;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SAFETY_ALLOWED_AREA;
+	
 
  	/**
 	*x position 1 / Latitude 1

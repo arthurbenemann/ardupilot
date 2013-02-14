@@ -13,6 +13,8 @@ public class msg_mission_write_partial_list extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_MISSION_WRITE_PARTIAL_LIST = 38;
 	public static final int MAVLINK_MSG_LENGTH = 6;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_MISSION_WRITE_PARTIAL_LIST;
+	
 
  	/**
 	*Start index, 0 by default and smaller / equal to the largest index of the current onboard list.

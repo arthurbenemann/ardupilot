@@ -13,6 +13,8 @@ public class msg_set_global_position_setpoint_int extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SET_GLOBAL_POSITION_SETPOINT_INT = 53;
 	public static final int MAVLINK_MSG_LENGTH = 15;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SET_GLOBAL_POSITION_SETPOINT_INT;
+	
 
  	/**
 	*WGS84 Latitude position in degrees * 1E7

@@ -13,6 +13,8 @@ public class msg_sys_status extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SYS_STATUS = 1;
 	public static final int MAVLINK_MSG_LENGTH = 31;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SYS_STATUS;
+	
 
  	/**
 	*Bitmask showing which onboard controllers and sensors are present. Value of 0: not present. Value of 1: present. Indices: 0: 3D gyro, 1: 3D acc, 2: 3D mag, 3: absolute pressure, 4: differential pressure, 5: GPS, 6: optical flow, 7: computer vision position, 8: laser based position, 9: external ground-truth (Vicon or Leica). Controllers: 10: 3D angular rate control 11: attitude stabilization, 12: yaw position, 13: z/altitude control, 14: x/y position control, 15: motor outputs / control

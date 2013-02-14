@@ -13,6 +13,8 @@ public class msg_battery_status extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_BATTERY_STATUS = 147;
 	public static final int MAVLINK_MSG_LENGTH = 16;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_BATTERY_STATUS;
+	
 
  	/**
 	*Battery voltage of cell 1, in millivolts (1 = 1 millivolt)

@@ -13,6 +13,8 @@ public class msg_highres_imu extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_HIGHRES_IMU = 105;
 	public static final int MAVLINK_MSG_LENGTH = 62;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_HIGHRES_IMU;
+	
 
  	/**
 	*Timestamp (microseconds, synced to UNIX time or since system boot)

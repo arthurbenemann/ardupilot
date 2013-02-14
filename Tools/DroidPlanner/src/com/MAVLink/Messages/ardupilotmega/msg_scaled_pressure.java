@@ -13,6 +13,8 @@ public class msg_scaled_pressure extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SCALED_PRESSURE = 29;
 	public static final int MAVLINK_MSG_LENGTH = 14;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SCALED_PRESSURE;
+	
 
  	/**
 	*Timestamp (milliseconds since system boot)

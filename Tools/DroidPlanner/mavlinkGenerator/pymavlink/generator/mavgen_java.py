@@ -162,6 +162,8 @@ public class msg_${name_lower} extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_${name} = ${id};
 	public static final int MAVLINK_MSG_LENGTH = ${wire_length};
+	private static final long serialVersionUID = MAVLINK_MSG_ID_${name};
+	
 
 ${{ordered_fields: 	/**
 	*${description}

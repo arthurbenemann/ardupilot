@@ -13,6 +13,8 @@ public class msg_command_long extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_COMMAND_LONG = 76;
 	public static final int MAVLINK_MSG_LENGTH = 33;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_COMMAND_LONG;
+	
 
  	/**
 	*Parameter 1, as defined by MAV_CMD enum.

@@ -14,6 +14,8 @@ public class msg_global_position_int extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_GLOBAL_POSITION_INT = 33;
 	public static final int MAVLINK_MSG_LENGTH = 28;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_GLOBAL_POSITION_INT;
+	
 
  	/**
 	*Timestamp (milliseconds since system boot)

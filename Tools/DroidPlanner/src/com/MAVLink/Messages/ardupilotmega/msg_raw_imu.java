@@ -13,6 +13,8 @@ public class msg_raw_imu extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_RAW_IMU = 27;
 	public static final int MAVLINK_MSG_LENGTH = 26;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_RAW_IMU;
+	
 
  	/**
 	*Timestamp (microseconds since UNIX epoch or microseconds since system boot)

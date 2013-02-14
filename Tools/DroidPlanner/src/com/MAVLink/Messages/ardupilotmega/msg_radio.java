@@ -13,6 +13,8 @@ public class msg_radio extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_RADIO = 166;
 	public static final int MAVLINK_MSG_LENGTH = 9;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_RADIO;
+	
 
  	/**
 	*receive errors

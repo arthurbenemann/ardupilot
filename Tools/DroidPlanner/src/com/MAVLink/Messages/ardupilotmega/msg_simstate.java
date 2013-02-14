@@ -13,6 +13,8 @@ public class msg_simstate extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SIMSTATE = 164;
 	public static final int MAVLINK_MSG_LENGTH = 44;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SIMSTATE;
+	
 
  	/**
 	*Roll angle (rad)

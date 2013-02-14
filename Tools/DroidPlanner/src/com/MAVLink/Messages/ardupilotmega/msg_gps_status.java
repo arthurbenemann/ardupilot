@@ -13,6 +13,8 @@ public class msg_gps_status extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_GPS_STATUS = 25;
 	public static final int MAVLINK_MSG_LENGTH = 101;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_GPS_STATUS;
+	
 
  	/**
 	*Number of satellites visible

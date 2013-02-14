@@ -14,6 +14,8 @@ public class msg_fence_status extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_FENCE_STATUS = 162;
 	public static final int MAVLINK_MSG_LENGTH = 8;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_FENCE_STATUS;
+	
 
  	/**
 	*time of last breach in milliseconds since boot

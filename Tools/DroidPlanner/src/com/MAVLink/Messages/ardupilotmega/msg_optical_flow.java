@@ -13,6 +13,8 @@ public class msg_optical_flow extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_OPTICAL_FLOW = 100;
 	public static final int MAVLINK_MSG_LENGTH = 26;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_OPTICAL_FLOW;
+	
 
  	/**
 	*Timestamp (UNIX)

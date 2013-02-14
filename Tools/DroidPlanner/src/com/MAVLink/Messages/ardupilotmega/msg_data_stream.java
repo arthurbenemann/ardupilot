@@ -13,6 +13,8 @@ public class msg_data_stream extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_DATA_STREAM = 67;
 	public static final int MAVLINK_MSG_LENGTH = 4;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_DATA_STREAM;
+	
 
  	/**
 	*The requested interval between two messages of this type

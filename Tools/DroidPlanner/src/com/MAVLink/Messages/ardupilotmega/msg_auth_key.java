@@ -13,6 +13,8 @@ public class msg_auth_key extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_AUTH_KEY = 7;
 	public static final int MAVLINK_MSG_LENGTH = 32;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_AUTH_KEY;
+	
 
  	/**
 	*key

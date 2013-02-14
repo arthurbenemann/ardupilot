@@ -13,6 +13,8 @@ public class msg_attitude_quaternion extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_ATTITUDE_QUATERNION = 31;
 	public static final int MAVLINK_MSG_LENGTH = 32;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_ATTITUDE_QUATERNION;
+	
 
  	/**
 	*Timestamp (milliseconds since system boot)

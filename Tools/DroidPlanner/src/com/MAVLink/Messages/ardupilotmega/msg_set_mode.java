@@ -13,6 +13,8 @@ public class msg_set_mode extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_SET_MODE = 11;
 	public static final int MAVLINK_MSG_LENGTH = 6;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_SET_MODE;
+	
 
  	/**
 	*The new autopilot-specific mode. This field can be ignored by an autopilot.

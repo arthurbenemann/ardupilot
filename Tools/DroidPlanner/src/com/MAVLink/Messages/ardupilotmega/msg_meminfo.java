@@ -13,6 +13,8 @@ public class msg_meminfo extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_MEMINFO = 152;
 	public static final int MAVLINK_MSG_LENGTH = 4;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_MEMINFO;
+	
 
  	/**
 	*heap top

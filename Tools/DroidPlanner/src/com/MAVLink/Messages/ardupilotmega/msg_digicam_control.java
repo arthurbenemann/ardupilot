@@ -13,6 +13,8 @@ public class msg_digicam_control extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_DIGICAM_CONTROL = 155;
 	public static final int MAVLINK_MSG_LENGTH = 13;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_DIGICAM_CONTROL;
+	
 
  	/**
 	*Correspondent value to given extra_param

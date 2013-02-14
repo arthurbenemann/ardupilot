@@ -13,6 +13,8 @@ public class msg_gps_global_origin extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_GPS_GLOBAL_ORIGIN = 49;
 	public static final int MAVLINK_MSG_LENGTH = 12;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_GPS_GLOBAL_ORIGIN;
+	
 
  	/**
 	*Latitude (WGS84), expressed as * 1E7

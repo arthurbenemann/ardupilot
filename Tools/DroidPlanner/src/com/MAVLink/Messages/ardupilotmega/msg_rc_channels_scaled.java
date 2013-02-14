@@ -13,6 +13,8 @@ public class msg_rc_channels_scaled extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_RC_CHANNELS_SCALED = 34;
 	public static final int MAVLINK_MSG_LENGTH = 22;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_RC_CHANNELS_SCALED;
+	
 
  	/**
 	*Timestamp (milliseconds since system boot)

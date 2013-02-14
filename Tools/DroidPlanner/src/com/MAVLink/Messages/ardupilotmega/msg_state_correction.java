@@ -13,6 +13,8 @@ public class msg_state_correction extends MAVLinkMessage{
 
 	public static final int MAVLINK_MSG_ID_STATE_CORRECTION = 64;
 	public static final int MAVLINK_MSG_LENGTH = 36;
+	private static final long serialVersionUID = MAVLINK_MSG_ID_STATE_CORRECTION;
+	
 
  	/**
 	*x position error
