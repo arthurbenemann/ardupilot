@@ -58,7 +58,7 @@ public class FightDataActivity extends android.support.v4.app.FragmentActivity
 			Bitmap planeBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.planetracker);
 		    Bitmap rotatedPlane = Bitmap.createBitmap(planeBitmap, 0, 0, planeBitmap.getWidth(), planeBitmap.getHeight(), matrix, true);
 		      
-		    mMap.clear();
+		    mMap.clear();	// Find a better implementation, where all markers don't need to be cleared
 		    mMap.addMarker(new MarkerOptions().position(data.position.coord)
 					.anchor((float) 0.5, (float) 0.5)
 					.icon(BitmapDescriptorFactory
