@@ -75,11 +75,11 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		@Override
 		public void onWaypointsReceived(List<waypoint> waypoints) {
 			if(waypoints!=null){
+				Log.d("Mission", "Received all waypoints, size()="+waypoints.size());
 				mission.setHome(waypoints.get(0));
+				waypoints.remove(0);	// Remove Home waypoint
 				mission.clearWaypoints();
-				for (int i = 0; i < waypoints.size(); i++) {
-					mission.addWaypoints(waypoints);
-				}
+				mission.addWaypoints(waypoints);
 				updateMarkersAndPath();
 				zoomToExtents();
 			}
