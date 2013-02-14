@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -21,7 +20,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class FightDataActivity extends android.support.v4.app.FragmentActivity
@@ -29,7 +27,7 @@ public class FightDataActivity extends android.support.v4.app.FragmentActivity
 
 	private GoogleMap mMap;
 	private MenuItem connectButton;
-	private Marker planeMarker;
+	private Bitmap planeBitmap;
 
 	MAVLink MAV = new MAVLink() {
 		@Override
@@ -49,20 +47,9 @@ public class FightDataActivity extends android.support.v4.app.FragmentActivity
 	GPSMananger gpsManager = new GPSMananger(MAV) {		
 		@Override
 		public void onGpsDataReceived(GPSdata data) {
-			Log.d("GPS", "LAT:"+data.position.coord.latitude+" LNG:"+data.position.coord.longitude+"ALT:"+data.position.Height+" heading:"+data.heading);
-			
-			
-			
-			Matrix matrix = new Matrix();
-			matrix.postRotate(data.heading);
-			Bitmap planeBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.planetracker);
-		    Bitmap rotatedPlane = Bitmap.createBitmap(planeBitmap, 0, 0, planeBitmap.getWidth(), planeBitmap.getHeight(), matrix, true);
-		      
+			//Log.d("GPS", "LAT:"+data.position.coord.latitude+" LNG:"+data.position.coord.longitude+"ALT:"+data.position.Height+" heading:"+data.heading);
 		    mMap.clear();	// Find a better implementation, where all markers don't need to be cleared
-		    mMap.addMarker(new MarkerOptions().position(data.position.coord)
-					.anchor((float) 0.5, (float) 0.5)
-					.icon(BitmapDescriptorFactory
-							.fromBitmap(rotatedPlane)));		    
+		    addPlaneMarkerToMap(data.heading, data.position.coord);	    
 		   
 		}
 	};
@@ -83,12 +70,14 @@ public class FightDataActivity extends android.support.v4.app.FragmentActivity
 		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
 		actionBar.setSelectedNavigationItem(2);
 
+		planeBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.planetracker);
 		setContentView(R.layout.flightdata);
 		
 		setUpMapIfNeeded();
 	}
 
 	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -167,12 +156,21 @@ public class FightDataActivity extends android.support.v4.app.FragmentActivity
 		mUiSettings.setCompassEnabled(true);
 		mUiSettings.setTiltGesturesEnabled(false);
 		
-		planeMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(0.0, 0.0))
+		}
+
+
+	/**
+	 * @param data
+	 */
+	private void addPlaneMarkerToMap(float heading, LatLng coord) {
+		Matrix matrix = new Matrix();
+		matrix.postRotate(heading);
+		Bitmap rotatedPlane = Bitmap.createBitmap(planeBitmap, 0, 0, planeBitmap.getWidth(), planeBitmap.getHeight(), matrix, true);
+		mMap.addMarker(new MarkerOptions().position(coord)
 				.anchor((float) 0.5, (float) 0.5)
 				.icon(BitmapDescriptorFactory
-						.fromResource(R.drawable.planetracker)));
-		
-		}	
+						.fromBitmap(rotatedPlane)));
+	}	
 	
 
 }

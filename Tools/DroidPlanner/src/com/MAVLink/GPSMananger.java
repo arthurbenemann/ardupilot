@@ -55,7 +55,7 @@ public abstract class GPSMananger {
 	private void processGpsIntMesssage(msg_global_position_int msg) {
 		GPSdata data = new GPSdata();
 		data.position = new waypoint(msg.lat/1E7, msg.lon/1E7, msg.alt/1000.0);
-		data.heading = msg.hdg/100;
+		data.heading = (0x0000FFFF & ((int)msg.hdg))/100; // TODO fix unsigned short read at mavlink library
 		onGpsDataReceived(data);
 	}
 }
