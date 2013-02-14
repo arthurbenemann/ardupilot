@@ -25,10 +25,8 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.MAVLink.GPSMananger;
 import com.MAVLink.MAVLink;
 import com.MAVLink.WaypointMananger;
-import com.MAVLink.GPSMananger.GPSdata;
 import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.ardupilotmega.msg_mission_ack;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -62,7 +60,6 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		@Override
 		public void onReceiveMessage(MAVLinkMessage msg) {
 			waypointMananger.processMessage(msg);
-			gpsManager.processMessage(msg);
 		}		
 		@Override
 		public void onDisconnect() {
@@ -93,13 +90,6 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		}
 	};
 	
-	GPSMananger gpsManager = new GPSMananger(MAV) {		
-		@Override
-		public void onGpsDataReceived(GPSdata data) {
-			Log.d("GPS", "LAT:"+data.position.coord.latitude+" LNG:"+data.position.coord.longitude+"ALT:"+data.position.Height+" heading:"+data.heading);			
-		}
-	};
-
 	
 	@Override
 	protected void onResume() {
