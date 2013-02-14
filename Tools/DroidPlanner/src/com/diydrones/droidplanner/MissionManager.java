@@ -167,7 +167,7 @@ public class MissionManager {
 					.format(Locale.ENGLISH,
 							"%d\t0\t%d\t%d\t0.000000\t0.000000\t0.000000\t0.000000\t%f\t%f\t%f\t1\n",
 							i + 1,
-							3, // TODO Implement Absolute Altitude
+							0, // TODO Implement Relative Altitude
 							16,// TODO Implement other modes (16 == auto?)
 							waypoints.get(i).coord.latitude,
 							waypoints.get(i).coord.longitude,
