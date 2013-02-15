@@ -99,7 +99,8 @@ public class msg_setpoint_6dof extends MAVLinkMessage{
         Log.d("MAVLink", "SETPOINT_6DOF");
         //Log.d("MAVLINK_MSG_ID_SETPOINT_6DOF", toString());
     }
-
+    
+              
     /**
      * Returns a string with the MSG name and data
      */

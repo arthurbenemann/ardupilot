@@ -135,7 +135,8 @@ public class msg_sys_status extends MAVLinkMessage{
         Log.d("MAVLink", "SYS_STATUS");
         //Log.d("MAVLINK_MSG_ID_SYS_STATUS", toString());
     }
-
+    
+                          
     /**
      * Returns a string with the MSG name and data
      */

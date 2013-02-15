@@ -73,11 +73,38 @@ public class msg_statustext extends MAVLinkMessage{
         Log.d("MAVLink", "STATUSTEXT");
         //Log.d("MAVLINK_MSG_ID_STATUSTEXT", toString());
     }
-
+    
+   /**
+     * Sets the buffer of this message with a string, adds the necessary padding
+     */    
+    public void setText(String str) {
+      int len = Math.min(str.length(), 50);
+      for (int i=0; i<len; i++) {
+        text[i] = (byte) str.charAt(i);
+      }
+      for (int i=len; i<50; i++) {			// padding for the rest of the buffer
+        text[i] = 0;
+      }
+    }
+    
+    /**
+	 * Gets the message, formated as a string
+	 */
+	public String getText() {
+		String result = "";
+		for (int i = 0; i < 50; i++) {
+			if (text[i] != 0)
+				result = result + (char) text[i];
+			else
+				break;
+		}
+		return result;
+		
+	} 
     /**
      * Returns a string with the MSG name and data
      */
     public String toString(){
-    	return "MAVLINK_MSG_ID_STATUSTEXT -"+" severity:"+severity+" text:"+text+"";
+    	return "MAVLINK_MSG_ID_STATUSTEXT -"+" severity:"+severity+" text:"+getText()+"";
     }
 }

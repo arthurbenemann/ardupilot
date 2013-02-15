@@ -93,7 +93,8 @@ public class msg_vfr_hud extends MAVLinkMessage{
         Log.d("MAVLink", "VFR_HUD");
         //Log.d("MAVLINK_MSG_ID_VFR_HUD", toString());
     }
-
+    
+            
     /**
      * Returns a string with the MSG name and data
      */

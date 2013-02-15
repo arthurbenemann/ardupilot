@@ -141,7 +141,8 @@ public class msg_hil_rc_inputs_raw extends MAVLinkMessage{
         Log.d("MAVLink", "HIL_RC_INPUTS_RAW");
         //Log.d("MAVLINK_MSG_ID_HIL_RC_INPUTS_RAW", toString());
     }
-
+    
+                            
     /**
      * Returns a string with the MSG name and data
      */

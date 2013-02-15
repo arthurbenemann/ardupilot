@@ -79,7 +79,8 @@ public class msg_data64 extends MAVLinkMessage{
         Log.d("MAVLink", "DATA64");
         //Log.d("MAVLINK_MSG_ID_DATA64", toString());
     }
-
+    
+      
     /**
      * Returns a string with the MSG name and data
      */

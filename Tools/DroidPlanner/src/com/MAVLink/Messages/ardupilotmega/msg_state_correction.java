@@ -111,7 +111,8 @@ public class msg_state_correction extends MAVLinkMessage{
         Log.d("MAVLink", "STATE_CORRECTION");
         //Log.d("MAVLINK_MSG_ID_STATE_CORRECTION", toString());
     }
-
+    
+                  
     /**
      * Returns a string with the MSG name and data
      */

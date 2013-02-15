@@ -69,7 +69,8 @@ public class msg_file_transfer_res extends MAVLinkMessage{
         Log.d("MAVLink", "FILE_TRANSFER_RES");
         //Log.d("MAVLINK_MSG_ID_FILE_TRANSFER_RES", toString());
     }
-
+    
+    
     /**
      * Returns a string with the MSG name and data
      */

@@ -91,7 +91,34 @@ public class msg_file_transfer_start extends MAVLinkMessage{
         Log.d("MAVLink", "FILE_TRANSFER_START");
         //Log.d("MAVLINK_MSG_ID_FILE_TRANSFER_START", toString());
     }
-
+    
+     /**
+     * Sets the buffer of this message with a string, adds the necessary padding
+     */    
+    public void setDest_Path(String str) {
+      int len = Math.min(str.length(), 240);
+      for (int i=0; i<len; i++) {
+        dest_path[i] = (byte) str.charAt(i);
+      }
+      for (int i=len; i<240; i++) {			// padding for the rest of the buffer
+        dest_path[i] = 0;
+      }
+    }
+    
+    /**
+	 * Gets the message, formated as a string
+	 */
+	public String getDest_Path() {
+		String result = "";
+		for (int i = 0; i < 240; i++) {
+			if (dest_path[i] != 0)
+				result = result + (char) dest_path[i];
+			else
+				break;
+		}
+		return result;
+		
+	}     
     /**
      * Returns a string with the MSG name and data
      */

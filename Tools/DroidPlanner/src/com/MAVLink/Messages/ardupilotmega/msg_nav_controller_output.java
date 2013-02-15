@@ -105,7 +105,8 @@ public class msg_nav_controller_output extends MAVLinkMessage{
         Log.d("MAVLink", "NAV_CONTROLLER_OUTPUT");
         //Log.d("MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT", toString());
     }
-
+    
+                
     /**
      * Returns a string with the MSG name and data
      */

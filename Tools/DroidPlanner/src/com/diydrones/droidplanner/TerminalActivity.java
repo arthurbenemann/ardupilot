@@ -14,7 +14,6 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.MAVLink.Messages.MAVLinkMessage;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_ack;
 import com.MAVLink.Messages.ardupilotmega.msg_param_request_list;
 import com.MAVLink.Messages.ardupilotmega.msg_param_value;
 import com.MAVLink.Messages.ardupilotmega.msg_statustext;
@@ -38,7 +37,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 					additionalInfo+= ((msg_statustext) m).toString()+"\n";
 				}
 				if(m.msgid == msg_param_value.MAVLINK_MSG_ID_PARAM_VALUE){
-					Log.d("PARAM",("param:"+new String(((msg_param_value) m).param_id)+"\t Value"+((msg_param_value) m).param_value));
+					Log.d("PARAM",("param:"+((msg_param_value) m).getParam_Id()+"\t Value"+((msg_param_value) m).param_value));
 				}
 				
 				terminal.setText(terminalMsg+additionalInfo);

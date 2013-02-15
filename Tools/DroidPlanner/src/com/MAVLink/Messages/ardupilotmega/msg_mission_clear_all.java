@@ -69,7 +69,8 @@ public class msg_mission_clear_all extends MAVLinkMessage{
         Log.d("MAVLink", "MISSION_CLEAR_ALL");
         //Log.d("MAVLINK_MSG_ID_MISSION_CLEAR_ALL", toString());
     }
-
+    
+    
     /**
      * Returns a string with the MSG name and data
      */

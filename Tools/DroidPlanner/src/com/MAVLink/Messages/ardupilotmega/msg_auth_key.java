@@ -67,7 +67,34 @@ public class msg_auth_key extends MAVLinkMessage{
         Log.d("MAVLink", "AUTH_KEY");
         //Log.d("MAVLINK_MSG_ID_AUTH_KEY", toString());
     }
-
+    
+ /**
+     * Sets the buffer of this message with a string, adds the necessary padding
+     */    
+    public void setKey(String str) {
+      int len = Math.min(str.length(), 32);
+      for (int i=0; i<len; i++) {
+        key[i] = (byte) str.charAt(i);
+      }
+      for (int i=len; i<32; i++) {			// padding for the rest of the buffer
+        key[i] = 0;
+      }
+    }
+    
+    /**
+	 * Gets the message, formated as a string
+	 */
+	public String getKey() {
+		String result = "";
+		for (int i = 0; i < 32; i++) {
+			if (key[i] != 0)
+				result = result + (char) key[i];
+			else
+				break;
+		}
+		return result;
+		
+	} 
     /**
      * Returns a string with the MSG name and data
      */

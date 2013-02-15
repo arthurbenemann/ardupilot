@@ -117,7 +117,8 @@ public class msg_digicam_control extends MAVLinkMessage{
         Log.d("MAVLink", "DIGICAM_CONTROL");
         //Log.d("MAVLINK_MSG_ID_DIGICAM_CONTROL", toString());
     }
-
+    
+                    
     /**
      * Returns a string with the MSG name and data
      */

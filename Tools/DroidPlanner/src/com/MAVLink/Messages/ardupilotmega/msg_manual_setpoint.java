@@ -99,7 +99,8 @@ public class msg_manual_setpoint extends MAVLinkMessage{
         Log.d("MAVLink", "MANUAL_SETPOINT");
         //Log.d("MAVLINK_MSG_ID_MANUAL_SETPOINT", toString());
     }
-
+    
+              
     /**
      * Returns a string with the MSG name and data
      */

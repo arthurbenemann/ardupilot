@@ -85,7 +85,34 @@ public class msg_param_request_read extends MAVLinkMessage{
         Log.d("MAVLink", "PARAM_REQUEST_READ");
         //Log.d("MAVLINK_MSG_ID_PARAM_REQUEST_READ", toString());
     }
-
+    
+       /**
+     * Sets the buffer of this message with a string, adds the necessary padding
+     */    
+    public void setParam_Id(String str) {
+      int len = Math.min(str.length(), 16);
+      for (int i=0; i<len; i++) {
+        param_id[i] = (byte) str.charAt(i);
+      }
+      for (int i=len; i<16; i++) {			// padding for the rest of the buffer
+        param_id[i] = 0;
+      }
+    }
+    
+    /**
+	 * Gets the message, formated as a string
+	 */
+	public String getParam_Id() {
+		String result = "";
+		for (int i = 0; i < 16; i++) {
+			if (param_id[i] != 0)
+				result = result + (char) param_id[i];
+			else
+				break;
+		}
+		return result;
+		
+	} 
     /**
      * Returns a string with the MSG name and data
      */

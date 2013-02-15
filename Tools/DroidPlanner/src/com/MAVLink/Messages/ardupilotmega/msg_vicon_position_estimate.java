@@ -99,7 +99,8 @@ public class msg_vicon_position_estimate extends MAVLinkMessage{
         Log.d("MAVLink", "VICON_POSITION_ESTIMATE");
         //Log.d("MAVLINK_MSG_ID_VICON_POSITION_ESTIMATE", toString());
     }
-
+    
+              
     /**
      * Returns a string with the MSG name and data
      */

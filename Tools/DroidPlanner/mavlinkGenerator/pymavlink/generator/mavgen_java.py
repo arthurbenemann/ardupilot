@@ -215,7 +215,8 @@ ${{ordered_fields:	    ${unpackField}
         Log.d("MAVLink", "${name}");
         //Log.d("MAVLINK_MSG_ID_${name}", toString());
     }
-
+    
+${{ordered_fields: ${getText} }}
     /**
      * Returns a string with the MSG name and data
      */
@@ -347,7 +348,6 @@ public class MAVLinkPacket implements Serializable {
 		buffer[i++] = (byte) (crc.getMSB());
 		return buffer;
 	}
-	
 	
 	/**
 	 * Unpack the data in this packet and return a MAVLink message
@@ -500,6 +500,7 @@ def generate_one(basename, xml):
                 f.c_print_format = 'NULL'
             else:
                 f.c_print_format = '"%s"' % f.print_format
+            f.getText = ''
             if f.array_length != 0:
                 f.array_suffix = '[] = new %s[%u]' % (mavfmt(f),f.array_length)
                 f.array_prefix = '*'
@@ -520,6 +521,33 @@ def generate_one(basename, xml):
                 f.get_arg = ', %s *%s' % (f.type, f.name)
                 if f.type == 'char':
                     f.c_test_value = '"%s"' % f.test_value
+                    f.getText = '''/**
+     * Sets the buffer of this message with a string, adds the necessary padding
+     */    
+    public void set%s(String str) {
+      int len = Math.min(str.length(), %d);
+      for (int i=0; i<len; i++) {
+        %s[i] = (byte) str.charAt(i);
+      }
+      for (int i=len; i<%d; i++) {			// padding for the rest of the buffer
+        %s[i] = 0;
+      }
+    }
+    
+    /**
+	 * Gets the message, formated as a string
+	 */
+	public String get%s() {
+		String result = "";
+		for (int i = 0; i < %d; i++) {
+			if (%s[i] != 0)
+				result = result + (char) %s[i];
+			else
+				break;
+		}
+		return result;
+		
+	}''' % (f.name.title(),f.array_length,f.name,f.array_length,f.name,f.name.title(),f.array_length,f.name,f.name)
                 else:
                     test_strings = []
                     for v in f.test_value:
@@ -535,8 +563,7 @@ def generate_one(basename, xml):
                 f.decode_left =  '%s' % (f.name)
                 f.decode_right = ''
                 f.unpackField = '%s = payload.get%s();' % (f.name, mavfmt(f).title())
-                f.packField = 'packet.payload.put%s(%s);' % (mavfmt(f).title(),f.name)
-                   
+                f.packField = 'packet.payload.put%s(%s);' % (mavfmt(f).title(),f.name)                   
 		
 
                 f.get_arg = ''
@@ -587,5 +614,3 @@ def generate(basename, xml_list):
         
     generate_MAVLinkMessage(basename, xml_list)
     generate_CRC(basename, xml_list[0])
-    #copy_fixed_headers(basename, xml_list[0])
-    #copy_fixed_sources(basename, xml_list[0])

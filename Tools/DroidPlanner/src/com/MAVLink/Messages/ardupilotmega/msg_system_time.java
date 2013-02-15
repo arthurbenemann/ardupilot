@@ -69,7 +69,8 @@ public class msg_system_time extends MAVLinkMessage{
         Log.d("MAVLink", "SYSTEM_TIME");
         //Log.d("MAVLINK_MSG_ID_SYSTEM_TIME", toString());
     }
-
+    
+    
     /**
      * Returns a string with the MSG name and data
      */

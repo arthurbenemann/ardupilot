@@ -87,7 +87,8 @@ public class msg_roll_pitch_yaw_speed_thrust_setpoint extends MAVLinkMessage{
         Log.d("MAVLink", "ROLL_PITCH_YAW_SPEED_THRUST_SETPOINT");
         //Log.d("MAVLINK_MSG_ID_ROLL_PITCH_YAW_SPEED_THRUST_SETPOINT", toString());
     }
-
+    
+          
     /**
      * Returns a string with the MSG name and data
      */

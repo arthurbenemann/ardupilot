@@ -63,7 +63,8 @@ public class msg_mission_current extends MAVLinkMessage{
         Log.d("MAVLink", "MISSION_CURRENT");
         //Log.d("MAVLINK_MSG_ID_MISSION_CURRENT", toString());
     }
-
+    
+  
     /**
      * Returns a string with the MSG name and data
      */

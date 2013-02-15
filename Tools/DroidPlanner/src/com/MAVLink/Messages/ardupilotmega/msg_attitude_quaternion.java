@@ -105,7 +105,8 @@ public class msg_attitude_quaternion extends MAVLinkMessage{
         Log.d("MAVLink", "ATTITUDE_QUATERNION");
         //Log.d("MAVLINK_MSG_ID_ATTITUDE_QUATERNION", toString());
     }
-
+    
+                
     /**
      * Returns a string with the MSG name and data
      */

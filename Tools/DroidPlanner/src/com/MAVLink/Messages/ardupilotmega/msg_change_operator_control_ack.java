@@ -75,7 +75,8 @@ public class msg_change_operator_control_ack extends MAVLinkMessage{
         Log.d("MAVLink", "CHANGE_OPERATOR_CONTROL_ACK");
         //Log.d("MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK", toString());
     }
-
+    
+      
     /**
      * Returns a string with the MSG name and data
      */

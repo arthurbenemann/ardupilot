@@ -117,7 +117,8 @@ public class msg_servo_output_raw extends MAVLinkMessage{
         Log.d("MAVLink", "SERVO_OUTPUT_RAW");
         //Log.d("MAVLINK_MSG_ID_SERVO_OUTPUT_RAW", toString());
     }
-
+    
+                    
     /**
      * Returns a string with the MSG name and data
      */

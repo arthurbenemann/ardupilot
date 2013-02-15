@@ -63,7 +63,8 @@ public class msg_mission_item_reached extends MAVLinkMessage{
         Log.d("MAVLink", "MISSION_ITEM_REACHED");
         //Log.d("MAVLINK_MSG_ID_MISSION_ITEM_REACHED", toString());
     }
-
+    
+  
     /**
      * Returns a string with the MSG name and data
      */

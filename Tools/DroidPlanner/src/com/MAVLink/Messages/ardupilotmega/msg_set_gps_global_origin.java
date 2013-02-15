@@ -81,7 +81,8 @@ public class msg_set_gps_global_origin extends MAVLinkMessage{
         Log.d("MAVLink", "SET_GPS_GLOBAL_ORIGIN");
         //Log.d("MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN", toString());
     }
-
+    
+        
     /**
      * Returns a string with the MSG name and data
      */

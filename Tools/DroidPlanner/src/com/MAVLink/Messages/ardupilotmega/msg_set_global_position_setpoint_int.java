@@ -87,7 +87,8 @@ public class msg_set_global_position_setpoint_int extends MAVLinkMessage{
         Log.d("MAVLink", "SET_GLOBAL_POSITION_SETPOINT_INT");
         //Log.d("MAVLINK_MSG_ID_SET_GLOBAL_POSITION_SETPOINT_INT", toString());
     }
-
+    
+          
     /**
      * Returns a string with the MSG name and data
      */

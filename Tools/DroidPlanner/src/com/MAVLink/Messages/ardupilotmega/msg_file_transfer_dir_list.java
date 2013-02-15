@@ -79,7 +79,34 @@ public class msg_file_transfer_dir_list extends MAVLinkMessage{
         Log.d("MAVLink", "FILE_TRANSFER_DIR_LIST");
         //Log.d("MAVLINK_MSG_ID_FILE_TRANSFER_DIR_LIST", toString());
     }
-
+    
+   /**
+     * Sets the buffer of this message with a string, adds the necessary padding
+     */    
+    public void setDir_Path(String str) {
+      int len = Math.min(str.length(), 240);
+      for (int i=0; i<len; i++) {
+        dir_path[i] = (byte) str.charAt(i);
+      }
+      for (int i=len; i<240; i++) {			// padding for the rest of the buffer
+        dir_path[i] = 0;
+      }
+    }
+    
+    /**
+	 * Gets the message, formated as a string
+	 */
+	public String getDir_Path() {
+		String result = "";
+		for (int i = 0; i < 240; i++) {
+			if (dir_path[i] != 0)
+				result = result + (char) dir_path[i];
+			else
+				break;
+		}
+		return result;
+		
+	}   
     /**
      * Returns a string with the MSG name and data
      */

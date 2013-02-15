@@ -81,7 +81,8 @@ public class msg_ping extends MAVLinkMessage{
         Log.d("MAVLink", "PING");
         //Log.d("MAVLINK_MSG_ID_PING", toString());
     }
-
+    
+        
     /**
      * Returns a string with the MSG name and data
      */

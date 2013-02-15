@@ -79,7 +79,34 @@ public class msg_named_value_int extends MAVLinkMessage{
         Log.d("MAVLink", "NAMED_VALUE_INT");
         //Log.d("MAVLINK_MSG_ID_NAMED_VALUE_INT", toString());
     }
-
+    
+     /**
+     * Sets the buffer of this message with a string, adds the necessary padding
+     */    
+    public void setName(String str) {
+      int len = Math.min(str.length(), 10);
+      for (int i=0; i<len; i++) {
+        name[i] = (byte) str.charAt(i);
+      }
+      for (int i=len; i<10; i++) {			// padding for the rest of the buffer
+        name[i] = 0;
+      }
+    }
+    
+    /**
+	 * Gets the message, formated as a string
+	 */
+	public String getName() {
+		String result = "";
+		for (int i = 0; i < 10; i++) {
+			if (name[i] != 0)
+				result = result + (char) name[i];
+			else
+				break;
+		}
+		return result;
+		
+	} 
     /**
      * Returns a string with the MSG name and data
      */

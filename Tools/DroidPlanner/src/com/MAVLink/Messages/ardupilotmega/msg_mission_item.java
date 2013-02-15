@@ -142,7 +142,8 @@ public class msg_mission_item extends MAVLinkMessage{
         Log.d("MAVLink", "MISSION_ITEM");
         //Log.d("MAVLINK_MSG_ID_MISSION_ITEM", toString());
     }
-
+    
+                            
     /**
      * Returns a string with the MSG name and data
      */

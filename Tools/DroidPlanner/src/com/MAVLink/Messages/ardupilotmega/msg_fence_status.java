@@ -82,7 +82,8 @@ public class msg_fence_status extends MAVLinkMessage{
         Log.d("MAVLink", "FENCE_STATUS");
         //Log.d("MAVLINK_MSG_ID_FENCE_STATUS", toString());
     }
-
+    
+        
     /**
      * Returns a string with the MSG name and data
      */

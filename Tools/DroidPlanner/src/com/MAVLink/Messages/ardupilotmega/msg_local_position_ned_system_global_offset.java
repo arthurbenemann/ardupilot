@@ -99,7 +99,8 @@ public class msg_local_position_ned_system_global_offset extends MAVLinkMessage{
         Log.d("MAVLink", "LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET");
         //Log.d("MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET", toString());
     }
-
+    
+              
     /**
      * Returns a string with the MSG name and data
      */

@@ -85,7 +85,34 @@ public class msg_change_operator_control extends MAVLinkMessage{
         Log.d("MAVLink", "CHANGE_OPERATOR_CONTROL");
         //Log.d("MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL", toString());
     }
-
+    
+       /**
+     * Sets the buffer of this message with a string, adds the necessary padding
+     */    
+    public void setPasskey(String str) {
+      int len = Math.min(str.length(), 25);
+      for (int i=0; i<len; i++) {
+        passkey[i] = (byte) str.charAt(i);
+      }
+      for (int i=len; i<25; i++) {			// padding for the rest of the buffer
+        passkey[i] = 0;
+      }
+    }
+    
+    /**
+	 * Gets the message, formated as a string
+	 */
+	public String getPasskey() {
+		String result = "";
+		for (int i = 0; i < 25; i++) {
+			if (passkey[i] != 0)
+				result = result + (char) passkey[i];
+			else
+				break;
+		}
+		return result;
+		
+	} 
     /**
      * Returns a string with the MSG name and data
      */

@@ -123,7 +123,8 @@ public class msg_rc_channels_raw extends MAVLinkMessage{
         Log.d("MAVLink", "RC_CHANNELS_RAW");
         //Log.d("MAVLINK_MSG_ID_RC_CHANNELS_RAW", toString());
     }
-
+    
+                      
     /**
      * Returns a string with the MSG name and data
      */

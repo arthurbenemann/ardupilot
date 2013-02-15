@@ -147,7 +147,8 @@ public class msg_highres_imu extends MAVLinkMessage{
         Log.d("MAVLink", "HIGHRES_IMU");
         //Log.d("MAVLINK_MSG_ID_HIGHRES_IMU", toString());
     }
-
+    
+                              
     /**
      * Returns a string with the MSG name and data
      */

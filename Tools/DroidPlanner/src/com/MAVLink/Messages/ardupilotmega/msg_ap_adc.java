@@ -93,7 +93,8 @@ public class msg_ap_adc extends MAVLinkMessage{
         Log.d("MAVLink", "AP_ADC");
         //Log.d("MAVLINK_MSG_ID_AP_ADC", toString());
     }
-
+    
+            
     /**
      * Returns a string with the MSG name and data
      */

@@ -153,7 +153,8 @@ public class msg_hil_state extends MAVLinkMessage{
         Log.d("MAVLink", "HIL_STATE");
         //Log.d("MAVLINK_MSG_ID_HIL_STATE", toString());
     }
-
+    
+                                
     /**
      * Returns a string with the MSG name and data
      */

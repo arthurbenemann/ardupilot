@@ -99,7 +99,8 @@ public class msg_global_vision_position_estimate extends MAVLinkMessage{
         Log.d("MAVLink", "GLOBAL_VISION_POSITION_ESTIMATE");
         //Log.d("MAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE", toString());
     }
-
+    
+              
     /**
      * Returns a string with the MSG name and data
      */

@@ -117,7 +117,6 @@ public class MAVLinkPacket implements Serializable {
 		return buffer;
 	}
 	
-	
 	/**
 	 * Unpack the data in this packet and return a MAVLink message
 	 * 

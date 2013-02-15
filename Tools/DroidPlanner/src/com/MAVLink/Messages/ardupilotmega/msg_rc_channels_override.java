@@ -117,7 +117,8 @@ public class msg_rc_channels_override extends MAVLinkMessage{
         Log.d("MAVLink", "RC_CHANNELS_OVERRIDE");
         //Log.d("MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE", toString());
     }
-
+    
+                    
     /**
      * Returns a string with the MSG name and data
      */

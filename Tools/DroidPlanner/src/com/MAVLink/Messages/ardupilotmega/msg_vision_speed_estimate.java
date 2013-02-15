@@ -81,7 +81,8 @@ public class msg_vision_speed_estimate extends MAVLinkMessage{
         Log.d("MAVLink", "VISION_SPEED_ESTIMATE");
         //Log.d("MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE", toString());
     }
-
+    
+        
     /**
      * Returns a string with the MSG name and data
      */

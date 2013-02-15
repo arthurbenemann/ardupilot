@@ -87,7 +87,8 @@ public class msg_set_quad_motors_setpoint extends MAVLinkMessage{
         Log.d("MAVLink", "SET_QUAD_MOTORS_SETPOINT");
         //Log.d("MAVLINK_MSG_ID_SET_QUAD_MOTORS_SETPOINT", toString());
     }
-
+    
+          
     /**
      * Returns a string with the MSG name and data
      */

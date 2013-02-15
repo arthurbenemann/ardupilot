@@ -75,7 +75,8 @@ public class msg_set_mode extends MAVLinkMessage{
         Log.d("MAVLink", "SET_MODE");
         //Log.d("MAVLINK_MSG_ID_SET_MODE", toString());
     }
-
+    
+      
     /**
      * Returns a string with the MSG name and data
      */

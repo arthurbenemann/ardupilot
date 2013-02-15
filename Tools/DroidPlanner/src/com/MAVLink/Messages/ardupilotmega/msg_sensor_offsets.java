@@ -130,7 +130,8 @@ public class msg_sensor_offsets extends MAVLinkMessage{
         Log.d("MAVLink", "SENSOR_OFFSETS");
         //Log.d("MAVLINK_MSG_ID_SENSOR_OFFSETS", toString());
     }
-
+    
+                        
     /**
      * Returns a string with the MSG name and data
      */

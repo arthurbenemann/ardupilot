@@ -81,7 +81,8 @@ public class msg_mission_write_partial_list extends MAVLinkMessage{
         Log.d("MAVLink", "MISSION_WRITE_PARTIAL_LIST");
         //Log.d("MAVLINK_MSG_ID_MISSION_WRITE_PARTIAL_LIST", toString());
     }
-
+    
+        
     /**
      * Returns a string with the MSG name and data
      */
