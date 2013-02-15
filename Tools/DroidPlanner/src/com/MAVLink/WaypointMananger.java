@@ -47,7 +47,8 @@ public abstract class WaypointMananger {
 	 */
 	public void writeWaypoints(List<waypoint> data) {
 		if ((waypoints != null) && (MAV.isConnected())) {
-			waypoints = data;
+			waypoints.clear();
+			waypoints.addAll(data);
 			writeIndex = 0;
 			sendWaypointCount();
 		}
