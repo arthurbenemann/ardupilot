@@ -1,7 +1,5 @@
 package com.diydrones.droidplanner;
 
-import java.util.List;
-
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
 import android.content.Intent;
@@ -14,9 +12,7 @@ import android.widget.Button;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.MAVLink.WaypointMananger;
 import com.MAVLink.Messages.MAVLinkMessage;
-import com.MAVLink.Messages.ardupilotmega.msg_mission_ack;
 
 public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		implements OnNavigationListener {
@@ -33,7 +29,6 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		public void notifyReceivedData(MAVLinkMessage m) {
 				String terminalMsg = "Received lenght packets\nLast packet was: " + m.msgid + "\n";
 				terminal.setText(terminalMsg);
-				waypointMananger.processMessage(m);
 		}
 		
 		@Override
@@ -45,17 +40,6 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		public void notifyConnected() {
 			connectButton.setTitle(getResources().getString(R.string.menu_disconnect));
 		}
-	};
-
-	WaypointMananger waypointMananger = new WaypointMananger(MAVClient) {
-		@Override
-		public void onWaypointsReceived(List<waypoint> waypoints) {
-			// TODO Auto-generated method stub			
-		}
-		@Override
-		public void onWriteWaypoints(msg_mission_ack msg) {
-			// TODO Auto-generated method stub	
-		}	
 	};
 	
 	@Override
@@ -90,7 +74,6 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 	}
 	
 	public void sendData(View view) {
-	   waypointMananger.getWaypoints();	   
 	}
 
 	@Override
