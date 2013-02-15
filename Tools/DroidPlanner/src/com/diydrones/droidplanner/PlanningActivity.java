@@ -75,6 +75,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		@Override
 		public void onWaypointsReceived(List<waypoint> waypoints) {
 			if(waypoints!=null){
+				Toast.makeText(getApplicationContext(), "Waypoints received from Drone", Toast.LENGTH_SHORT).show();
 				Log.d("Mission", "Received all waypoints, size()="+waypoints.size());
 				mission.setHome(waypoints.get(0));
 				waypoints.remove(0);	// Remove Home waypoint
@@ -86,7 +87,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 		}
 		@Override
 		public void onWriteWaypoints(msg_mission_ack msg) {
-			// TODO Auto-generated method stub	
+			Toast.makeText(getApplicationContext(), "Waypoints saved to Drone", Toast.LENGTH_SHORT).show();
 		}
 	};
 
