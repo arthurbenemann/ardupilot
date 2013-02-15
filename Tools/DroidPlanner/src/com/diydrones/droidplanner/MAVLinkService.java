@@ -148,11 +148,13 @@ public class MAVLinkService extends Service {
 		@Override
 		public void onDisconnect() {
 			sendMessage(MSG_DEVICE_DISCONNECTED);
+			updateNotification(getResources().getString(R.string.disconnected));
 		}
 
 		@Override
 		public void onConnect() {
 			sendMessage(MSG_DEVICE_CONNECTED);
+			updateNotification(getResources().getString(R.string.conected));
 		}
 	};
 
@@ -172,24 +174,22 @@ public class MAVLinkService extends Service {
 	/**
 	 * Show a notification while this service is running.
 	 */
+	static final int StatusBarNotification = 1;
 	private void showNotification() {
-
+			updateNotification(getResources().getString(R.string.disconnected));
+	}
+	
+	private void updateNotification(String text) {
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
 				this).setSmallIcon(R.drawable.ic_launcher)
-				.setContentTitle("DroidPlanner")
-				.setContentText("Not Connected");
-		// Intent resultIntent = new Intent(this, TerminalActivity.class);
-		// mBuilder.setContentIntent(resultIntent);
-
-		// The PendingIntent to launch our activity if the user selects this
-		// notification
+				.setContentTitle(getResources().getString(R.string.app_title))
+				.setContentText(text);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
 				new Intent(this, TerminalActivity.class), 0);
 		mBuilder.setContentIntent(contentIntent);
 
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		// mId allows you to update the notification later on.
-		mNotificationManager.notify(0, mBuilder.build());
+		mNotificationManager.notify(StatusBarNotification, mBuilder.build());
 	}
 
 	private void dismissNotification() {
