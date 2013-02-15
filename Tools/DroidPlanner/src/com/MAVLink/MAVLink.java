@@ -133,7 +133,7 @@ public abstract class MAVLink {
 	/*
 	 * Close the MAVlink Connection
 	 */
-	private void closeConnection() {
+	public void closeConnection() {
 		Log.d("TCP IN", "closing TCP");
 		connected = false;
 		onDisconnect();
@@ -142,7 +142,7 @@ public abstract class MAVLink {
 	/**
 	 * Start the MAVlink Connection
 	 */
-	private void openConnection() {
+	public void openConnection() {
 		Log.d("TCP IN", "starting TCP");
 		connected = true;
 		new connectTask().execute("");
