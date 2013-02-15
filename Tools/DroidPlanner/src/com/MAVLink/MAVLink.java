@@ -21,8 +21,8 @@ import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPacket;
 
 public abstract class MAVLink {
-	public static final String SERVERIP = "192.168.40.10";	//TODO add Settings screen for this stuff
-	public static final int SERVERPORT = 5760;
+	public String SERVERIP;	
+	public int SERVERPORT;
 
 	boolean connected = false;
 	private BufferedInputStream mavIn;
@@ -118,18 +118,6 @@ public abstract class MAVLink {
 		}
 	}
 	
-	/**
-	 * Toggle the current state of the MAVlink connection. Starting and closing
-	 * the as needed. May throw a onConnect or onDisconnect callback
-	 */
-	public void toggleConnectionState() {
-		if (isConnected()) {
-			closeConnection();
-		} else {
-			openConnection();
-		}
-	}
-
 	/*
 	 * Close the MAVlink Connection
 	 */
@@ -141,10 +129,14 @@ public abstract class MAVLink {
 
 	/**
 	 * Start the MAVlink Connection
+	 * @param port 
+	 * @param serverIP 
 	 */
-	public void openConnection() {
+	public void openConnection(String serverIP, int port) {
 		Log.d("TCP IN", "starting TCP");
 		connected = true;
+		SERVERIP = serverIP;
+		SERVERPORT = port;
 		new connectTask().execute("");
 		onConnect();
 	}

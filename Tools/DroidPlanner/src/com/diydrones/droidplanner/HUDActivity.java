@@ -105,9 +105,7 @@ public class HUDActivity extends android.support.v4.app.FragmentActivity
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_settings:
-			byte[] buff = new byte[1];
-			buff[0] = '1';
-			//MAVLinkClient.sendBuffer(buff); // TODO only used for debbuging
+			startActivity(new Intent(this,SettingsActivity.class));
 			return true;
 		case R.id.menu_connect:
 			MAVClient.sendConnectMessage();

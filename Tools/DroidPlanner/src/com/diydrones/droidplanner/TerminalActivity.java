@@ -130,6 +130,7 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_settings:
+			startActivity(new Intent(this,SettingsActivity.class));
 			return true;
 		case R.id.menu_connect:
 			MAVClient.sendConnectMessage();			

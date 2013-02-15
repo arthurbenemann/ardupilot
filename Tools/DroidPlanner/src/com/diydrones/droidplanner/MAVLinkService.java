@@ -8,12 +8,14 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -81,7 +83,7 @@ public class MAVLinkService extends Service {
 
 			case MSG_CONNECT_DEVICE:
 				Log.d("Service", "Toglle connection to Device");
-				MAV.toggleConnectionState();
+				toggleConnectionState();		
 				break;
 
 			case MSG_SEND_DATA:
@@ -169,6 +171,21 @@ public class MAVLinkService extends Service {
 		MAV.closeConnection();
 		dismissNotification();
 		super.onDestroy();
+	}
+
+	/**
+	 * Toggle the current state of the MAVlink connection. Starting and closing
+	 * the as needed. May throw a onConnect or onDisconnect callback
+	 */
+	public void toggleConnectionState() {
+		if (MAV.isConnected()) {
+			MAV.closeConnection();
+		} else {
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+			String serverIP =prefs.getString("pref_server_ip", "");
+			int port = Integer.parseInt(prefs.getString("pref_server_port", "0"));		
+			MAV.openConnection(serverIP,port);
+		}
 	}
 
 	/**

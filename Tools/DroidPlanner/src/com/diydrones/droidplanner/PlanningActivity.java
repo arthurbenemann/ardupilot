@@ -301,8 +301,7 @@ public class PlanningActivity extends android.support.v4.app.FragmentActivity
 			menuSaveFile();
 			return true;
 		case R.id.menu_settings:
-			Toast.makeText(this, "not yet implemented", Toast.LENGTH_SHORT)
-					.show();
+			startActivity(new Intent(this,SettingsActivity.class));
 			return true;
 		case R.id.menu_connect:
 			MAVClient.sendConnectMessage();

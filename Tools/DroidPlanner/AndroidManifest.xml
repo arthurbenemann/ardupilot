@@ -71,6 +71,10 @@
          <activity
             android:name=".HUDActivity">
          </activity>
+         <activity
+            android:name=".SettingsActivity">
+         </activity>
+         
     </application>
 
 </manifest>
