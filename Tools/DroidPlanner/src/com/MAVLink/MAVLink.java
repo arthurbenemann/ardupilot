@@ -21,8 +21,9 @@ import com.MAVLink.Messages.MAVLinkMessage;
 import com.MAVLink.Messages.MAVLinkPacket;
 
 public abstract class MAVLink {
-	public String SERVERIP;	
-	public int SERVERPORT;
+	private String serverIP;
+	private int serverPort;
+	private boolean logEnabled;
 
 	boolean connected = false;
 	private BufferedInputStream mavIn;
@@ -45,7 +46,9 @@ public abstract class MAVLink {
 		protected String doInBackground(String... message) {
 			parser = new Parser();
 			try {
-				logWriter = getFileStream();
+				if (logEnabled) {					
+					logWriter = getFileStream();
+				}
 				getTCPStream();
 				
 				MAVLinkMessage m;
@@ -53,7 +56,9 @@ public abstract class MAVLink {
 				while (connected) {
 					int data;
 					if ((data = mavIn.read()) >= 0) {
-						// logWriter.write(data);
+						if (logEnabled) {
+							logWriter.write(data);
+						}							
 						m = parser.mavlink_parse_char(data);
 						if (m != null) {
 							receivedCount++;
@@ -71,8 +76,8 @@ public abstract class MAVLink {
 
 
 		private void getTCPStream() throws UnknownHostException, IOException {
-			InetAddress serverAddr = InetAddress.getByName(SERVERIP);
-			socket = new Socket(serverAddr, SERVERPORT);
+			InetAddress serverAddr = InetAddress.getByName(serverIP);
+			socket = new Socket(serverAddr, serverPort);
 			mavOut = new BufferedOutputStream((socket.getOutputStream()));
 			Log.d("TCP Client", "TCP connection started");
 			// receive the message which the server sends back
@@ -131,12 +136,14 @@ public abstract class MAVLink {
 	 * Start the MAVlink Connection
 	 * @param port 
 	 * @param serverIP 
+	 * @param logEnabled 
 	 */
-	public void openConnection(String serverIP, int port) {
+	public void openConnection(String serverIP, int port, boolean logEnabled) {
 		Log.d("TCP IN", "starting TCP");
 		connected = true;
-		SERVERIP = serverIP;
-		SERVERPORT = port;
+		this.serverIP = serverIP;
+		this.serverPort = port;
+		this.logEnabled = logEnabled;
 		new connectTask().execute("");
 		onConnect();
 	}

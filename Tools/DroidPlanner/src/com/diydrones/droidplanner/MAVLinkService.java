@@ -184,7 +184,8 @@ public class MAVLinkService extends Service {
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 			String serverIP =prefs.getString("pref_server_ip", "");
 			int port = Integer.parseInt(prefs.getString("pref_server_port", "0"));		
-			MAV.openConnection(serverIP,port);
+			boolean logEnabled = prefs.getBoolean("pref_mavlink_log_enabled",false);
+			MAV.openConnection(serverIP,port,logEnabled);
 		}
 	}
 
