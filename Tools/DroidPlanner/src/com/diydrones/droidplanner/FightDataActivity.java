@@ -48,7 +48,7 @@ public class FightDataActivity extends android.support.v4.app.FragmentActivity
 		public void onGpsDataReceived(GPSdata data) {
 			//Log.d("GPS", "LAT:"+data.position.coord.latitude+" LNG:"+data.position.coord.longitude+"ALT:"+data.position.Height+" heading:"+data.heading);
 		    mMap.clear();	// Find a better implementation, where all markers don't need to be cleared
-		    addPlaneMarkerToMap(data.heading, data.position.coord);	    
+		    addDroneMarkerToMap(data.heading, data.position.coord);	    
 		   
 		}
 	};
@@ -166,9 +166,9 @@ public class FightDataActivity extends android.support.v4.app.FragmentActivity
 	/**
 	 * @param data
 	 */
-	private void addPlaneMarkerToMap(float heading, LatLng coord) {
+	private void addDroneMarkerToMap(float heading, LatLng coord) {
 		Matrix matrix = new Matrix();
-		matrix.postRotate(heading);
+		matrix.postRotate(heading-mMap.getCameraPosition().bearing);
 		Bitmap rotatedPlane = Bitmap.createBitmap(planeBitmap, 0, 0, planeBitmap.getWidth(), planeBitmap.getHeight(), matrix, true);
 		mMap.addMarker(new MarkerOptions().position(coord)
 				.anchor((float) 0.5, (float) 0.5)
