@@ -23,7 +23,7 @@ public class msg_statustext extends MAVLinkMessage{
  	/**
 	*Status text message, without null termination character
 	*/
-	public char text[] = new char[50]; 
+	public byte text[] = new byte[50]; 
 
 	/**
 	 * Generates the payload for a mavlink message for a message of this type
@@ -37,7 +37,7 @@ public class msg_statustext extends MAVLinkMessage{
 		packet.msgid = MAVLINK_MSG_ID_STATUSTEXT;
 		packet.payload.putByte(severity);
 		 for (int i = 0; i < text.length; i++) {
-                        packet.payload.putChar(text[i]);
+                        packet.payload.putByte(text[i]);
             }
 		return packet;		
 	}
@@ -51,7 +51,7 @@ public class msg_statustext extends MAVLinkMessage{
         payload.resetIndex();
 	    severity = payload.getByte();
 	     for (int i = 0; i < text.length; i++) {
-			text[i] = payload.getChar();
+			text[i] = payload.getByte();
 		}    
     }
 

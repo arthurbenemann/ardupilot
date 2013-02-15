@@ -27,7 +27,7 @@ public class msg_named_value_float extends MAVLinkMessage{
  	/**
 	*Name of the debug variable
 	*/
-	public char name[] = new char[10]; 
+	public byte name[] = new byte[10]; 
 
 	/**
 	 * Generates the payload for a mavlink message for a message of this type
@@ -42,7 +42,7 @@ public class msg_named_value_float extends MAVLinkMessage{
 		packet.payload.putInt(time_boot_ms);
 		packet.payload.putFloat(value);
 		 for (int i = 0; i < name.length; i++) {
-                        packet.payload.putChar(name[i]);
+                        packet.payload.putByte(name[i]);
             }
 		return packet;		
 	}
@@ -57,7 +57,7 @@ public class msg_named_value_float extends MAVLinkMessage{
 	    time_boot_ms = payload.getInt();
 	    value = payload.getFloat();
 	     for (int i = 0; i < name.length; i++) {
-			name[i] = payload.getChar();
+			name[i] = payload.getByte();
 		}    
     }
 

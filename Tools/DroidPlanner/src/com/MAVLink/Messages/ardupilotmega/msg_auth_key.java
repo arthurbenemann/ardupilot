@@ -19,7 +19,7 @@ public class msg_auth_key extends MAVLinkMessage{
  	/**
 	*key
 	*/
-	public char key[] = new char[32]; 
+	public byte key[] = new byte[32]; 
 
 	/**
 	 * Generates the payload for a mavlink message for a message of this type
@@ -32,7 +32,7 @@ public class msg_auth_key extends MAVLinkMessage{
 		packet.compid = 190;
 		packet.msgid = MAVLINK_MSG_ID_AUTH_KEY;
 		 for (int i = 0; i < key.length; i++) {
-                        packet.payload.putChar(key[i]);
+                        packet.payload.putByte(key[i]);
             }
 		return packet;		
 	}
@@ -45,7 +45,7 @@ public class msg_auth_key extends MAVLinkMessage{
     public void unpack(MAVLinkPayload payload) {
         payload.resetIndex();
 	     for (int i = 0; i < key.length; i++) {
-			key[i] = payload.getChar();
+			key[i] = payload.getByte();
 		}    
     }
 

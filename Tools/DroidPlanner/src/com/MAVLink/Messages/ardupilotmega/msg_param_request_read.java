@@ -31,7 +31,7 @@ public class msg_param_request_read extends MAVLinkMessage{
  	/**
 	*Onboard parameter id, terminated by NULL if the length is less than 16 human-readable chars and WITHOUT null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the ID is stored as string
 	*/
-	public char param_id[] = new char[16]; 
+	public byte param_id[] = new byte[16]; 
 
 	/**
 	 * Generates the payload for a mavlink message for a message of this type
@@ -47,7 +47,7 @@ public class msg_param_request_read extends MAVLinkMessage{
 		packet.payload.putByte(target_system);
 		packet.payload.putByte(target_component);
 		 for (int i = 0; i < param_id.length; i++) {
-                        packet.payload.putChar(param_id[i]);
+                        packet.payload.putByte(param_id[i]);
             }
 		return packet;		
 	}
@@ -63,7 +63,7 @@ public class msg_param_request_read extends MAVLinkMessage{
 	    target_system = payload.getByte();
 	    target_component = payload.getByte();
 	     for (int i = 0; i < param_id.length; i++) {
-			param_id[i] = payload.getChar();
+			param_id[i] = payload.getByte();
 		}    
     }
 

@@ -425,7 +425,7 @@ def mavfmt(field):
     map = {
         'float'    : 'float',
         'double'   : 'double',
-        'char'     : 'char',
+        'char'     : 'byte',
         'int8_t'   : 'byte',
         'uint8_t'  : 'byte',
         'uint8_t_mavlink_version'  : 'byte',
