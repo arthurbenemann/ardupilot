@@ -23,7 +23,7 @@ public class msg_file_transfer_dir_list extends MAVLinkMessage{
  	/**
 	*Directory path to list
 	*/
-	public byte dir_path[] = new byte[240]; 
+	public char dir_path[] = new char[240]; 
  	/**
 	*RESERVED
 	*/
@@ -41,7 +41,7 @@ public class msg_file_transfer_dir_list extends MAVLinkMessage{
 		packet.msgid = MAVLINK_MSG_ID_FILE_TRANSFER_DIR_LIST;
 		packet.payload.putLong(transfer_uid);
 		 for (int i = 0; i < dir_path.length; i++) {
-                        packet.payload.putByte(dir_path[i]);
+                        packet.payload.putChar(dir_path[i]);
             }
 		packet.payload.putByte(flags);
 		return packet;		
@@ -56,7 +56,7 @@ public class msg_file_transfer_dir_list extends MAVLinkMessage{
         payload.resetIndex();
 	    transfer_uid = payload.getLong();
 	     for (int i = 0; i < dir_path.length; i++) {
-			dir_path[i] = payload.getByte();
+			dir_path[i] = payload.getChar();
 		}
 	    flags = payload.getByte();    
     }

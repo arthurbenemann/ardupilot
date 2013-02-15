@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,10 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.MAVLink.Messages.MAVLinkMessage;
+import com.MAVLink.Messages.ardupilotmega.msg_mission_ack;
+import com.MAVLink.Messages.ardupilotmega.msg_param_request_list;
+import com.MAVLink.Messages.ardupilotmega.msg_param_value;
+import com.MAVLink.Messages.ardupilotmega.msg_statustext;
 
 public class TerminalActivity extends android.support.v4.app.FragmentActivity
 		implements OnNavigationListener {
@@ -25,10 +30,18 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 	
 	public MAVLinkClient MAVClient = new MAVLinkClient(this) {
 		
+		String additionalInfo="";
 		@Override
 		public void notifyReceivedData(MAVLinkMessage m) {
 				String terminalMsg = "Received lenght packets\nLast packet was: " + m.msgid + "\n";
-				terminal.setText(terminalMsg);
+				if(m.msgid == msg_statustext.MAVLINK_MSG_ID_STATUSTEXT){
+					additionalInfo+= ((msg_statustext) m).toString()+"\n";
+				}
+				if(m.msgid == msg_param_value.MAVLINK_MSG_ID_PARAM_VALUE){
+					Log.d("PARAM",("param:"+new String(((msg_param_value) m).param_id)+"\t Value"+((msg_param_value) m).param_value));
+				}
+				
+				terminal.setText(terminalMsg+additionalInfo);
 		}
 		
 		@Override
@@ -74,6 +87,11 @@ public class TerminalActivity extends android.support.v4.app.FragmentActivity
 	}
 	
 	public void sendData(View view) {
+		Log.d("PARAM", "request List");
+		msg_param_request_list msg = new msg_param_request_list();
+		msg.target_system = 1;
+		msg.target_component = 1;
+		MAVClient.sendMavPacket(msg.pack());
 	}
 
 	@Override

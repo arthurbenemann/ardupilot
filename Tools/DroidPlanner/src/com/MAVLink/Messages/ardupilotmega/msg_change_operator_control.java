@@ -31,7 +31,7 @@ public class msg_change_operator_control extends MAVLinkMessage{
  	/**
 	*Password / Key, depending on version plaintext or encrypted. 25 or less characters, NULL terminated. The characters may involve A-Z, a-z, 0-9, and "!?,.-"
 	*/
-	public byte passkey[] = new byte[25]; 
+	public char passkey[] = new char[25]; 
 
 	/**
 	 * Generates the payload for a mavlink message for a message of this type
@@ -47,7 +47,7 @@ public class msg_change_operator_control extends MAVLinkMessage{
 		packet.payload.putByte(control_request);
 		packet.payload.putByte(version);
 		 for (int i = 0; i < passkey.length; i++) {
-                        packet.payload.putByte(passkey[i]);
+                        packet.payload.putChar(passkey[i]);
             }
 		return packet;		
 	}
@@ -63,7 +63,7 @@ public class msg_change_operator_control extends MAVLinkMessage{
 	    control_request = payload.getByte();
 	    version = payload.getByte();
 	     for (int i = 0; i < passkey.length; i++) {
-			passkey[i] = payload.getByte();
+			passkey[i] = payload.getChar();
 		}    
     }
 

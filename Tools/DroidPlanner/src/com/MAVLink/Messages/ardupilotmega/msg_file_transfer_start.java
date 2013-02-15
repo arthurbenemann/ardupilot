@@ -27,7 +27,7 @@ public class msg_file_transfer_start extends MAVLinkMessage{
  	/**
 	*Destination path
 	*/
-	public byte dest_path[] = new byte[240]; 
+	public char dest_path[] = new char[240]; 
  	/**
 	*Transfer direction: 0: from requester, 1: to requester
 	*/
@@ -50,7 +50,7 @@ public class msg_file_transfer_start extends MAVLinkMessage{
 		packet.payload.putLong(transfer_uid);
 		packet.payload.putInt(file_size);
 		 for (int i = 0; i < dest_path.length; i++) {
-                        packet.payload.putByte(dest_path[i]);
+                        packet.payload.putChar(dest_path[i]);
             }
 		packet.payload.putByte(direction);
 		packet.payload.putByte(flags);
@@ -67,7 +67,7 @@ public class msg_file_transfer_start extends MAVLinkMessage{
 	    transfer_uid = payload.getLong();
 	    file_size = payload.getInt();
 	     for (int i = 0; i < dest_path.length; i++) {
-			dest_path[i] = payload.getByte();
+			dest_path[i] = payload.getChar();
 		}
 	    direction = payload.getByte();
 	    flags = payload.getByte();    
