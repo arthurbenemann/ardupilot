@@ -843,12 +843,6 @@
  # define L1_CONTROL DISABLED
 #endif
 
-#if L1_CONTROL
- #ifndef L1_REFERENCE_LENGTH
-  #error Need to #define L1_REFERENCE_LENGTH [length].
- #endif
-#endif
-
 #ifndef SERIAL_BUFSIZE
  # define SERIAL_BUFSIZE 256
 #endif

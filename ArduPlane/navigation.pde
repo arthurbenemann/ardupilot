@@ -148,8 +148,11 @@ static void update_loiter()
 {
 
 #if L1_CONTROL
-    calc_L1_circ(L1, g.loiter_radius, next_WP, current_loc, L1_ref, loiter_direction);
-    calc_nu_cd();
+    if(g.L1_dist>0){
+	calc_L1_circ(g.L1_dist, g.loiter_radius, next_WP, current_loc, L1_ref, loiter_direction);
+	calc_nu_cd();
+        return;
+    }
 #else
     float power;
 
@@ -209,8 +212,11 @@ static void wind_correct_bearing(int32_t &nav_bearing_cd)
 static void update_crosstrack(void)
 {
 #if L1_CONTROL
-    calc_L1_line(L1, prev_WP, next_WP, current_loc, L1_ref);
+  if(g.L1_dist>0){
+    calc_L1_line(g.L1_dist, prev_WP, next_WP, current_loc, L1_ref);
     calc_nu_cd();
+    return;
+  }
 #else
     wind_correct_bearing(nav_bearing_cd);
 

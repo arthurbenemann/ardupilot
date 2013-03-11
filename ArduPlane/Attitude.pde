@@ -318,6 +318,18 @@ static void calc_nav_pitch()
 static void calc_nav_roll()
 {
 #define NAV_ROLL_BY_RATE 0
+
+#if L1_CONTROL == ENABLED
+	if(g.L1_dist > 0){
+		//Bank angle command based on angle between aircraft velocity vector and reference vector to path.
+		//S. Park, J. Deyst, and J. P. How, "A New Nonlinear Guidance Logic for Trajectory Tracking,"
+		//Proceedings of the AIAA Guidance, Navigation and Control Conference, Aug 2004. AIAA-2004-4900.
+		nav_roll_cd=degrees( (2*sq(g_gps->ground_speed*0.01) / g.L1_dist) * sin( radians(nu_cd*0.01))  * 10.1972); //10.1972 = (1/9.81)*100
+		nav_roll_cd = constrain_int32(nav_roll_cd, -g.roll_limit_cd.get(), g.roll_limit_cd.get());
+		return;
+	}	// If L1 is disable via parameter use the other controllers
+#endif
+
 #if NAV_ROLL_BY_RATE
     // Scale from centidegrees (PID input) to radians per second. A P gain of 1.0 should result in a
     // desired rate of 1 degree per second per degree of error - if you're 15 degrees off, you'll try
@@ -338,11 +350,6 @@ static void calc_nav_roll()
     // Bank angle = V*R/g, where V is airspeed, R is turn rate, and g is gravity.
     nav_roll = ToDeg(atanf(speed*turn_rate/GRAVITY_MSS)*100);
 
-#elif L1_CONTROL 
-    //Bank angle command based on angle between aircraft velocity vector and reference vector to path.
-    //S. Park, J. Deyst, and J. P. How, "A New Nonlinear Guidance Logic for Trajectory Tracking," 
-    //Proceedings of the AIAA Guidance, Navigation and Control Conference, Aug 2004. AIAA-2004-4900.
-    nav_roll_cd=degrees( (2*sq(g_gps->ground_speed*0.01) / L1) * sin( radians(nu_cd*0.01))  * 10.1972); //10.1972 = (1/9.81)*100
 #else
     // this is the old nav_roll calculation. We will use this for 2.50
     // then remove for a future release
