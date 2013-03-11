@@ -169,6 +169,17 @@ const AP_Param::Info var_info[] PROGMEM = {
     // @User: Standard
     GSCALAR(crosstrack_min_distance, "XTRK_MIN_DIST",  50),
 
+#if L1_CONTROL == ENABLED
+    // @Param: L1_DIST
+    // @DisplayName: L1 reference distance
+    // @Description: Distance used on the L1 reference controller in navigation. Setting to zero disables this controller.
+    // @Units: Meters
+    // @Range: 0 32767
+    // @Increment: 1
+    // @User: Standard
+    GSCALAR(L1_dist, "L1_DIST",  50),
+#endif
+
     // @Param: ALT_MIX
     // @DisplayName: Gps to Baro Mix
     // @Description: The percent of mixing between gps altitude and baro altitude. 0 = 100% gps, 1 = 100% baro

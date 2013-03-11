@@ -81,6 +81,9 @@ public:
         k_param_takeoff_throttle_min_speed,
         k_param_takeoff_throttle_min_accel,
 
+        // 109: L1 reference Controller
+        k_param_L1_dist = 109,	// *** Probably should be under navigation parameters
+
         // 110: Telemetry control
         //
         k_param_gcs0 = 110,         // stream rates for port0
@@ -257,6 +260,11 @@ public:
     AP_Int16 crosstrack_entry_angle;
     AP_Int8  crosstrack_use_wind;
     AP_Int16 crosstrack_min_distance;
+
+#if L1_CONTROL == ENABLED
+    // L1 reference Navigation Controller
+    AP_Int16 L1_dist;
+#endif
 
     // Estimation
     //
