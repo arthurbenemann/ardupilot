@@ -298,6 +298,11 @@ static void NOINLINE send_hwstatus(mavlink_channel_t chan)
         hal.i2c->lockup_count());
 }
 
+static void NOINLINE send_cam(mavlink_channel_t chan)
+{
+    mavlink_msg_cam_picture_send(chan, 0, 0.0, 0.0, 0.0, 0, 0, 0);
+}
+
 static void NOINLINE send_gps_raw(mavlink_channel_t chan)
 {
     const Location &loc = gps.location(0);
@@ -770,6 +775,9 @@ bool GCS_MAVLINK::try_send_message(enum ap_message id)
     case MSG_FENCE_STATUS:
     case MSG_WIND:
         // unused
+        break;
+    case MSG_CAM:
+        send_cam(chan);
         break;
 
     case MSG_RETRY_DEFERRED:

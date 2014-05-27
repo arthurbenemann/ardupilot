@@ -5,6 +5,7 @@
 #include <AP_Math.h>
 #include <RC_Channel.h>
 #include <AP_HAL.h>
+#include <GCS.h>
 
 extern const AP_HAL::HAL& hal;
 
@@ -85,7 +86,9 @@ AP_Camera::trigger_pic()
         break;
     }
 
-    mavlink_msg_cam_picture_send(mavlink_channel_t chan, 0, 0.0, 0.0, 0.0, 0, 0, 0);
+
+    g.gcs.send_message(MSG_CAM);
+
 }
 
 /// de-activate the trigger after some delay, but without using a delay() function
