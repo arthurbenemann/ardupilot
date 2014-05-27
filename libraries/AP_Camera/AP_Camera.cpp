@@ -84,6 +84,8 @@ AP_Camera::trigger_pic()
         relay_pic();                    // basic relay activation
         break;
     }
+
+    mavlink_msg_cam_picture_send(mavlink_channel_t chan, 0, 0.0, 0.0, 0.0, 0, 0, 0);
 }
 
 /// de-activate the trigger after some delay, but without using a delay() function

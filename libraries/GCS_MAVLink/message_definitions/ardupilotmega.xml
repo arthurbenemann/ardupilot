@@ -386,5 +386,17 @@
             <field type="int32_t" name="lat">Latitude in degrees * 1E7</field>
             <field type="int32_t" name="lng">Longitude in degrees * 1E7</field>
 	  </message>
+
+	  <message name="CAM_PICTURE" id="179">
+	    <description>Attitude and Location of an photo taken by the MAV</description>
+            <field type="uint32_t" name="time_boot_ms">Timestamp (milliseconds since system boot)</field>
+            <field type="float" name="roll">Roll angle (rad)</field>
+            <field type="float" name="pitch">Pitch angle (rad)</field>
+            <field type="float" name="yaw">Yaw angle (rad)</field>
+            <field type="int32_t" name="lat">Latitude, expressed as * 1E7</field>
+            <field type="int32_t" name="lon">Longitude, expressed as * 1E7</field>
+            <field type="int32_t" name="alt">Altitude in meters, expressed as * 1000 (millimeters), above MSL</field>
+	  </message>
+
      </messages>
 </mavlink>
