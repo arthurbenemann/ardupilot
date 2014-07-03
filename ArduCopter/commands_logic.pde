@@ -790,7 +790,7 @@ static bool do_guided(const AP_Mission::Mission_Command& cmd)
 
     // set wp_nav's destination
     Vector3f pos = pv_location_to_vector(cmd.content.location);
-    guided_set_destination(pos);
+    guided_set_destination(pos,cmd.p1);
     return true;
 }
 

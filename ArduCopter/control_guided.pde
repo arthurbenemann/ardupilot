@@ -9,6 +9,7 @@
 #endif
 
 static bool guided_pilot_yaw_override_yaw = false;
+float guided_heading = -1.0;
 
 // guided_init - initialise guided controller
 static bool guided_init(bool ignore_checks)
@@ -35,9 +36,10 @@ static bool guided_init(bool ignore_checks)
 }
 
 // guided_set_destination - sets guided mode's target destination
-static void guided_set_destination(const Vector3f& destination)
+static void guided_set_destination(const Vector3f& destination, float heading)
 {
     if (control_mode == GUIDED) {
+        guided_heading = heading;
         wp_nav.set_wp_destination(destination);
         if (!guided_pilot_yaw_override_yaw) {
             // get default yaw mode
@@ -76,12 +78,17 @@ static void guided_run()
     // call z-axis position controller (wpnav should have already updated it's alt target)
     pos_control.update_z_controller();
 
+
     // call attitude controller
-    if (auto_yaw_mode == AUTO_YAW_HOLD) {
+    if(guided_heading >=0){    
+        // roll, pitch from waypoint controller, yaw heading from ground station
+        attitude_control.angle_ef_roll_pitch_yaw(wp_nav.get_roll(), wp_nav.get_pitch(), guided_heading,true);
+    }else if (auto_yaw_mode == AUTO_YAW_HOLD) {
         // roll & pitch from waypoint controller, yaw rate from pilot
         attitude_control.angle_ef_roll_pitch_rate_ef_yaw(wp_nav.get_roll(), wp_nav.get_pitch(), target_yaw_rate);
     }else{
         // roll, pitch from waypoint controller, yaw heading from auto_heading()
         attitude_control.angle_ef_roll_pitch_yaw(wp_nav.get_roll(), wp_nav.get_pitch(), get_auto_heading(),true);
     }
+
 }
