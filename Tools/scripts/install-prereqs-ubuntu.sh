@@ -11,6 +11,7 @@ PX4_PKGS="python-serial python-argparse openocd flex bison libncurses5-dev \
           autoconf texinfo build-essential libftdi-dev libtool zlib1g-dev \
           zip genromfs"
 UBUNTU64_PKGS="libc6:i386 libgcc1:i386 gcc-4.6-base:i386 libstdc++5:i386 libstdc++6:i386"
+JSBSIM_PKGS="libtool automake autoconf libexpat1-dev"
 ASSUME_YES=false
 
 # GNU Tools for ARM Embedded Processors
@@ -21,6 +22,9 @@ ARM_TARBALL_URL="https://launchpad.net/gcc-arm-embedded/4.8/4.8-2013-q4-major/+d
 
 # Ardupilot Tools
 ARDUPILOT_TOOLS="ardupilot/Tools/autotest"
+
+#JSBSim Source
+JBSSIM_SRC="jsbsim"
 
 function maybe_prompt_user() {
     if $ASSUME_YES; then
@@ -57,7 +61,7 @@ sudo usermod -a -G dialout $USER
 
 $APT_GET remove modemmanager
 $APT_GET update
-$APT_GET install $BASE_PKGS $SITL_PKGS $PX4_PKGS $UBUNTU64_PKGS
+$APT_GET install $BASE_PKGS $SITL_PKGS $PX4_PKGS $UBUNTU64_PKGS $JSBSIM_PKGS
 sudo pip -q install $PYTHON_PKGS
 
 
@@ -71,6 +75,10 @@ fi
 
 if [ ! -d VRNuttX ]; then
     git clone https://github.com/virtualrobotix/vrbrain_nuttx.git VRNuttX
+fi
+
+if [ ! -d jsbsim ]; then
+    git clone https://github.com/tridge/jsbsim.git
 fi
 
 if [ ! -d $OPT/$ARM_ROOT ]; then
@@ -97,6 +105,20 @@ if ! grep -Fxq "$exportline2" ~/.profile ; then
     if maybe_prompt_user "Add $CWD/$ARDUPILOT_TOOLS to your PATH [Y/n]?" ; then
         echo $exportline2 >> ~/.profile
         $exportline2
+    else
+        echo "Skipping adding $CWD/$ARDUPILOT_TOOLS to PATH."
+    fi
+fi
+
+exportline3="export PATH=$CWD/$JBSSIM_SRC:\$PATH";
+if ! grep -Fxq "$exportline3" ~/.profile ; then
+    if maybe_prompt_user "Add $CWD/$JBSSIM_SRC to your PATH, and build it [Y/n]?" ; then
+        echo $exportline3 >> ~/.profile
+        $exportline3
+	cd jsbsim
+	./autogen.sh
+	make
+	cd ..
     else
         echo "Skipping adding $CWD/$ARDUPILOT_TOOLS to PATH."
     fi
