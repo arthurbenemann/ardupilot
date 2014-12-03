@@ -94,6 +94,7 @@ parser.add_option("--simin",  dest="simin",   help="SIM input (IP:port)",       
 parser.add_option("--simout", dest="simout",  help="SIM output (IP:port)",      default="127.0.0.1:5501")
 parser.add_option("--home", dest="home",  type='string', default=None, help="home lat,lng,alt,hdg (required)")
 parser.add_option("--rate", dest="rate", type='int', help="SIM update rate", default=400)
+parser.add_option("--time-scale", dest="time_scale", help="Change simulation time scale", default=1.0)
 parser.add_option("--wind", dest="wind", help="Simulate wind (speed,direction,turbulance)", default='0,0,0')
 parser.add_option("--frame", dest="frame", help="frame type (+,X,octo)", default='+')
 
@@ -129,7 +130,7 @@ sim_out.setblocking(0)
 fdm = fgFDM.fgFDM()
 
 # create the quadcopter model
-a = MultiCopter(frame=opts.frame)
+a = MultiCopter(frame=opts.frame, time_scale=opts.time_scale)
 
 print("Simulating %u motors for frame %s" % (len(a.motors), opts.frame))
 
@@ -162,7 +163,7 @@ print("Starting at lat=%f lon=%f alt=%.1f heading=%.1f" % (
     a.home_altitude,
     a.yaw))
 
-frame_time = 1.0/opts.rate
+frame_time = 1.0/(opts.rate * opts.time_scale)
 sleep_overhead = 0
 
 while True:

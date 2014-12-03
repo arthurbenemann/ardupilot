@@ -78,7 +78,8 @@ class MultiCopter(Aircraft):
                  hover_throttle=0.45,
                  terminal_velocity=15.0,
                  frame_height=0.1,
-                 mass=1.5):
+                 mass=1.5,
+                 time_scale=1.0):
         Aircraft.__init__(self)
         self.motors = build_motors(frame)
         self.motor_speed = [ 0.0 ] * len(self.motors)
@@ -93,6 +94,7 @@ class MultiCopter(Aircraft):
         self.thrust_scale = (self.mass * self.gravity) / (len(self.motors) * self.hover_throttle)
 
         self.last_time = time.time()
+        self.time_scale = time_scale
 
     def update(self, servos):
         for i in range(0, len(self.motors)):
@@ -107,7 +109,7 @@ class MultiCopter(Aircraft):
 
         # how much time has passed?
         t = time.time()
-        delta_time = t - self.last_time
+        delta_time = (t - self.last_time) * self.time_scale
         self.last_time = t
 
         # rotational acceleration, in rad/s/s, in body frame
