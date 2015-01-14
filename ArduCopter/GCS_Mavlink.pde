@@ -645,6 +645,13 @@ bool GCS_MAVLINK::try_send_message(enum ap_message id)
 #endif // MOUNT == ENABLED
         break;
 
+    case MSG_MOUNT_CONTROL:
+#if MOUNT == ENABLED
+        CHECK_PAYLOAD_SIZE(MOUNT_CONTROL);    
+        camera_mount.send_mount_control(chan);
+#endif // MOUNT == ENABLED
+        break;
+
     case MSG_OPTICAL_FLOW:
 #if OPTFLOW == ENABLED
         CHECK_PAYLOAD_SIZE(OPTICAL_FLOW);
