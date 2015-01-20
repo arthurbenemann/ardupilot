@@ -103,11 +103,6 @@ static void init_ardupilot()
     hal.uartB->begin(38400, 256, 16);
 #endif
 
-#if GPS2_ENABLE
-    if (hal.uartE != NULL) {
-        hal.uartE->begin(38400, 256, 16);
-    }
-#endif
 
     cliSerial->printf_P(PSTR("\n\nInit " FIRMWARE_STRING
                          "\n\nFree RAM: %u\n"),
@@ -174,6 +169,8 @@ static void init_ardupilot()
     } else {
         gcs[2].setup_uart(hal.uartD, map_baudrate(g.serial2_baud), 128, 128);
     }
+
+    gcs[3].setup_uart(hal.uartE, map_baudrate(115), 128, 128);
 #endif
 
     // identify ourselves correctly with the ground station
@@ -294,6 +291,10 @@ static void init_ardupilot()
     hal.uartC->set_blocking_writes(false);
     if (hal.uartD != NULL) {
         hal.uartD->set_blocking_writes(false);
+    }
+
+    if (hal.uartE != NULL) {
+        hal.uartE->set_blocking_writes(false);
     }
 
     cliSerial->print_P(PSTR("\nReady to FLY "));
