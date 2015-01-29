@@ -170,7 +170,7 @@ static void init_ardupilot()
         gcs[2].setup_uart(hal.uartD, map_baudrate(g.serial2_baud), 128, 128);
     }
 
-    gcs[3].setup_uart(hal.uartE, map_baudrate(115), 128, 128);
+    gcs[3].setup_uart(hal.uartE, map_baudrate(230), 128, 128);
 #endif
 
     // identify ourselves correctly with the ground station
