@@ -666,7 +666,7 @@ static AP_Mount camera_mount(&current_loc, ahrs, 0);
 ////////////////////////////////////////////////////////////////////////////////
 // AP_Gimbal
 ////////////////////////////////////////////////////////////////////////////////
-static AP_Gimbal gimbal(&current_loc, ahrs, 50, 230);
+static AP_Gimbal gimbal(ahrs, 50, 230);
 
 ////////////////////////////////////////////////////////////////////////////////
 // AC_Fence library to reduce fly-aways
@@ -775,7 +775,6 @@ static const AP_Scheduler::Task scheduler_tasks[] PROGMEM = {
 #if COPTER_LEDS == ENABLED
     { update_copter_leds,   40,      5 },
 #endif
-    { update_gimbal,         4,     45 },
     { update_mount,          8,     45 },
     { ten_hz_logging_loop,  40,     30 },
     { fifty_hz_logging_loop, 8,     22 },
@@ -1031,13 +1030,6 @@ static void update_mount()
 #if CAMERA == ENABLED
     camera.trigger_pic_cleanup();
 #endif
-}
-
-// update_gimbal - update gimbalposition
-// should be run at 100hz
-static void update_gimbal()
-{
-    gimbal.update_position();
 }
 
 // update_batt_compass - read battery and compass
